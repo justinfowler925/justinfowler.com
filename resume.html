@@ -172,6 +172,51 @@
 
   footer { padding: 48px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute-2); }
 
+  /* photo + hero layout */
+  .hero-row { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; margin-bottom: 18px; }
+  .profile-photo {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--ink-3);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+    flex: 0 0 auto;
+    background: var(--ink-2);
+  }
+  @media (min-width: 768px) {
+    .profile-photo { width: 132px; height: 132px; }
+  }
+  .hero-row > div { flex: 1 1 280px; min-width: 0; }
+
+  /* certifications, education, awards, volunteer */
+  .cert-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--ink-3); border: 1px solid var(--ink-3); border-radius: 14px; overflow: hidden; }
+  @media (min-width: 700px) { .cert-grid { grid-template-columns: 1fr 1fr; } }
+  .cert-row { background: var(--ink-2); padding: 16px 20px; display: flex; flex-direction: column; gap: 4px; }
+  .cert-row .cwhen { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); }
+  .cert-row .cname { font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--paper); line-height: 1.25; }
+  .cert-row .cissuer { font-family: var(--mono); font-size: 11px; color: var(--mute); }
+
+  .award { padding: 22px 24px; background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-left: 2px solid var(--accent); border-radius: 0 12px 12px 0; }
+  .award .awhen { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 8px; }
+  .award h4 { font-family: var(--serif); font-size: 19px; font-weight: 400; line-height: 1.2; color: var(--paper); margin-bottom: 6px; }
+  .award h4 em { color: var(--accent-2); font-style: italic; }
+  .award .aissuer { font-family: var(--mono); font-size: 11px; color: var(--mute); }
+
+  .vol-list { display: grid; gap: 10px; }
+  .vol-row { display: grid; grid-template-columns: 1fr; gap: 4px; padding: 14px 18px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 10px; }
+  @media (min-width: 700px) { .vol-row { grid-template-columns: 130px 1fr 130px; gap: 18px; align-items: center; } }
+  .vol-row .vwhen { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.22em; text-transform: uppercase; }
+  .vol-row .vname { font-family: var(--serif); font-size: 16px; color: var(--paper); }
+  .vol-row .vname em { color: var(--accent-2); font-style: italic; }
+  .vol-row .vrole { font-family: var(--mono); font-size: 11px; color: var(--mute); letter-spacing: 0.05em; }
+
+  .edu-row { padding: 22px 24px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 12px; }
+  .edu-row .ewhen { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 6px; }
+  .edu-row h4 { font-family: var(--serif); font-size: 20px; font-weight: 400; line-height: 1.2; color: var(--paper); margin-bottom: 4px; }
+  .edu-row h4 em { color: var(--accent-2); font-style: italic; }
+  .edu-row .efield { font-family: var(--mono); font-size: 11px; color: var(--mute); letter-spacing: 0.05em; }
+
   /* focus rings */
   a:focus-visible, button:focus-visible, .toolbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 
@@ -209,6 +254,13 @@
     .role-item ul li::before { color: #555 !important; }
     .compliance span { background: none !important; border: 1px solid #999 !important; color: #000 !important; }
     .work-row a { display: none; }
+    .profile-photo { width: 80px !important; height: 80px !important; box-shadow: none !important; border: 1px solid #999 !important; filter: grayscale(0.4); }
+    .cert-grid, .cert-row, .award, .vol-row, .edu-row { background: none !important; border: 1px solid #ccc !important; border-radius: 4pt !important; page-break-inside: avoid; }
+    .cert-row .cwhen, .award .awhen, .vol-row .vwhen, .edu-row .ewhen { color: #555 !important; font-size: 8pt !important; }
+    .cert-row .cname, .award h4, .award h4 em, .vol-row .vname, .vol-row .vname em, .edu-row h4, .edu-row h4 em { color: #000 !important; }
+    .cert-row .cissuer, .award .aissuer, .vol-row .vrole, .edu-row .efield { color: #444 !important; }
+    .cert-grid { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 4pt !important; background: none !important; border: none !important; }
+    .award { border-left: 2pt solid #000 !important; }
     ::selection { background: none; color: inherit; }
   }
 </style>
@@ -244,17 +296,23 @@
   <div class="breadcrumb">
     <a href="/">Home</a><span class="sep">/</span><span class="here">Resume</span>
   </div>
-  <h1 class="name">Justin <em>Fowler</em></h1>
-  <p class="role">
-    <em>Salesforce operator</em> building production AI infrastructure — from autonomous Apex / LWC pipelines on the day job to multi-agent systems running on local hardware. Co-founder of <em>PurpleChipmonk</em>, an 18-skill agentic OS for the modern job search.
-  </p>
+  <div class="hero-row">
+    <img class="profile-photo" src="/assets/photo.jpg" alt="Justin Fowler" loading="lazy"
+         onerror="this.style.display='none'" />
+    <div>
+      <h1 class="name">Justin <em>Fowler</em></h1>
+      <p class="role">
+        <em>Salesforce operator</em> building production AI infrastructure — from autonomous Apex / LWC pipelines on the day job to multi-agent systems running on local hardware. Co-founder of <em>PurpleChipmonk</em>, an 18-skill agentic OS for the modern job search.
+      </p>
+    </div>
+  </div>
   <div class="contactbar">
     <a href="mailto:justin@justinfowler.com">
       <span class="clabel">Email</span>
       <span class="cval">justin@justinfowler.com</span>
     </a>
     <a href="https://linkedin.com/in/justinfowler" target="_blank" rel="noopener">
-      <span class="clabel">LinkedIn</span>
+      <span class="clabel">LinkedIn · 11K followers</span>
       <span class="cval">/in/justinfowler</span>
     </a>
     <a href="https://github.com/justinfowler925" target="_blank" rel="noopener">
@@ -263,7 +321,7 @@
     </a>
     <span>
       <span class="clabel">Based</span>
-      <span class="cval">Wisconsin · USA</span>
+      <span class="cval">Chicago, Illinois</span>
     </span>
   </div>
 </header>
@@ -328,9 +386,9 @@
       <h3>Operator · <em>OpenClaw HQ</em>, <em>Atlas Direct</em>, <em>Atlas3</em>, <em>fowler-brain</em></h3>
       <p>A stack of named systems that compose into something larger than any one of them. All running on hardware I own. All US/EU model-origin only. All version-controlled, lessons-graduating, drift-reviewed weekly.</p>
       <ul>
-        <li><strong>OpenClaw HQ</strong> — three-tier multi-agent platform · BullMQ + Redis + pgvector · M3 Ultra · 96 GB unified memory · ~18 tok/s on llama3.3:70b</li>
-        <li><strong>Atlas Direct</strong> — autonomous RevOps build agent · Anthropic CCR cloud trigger nightly @ 22:00 PT · scored ROADMAP · ships PRs to <code>main</code> · ~70 phases planned</li>
-        <li><strong>Atlas3</strong> — local Aider-based coding system · FastAPI port 7800 · compliant model stack (codestral · llama · devstral · phi4)</li>
+        <li><strong>OpenClaw HQ</strong> — three-tier multi-agent platform · BullMQ + Redis + pgvector · M3 Ultra · 96 GB unified memory · production-grade local inference</li>
+        <li><strong>Atlas Direct</strong> — autonomous RevOps build agent · nightly cloud trigger · scored ROADMAP · ships PRs to <code>main</code> · ~70 phases planned</li>
+        <li><strong>Atlas3</strong> — local Aider-based coding system · FastAPI service · compliant model stack (Mistral · Meta · Microsoft only)</li>
         <li><strong>fowler-brain</strong> — version-controlled personal AI OS · 21 lessons captured · 11 workflows · 8 adapters · Saturday automated coaching review</li>
       </ul>
     </div>
@@ -419,39 +477,39 @@
       <span class="wnum">§ 05</span>
       <div>
         <h4><em>OpenClaw HQ</em></h4>
-        <span class="wdesc">Three-tier multi-agent workforce · BullMQ + pgvector · gateway port 7777</span>
+        <span class="wdesc">Three-tier multi-agent workforce · BullMQ + pgvector · REST + WebSocket gateway</span>
       </div>
       <a href="/portfolio.html#openclaw-hq">View case study →</a>
     </div>
     <div class="work-row">
       <span class="wnum">§ 06</span>
       <div>
-        <h4>Marketing 2030 · <em>RevOps 2030</em></h4>
-        <span class="wdesc">Signal-Led Growth Engine · 11-section blueprint · ABM for 24-mo cycles</span>
+        <h4>RevOps <em>2030</em></h4>
+        <span class="wdesc">Signal-Led Growth Engine · enterprise ABM blueprint · v2 in flight</span>
       </div>
       <a href="/portfolio.html#request">Request access →</a>
     </div>
     <div class="work-row">
       <span class="wnum">§ 07</span>
       <div>
-        <h4>Monch Monch · <em>Matchbox 7</em></h4>
-        <span class="wdesc">Five-year strategic + operational plan · CPG financial modeling · NDA-gated</span>
+        <h4>Bio<em>Lumen</em></h4>
+        <span class="wdesc">Functional health platform · proprietary fiber tech · five-year operating plan · NDA-gated</span>
       </div>
       <a href="/portfolio.html#request">Request access →</a>
     </div>
     <div class="work-row">
       <span class="wnum">§ 08</span>
       <div>
-        <h4>ClearSpeed <em>Salesforce + AI</em></h4>
-        <span class="wdesc">Day-job · 8-agent autonomous metadata pipeline · ISO 27001/27701</span>
+        <h4>Salesforce + <em>AI</em></h4>
+        <span class="wdesc">Eight-agent autonomous metadata pipeline · ISO 27001 / 27701 lane</span>
       </div>
       <a href="/portfolio.html#request">Request access →</a>
     </div>
     <div class="work-row">
       <span class="wnum">§ 09</span>
       <div>
-        <h4>CS HubSpot <em>RevOps</em></h4>
-        <span class="wdesc">19-workflow playbook · Project-Knowledge distribution model</span>
+        <h4>HubSpot + <em>AI</em></h4>
+        <span class="wdesc">19-workflow RevOps playbook · Project-Knowledge distribution model</span>
       </div>
       <a href="/portfolio.html#request">Request access →</a>
     </div>
@@ -476,9 +534,91 @@
   </div>
 </section>
 
-<section class="block" id="references">
+<section class="block" id="certifications">
   <div class="section-head">
     <div class="section-num">§ 06</div>
+    <h2 class="section-title">Certifications</h2>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-row">
+      <span class="cwhen">Nov 2024</span>
+      <span class="cname">Salesforce Certified <em>Administrator</em></span>
+      <span class="cissuer">Salesforce</span>
+    </div>
+    <div class="cert-row">
+      <span class="cwhen">Jan 2020</span>
+      <span class="cname">Certified <em>Product Manager</em> · CPM</span>
+      <span class="cissuer">AIPMM</span>
+    </div>
+    <div class="cert-row">
+      <span class="cwhen">Mar 2019</span>
+      <span class="cname">Certified Associate in <em>Project Management</em> · CAPM</span>
+      <span class="cissuer">Project Management Institute</span>
+    </div>
+    <div class="cert-row">
+      <span class="cwhen">Feb 2019</span>
+      <span class="cname">Professional <em>Scrum Master</em> I · PSM I</span>
+      <span class="cissuer">Scrum.org</span>
+    </div>
+    <div class="cert-row">
+      <span class="cwhen">Jul 2018</span>
+      <span class="cname">Entry Certificate in <em>Business Analysis</em> · ECBA</span>
+      <span class="cissuer">IIBA</span>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="awards">
+  <div class="section-head">
+    <div class="section-num">§ 07</div>
+    <h2 class="section-title">Awards <em>+ recognition</em></h2>
+  </div>
+  <div class="award">
+    <span class="awhen">Sep 2023</span>
+    <h4><em>Product Manager of the Year</em></h4>
+    <span class="aissuer">Products That Count</span>
+  </div>
+</section>
+
+<section class="block" id="education">
+  <div class="section-head">
+    <div class="section-num">§ 08</div>
+    <h2 class="section-title">Education</h2>
+  </div>
+  <div class="edu-row">
+    <span class="ewhen">2000 — 2003</span>
+    <h4><em>St. Mary's College of California</em></h4>
+    <span class="efield">Finance emphasis</span>
+  </div>
+</section>
+
+<section class="block" id="volunteer">
+  <div class="section-head">
+    <div class="section-num">§ 09</div>
+    <h2 class="section-title">Volunteer <em>+ community</em></h2>
+  </div>
+  <div class="vol-list">
+    <div class="vol-row">
+      <span class="vwhen">2024 — present</span>
+      <span class="vname"><em>RevGenius</em> · member</span>
+      <span class="vrole">RevOps community</span>
+    </div>
+    <div class="vol-row">
+      <span class="vwhen">Active</span>
+      <span class="vname"><em>Product Gym</em> · coach</span>
+      <span class="vrole">Product career mentorship</span>
+    </div>
+    <div class="vol-row">
+      <span class="vwhen">Sep — Dec 2019</span>
+      <span class="vname"><em>WeSolve World Inc.</em> · product consultant</span>
+      <span class="vrole">Volunteer engagement</span>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="references">
+  <div class="section-head">
+    <div class="section-num">§ 10</div>
     <h2 class="section-title">References <em>+ history</em></h2>
   </div>
   <div class="summary">
