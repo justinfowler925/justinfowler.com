@@ -1,0 +1,1873 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Portfolio — Justin Fowler</title>
+<meta name="description" content="Selected work: shipped products, AI infrastructure, strategic artifacts, and enterprise delivery from Justin Fowler — Salesforce operator, founder of Signal OS, builder of agentic systems." />
+<meta name="theme-color" content="#0c0a09" />
+<meta property="og:title" content="Portfolio — Justin Fowler" />
+<meta property="og:description" content="Selected work: shipped products, AI infrastructure, strategic artifacts, and enterprise delivery." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://justinfowler.com/portfolio.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #0c0a09;
+    --ink-2: #1c1917;
+    --ink-3: #292524;
+    --ink-4: #44403c;
+    --paper: #fafaf9;
+    --paper-2: #e7e5e4;
+    --mute: #78716c;
+    --mute-2: #57534e;
+    --accent: #fb923c;
+    --accent-2: #fdba74;
+    --accent-3: #ea580c;
+    --accent-soft: rgba(251, 146, 60, 0.08);
+    --accent-line: rgba(251, 146, 60, 0.2);
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--sans);
+    line-height: 1.5;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  ::selection { background: var(--accent); color: var(--ink); }
+
+  .grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  }
+
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (min-width: 768px) {
+    .container { padding: 0 48px; }
+  }
+
+  /* ─── NAV ──────────────────────────────── */
+  nav {
+    padding: 28px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mark {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--mute);
+    text-decoration: none;
+  }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  .nav-links { display: flex; gap: 24px; align-items: center; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--mute);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--paper); }
+  .nav-links a.active { color: var(--accent); }
+
+  /* ─── HERO ─────────────────────────────── */
+  .hero {
+    padding: 80px 0 80px;
+    position: relative;
+  }
+
+  @media (min-width: 768px) {
+    .hero { padding: 120px 0 100px; }
+  }
+
+  .breadcrumb {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--mute);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.05s forwards;
+  }
+  .breadcrumb a { color: var(--mute); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { color: var(--mute-2); margin: 0 12px; }
+  .breadcrumb .here { color: var(--accent); }
+
+  h1.title {
+    font-family: var(--serif);
+    font-variation-settings: 'opsz' 144, 'SOFT' 50;
+    font-size: clamp(48px, 10vw, 120px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 28px;
+    color: var(--paper);
+    opacity: 0;
+    animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+  }
+
+  h1.title em {
+    font-style: italic;
+    color: var(--accent-2);
+    font-weight: 300;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(19px, 2.2vw, 24px);
+    font-weight: 300;
+    line-height: 1.45;
+    color: var(--paper-2);
+    max-width: 760px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  }
+
+  .lede em { color: var(--accent-2); font-style: italic; }
+
+  /* ─── HERO METRICS ─────────────────────── */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--ink-3);
+    border: 1px solid var(--ink-3);
+    border-radius: 16px;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 0.9s ease-out 0.55s forwards;
+  }
+  @media (min-width: 768px) {
+    .hero-stats { grid-template-columns: repeat(4, 1fr); }
+  }
+  .hstat {
+    background: var(--ink-2);
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .hstat .hslabel {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--mute);
+  }
+  .hstat .hsvalue {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--paper);
+    letter-spacing: -0.02em;
+  }
+  .hstat .hsvalue em { color: var(--accent); font-style: normal; }
+  .hstat .hssub {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--mute-2);
+  }
+
+  /* ─── FILTER BAR ───────────────────────── */
+  .filterbar {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--ink-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 0.9s ease-out 0.7s forwards;
+  }
+  .filterbar .flabel {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--mute-2);
+    margin-right: 8px;
+  }
+  .pill {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--mute);
+    padding: 8px 16px;
+    background: var(--ink-2);
+    border: 1px solid var(--ink-3);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .pill:hover { color: var(--paper); border-color: var(--ink-4); }
+  .pill.on {
+    background: var(--accent);
+    color: var(--ink);
+    border-color: var(--accent);
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ─── PROJECT GRID ─────────────────────── */
+  section.work {
+    padding: 80px 0 60px;
+  }
+
+  .work-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .project {
+    background: var(--ink-2);
+    border: 1px solid var(--ink-3);
+    border-radius: 20px;
+    padding: 32px 28px;
+    transition: border-color 0.3s, transform 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .project:hover { border-color: var(--ink-4); }
+  .project:hover::before { opacity: 0.5; }
+
+  @media (min-width: 768px) {
+    .project { padding: 44px 40px; }
+  }
+
+  .pmeta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+    margin-bottom: 20px;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+  }
+  .pmeta .pidx { color: var(--mute-2); }
+  .pmeta .ptag {
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .pmeta .pcat {
+    color: var(--mute);
+    padding: 4px 10px;
+    background: var(--ink);
+    border-radius: 999px;
+  }
+  .pmeta .pyear { color: var(--mute); margin-left: auto; }
+
+  .pgrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  @media (min-width: 900px) {
+    .pgrid { grid-template-columns: 1.4fr 1fr; gap: 48px; }
+  }
+
+  h2.ptitle {
+    font-family: var(--serif);
+    font-variation-settings: 'opsz' 144, 'SOFT' 50;
+    font-size: clamp(34px, 4.6vw, 56px);
+    font-weight: 300;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--paper);
+    margin-bottom: 16px;
+  }
+  h2.ptitle em { color: var(--accent-2); font-style: italic; font-weight: 300; }
+  h2.ptitle .sub {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--mute);
+    margin-top: 10px;
+  }
+
+  .psynopsis p {
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--paper-2);
+    margin-bottom: 14px;
+  }
+  .psynopsis p:last-child { margin-bottom: 0; }
+  .psynopsis strong { color: var(--paper); font-weight: 600; }
+  .psynopsis em { color: var(--accent-2); font-style: italic; }
+
+  .pside {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* metrics block */
+  .metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--ink-3);
+    border: 1px solid var(--ink-3);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .metric {
+    background: var(--ink);
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 88px;
+  }
+  .metric .mval {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--paper);
+    letter-spacing: -0.02em;
+  }
+  .metric .mval em { color: var(--accent); font-style: normal; }
+  .metric .mlabel {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--mute);
+    line-height: 1.4;
+  }
+
+  /* skills block */
+  .pblock {
+    border-top: 1px solid var(--ink-3);
+    padding-top: 20px;
+  }
+  .pblock-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--mute-2);
+    margin-bottom: 14px;
+  }
+
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .skills span {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--paper-2);
+    padding: 5px 10px;
+    background: var(--ink);
+    border: 1px solid var(--ink-3);
+    border-radius: 999px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .skills span:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* timeline block */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .tline {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: 14px;
+    font-size: 13px;
+    color: var(--paper-2);
+    line-height: 1.5;
+    padding: 6px 0;
+  }
+  .tline .twhen {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    padding-top: 2px;
+  }
+  .tline .twhat strong { color: var(--paper); font-weight: 600; }
+
+  /* links block */
+  .plinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 24px;
+    margin-top: 8px;
+    border-top: 1px solid var(--ink-3);
+  }
+  .plink {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--paper);
+    padding: 9px 16px;
+    background: var(--ink);
+    border: 1px solid var(--ink-3);
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .plink:hover {
+    background: var(--accent);
+    color: var(--ink);
+    border-color: var(--accent);
+  }
+  .plink.muted {
+    color: var(--mute);
+    cursor: default;
+  }
+  .plink.muted:hover {
+    background: var(--ink);
+    color: var(--mute);
+    border-color: var(--ink-3);
+  }
+
+  /* ─── RESTRICTED PROJECT VARIANT ────────── */
+  .project.restricted {
+    background: linear-gradient(180deg, var(--ink-2), var(--ink));
+    border: 1px solid var(--ink-3);
+    position: relative;
+  }
+  .project.restricted::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle at top right, rgba(251, 146, 60, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .project.restricted .pmeta .lock-badge {
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
+    padding: 4px 10px 4px 28px;
+    border-radius: 999px;
+    position: relative;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+  }
+  .project.restricted .pmeta .lock-badge::before {
+    content: '';
+    position: absolute;
+    left: 11px; top: 50%; transform: translateY(-50%);
+    width: 8px; height: 9px;
+    background: var(--accent);
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 14'><path d='M2 6V4a4 4 0 018 0v2h1a1 1 0 011 1v6a1 1 0 01-1 1H1a1 1 0 01-1-1V7a1 1 0 011-1h1zm2 0h4V4a2 2 0 00-4 0v2z'/></svg>") no-repeat center / contain;
+            mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 14'><path d='M2 6V4a4 4 0 018 0v2h1a1 1 0 011 1v6a1 1 0 01-1 1H1a1 1 0 01-1-1V7a1 1 0 011-1h1zm2 0h4V4a2 2 0 00-4 0v2z'/></svg>") no-repeat center / contain;
+  }
+
+  .thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, var(--ink), var(--ink-2));
+    border: 1px solid var(--ink-3);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .thumb svg { width: 100%; height: 100%; display: block; }
+  .thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, transparent 60%, rgba(12,10,9,0.6) 100%),
+      repeating-linear-gradient(90deg, transparent 0 24px, rgba(255,255,255,0.012) 24px 25px),
+      repeating-linear-gradient(0deg, transparent 0 24px, rgba(255,255,255,0.012) 24px 25px);
+    pointer-events: none;
+  }
+  .thumb .thumb-label {
+    position: absolute;
+    bottom: 14px; left: 16px;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    z-index: 2;
+  }
+  .thumb .thumb-redacted {
+    position: absolute;
+    top: 14px; right: 16px;
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    background: rgba(251, 146, 60, 0.12);
+    border: 1px solid var(--accent-line);
+    padding: 3px 8px;
+    border-radius: 4px;
+    z-index: 2;
+  }
+
+  .metrics.locked .metric .mval {
+    filter: blur(8px);
+    opacity: 0.55;
+    user-select: none;
+  }
+  .metrics.locked .metric { position: relative; }
+  .metrics.locked .metric::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(251,146,60,0.04), transparent);
+    pointer-events: none;
+  }
+
+  .locked-line {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: 14px;
+    padding: 6px 0;
+    align-items: center;
+  }
+  .locked-line .twhen {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+  }
+  .locked-line .lockbar {
+    height: 8px;
+    background: linear-gradient(90deg, var(--ink-3) 0%, var(--ink) 60%, var(--ink-3) 100%);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .locked-line .lockbar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(135deg, transparent 0 6px, rgba(251,146,60,0.10) 6px 7px);
+  }
+  .locked-line.short .lockbar { width: 70%; }
+  .locked-line.shorter .lockbar { width: 45%; }
+  .locked-line.tiny .lockbar { width: 32%; }
+
+  .btn-request {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    text-decoration: none;
+    padding: 12px 20px;
+    background: var(--accent);
+    color: var(--ink);
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  .btn-request:hover {
+    background: var(--accent-2);
+    border-color: var(--accent-2);
+  }
+
+  /* ─── REQUEST FORM ──────────────────────── */
+  section.request {
+    padding: 80px 0 40px;
+    border-top: 1px solid var(--ink-3);
+    margin-top: 24px;
+  }
+  .form-shell {
+    background: linear-gradient(180deg, var(--ink-2), var(--ink));
+    border: 1px solid var(--ink-3);
+    border-radius: 24px;
+    padding: 40px 28px;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  @media (min-width: 900px) {
+    .form-shell {
+      padding: 56px 56px;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 64px;
+    }
+  }
+  .form-shell::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: -100px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(251, 146, 60, 0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .form-intro h3 {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.6vw, 44px);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+    color: var(--paper);
+  }
+  .form-intro h3 em { color: var(--accent-2); font-style: italic; }
+  .form-intro p {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--paper-2);
+    margin-bottom: 14px;
+  }
+  .form-intro ul {
+    list-style: none;
+    margin-top: 18px;
+    padding: 0;
+  }
+  .form-intro ul li {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--mute);
+    padding: 8px 0;
+    border-top: 1px solid var(--ink-3);
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+  }
+  .form-intro ul li::before {
+    content: '01';
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .form-intro ul li:nth-child(2)::before { content: '02'; }
+  .form-intro ul li:nth-child(3)::before { content: '03'; }
+
+  form.access {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    position: relative;
+    z-index: 2;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .field label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--mute);
+  }
+  .field label .req { color: var(--accent); margin-left: 4px; }
+  .field input,
+  .field select,
+  .field textarea {
+    background: var(--ink);
+    border: 1px solid var(--ink-3);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--paper);
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+  }
+  .field textarea { min-height: 110px; resize: vertical; font-family: var(--sans); }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: var(--ink-2);
+  }
+  .field input::placeholder, .field textarea::placeholder { color: var(--mute-2); }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  @media (min-width: 600px) { .field-row { grid-template-columns: 1fr 1fr; } }
+
+  .form-submit {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+  .form-submit button {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    padding: 14px 22px;
+    border: none;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--ink);
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .form-submit button:hover { background: var(--accent-2); }
+  .form-submit .formhint {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--mute-2);
+  }
+
+  /* ─── CAPABILITIES STRIP ───────────────── */
+  section.caps {
+    padding: 80px 0;
+    border-top: 1px solid var(--ink-3);
+    margin-top: 40px;
+  }
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 48px;
+    align-items: baseline;
+  }
+  @media (min-width: 768px) {
+    .section-head { grid-template-columns: 200px 1fr; gap: 32px; }
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(30px, 4.6vw, 52px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+  }
+  .section-title em { font-style: italic; color: var(--mute); }
+
+  .capgrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--ink-3);
+    border: 1px solid var(--ink-3);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  @media (min-width: 700px) { .capgrid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px) { .capgrid { grid-template-columns: repeat(3, 1fr); } }
+
+  .cap {
+    background: var(--ink-2);
+    padding: 28px 24px;
+    transition: background 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cap:hover { background: var(--ink-3); }
+  .cap-domain {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+  }
+  .cap-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--paper);
+  }
+  .cap-stack {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--mute);
+    line-height: 1.6;
+  }
+
+  /* ─── CTA ───────────────────────────────── */
+  section.cta {
+    padding: 80px 0 60px;
+    border-top: 1px solid var(--ink-3);
+  }
+  .ctabox {
+    background: linear-gradient(135deg, var(--ink-2), var(--ink));
+    border: 1px solid var(--ink-3);
+    border-radius: 24px;
+    padding: 48px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .ctabox { padding: 72px 64px; }
+  }
+  .ctabox::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 360px;
+    height: 360px;
+    background: radial-gradient(circle, rgba(251, 146, 60, 0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .cta-h {
+    font-family: var(--serif);
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    max-width: 720px;
+  }
+  .cta-h em { color: var(--accent-2); font-style: italic; }
+  .cta-body {
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.8vw, 21px);
+    line-height: 1.5;
+    color: var(--paper-2);
+    max-width: 680px;
+    margin-bottom: 32px;
+  }
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    text-decoration: none;
+    padding: 14px 22px;
+    border: 1px solid var(--ink-3);
+    color: var(--paper);
+    border-radius: 999px;
+    transition: all 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--ink);
+  }
+  .btn.primary:hover {
+    background: var(--accent-2);
+    border-color: var(--accent-2);
+    color: var(--ink);
+  }
+
+  /* ─── FOOTER ───────────────────────────── */
+  footer {
+    padding: 48px 0 60px;
+    border-top: 1px solid var(--ink-3);
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--mute-2);
+  }
+
+  /* ─── REVEAL ON SCROLL ─────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* ─── FILTER STATES ────────────────────── */
+  .project.hide { display: none; }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="container">
+
+<nav>
+  <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+  <div class="nav-links">
+    <a href="/#work">Work</a>
+    <a href="/portfolio.html" class="active">Portfolio</a>
+    <a href="/#writing">Writing</a>
+    <a href="/#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="breadcrumb">
+    <a href="/">Home</a><span class="sep">/</span><span class="here">Portfolio</span>
+  </div>
+  <h1 class="title">Selected <em>work</em>,<br />in the open.</h1>
+  <p class="lede">
+    Ten artifacts spanning <em>shipped products</em>, autonomous AI infrastructure, strategic operating documents, and enterprise delivery work. Each entry: what it is, the skills deployed, the timeline, and the metrics that matter — for recruiters, prospective clients, or anyone who wants to know what an operator actually does.
+  </p>
+
+  <div class="hero-stats">
+    <div class="hstat">
+      <span class="hslabel">Projects</span>
+      <span class="hsvalue"><em>10</em></span>
+      <span class="hssub">Selected · Q2 2026</span>
+    </div>
+    <div class="hstat">
+      <span class="hslabel">Live products</span>
+      <span class="hsvalue"><em>1</em> · SaaS</span>
+      <span class="hssub">purplechipmonk.com</span>
+    </div>
+    <div class="hstat">
+      <span class="hslabel">Agents in production</span>
+      <span class="hsvalue"><em>14+</em></span>
+      <span class="hssub">SF · RevOps · Coding · Multi</span>
+    </div>
+    <div class="hstat">
+      <span class="hslabel">Stack discipline</span>
+      <span class="hsvalue"><em>US/EU</em> only</span>
+      <span class="hssub">No Qwen · No DeepSeek</span>
+    </div>
+  </div>
+
+  <div class="filterbar">
+    <span class="flabel">Filter</span>
+    <button class="pill on" data-filter="all">All</button>
+    <button class="pill" data-filter="product">Live products</button>
+    <button class="pill" data-filter="ai">AI infrastructure</button>
+    <button class="pill" data-filter="strategy">Strategic artifacts</button>
+    <button class="pill" data-filter="enterprise">Enterprise delivery</button>
+  </div>
+</header>
+
+<section class="work">
+  <div class="work-list">
+
+    <!-- ── 01 SIGNAL OS ─────────────────────────────────── -->
+    <article class="project reveal" data-cat="product">
+      <div class="pmeta">
+        <span class="pidx">§ 01</span>
+        <span class="ptag">Live · SaaS</span>
+        <span class="pcat">Product</span>
+        <span class="pyear">Apr 2026 — present</span>
+      </div>
+      <div class="pgrid">
+        <div>
+          <h2 class="ptitle">Signal <em>OS</em>
+            <span class="sub">aka Purple Chipmonk · purplechipmonk.com</span>
+          </h2>
+          <div class="psynopsis">
+            <p>An <strong>18-skill agentic operating system</strong> for the modern job search. Not a chatbot — an actual operating system. It manages the full lifecycle: finding roles, qualifying them, applying, prepping for interviews, debriefing after calls, and negotiating offers. Built on Claude Sonnet 4.6 + Next.js 15 + Supabase, with persistent state across sessions and a self-improving playbook that learns from every correction.</p>
+            <p><strong>Nine quality gates</strong> sit between the LLM and the user — preventing the failure modes that make raw GPT-on-resume tools dangerous: resume fabrication, comp-math errors, persona mismatch in prep docs, fabricated experience claims. The architectural rule: <em>LLM downstream of parsers + provenance + coverage receipts, never raw string-to-output.</em></p>
+            <p>Co-founded with Zach Berenzweig (50/50 equity, lifestyle business). 90-day experiment: <strong>10 paid customers at list price by July 31, 2026</strong> determines kill-or-scale. Launched April 21, 2026 with binary 9/9 launch checklist. PostHog telemetry live April 23. Voyage AI embeddings on paid tier. Sentry-bridged structured error logs.</p>
+          </div>
+        </div>
+        <aside class="pside">
+          <div class="metrics">
+            <div class="metric"><span class="mval"><em>18</em></span><span class="mlabel">Specialized AI skills</span></div>
+            <div class="metric"><span class="mval"><em>9</em></span><span class="mlabel">Quality gates · pre-LLM</span></div>
+            <div class="metric"><span class="mval"><em>$29→$49</em></span><span class="mlabel">Launch-window pricing</span></div>
+            <div class="metric"><span class="mval"><em>90</em>d</span><span class="mlabel">Binary kill/scale gate</span></div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Skills deployed</div>
+            <div class="skills">
+              <span>Next.js 15</span><span>TypeScript</span><span>tRPC</span><span>Supabase</span><span>Postgres + RLS</span><span>Claude Sonnet 4.6</span><span>Voyage embeddings</span><span>Stripe</span><span>Vercel</span><span>PostHog</span><span>Sentry</span><span>Agent design</span><span>LLM tool-use</span>
+            </div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Timeline</div>
+            <div class="timeline">
+              <div class="tline"><span class="twhen">Apr 16</span><span class="twhat"><strong>Sprints 1–4 shipped</strong> · Atlas BUILD_PLAN milestones</span></div>
+              <div class="tline"><span class="twhen">Apr 21</span><span class="twhat"><strong>GTM launch</strong> · 9/9 checklist · first 10 outbound</span></div>
+              <div class="tline"><span class="twhen">Apr 21</span><span class="twhat">Resume Lab P0 · <strong>4 bugs + 1 systemic Sentry gap</strong> closed in PR #72</span></div>
+              <div class="tline"><span class="twhen">Apr 23</span><span class="twhat">PostHog (US Cloud) wired · Doppler + Vercel</span></div>
+              <div class="tline"><span class="twhen">Jul 31</span><span class="twhat">90-day gate · joint kill-or-scale call</span></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="plinks">
+        <a class="plink" href="https://purplechipmonk.com" target="_blank" rel="noopener">Live site ↗</a>
+        <a class="plink" href="https://github.com/justinfowler925/purplechipmonk" target="_blank" rel="noopener">GitHub ↗</a>
+        <span class="plink muted">Architecture · on request</span>
+      </div>
+    </article>
+
+    <!-- ── 02 PCM GTM (restricted) ─────────────────────────── -->
+    <article class="project restricted reveal" data-cat="strategy">
+      <div class="pmeta">
+        <span class="pidx">§ 02</span>
+        <span class="lock-badge">Restricted · Request access</span>
+        <span class="pcat">Strategic artifact</span>
+        <span class="pyear">Apr 2026</span>
+      </div>
+      <div class="pgrid">
+        <div>
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="g02" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+                  <circle cx="3" cy="3" r="0.8" fill="rgba(251,146,60,0.32)"/>
+                </pattern>
+              </defs>
+              <rect x="36" y="20" width="248" height="140" fill="url(#g02)" opacity="0.7"/>
+              <g fill="none" stroke="rgba(251,146,60,0.42)" stroke-width="1">
+                <circle cx="160" cy="90" r="60"/>
+                <circle cx="160" cy="90" r="44"/>
+                <circle cx="160" cy="90" r="28"/>
+              </g>
+              <circle cx="160" cy="90" r="12" fill="rgba(251,146,60,0.78)"/>
+              <line x1="40" y1="90" x2="280" y2="90" stroke="rgba(251,146,60,0.18)" stroke-width="0.5"/>
+              <line x1="160" y1="22" x2="160" y2="158" stroke="rgba(251,146,60,0.18)" stroke-width="0.5"/>
+            </svg>
+            <span class="thumb-redacted">Confidential</span>
+            <span class="thumb-label">§ 02 · 90-day target</span>
+          </div>
+          <h2 class="ptitle">Purple Chipmonk <em>GTM</em>
+            <span class="sub">Signal OS go-to-market plan + 90-day gate</span>
+          </h2>
+          <div class="psynopsis">
+            <p>The full operating document behind the Signal OS launch. A <strong>partner-aligned, financially-honest GTM</strong> covering ICP, a pricing strategy memo with five options + customers-to-$100K ARR math, four ranked acquisition channels, message framing, weekly cadence, and a binary 9-item launch checklist that defines "launched" vs. "did not launch."</p>
+            <p><em>Approval-gated.</em> Pricing math, partner alignment memo, kill-conditions, and customer dev interview loop available on request.</p>
+          </div>
+        </div>
+        <aside class="pside">
+          <div class="metrics locked" aria-label="Locked metrics — request access">
+            <div class="metric"><span class="mval"><em>00</em></span><span class="mlabel">Gate metric · locked</span></div>
+            <div class="metric"><span class="mval"><em>00</em></span><span class="mlabel">Channels ranked</span></div>
+            <div class="metric"><span class="mval"><em>0/0</em></span><span class="mlabel">Launch checklist · locked</span></div>
+            <div class="metric"><span class="mval"><em>00</em>/wk</span><span class="mlabel">Cadence floor</span></div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Skills deployed</div>
+            <div class="skills">
+              <span>GTM strategy</span><span>Pricing analysis</span><span>ICP definition</span><span>Partner agreements</span><span>Cadence design</span><span>Customer dev</span><span>Metric design</span><span>Risk gating</span>
+            </div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Detail · approval-gated</div>
+            <div class="timeline">
+              <div class="locked-line"><span class="twhen">— — —</span><div class="lockbar"></div></div>
+              <div class="locked-line short"><span class="twhen">— — —</span><div class="lockbar"></div></div>
+              <div class="locked-line shorter"><span class="twhen">— — —</span><div class="lockbar"></div></div>
+              <div class="locked-line tiny"><span class="twhen">— — —</span><div class="lockbar"></div></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="plinks">
+        <button type="button" class="btn-request" data-asset="Purple Chipmonk GTM">Request access →</button>
+        <a class="plink" href="https://purplechipmonk.com" target="_blank" rel="noopener">Outcome: live site ↗</a>
+      </div>
+    </article>
+
+    <!-- ── 03 FOWLER-BRAIN ─────────────────────────────────── -->
+    <article class="project reveal" data-cat="ai">
+      <div class="pmeta">
+        <span class="pidx">§ 03</span>
+        <span class="ptag">Personal OS · 4 phases shipped</span>
+        <span class="pcat">AI infrastructure</span>
+        <span class="pyear">Apr 2026 — present</span>
+      </div>
+      <div class="pgrid">
+        <div>
+          <h2 class="ptitle">fowler-<em>brain</em>
+            <span class="sub">A version-controlled operating system for every AI I talk to</span>
+          </h2>
+          <div class="psynopsis">
+            <p>A <strong>two-layer, version-controlled brain</strong>: every AI surface I use — Claude Code, Claude.ai projects, Cursor, local Ollama models, the Atlas agents — bootstraps from a single git repo. Lessons captured during work graduate to rules. Drift is reviewed every Saturday at 8am CT by an automated coaching script. The brain compounds; nothing slips out the back.</p>
+            <p>Architecture: <strong>contexts</strong> (per-project knowledge), <strong>workflows</strong> (11 named procedures), <strong>templates</strong> (PR descriptions, decision docs, incident reports), <strong>vocabulary</strong> (phrases, glossary, anti-patterns), <strong>strategy</strong> (10-year plan, three planks, weekly commitments), <strong>lessons</strong> (capture → promote → archive). A <code>rebuild.sh</code> script compiles 8+ adapters and distributes them to downstream tools. Gitleaks pre-commit. iPhone-editable via Working Copy.</p>
+            <p>Phases 1–4 complete (Foundation, Protocols, Automation, Integration). 21 lessons captured · 14 in the last week. Includes prevention layers built in real time: never-silent-delegation rule, MCP preflight, atlas-pickup-watch — each derived from a specific incident, each preventing recurrence.</p>
+          </div>
+        </div>
+        <aside class="pside">
+          <div class="metrics">
+            <div class="metric"><span class="mval"><em>4/6</em></span><span class="mlabel">Phases complete</span></div>
+            <div class="metric"><span class="mval"><em>21</em></span><span class="mlabel">Lessons · 14 this week</span></div>
+            <div class="metric"><span class="mval"><em>11</em></span><span class="mlabel">Named workflows</span></div>
+            <div class="metric"><span class="mval"><em>8</em></span><span class="mlabel">Tool adapters</span></div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Skills deployed</div>
+            <div class="skills">
+              <span>Knowledge architecture</span><span>Markdown systems</span><span>Bash</span><span>launchd</span><span>Git</span><span>Gitleaks</span><span>GitHub Pages</span><span>YAML config</span><span>Adapter compilation</span><span>Prompt engineering</span>
+            </div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Phase status</div>
+            <div class="timeline">
+              <div class="tline"><span class="twhen">Phase 1</span><span class="twhat"><strong>Foundation</strong> · repo · gitleaks · launchd ✓</span></div>
+              <div class="tline"><span class="twhen">Phase 2</span><span class="twhat"><strong>Protocols</strong> · 11 workflows · 7 templates · 9 prompts ✓</span></div>
+              <div class="tline"><span class="twhen">Phase 3</span><span class="twhat"><strong>Automation</strong> · 4 daemons live ✓</span></div>
+              <div class="tline"><span class="twhen">Phase 4</span><span class="twhat"><strong>Integration</strong> · 4 adapters distributed ✓</span></div>
+              <div class="tline"><span class="twhen">Phase 5–6</span><span class="twhat">Sophistication · evolution · trigger-deferred</span></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="plinks">
+        <span class="plink muted">Private repo · architecture available on request</span>
+      </div>
+    </article>
+
+    <!-- ── 04 ATLAS DIRECT ─────────────────────────────────── -->
+    <article class="project reveal" data-cat="ai">
+      <div class="pmeta">
+        <span class="pidx">§ 04</span>
+        <span class="ptag">Autonomous · Production</span>
+        <span class="pcat">AI infrastructure</span>
+        <span class="pyear">2026 — present</span>
+      </div>
+      <div class="pgrid">
+        <div>
+          <h2 class="ptitle">Atlas <em>Direct</em>
+            <span class="sub">Autonomous RevOps build agent · Claude Sonnet 4.6 worker</span>
+          </h2>
+          <div class="psynopsis">
+            <p>A <strong>headless autonomous coding agent</strong> specialized for Salesforce + RevOps delivery. Claude Sonnet 4.6 worker managed by Claude Code as supervisor. Runs as on-demand launchd service (<code>com.jfstudio.atlas-claude-bot</code>) — spun up when there's a ticket, shut down when done. Picks the highest-scored unchecked phase from a scored ROADMAP each night, builds the slice, opens a PR to <code>main</code>, self-curates the backlog.</p>
+            <p>Three automation layers: hourly local supervisor combining <strong>5 polling tasks into 1 session</strong> (Linear + PCM Slack + SFDC errors + Atlas health + SF deploy gate, 20-min cap), Anthropic CCR cloud trigger at 22:00 PT for nightly RevOps build-out, ticket-specific watchers that delete themselves on close. Hard rule: external-write operations (SF DML, HubSpot mutate, Gmail send) ship behind <code>TODO(approval)</code> gates with feature flags off.</p>
+            <p>Roadmap covers <strong>~70 phases</strong> across SF, HubSpot, ZoomInfo, Zoom recordings, Google Workspace, Slack, orchestration skills, data pipelines, reporting, and policy/guardrails. Budget target: inside one Claude Max $200/mo subscription.</p>
+          </div>
+        </div>
+        <aside class="pside">
+          <div class="metrics">
+            <div class="metric"><span class="mval"><em>~70</em></span><span class="mlabel">Roadmap phases planned</span></div>
+            <div class="metric"><span class="mval"><em>5→1</em></span><span class="mlabel">Polling tasks consolidated</span></div>
+            <div class="metric"><span class="mval"><em>22:00</em>PT</span><span class="mlabel">Nightly cloud build trigger</span></div>
+            <div class="metric"><span class="mval"><em>$200</em>/mo</span><span class="mlabel">Cap · 1× Claude Max</span></div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Skills deployed</div>
+            <div class="skills">
+              <span>Claude Sonnet 4.6</span><span>Claude Code</span><span>launchd</span><span>Salesforce CLI</span><span>SOQL</span><span>Apex</span><span>HubSpot API</span><span>Linear MCP</span><span>Tonic gRPC</span><span>Phase scoring · R×I×C/E</span><span>Feature flags</span><span>Bash</span>
+            </div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Operating model</div>
+            <div class="timeline">
+              <div class="tline"><span class="twhen">Layer 1</span><span class="twhat"><strong>atlas-supervisor</strong> · hourly local · 20-min cap</span></div>
+              <div class="tline"><span class="twhen">Layer 2</span><span class="twhat"><strong>Anthropic CCR</strong> · cloud · daily 22:00 PT</span></div>
+              <div class="tline"><span class="twhen">Layer 3</span><span class="twhat"><strong>Ticket watchers</strong> · self-deleting</span></div>
+              <div class="tline"><span class="twhen">Apr 21</span><span class="twhat">Recalibration design locked · 7-phase migration</span></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="plinks">
+        <span class="plink muted">Private repo · justinfowler925/atlas-direct</span>
+        <span class="plink muted">Demo + architecture · on request</span>
+      </div>
+    </article>
+
+    <!-- ── 05 ATLAS3 ───────────────────────────────────────── -->
+    <article class="project reveal" data-cat="ai">
+      <div class="pmeta">
+        <span class="pidx">§ 05</span>
+        <span class="ptag">Local · M3 Ultra</span>
+        <span class="pcat">AI infrastructure</span>
+        <span class="pyear">2026</span>
+      </div>
+      <div class="pgrid">
+        <div>
+          <h2 class="ptitle">Atlas<em>3</em>
+            <span class="sub">Local autonomous coding system · Aider + headless Claude</span>
+          </h2>
+          <div class="psynopsis">
+            <p>A <strong>local autonomous coding stack</strong> running on the M3 Ultra under my desk. FastAPI on port 7800. Aider as the primary coding interface; headless Claude Code as fallback / review pass. Redis queue. Per-task model selection with batched loading to minimize swap thrash on 96 GB unified memory.</p>
+            <p>Strict <strong>compliant model stack</strong>: codestral:22b (Mistral) primary, llama3.3:70b (Meta) for complexity ≥ 70, devstral-small-2:24b (Mistral) for Phase 2 agentic flows, phi4:14b (Microsoft) as router. <em>No Qwen. No DeepSeek. US/EU origin only.</em> Native Ollama (never Docker — Docker'd Ollama loses Metal GPU access). Cursor connects via a static ngrok tunnel.</p>
+            <p>16 Signal OS task specs sit in the queue as structured markdown with goals, acceptance criteria, expected output. Atlas3 consumes them and generates the code. 66 files, ~1,491 lines of Python at 0.1.1.</p>
+          </div>
+        </div>
+        <aside class="pside">
+          <div class="metrics">
+            <div class="metric"><span class="mval"><em>66</em></span><span class="mlabel">Files · 0.1.1</span></div>
+            <div class="metric"><span class="mval"><em>16</em></span><span class="mlabel">Task specs queued</span></div>
+            <div class="metric"><span class="mval"><em>~18</em>tok/s</span><span class="mlabel">Llama3.3:70b · M3 Ultra</span></div>
+            <div class="metric"><span class="mval"><em>4</em></span><span class="mlabel">Compliant models</span></div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Skills deployed</div>
+            <div class="skills">
+              <span>FastAPI</span><span>Python</span><span>Aider</span><span>Ollama</span><span>Redis</span><span>Apple Silicon Metal</span><span>ngrok</span><span>Model routing</span><span>Cursor integration</span><span>Compliance gating</span>
+            </div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Stack constraints</div>
+            <div class="timeline">
+              <div class="tline"><span class="twhen">Origin</span><span class="twhat"><strong>US/EU only</strong> models · enforced at router</span></div>
+              <div class="tline"><span class="twhen">Runtime</span><span class="twhat"><strong>Ollama native</strong> · never containerized</span></div>
+              <div class="tline"><span class="twhen">Loading</span><span class="twhat"><strong>Batched</strong> · minimize model swap</span></div>
+              <div class="tline"><span class="twhen">Contract</span><span class="twhat">FastAPI · port 7800 · stable signatures</span></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="plinks">
+        <span class="plink muted">Private · architecture available on request</span>
+      </div>
+    </article>
+
+    <!-- ── 06 OPENCLAW HQ ──────────────────────────────────── -->
+    <article class="project reveal" data-cat="ai">
+      <div class="pmeta">
+        <span class="pidx">§ 06</span>
+        <span class="ptag">Multi-agent · Native Ollama</span>
+        <span class="pcat">AI infrastructure</span>
+        <span class="pyear">2026</span>
+      </div>
+      <div class="pgrid">
+        <div>
+          <h2 class="ptitle">OpenClaw <em>HQ</em>
+            <span class="sub">Three-tier multi-agent workforce · BullMQ + pgvector</span>
+          </h2>
+          <div class="psynopsis">
+            <p>A <strong>production-grade multi-agent platform</strong> running on local hardware. Three core agents — <strong>Alpha</strong> (Salesforce / CRM / Apex), <strong>Beta</strong> (code, scraping, build tasks), <strong>Gamma</strong> (R&D experiments) — plus a dedicated Delta coding agent. BullMQ on Redis for job orchestration. Postgres + pgvector for semantic memory. AI router with complexity-based dispatch (0–100 score; threshold 70 routes to Claude API; below stays local).</p>
+            <p>Single REST + WebSocket + mDNS gateway on <strong>port 7777</strong>. ComfyUI for local image generation, prompted by Beta on creative tasks. Shell commands installed to <code>~/.openclaw/bin</code>: <code>openclaw-generate</code>, <code>openclaw-review</code>, etc. The whole thing runs while I sleep.</p>
+            <p>Twin sandbox copy in <code>bot-army</code>. Both have Alpha/Beta/Gamma, gateway, Redis + Postgres, security policy, runbook, skill audit framework. The lane lock is non-negotiable: Alpha owns Salesforce, Beta owns code/scrape, Gamma owns experiments. Cross-assignment is the failure mode the architecture exists to prevent.</p>
+          </div>
+        </div>
+        <aside class="pside">
+          <div class="metrics">
+            <div class="metric"><span class="mval"><em>3+1</em></span><span class="mlabel">Agents · Α Β Γ + Δ</span></div>
+            <div class="metric"><span class="mval"><em>7777</em></span><span class="mlabel">Gateway port · REST/WS/mDNS</span></div>
+            <div class="metric"><span class="mval"><em>0–100</em></span><span class="mlabel">Complexity routing</span></div>
+            <div class="metric"><span class="mval"><em>96</em>GB</span><span class="mlabel">Unified memory · M3 Ultra</span></div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Skills deployed</div>
+            <div class="skills">
+              <span>Multi-agent design</span><span>BullMQ</span><span>Redis</span><span>Postgres</span><span>pgvector</span><span>FastAPI</span><span>WebSocket</span><span>mDNS</span><span>Ollama</span><span>ComfyUI</span><span>System prompts</span><span>Skill audit</span>
+            </div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Lane lock</div>
+            <div class="timeline">
+              <div class="tline"><span class="twhen">Alpha</span><span class="twhat"><strong>Salesforce · CRM · Apex generation</strong></span></div>
+              <div class="tline"><span class="twhen">Beta</span><span class="twhat"><strong>Code · scraping · builds · ComfyUI prompts</strong></span></div>
+              <div class="tline"><span class="twhen">Gamma</span><span class="twhat"><strong>R&D · low-stakes experiments</strong></span></div>
+              <div class="tline"><span class="twhen">Delta</span><span class="twhat">Dedicated coding agent · separate lifecycle</span></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="plinks">
+        <span class="plink muted">Private · architecture available on request</span>
+      </div>
+    </article>
+
+    <!-- ── 07 MARKETING / REVOPS 2030 (restricted) ─────────── -->
+    <article class="project restricted reveal" data-cat="strategy">
+      <div class="pmeta">
+        <span class="pidx">§ 07</span>
+        <span class="lock-badge">Restricted · Request access</span>
+        <span class="pcat">Strategic artifact</span>
+        <span class="pyear">Apr 2026</span>
+      </div>
+      <div class="pgrid">
+        <div>
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+              <g fill="rgba(251,146,60,0.20)" stroke="rgba(251,146,60,0.45)" stroke-width="0.5">
+                <rect x="40" y="22" width="240" height="13" rx="2"/>
+                <rect x="50" y="40" width="220" height="13" rx="2"/>
+                <rect x="62" y="58" width="196" height="13" rx="2"/>
+                <rect x="76" y="76" width="168" height="13" rx="2"/>
+                <rect x="92" y="94" width="136" height="13" rx="2"/>
+                <rect x="108" y="112" width="104" height="13" rx="2"/>
+                <rect x="124" y="130" width="72" height="13" rx="2"/>
+              </g>
+              <g fill="rgba(251,146,60,0.85)">
+                <circle cx="160" cy="151" r="3"/>
+              </g>
+              <circle cx="160" cy="151" r="6" fill="none" stroke="rgba(251,146,60,0.55)" stroke-width="0.5"/>
+            </svg>
+            <span class="thumb-redacted">Internal</span>
+            <span class="thumb-label">§ 07 · Funnel reset</span>
+          </div>
+          <h2 class="ptitle">Marketing <em>2030</em>
+            <span class="sub">RevOps 2030 · Signal-Led Growth Engine for ClearSpeed</span>
+          </h2>
+          <div class="psynopsis">
+            <p>An <strong>11-section interactive blueprint</strong> repositioning marketing from a demand-gen function to an <em>intelligence + engagement layer</em> that feeds the pipeline with warm, identified, intent-signaling accounts before sales ever touches them. Built for high-ACV, long-cycle, government + enterprise buying-committee motion.</p>
+            <p><em>Approval-gated.</em> Diagnostic, KPI redesign, ABM architecture, 6-domain skill grid, and quick-win deploy plan available on request.</p>
+          </div>
+        </div>
+        <aside class="pside">
+          <div class="metrics locked" aria-label="Locked metrics — request access">
+            <div class="metric"><span class="mval"><em>00</em></span><span class="mlabel">Blueprint sections</span></div>
+            <div class="metric"><span class="mval"><em>0</em></span><span class="mlabel">Skill domains mapped</span></div>
+            <div class="metric"><span class="mval"><em>00</em>mo</span><span class="mlabel">Deal cycle target</span></div>
+            <div class="metric"><span class="mval"><em>00</em>d</span><span class="mlabel">Quick-win window</span></div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Skills deployed</div>
+            <div class="skills">
+              <span>RevOps strategy</span><span>ABM design</span><span>Funnel architecture</span><span>HubSpot</span><span>Salesforce reporting</span><span>ZoomInfo</span><span>Attribution</span><span>Looker Studio</span><span>HTML/CSS</span><span>Information design</span>
+            </div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Section map · approval-gated</div>
+            <div class="timeline">
+              <div class="locked-line"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+              <div class="locked-line short"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+              <div class="locked-line shorter"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+              <div class="locked-line tiny"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="plinks">
+        <button type="button" class="btn-request" data-asset="Marketing 2030 (RevOps 2030)">Request access →</button>
+      </div>
+    </article>
+
+    <!-- ── 08 MONCH MONCH / MATCHBOX 7 (restricted) ────────── -->
+    <article class="project restricted reveal" data-cat="strategy">
+      <div class="pmeta">
+        <span class="pidx">§ 08</span>
+        <span class="lock-badge">Confidential · Request access</span>
+        <span class="pcat">Strategic artifact</span>
+        <span class="pyear">Apr 2026</span>
+      </div>
+      <div class="pgrid">
+        <div>
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+              <line x1="40" y1="148" x2="290" y2="148" stroke="rgba(251,146,60,0.30)" stroke-width="0.5"/>
+              <line x1="40" y1="36" x2="40" y2="148" stroke="rgba(251,146,60,0.30)" stroke-width="0.5"/>
+              <g fill="rgba(251,146,60,0.55)" stroke="rgba(251,146,60,0.85)" stroke-width="0.4">
+                <rect x="58" y="124" width="32" height="24" rx="1"/>
+                <rect x="106" y="100" width="32" height="48" rx="1"/>
+                <rect x="154" y="74" width="32" height="74" rx="1"/>
+                <rect x="202" y="56" width="32" height="92" rx="1"/>
+                <rect x="250" y="38" width="32" height="110" rx="1"/>
+              </g>
+              <g fill="rgba(251,146,60,0.85)" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.06em">
+                <text x="74" y="166" text-anchor="middle">Y1</text>
+                <text x="122" y="166" text-anchor="middle">Y2</text>
+                <text x="170" y="166" text-anchor="middle">Y3</text>
+                <text x="218" y="166" text-anchor="middle">Y4</text>
+                <text x="266" y="166" text-anchor="middle">Y5</text>
+              </g>
+              <path d="M 74 124 L 122 100 L 170 74 L 218 56 L 266 38" stroke="rgba(251,146,60,0.95)" stroke-width="1.2" fill="none"/>
+            </svg>
+            <span class="thumb-redacted">NDA-gated</span>
+            <span class="thumb-label">§ 08 · 5-yr trajectory</span>
+          </div>
+          <h2 class="ptitle">Monch <em>Monch</em> · Matchbox 7
+            <span class="sub">Five-year strategic + operational plan · Kimridge Heights / Peerless Capital</span>
+          </h2>
+          <div class="psynopsis">
+            <p>A <strong>board-grade five-year strategic and operational plan</strong> for Monch Monch — a consumer health & wellness brand entering the functional-food market with two product lines (nutrition bars + electrolyte packets) built around the proprietary <strong>BioLumen™</strong> fiber technology. Demand-driven production model. Capital-light co-manufacturing. First-party DTC data asset.</p>
+            <p><em>NDA-gated.</em> Financial model, P&L waterfall, unit economics, inventory mechanics, EBITDA path-to-breakeven, and exit-moat memo available on request.</p>
+          </div>
+        </div>
+        <aside class="pside">
+          <div class="metrics locked" aria-label="Locked metrics — request access">
+            <div class="metric"><span class="mval"><em>$0.0</em>M</span><span class="mlabel">Year 5 revenue · locked</span></div>
+            <div class="metric"><span class="mval"><em>00.0</em>%</span><span class="mlabel">Gross margin · locked</span></div>
+            <div class="metric"><span class="mval"><em>00</em></span><span class="mlabel">SKUs · product lines</span></div>
+            <div class="metric"><span class="mval"><em>000</em>k</span><span class="mlabel">Year 5 units · locked</span></div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Skills deployed</div>
+            <div class="skills">
+              <span>Financial modeling</span><span>Unit economics</span><span>P&L design</span><span>Inventory modeling</span><span>Channel strategy</span><span>CPG positioning</span><span>Investor decks</span><span>Cap-ex appendix</span><span>Excel architecture</span><span>Strategic narrative</span>
+            </div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Deliverables · approval-gated</div>
+            <div class="timeline">
+              <div class="locked-line"><span class="twhen">XLSX</span><div class="lockbar"></div></div>
+              <div class="locked-line short"><span class="twhen">PDF</span><div class="lockbar"></div></div>
+              <div class="locked-line shorter"><span class="twhen">DOCX</span><div class="lockbar"></div></div>
+              <div class="locked-line tiny"><span class="twhen">PPTX</span><div class="lockbar"></div></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="plinks">
+        <button type="button" class="btn-request" data-asset="Monch Monch / Matchbox 7">Request access →</button>
+      </div>
+    </article>
+
+    <!-- ── 09 CLEARSPEED SF + AI DELIVERY (restricted) ─────── -->
+    <article class="project restricted reveal" data-cat="enterprise">
+      <div class="pmeta">
+        <span class="pidx">§ 09</span>
+        <span class="lock-badge">Restricted · Request access</span>
+        <span class="pcat">Enterprise delivery</span>
+        <span class="pyear">2024 — present</span>
+      </div>
+      <div class="pgrid">
+        <div>
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+              <g stroke="rgba(251,146,60,0.20)" stroke-width="0.5" fill="none">
+                <line x1="160" y1="90" x2="220" y2="90"/>
+                <line x1="160" y1="90" x2="202" y2="47"/>
+                <line x1="160" y1="90" x2="160" y2="30"/>
+                <line x1="160" y1="90" x2="118" y2="47"/>
+                <line x1="160" y1="90" x2="100" y2="90"/>
+                <line x1="160" y1="90" x2="118" y2="133"/>
+                <line x1="160" y1="90" x2="160" y2="150"/>
+                <line x1="160" y1="90" x2="202" y2="133"/>
+                <circle cx="160" cy="90" r="60" stroke="rgba(251,146,60,0.16)" stroke-dasharray="2 4"/>
+              </g>
+              <g fill="rgba(251,146,60,0.55)" stroke="rgba(251,146,60,0.85)" stroke-width="0.5">
+                <circle cx="220" cy="90" r="6"/>
+                <circle cx="202" cy="47" r="6"/>
+                <circle cx="160" cy="30" r="6"/>
+                <circle cx="118" cy="47" r="6"/>
+                <circle cx="100" cy="90" r="6"/>
+                <circle cx="118" cy="133" r="6"/>
+                <circle cx="160" cy="150" r="6"/>
+                <circle cx="202" cy="133" r="6"/>
+              </g>
+              <circle cx="160" cy="90" r="14" fill="rgba(251,146,60,0.85)"/>
+              <circle cx="160" cy="90" r="20" fill="none" stroke="rgba(251,146,60,0.32)" stroke-width="0.6"/>
+            </svg>
+            <span class="thumb-redacted">Internal</span>
+            <span class="thumb-label">§ 09 · 8-agent network</span>
+          </div>
+          <h2 class="ptitle">ClearSpeed <em>Salesforce + AI</em>
+            <span class="sub">Eight-agent autonomous metadata pipeline · ISO 27001/27701</span>
+          </h2>
+          <div class="psynopsis">
+            <p>The Salesforce admin role, <strong>reimagined for an operator who refuses to do work twice</strong>. An eight-agent autonomous pipeline for Salesforce metadata generation — Apex classes, Lightning Web Components, test classes, deployments — drafted overnight, reviewed in the morning. Two orgs, dozens of managed packages, full ISO 27001/27701 compliance lane.</p>
+            <p><em>Approval-gated.</em> Architecture diagrams, agent role definitions, deployment cadence, security model, and recent delivery log available on request.</p>
+          </div>
+        </div>
+        <aside class="pside">
+          <div class="metrics locked" aria-label="Locked metrics — request access">
+            <div class="metric"><span class="mval"><em>0</em></span><span class="mlabel">Orgs · scope locked</span></div>
+            <div class="metric"><span class="mval"><em>00</em></span><span class="mlabel">Managed packages</span></div>
+            <div class="metric"><span class="mval"><em>0</em></span><span class="mlabel">Agents · pipeline</span></div>
+            <div class="metric"><span class="mval"><em>0</em></span><span class="mlabel">Browser-free policy</span></div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Skills deployed</div>
+            <div class="skills">
+              <span>Salesforce admin</span><span>Apex</span><span>LWC</span><span>SOQL</span><span>Flow Builder</span><span>jsforce</span><span>SF CLI · SFDX</span><span>Tooling API</span><span>OAuth · JWT</span><span>GitLab CI</span><span>Doppler</span><span>ISO 27001</span><span>ISO 27701</span>
+            </div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Recent deliveries · approval-gated</div>
+            <div class="timeline">
+              <div class="locked-line"><span class="twhen">— — —</span><div class="lockbar"></div></div>
+              <div class="locked-line short"><span class="twhen">— — —</span><div class="lockbar"></div></div>
+              <div class="locked-line shorter"><span class="twhen">— — —</span><div class="lockbar"></div></div>
+              <div class="locked-line tiny"><span class="twhen">— — —</span><div class="lockbar"></div></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="plinks">
+        <button type="button" class="btn-request" data-asset="ClearSpeed Salesforce + AI Delivery">Request access →</button>
+      </div>
+    </article>
+
+    <!-- ── 10 CS HUBSPOT REVOPS (restricted) ───────────────── -->
+    <article class="project restricted reveal" data-cat="enterprise">
+      <div class="pmeta">
+        <span class="pidx">§ 10</span>
+        <span class="lock-badge">Restricted · Request access</span>
+        <span class="pcat">Enterprise delivery</span>
+        <span class="pyear">Apr 2026</span>
+      </div>
+      <div class="pgrid">
+        <div>
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+              <g stroke="rgba(251,146,60,0.22)" stroke-width="0.6" fill="none">
+                <path d="M 40 100 L 80 60 L 120 60 L 160 60"/>
+                <path d="M 80 60 L 80 100 L 120 100"/>
+                <path d="M 120 60 L 120 100 L 160 100 L 200 100"/>
+                <path d="M 160 60 L 160 100 L 200 60 L 240 60 L 280 60"/>
+                <path d="M 200 100 L 240 100 L 240 130 L 280 130"/>
+                <path d="M 80 100 L 80 130 L 120 130 L 160 130 L 200 130 L 240 130"/>
+              </g>
+              <g fill="rgba(251,146,60,0.55)" stroke="rgba(251,146,60,0.85)" stroke-width="0.5">
+                <circle cx="80" cy="60" r="3.5"/>
+                <circle cx="120" cy="60" r="3.5"/>
+                <circle cx="160" cy="60" r="3.5"/>
+                <circle cx="200" cy="60" r="3.5"/>
+                <circle cx="240" cy="60" r="3.5"/>
+                <circle cx="280" cy="60" r="3.5"/>
+                <circle cx="80" cy="100" r="3.5"/>
+                <circle cx="120" cy="100" r="3.5"/>
+                <circle cx="160" cy="100" r="3.5"/>
+                <circle cx="200" cy="100" r="3.5"/>
+                <circle cx="240" cy="100" r="3.5"/>
+                <circle cx="80" cy="130" r="3.5"/>
+                <circle cx="120" cy="130" r="3.5"/>
+                <circle cx="160" cy="130" r="3.5"/>
+                <circle cx="200" cy="130" r="3.5"/>
+                <circle cx="240" cy="130" r="3.5"/>
+                <circle cx="280" cy="130" r="3.5"/>
+                <circle cx="280" cy="100" r="3.5"/>
+              </g>
+              <circle cx="40" cy="100" r="5.5" fill="rgba(251,146,60,0.95)" stroke="rgba(251,146,60,1)" stroke-width="0.6"/>
+            </svg>
+            <span class="thumb-redacted">Internal</span>
+            <span class="thumb-label">§ 10 · Workflow graph</span>
+          </div>
+          <h2 class="ptitle">CS HubSpot <em>RevOps</em>
+            <span class="sub">19-workflow playbook · Project-Knowledge distribution model</span>
+          </h2>
+          <div class="psynopsis">
+            <p>A <strong>multi-thousand-line workflow playbook</strong> covering the full RevOps ritual surface on HubSpot CRM for ClearSpeed: account research, contact enrichment, deal-stage hygiene, pipeline review prep, MQL-to-SQL transition, retention triage, hand-off rituals. Two delivery surfaces — claude.ai Project Knowledge for coworkers, custom stdio MCP for my own Claude Code — one source of truth.</p>
+            <p><em>Approval-gated.</em> Workflow inventory, MCP architecture, custom-instructions blueprint, and rollout pattern available on request.</p>
+          </div>
+        </div>
+        <aside class="pside">
+          <div class="metrics locked" aria-label="Locked metrics — request access">
+            <div class="metric"><span class="mval"><em>00</em></span><span class="mlabel">Workflows · locked</span></div>
+            <div class="metric"><span class="mval"><em>0,000</em></span><span class="mlabel">Lines · scope locked</span></div>
+            <div class="metric"><span class="mval"><em>0</em></span><span class="mlabel">Delivery surfaces</span></div>
+            <div class="metric"><span class="mval"><em>0</em></span><span class="mlabel">Plugin install</span></div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Skills deployed</div>
+            <div class="skills">
+              <span>HubSpot CRM</span><span>HubSpot MCP</span><span>RevOps rituals</span><span>Custom MCP servers</span><span>stdio transport</span><span>Project Knowledge architecture</span><span>Claude.ai Projects</span><span>Doppler</span><span>Distribution design</span>
+            </div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Distribution model · approval-gated</div>
+            <div class="timeline">
+              <div class="locked-line"><span class="twhen">Layer —</span><div class="lockbar"></div></div>
+              <div class="locked-line short"><span class="twhen">Layer —</span><div class="lockbar"></div></div>
+              <div class="locked-line shorter"><span class="twhen">Layer —</span><div class="lockbar"></div></div>
+              <div class="locked-line tiny"><span class="twhen">— — —</span><div class="lockbar"></div></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="plinks">
+        <button type="button" class="btn-request" data-asset="CS HubSpot RevOps Playbook">Request access →</button>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="request" id="request">
+  <div class="form-shell reveal">
+    <div class="form-intro">
+      <h3>Request <em>access</em> to the gated work.</h3>
+      <p>The <strong>strategic artifacts</strong> and <strong>enterprise delivery</strong> projects above represent client-confidential, NDA-gated, or internal work. I'm happy to share the substance — financial models, blueprints, architecture diagrams, full case-study writeups — once I know who's asking.</p>
+      <p>Submit the form, I review every request personally, and you'll hear back within <em>24 hours</em>.</p>
+      <ul>
+        <li>Tell me who you are and what you'd like to see</li>
+        <li>I review and approve / decline / ask follow-up</li>
+        <li>Approved: I send the materials directly</li>
+      </ul>
+    </div>
+
+    <form class="access" id="access-form" method="post" action="mailto:justin@justinfowler.com" enctype="text/plain">
+      <div class="field-row">
+        <div class="field">
+          <label for="rname">Name <span class="req">*</span></label>
+          <input id="rname" name="Name" type="text" autocomplete="name" required placeholder="Full name" />
+        </div>
+        <div class="field">
+          <label for="rcompany">Company / Org</label>
+          <input id="rcompany" name="Company" type="text" autocomplete="organization" placeholder="Where you work" />
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="remail">Email <span class="req">*</span></label>
+          <input id="remail" name="Email" type="email" autocomplete="email" required placeholder="you@company.com" />
+        </div>
+        <div class="field">
+          <label for="rphone">Phone <span class="req">*</span></label>
+          <input id="rphone" name="Phone" type="tel" autocomplete="tel" required placeholder="+1 555 555 0123" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="rasset">Asset of interest <span class="req">*</span></label>
+        <select id="rasset" name="Asset" required>
+          <option value="" disabled selected>Choose an asset…</option>
+          <option value="Purple Chipmonk GTM">§ 02 · Purple Chipmonk GTM</option>
+          <option value="Marketing 2030 (RevOps 2030)">§ 07 · Marketing 2030 / RevOps 2030</option>
+          <option value="Monch Monch / Matchbox 7">§ 08 · Monch Monch · Matchbox 7</option>
+          <option value="ClearSpeed Salesforce + AI Delivery">§ 09 · ClearSpeed Salesforce + AI</option>
+          <option value="CS HubSpot RevOps Playbook">§ 10 · CS HubSpot RevOps Playbook</option>
+          <option value="All restricted assets">All gated assets · evaluation</option>
+          <option value="Other / Consulting inquiry">Other · consulting inquiry</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="rrole">Your role / context</label>
+        <input id="rrole" name="Role" type="text" placeholder="Recruiter · Founder · Hiring manager · Client · …" />
+      </div>
+
+      <div class="field">
+        <label for="rreason">Why you'd like access</label>
+        <textarea id="rreason" name="Reason" placeholder="Hiring for a Salesforce + AI lead role · evaluating consulting fit · investor due diligence · etc."></textarea>
+      </div>
+
+      <div class="form-submit">
+        <button type="submit">Submit request →</button>
+        <span class="formhint">Reviewed personally · response in 24 hours</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="caps">
+  <div class="section-head reveal">
+    <div class="section-num">§ Capabilities</div>
+    <h2 class="section-title">What I bring, <em>by domain</em></h2>
+  </div>
+
+  <div class="capgrid reveal">
+    <div class="cap">
+      <div class="cap-domain">01 · Salesforce + RevOps</div>
+      <div class="cap-name">Production-grade admin & platform engineering</div>
+      <div class="cap-stack">Apex · LWC · SOQL · Flow Builder · jsforce · SF CLI · SFDX · Tooling API · External Client Apps · OAuth · GitLab CI · ISO 27001 / 27701</div>
+    </div>
+    <div class="cap">
+      <div class="cap-domain">02 · Agentic AI</div>
+      <div class="cap-name">Multi-agent systems, in production</div>
+      <div class="cap-stack">Claude Sonnet 4.6 · Claude Code · Aider · Ollama · BullMQ · pgvector · gRPC · MCP servers · skill design · prompt engineering · LLM tool-use validation</div>
+    </div>
+    <div class="cap">
+      <div class="cap-domain">03 · Web + product</div>
+      <div class="cap-name">Shipping a real SaaS, not a side project</div>
+      <div class="cap-stack">Next.js 15 · TypeScript · tRPC · Supabase · Postgres + RLS · Stripe · Vercel · Voyage embeddings · PostHog · Sentry · Playwright</div>
+    </div>
+    <div class="cap">
+      <div class="cap-domain">04 · Local AI infrastructure</div>
+      <div class="cap-name">Serious models on hardware you own</div>
+      <div class="cap-stack">M3 Ultra · 96 GB unified memory · native Ollama (no Docker) · ngrok tunnels · launchd · Redis · Postgres · ComfyUI · model-routing by complexity score</div>
+    </div>
+    <div class="cap">
+      <div class="cap-domain">05 · Strategy + financial modeling</div>
+      <div class="cap-name">Operating documents, not slideware</div>
+      <div class="cap-stack">Five-year P&L · unit economics · CPG channel modeling · GTM design · 90-day binary gates · investor decks · partner agreements · pricing memos</div>
+    </div>
+    <div class="cap">
+      <div class="cap-domain">06 · Knowledge systems</div>
+      <div class="cap-name">Information architecture that compounds</div>
+      <div class="cap-stack">Markdown systems · adapter compilation · gitleaks · launchd daemons · Claude.ai Project Knowledge · custom MCP servers · GitHub Pages · iPhone/Working Copy round-trip</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="ctabox reveal">
+    <div class="cta-eyebrow">— Recruiters · prospective clients · partners</div>
+    <h2 class="cta-h">If any of this maps to <em>what you're hiring for</em>, let's talk.</h2>
+    <p class="cta-body">
+      I take selective consulting work in the intersection of <em>Salesforce / RevOps</em> and <em>agentic AI for operators</em> — the kind of engagement where someone needs the system actually built, not just diagrammed. I'm also open to senior IC + technical-lead conversations where the role lets the specific edge compound.
+    </p>
+    <div class="cta-actions">
+      <a class="btn primary" href="mailto:justin@justinfowler.com">Email me</a>
+      <a class="btn" href="https://linkedin.com/in/justinfowler" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn" href="https://github.com/justinfowler925" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn" href="/">← Back to home</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 · Justin Fowler</span>
+  <span>Portfolio · v1.0 · Q2 2026</span>
+</footer>
+
+</div>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  const pills = document.querySelectorAll('.pill');
+  const projects = document.querySelectorAll('.project');
+  pills.forEach((p) => {
+    p.addEventListener('click', () => {
+      pills.forEach((x) => x.classList.remove('on'));
+      p.classList.add('on');
+      const f = p.dataset.filter;
+      projects.forEach((proj) => {
+        if (f === 'all' || proj.dataset.cat === f) {
+          proj.classList.remove('hide');
+        } else {
+          proj.classList.add('hide');
+        }
+      });
+    });
+  });
+
+  // Request-access buttons: scroll to form + pre-select asset
+  const assetSelect = document.getElementById('rasset');
+  document.querySelectorAll('.btn-request').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const asset = btn.dataset.asset;
+      if (assetSelect && asset) {
+        const opt = Array.from(assetSelect.options).find((o) => o.value === asset);
+        if (opt) assetSelect.value = asset;
+      }
+      const target = document.getElementById('request');
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => {
+        const nameField = document.getElementById('rname');
+        if (nameField) nameField.focus();
+      }, 600);
+    });
+  });
+
+  // Form submit: build a clean mailto: with all fields URL-encoded
+  const form = document.getElementById('access-form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const get = (k) => (data.get(k) || '').toString().trim();
+      const name = get('Name');
+      const company = get('Company');
+      const email = get('Email');
+      const phone = get('Phone');
+      const asset = get('Asset');
+      const role = get('Role');
+      const reason = get('Reason');
+      const subject = `Portfolio access request — ${asset || 'unspecified asset'} — ${name}`;
+      const body = [
+        `Name:    ${name}`,
+        `Company: ${company || '—'}`,
+        `Email:   ${email}`,
+        `Phone:   ${phone}`,
+        `Role:    ${role || '—'}`,
+        `Asset:   ${asset}`,
+        '',
+        'Reason / context:',
+        reason || '(none provided)',
+        '',
+        '— Submitted from justinfowler.com/portfolio.html'
+      ].join('\n');
+      const href = 'mailto:justin@justinfowler.com'
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(body);
+      window.location.href = href;
+    });
+  }
+</script>
+
+</body>
+</html>

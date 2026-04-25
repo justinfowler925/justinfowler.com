@@ -280,6 +280,32 @@
     border-radius: 999px;
   }
 
+  .work-more {
+    margin-top: 32px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .work-more a {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--mute);
+    text-decoration: none;
+    padding: 12px 18px;
+    border: 1px solid var(--ink-3);
+    border-radius: 999px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .work-more a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .work-more a span { color: var(--accent); }
+
   /* ─── WRITE THEMES ─────────────────────── */
   .themes { display: grid; grid-template-columns: 1fr; gap: 24px; }
 
@@ -439,6 +465,7 @@
   <div class="mark"><span class="dot"></span>Justin Fowler</div>
   <div class="nav-links">
     <a href="#work">Work</a>
+    <a href="/portfolio.html">Portfolio</a>
     <a href="#writing">Writing</a>
     <a href="#contact">Contact</a>
   </div>
@@ -501,6 +528,10 @@
         <span>jsforce</span><span>SF CLI</span><span>Octokit</span><span>Drizzle</span>
       </div>
     </div>
+  </div>
+
+  <div class="work-more reveal">
+    <a href="/portfolio.html">View full portfolio · 10 projects <span>→</span></a>
   </div>
 </section>
 
