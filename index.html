@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Justin Fowler — Operator</title>
+<meta name="description" content="Salesforce operator building production AI infrastructure. Founder of Signal OS. Writing about agentic systems for people who do the actual work." />
+<meta name="theme-color" content="#0c0a09" />
+<meta property="og:title" content="Justin Fowler — Operator" />
+<meta property="og:description" content="Salesforce operator building production AI infrastructure. Writing about agentic systems for people who do the actual work." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://justinfowler.com" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #0c0a09;
+    --ink-2: #1c1917;
+    --ink-3: #292524;
+    --paper: #fafaf9;
+    --paper-2: #e7e5e4;
+    --mute: #78716c;
+    --mute-2: #57534e;
+    --accent: #fb923c;
+    --accent-2: #fdba74;
+    --accent-3: #ea580c;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--sans);
+    line-height: 1.5;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  ::selection { background: var(--accent); color: var(--ink); }
+
+  .grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  }
+
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (min-width: 768px) {
+    .container { padding: 0 48px; }
+  }
+
+  /* ─── NAV ──────────────────────────────── */
+  nav {
+    padding: 28px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mark {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--mute);
+  }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--mute);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--paper); }
+
+  /* ─── HERO ─────────────────────────────── */
+  .hero {
+    padding: 80px 0 100px;
+    position: relative;
+  }
+
+  @media (min-width: 768px) {
+    .hero { padding: 140px 0 160px; }
+  }
+
+  .kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.1s forwards;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-variation-settings: 'opsz' 144, 'SOFT' 50;
+    font-size: clamp(56px, 12vw, 144px);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    margin-bottom: 28px;
+    color: var(--paper);
+    opacity: 0;
+    animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent-2);
+    font-weight: 300;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.4vw, 28px);
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--paper-2);
+    max-width: 720px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+  }
+
+  .lede em { color: var(--accent-2); font-style: italic; }
+  .lede s { color: var(--mute-2); text-decoration-thickness: 1px; }
+
+  .meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--mute);
+    padding-top: 32px;
+    border-top: 1px solid var(--ink-3);
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.6s forwards;
+  }
+
+  .meta-bar span { display: flex; align-items: center; gap: 8px; }
+  .meta-bar .label { color: var(--mute-2); }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ─── SECTIONS ─────────────────────────── */
+  section.block { padding: 80px 0; border-top: 1px solid var(--ink-3); }
+
+  @media (min-width: 768px) {
+    section.block { padding: 120px 0; }
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 56px;
+    align-items: baseline;
+  }
+
+  @media (min-width: 768px) {
+    .section-head { grid-template-columns: 200px 1fr; gap: 32px; }
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+  }
+
+  .section-title em { font-style: italic; color: var(--mute); }
+
+  /* ─── WORK GRID ────────────────────────── */
+  .work-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--ink-3); border: 1px solid var(--ink-3); border-radius: 16px; overflow: hidden; }
+
+  @media (min-width: 768px) {
+    .work-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .work-item {
+    background: var(--ink-2);
+    padding: 36px;
+    transition: background 0.3s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+  }
+
+  .work-item:hover { background: var(--ink-3); }
+
+  .work-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .work-title {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    color: var(--paper);
+  }
+
+  .work-desc {
+    color: var(--paper-2);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    flex: 1;
+  }
+
+  .work-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 20px;
+    border-top: 1px solid var(--ink-3);
+  }
+
+  .work-stack span {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--mute);
+    padding: 4px 10px;
+    background: var(--ink);
+    border-radius: 999px;
+  }
+
+  /* ─── WRITE THEMES ─────────────────────── */
+  .themes { display: grid; grid-template-columns: 1fr; gap: 24px; }
+
+  @media (min-width: 768px) {
+    .themes { grid-template-columns: 1fr 1fr; gap: 32px 48px; }
+  }
+
+  .theme {
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--ink-3);
+  }
+
+  .theme-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--mute-2);
+    margin-bottom: 12px;
+  }
+
+  .theme-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--paper);
+    margin-bottom: 12px;
+  }
+
+  .theme-desc {
+    color: var(--paper-2);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ─── MANIFESTO ────────────────────────── */
+  .manifesto {
+    background: linear-gradient(135deg, var(--ink-2), var(--ink));
+    border: 1px solid var(--ink-3);
+    border-radius: 24px;
+    padding: 48px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .manifesto { padding: 80px 64px; }
+  }
+
+  .manifesto::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(251, 146, 60, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .manifesto p {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.6vw, 32px);
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--paper);
+    margin-bottom: 24px;
+    max-width: 760px;
+    position: relative;
+  }
+
+  .manifesto p em { color: var(--accent-2); font-style: italic; }
+  .manifesto p s { color: var(--mute-2); text-decoration-thickness: 1px; }
+
+  .manifesto p:last-child { margin-bottom: 0; }
+
+  /* ─── CONTACT ──────────────────────────── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--ink-3);
+    border: 1px solid var(--ink-3);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  @media (min-width: 600px) {
+    .contact-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (min-width: 900px) {
+    .contact-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .contact-link {
+    background: var(--ink-2);
+    padding: 32px 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .contact-link:hover { background: var(--accent); color: var(--ink); }
+  .contact-link:hover .contact-label { color: var(--ink); opacity: 0.7; }
+
+  .contact-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--mute);
+    transition: color 0.3s;
+  }
+
+  .contact-value {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  /* ─── FOOTER ───────────────────────────── */
+  footer {
+    padding: 48px 0 60px;
+    border-top: 1px solid var(--ink-3);
+    margin-top: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--mute-2);
+  }
+
+  /* ─── REVEAL ON SCROLL ─────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="container">
+
+<nav>
+  <div class="mark"><span class="dot"></span>Justin Fowler</div>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#writing">Writing</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="kicker">— Operator · Builder · Q2 2026</div>
+  <h1>I build <em>AI</em><br />for people who<br />do the <em>actual</em> work.</h1>
+  <p class="lede">
+    I'm a Salesforce operator who got tired of waiting for AI tools to be built for people like me — so I started building them myself.
+    <s>Thought leader.</s> <em>Practitioner.</em> Multi-agent systems running on the desk under my monitor. A SaaS in the wild. The notes from doing the work, in public.
+  </p>
+  <div class="meta-bar">
+    <span><span class="label">Based</span> Wisconsin · USA</span>
+    <span><span class="label">Day job</span> Salesforce + AI delivery</span>
+    <span><span class="label">Side bet</span> Signal OS</span>
+    <span><span class="label">Stack</span> M3 Ultra · Llama · Claude</span>
+  </div>
+</header>
+
+<section class="block" id="work">
+  <div class="section-head reveal">
+    <div class="section-num">§ 01</div>
+    <h2 class="section-title">What I'm <em>building</em></h2>
+  </div>
+
+  <div class="work-grid reveal">
+    <div class="work-item">
+      <div class="work-tag">Live · SaaS · 2026</div>
+      <h3 class="work-title">Signal OS</h3>
+      <p class="work-desc">An 18-skill agentic operating system for the modern job search. Eighteen specialized AI skills, persistent state across sessions, and a self-improving playbook that learns from every correction. Not a chatbot. An actual operating system.</p>
+      <div class="work-stack">
+        <span>Next.js 15</span><span>Supabase</span><span>Claude API</span><span>tRPC</span>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="work-tag">Personal infra · 2026</div>
+      <h3 class="work-title">OpenClaw HQ</h3>
+      <p class="work-desc">A three-tier multi-agent workforce running on my desk. Native Ollama on Apple Silicon hits ~18 tok/s on a 70B model. BullMQ + Redis orchestration. PostgreSQL + pgvector for skill memory. The whole thing runs while I sleep.</p>
+      <div class="work-stack">
+        <span>Ollama</span><span>BullMQ</span><span>pgvector</span><span>FastAPI</span>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="work-tag">Personal OS · 2026</div>
+      <h3 class="work-title">fowler-brain</h3>
+      <p class="work-desc">A version-controlled AI operating system. Every AI I talk to — Claude, Cursor, local models — bootstraps from one source of truth. Lessons graduate to rules. Drift is reviewed weekly. The brain compounds.</p>
+      <div class="work-stack">
+        <span>Markdown</span><span>GitHub Pages</span><span>Adapters</span>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="work-tag">Inside the day job · 2026</div>
+      <h3 class="work-title">Salesforce + AI Delivery</h3>
+      <p class="work-desc">An eight-agent autonomous pipeline for Salesforce metadata generation. Apex, LWC, test classes, deployments — drafted overnight, reviewed in the morning. The Salesforce admin role, reimagined for an operator who refuses to do work twice.</p>
+      <div class="work-stack">
+        <span>jsforce</span><span>SF CLI</span><span>Octokit</span><span>Drizzle</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="writing">
+  <div class="section-head reveal">
+    <div class="section-num">§ 02</div>
+    <h2 class="section-title">What I <em>write about</em></h2>
+  </div>
+
+  <div class="themes reveal">
+    <div class="theme">
+      <div class="theme-num">01</div>
+      <h3 class="theme-title">Local-first AI for operators</h3>
+      <p class="theme-desc">Running serious models on serious hardware that you actually own. Why the cloud isn't always the answer for people who care about cost, latency, and never sending their work somewhere they can't see it.</p>
+    </div>
+    <div class="theme">
+      <div class="theme-num">02</div>
+      <h3 class="theme-title">Multi-agent systems, in practice</h3>
+      <p class="theme-desc">Not the hype version — the version where you actually have to maintain them. What works when one agent has to hand off to another, what breaks, and why orchestration is harder than the demo videos suggest.</p>
+    </div>
+    <div class="theme">
+      <div class="theme-num">03</div>
+      <h3 class="theme-title">The Salesforce admin's AI playbook</h3>
+      <p class="theme-desc">Specific patterns for using AI inside the most boring-looking but most-used software on the planet. Apex generation, LWC scaffolding, test class authoring, debug log triage. The unsexy work, made faster.</p>
+    </div>
+    <div class="theme">
+      <div class="theme-num">04</div>
+      <h3 class="theme-title">Building in public, honestly</h3>
+      <p class="theme-desc">A 49-year-old solo builder shipping a SaaS while keeping a day job. The 90-day gates. The portfolio with a floor. The mistakes I'm making in real time. No pretending the path is straight.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-head reveal">
+    <div class="section-num">§ 03</div>
+    <h2 class="section-title">A <em>position</em></h2>
+  </div>
+
+  <div class="manifesto reveal">
+    <p>
+      Most AI writing is for people who write about AI. <s>That's not me.</s>
+    </p>
+    <p>
+      I write for the people who do the work — the Salesforce admin, the RevOps lead, the solutions engineer, the SaaS operator — who read the AI hype, know it matters, and have <em>no idea where to start</em>.
+    </p>
+    <p>
+      I'm 18 months ahead of them. <em>That gap is the whole point.</em>
+    </p>
+    <p>
+      No frameworks I haven't shipped. No advice I haven't followed. No claims of expertise I can't demonstrate at a terminal in front of you.
+    </p>
+  </div>
+</section>
+
+<section class="block" id="contact">
+  <div class="section-head reveal">
+    <div class="section-num">§ 04</div>
+    <h2 class="section-title">Find <em>me</em></h2>
+  </div>
+
+  <div class="contact-grid reveal">
+    <a class="contact-link" href="https://linkedin.com/in/justinfowler" target="_blank" rel="noopener">
+      <span class="contact-label">Where I post</span>
+      <span class="contact-value">LinkedIn ↗</span>
+    </a>
+    <a class="contact-link" href="https://signalos.app" target="_blank" rel="noopener">
+      <span class="contact-label">What I'm building</span>
+      <span class="contact-value">Signal OS ↗</span>
+    </a>
+    <a class="contact-link" href="https://github.com/justinfowler925" target="_blank" rel="noopener">
+      <span class="contact-label">Code I share</span>
+      <span class="contact-value">GitHub ↗</span>
+    </a>
+    <a class="contact-link" href="mailto:justin@justinfowler.com">
+      <span class="contact-label">Direct line</span>
+      <span class="contact-value">Email ↗</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 · Justin Fowler</span>
+  <span>Built in public · v1.0 · Q2 2026</span>
+</footer>
+
+</div>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>
