@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Now — Justin Fowler</title>
+<meta name="description" content="What Justin Fowler is focused on right now: shipped this week, in flight, on deck. Updated weekly during the Saturday coaching review." />
+<meta name="theme-color" content="#0c0a09" />
+
+<link rel="canonical" href="https://justinfowler.com/now.html" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+<link rel="manifest" href="/manifest.webmanifest" />
+
+<meta property="og:title" content="Now — Justin Fowler" />
+<meta property="og:description" content="What I'm focused on right now. Updated weekly." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://justinfowler.com/now.html" />
+<meta property="og:image" content="https://justinfowler.com/og-image.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://justinfowler.com/og-image.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink: #0c0a09; --ink-2: #1c1917; --ink-3: #292524; --ink-4: #44403c;
+    --paper: #fafaf9; --paper-2: #e7e5e4; --mute: #78716c; --mute-2: #57534e;
+    --accent: #fb923c; --accent-2: #fdba74;
+    --accent-soft: rgba(251, 146, 60, 0.08); --accent-line: rgba(251, 146, 60, 0.2);
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.5; min-height: 100vh; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  .skip { position: absolute; left: -9999px; top: 8px; padding: 10px 16px; background: var(--accent); color: var(--ink); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; border-radius: 999px; z-index: 999; }
+  .skip:focus { left: 24px; }
+  .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  @media (min-width: 768px) { .container { padding: 0 48px; } }
+  nav { padding: 28px 0 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
+  header.hero { padding: 80px 0 40px; }
+  @media (min-width: 768px) { header.hero { padding: 120px 0 60px; } }
+  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); margin-bottom: 28px; }
+  .breadcrumb a { color: var(--mute); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { color: var(--mute-2); margin: 0 12px; }
+  .breadcrumb .here { color: var(--accent); }
+  h1 { font-family: var(--serif); font-variation-settings: 'opsz' 144, 'SOFT' 50; font-size: clamp(48px, 9vw, 96px); font-weight: 300; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 24px; }
+  h1 em { font-style: italic; color: var(--accent-2); font-weight: 300; }
+  .stamp { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 28px; padding: 8px 14px; display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent-line); border-radius: 999px; }
+  .lede { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); line-height: 1.45; color: var(--paper-2); max-width: 720px; margin-bottom: 16px; }
+  .lede em { color: var(--accent-2); font-style: italic; }
+  .convention { font-family: var(--serif); font-size: 16px; font-style: italic; color: var(--mute); max-width: 720px; }
+  .convention a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; }
+
+  section.block { padding: 56px 0; border-top: 1px solid var(--ink-3); }
+  .section-num { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 8px; }
+  h2.st { font-family: var(--serif); font-size: clamp(30px, 4.4vw, 44px); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 32px; }
+  h2.st em { font-style: italic; color: var(--mute); }
+
+  .planks { display: grid; gap: 16px; }
+  .plank { padding: 24px 26px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 14px; position: relative; overflow: hidden; }
+  .plank::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); opacity: 0.55; }
+  .plank-meta { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: baseline; margin-bottom: 8px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); }
+  .plank-meta .pnum { color: var(--accent); }
+  .plank-meta .pstatus { margin-left: auto; }
+  .plank-meta .pstatus.live { color: var(--accent); }
+  .plank-meta .pstatus.planning { color: var(--paper-2); }
+  .plank h3 { font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.15; margin-bottom: 8px; color: var(--paper); }
+  .plank h3 em { color: var(--accent-2); font-style: italic; }
+  .plank p { color: var(--paper-2); font-size: 15px; line-height: 1.65; margin-bottom: 8px; }
+  .plank p:last-child { margin-bottom: 0; }
+  .plank ul { list-style: none; padding: 0; margin-top: 8px; }
+  .plank ul li { font-size: 14px; color: var(--paper-2); padding: 4px 0 4px 20px; position: relative; line-height: 1.55; }
+  .plank ul li::before { content: '◆'; position: absolute; left: 0; color: var(--accent); font-size: 9px; top: 7px; }
+
+  .stack { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--ink-3); border: 1px solid var(--ink-3); border-radius: 14px; overflow: hidden; }
+  @media (min-width: 700px) { .stack { grid-template-columns: 1fr 1fr 1fr; } }
+  .stackcell { background: var(--ink-2); padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; }
+  .stackcell .lbl { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); }
+  .stackcell .val { font-family: var(--serif); font-size: 18px; color: var(--paper); }
+  .stackcell .val em { color: var(--accent-2); font-style: italic; }
+
+  .quote { padding: 32px 28px; border-left: 2px solid var(--accent); background: linear-gradient(135deg, var(--ink-2), var(--ink)); border-radius: 0 12px 12px 0; margin-top: 32px; }
+  .quote p { font-family: var(--serif); font-size: 19px; font-style: italic; line-height: 1.5; color: var(--paper); }
+  .quote .who { display: block; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); margin-top: 12px; }
+
+  footer { padding: 48px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute-2); }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="container">
+
+<nav aria-label="Primary">
+  <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/resume.html">Resume</a>
+    <a href="/now.html" aria-current="page">Now</a>
+    <a href="/writing.html">Writing</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="hero">
+  <div class="breadcrumb">
+    <a href="/">Home</a><span class="sep">/</span><span class="here">Now</span>
+  </div>
+  <div class="stamp">— Last updated 2026-04-25 · Reviewed weekly</div>
+  <h1>What I'm <em>doing</em> now.</h1>
+  <p class="lede">
+    A live snapshot of where my hours are going this week. Updated every Saturday during the coaching review. Honest about the trade-offs — three parallel tracks, one body, finite weeks.
+  </p>
+  <p class="convention">
+    A <a href="https://nownownow.com/about" target="_blank" rel="noopener">/now page</a> in the Sivers tradition — what I'm focused on, not what I want you to think I'm focused on.
+  </p>
+</header>
+
+<section class="block" id="planks">
+  <div class="section-num">§ 01</div>
+  <h2 class="st">Three planks · <em>running in parallel</em></h2>
+
+  <div class="planks">
+
+    <div class="plank">
+      <div class="plank-meta">
+        <span class="pnum">Plank 01</span>
+        <span>Anchor income · ClearSpeed</span>
+        <span class="pstatus planning">In motion</span>
+      </div>
+      <h3>The day job is the <em>capital engine</em>, not the obstacle.</h3>
+      <p>Salesforce + IT lead at ClearSpeed continues. Active scope: ISO 27001 / 27701 compliance lane, Contract lifecycle flow hardening, sandbox-aware email guards, eight-agent autonomous metadata pipeline, GitLab-CI-driven SFDX deploys.</p>
+      <ul>
+        <li>59-package production org · prod + sandbox · zero-browser policy</li>
+        <li>Atlas Direct nightly cloud trigger picks the highest-scored RevOps phase from a scored ROADMAP and ships PRs to <code>main</code></li>
+        <li>Audit-trail observability + Setup Audit Trail SOQL pipeline live</li>
+      </ul>
+    </div>
+
+    <div class="plank">
+      <div class="plank-meta">
+        <span class="pnum">Plank 02</span>
+        <span>Asymmetric upside · PurpleChipmonk</span>
+        <span class="pstatus live">Active · 90-day gate</span>
+      </div>
+      <h3>PurpleChipmonk · <em>kill-or-scale by July 31</em>.</h3>
+      <p>Co-founded with Zach Berenzweig. Launched April 21, 2026 with a 9/9 binary launch checklist. The hypothesis: 10 paid customers at list price by July 31, 2026 with credible path-to-$100K-ARR math = continue. Less than that, joint sunset call.</p>
+      <ul>
+        <li>5 sales conversations / week · non-negotiable floor</li>
+        <li>1 LinkedIn post / week · doubles as Plank 3 content</li>
+        <li>Customer-development interview loop on every trial · 3+ co-occurring answers become roadmap</li>
+        <li>Weekly metrics update Sunday · Saturday coaching review</li>
+      </ul>
+    </div>
+
+    <div class="plank">
+      <div class="plank-meta">
+        <span class="pnum">Plank 03</span>
+        <span>Compound asset · public authority</span>
+        <span class="pstatus planning">Week 0 → 52</span>
+      </div>
+      <h3>Build the audience that <em>compounds</em> regardless of Plank 02.</h3>
+      <p>Five hours per week, non-negotiable. One substantive LinkedIn post per week for 52 weeks. One newsletter live within 10 days of starting. One open-source project derived from Atlas3 or OpenClaw within 90 days. One talk delivered by year-end.</p>
+      <ul>
+        <li>Topic intersection: <em>AI agent orchestration for operators</em> + <em>local/frontier hybrid AI for businesses</em></li>
+        <li>Posts archived in <a href="/writing.html" style="color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px;">/writing</a> as they ship</li>
+        <li>Insurance policy if Plank 02 fails · lead generator if it succeeds · justification for $300–500/hr consulting if I eventually go independent</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="block" id="stack">
+  <div class="section-num">§ 02</div>
+  <h2 class="st">Where my <em>hours</em> are going this week</h2>
+  <div class="stack">
+    <div class="stackcell">
+      <span class="lbl">Plank 01 · ClearSpeed</span>
+      <span class="val">~<em>40–50</em>h</span>
+    </div>
+    <div class="stackcell">
+      <span class="lbl">Plank 02 · PurpleChipmonk</span>
+      <span class="val">~<em>15–25</em>h</span>
+    </div>
+    <div class="stackcell">
+      <span class="lbl">Plank 03 · Public output</span>
+      <span class="val">~<em>5</em>h</span>
+    </div>
+  </div>
+  <p style="margin-top: 20px; font-family: var(--mono); font-size: 12px; color: var(--mute); letter-spacing: 0.05em;">
+    Sustainable ceiling: 60–65 hours · 102-day window for the Plank 02 push · marriage and body protected · weekends with my wife are non-negotiable.
+  </p>
+</section>
+
+<section class="block" id="discipline">
+  <div class="section-num">§ 03</div>
+  <h2 class="st">The <em>operating discipline</em></h2>
+  <div class="quote">
+    <p>"Most AI writing is for people who write about AI. I write for the people who do the work — the Salesforce admin, the RevOps lead, the solutions engineer, the SaaS operator — who read the AI hype, know it matters, and have no idea where to start. I'm 18 months ahead of them. That gap is the whole point."</p>
+    <span class="who">— Position statement · justinfowler.com</span>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 · Justin Fowler</span>
+  <span>Now · v1.0 · Last updated 2026-04-25</span>
+</footer>
+
+</div>
+
+</body>
+</html>

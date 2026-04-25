@@ -1,0 +1,24 @@
+{
+  "name": "Justin Fowler — Operator",
+  "short_name": "Justin Fowler",
+  "description": "Salesforce operator building production AI infrastructure. Co-founder of PurpleChipmonk. Writing about agentic systems for people who do the actual work.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0c0a09",
+  "theme_color": "#0c0a09",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -3,14 +3,76 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>Justin Fowler — Operator</title>
-<meta name="description" content="Salesforce operator building production AI infrastructure. Founder of Signal OS. Writing about agentic systems for people who do the actual work." />
+<title>Justin Fowler — Operator · Builder · Founder of PurpleChipmonk</title>
+<meta name="description" content="Salesforce operator building production AI infrastructure. Co-founder of PurpleChipmonk. Writing about agentic systems for people who do the actual work." />
 <meta name="theme-color" content="#0c0a09" />
-<meta property="og:title" content="Justin Fowler — Operator" />
-<meta property="og:description" content="Salesforce operator building production AI infrastructure. Writing about agentic systems for people who do the actual work." />
+<meta name="author" content="Justin Fowler" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+
+<link rel="canonical" href="https://justinfowler.com/" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="alternate" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+<meta property="og:title" content="Justin Fowler — Operator · Builder" />
+<meta property="og:description" content="Salesforce operator building production AI infrastructure. Co-founder of PurpleChipmonk. Writing about agentic systems for people who do the actual work." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://justinfowler.com" />
+<meta property="og:url" content="https://justinfowler.com/" />
+<meta property="og:site_name" content="Justin Fowler" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:image" content="https://justinfowler.com/og-image.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Justin Fowler — I build AI for people who do the actual work." />
+
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Justin Fowler — Operator · Builder" />
+<meta name="twitter:description" content="Salesforce operator. Agentic AI infrastructure. Co-founder of PurpleChipmonk." />
+<meta name="twitter:image" content="https://justinfowler.com/og-image.svg" />
+<meta name="twitter:image:alt" content="Justin Fowler — I build AI for people who do the actual work." />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://justinfowler.com/#person",
+      "name": "Justin Fowler",
+      "url": "https://justinfowler.com/",
+      "image": "https://justinfowler.com/og-image.svg",
+      "jobTitle": "Salesforce Admin · IT Lead · Co-founder",
+      "description": "Salesforce operator building production AI infrastructure. Co-founder of PurpleChipmonk.",
+      "worksFor": { "@type": "Organization", "name": "ClearSpeed" },
+      "knowsAbout": [
+        "Salesforce administration",
+        "Agentic AI systems",
+        "Multi-agent orchestration",
+        "RevOps engineering",
+        "ISO 27001 / 27701 compliance",
+        "Apex", "Lightning Web Components", "tRPC", "Next.js", "Supabase",
+        "Claude API", "Local LLMs", "Ollama"
+      ],
+      "sameAs": [
+        "https://linkedin.com/in/justinfowler",
+        "https://github.com/justinfowler925"
+      ],
+      "address": { "@type": "PostalAddress", "addressRegion": "WI", "addressCountry": "US" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://justinfowler.com/#website",
+      "url": "https://justinfowler.com/",
+      "name": "Justin Fowler",
+      "description": "Salesforce operator. Agentic AI infrastructure. Co-founder of PurpleChipmonk.",
+      "publisher": { "@id": "https://justinfowler.com/#person" },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -455,18 +517,56 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* ─── SKIP LINK + A11Y ─────────────────── */
+  .skip {
+    position: absolute;
+    left: -9999px;
+    top: 8px;
+    padding: 10px 16px;
+    background: var(--accent);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    text-decoration: none;
+    border-radius: 999px;
+    z-index: 999;
+  }
+  .skip:focus { left: 24px; }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .nav-links a[aria-current="page"] { color: var(--accent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .reveal { opacity: 1 !important; transform: none !important; }
+  }
 </style>
 </head>
 <body>
-<div class="grain"></div>
+<a href="#work" class="skip">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
 <div class="container">
 
-<nav>
-  <div class="mark"><span class="dot"></span>Justin Fowler</div>
+<nav aria-label="Primary">
+  <a href="/" class="mark" aria-current="page"><span class="dot"></span>Justin Fowler</a>
   <div class="nav-links">
-    <a href="#work">Work</a>
     <a href="/portfolio.html">Portfolio</a>
-    <a href="#writing">Writing</a>
+    <a href="/resume.html">Resume</a>
+    <a href="/now.html">Now</a>
+    <a href="/writing.html">Writing</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -494,9 +594,9 @@
 
   <div class="work-grid reveal">
     <div class="work-item">
-      <div class="work-tag">Live · SaaS · 2026</div>
-      <h3 class="work-title">Signal OS</h3>
-      <p class="work-desc">An 18-skill agentic operating system for the modern job search. Eighteen specialized AI skills, persistent state across sessions, and a self-improving playbook that learns from every correction. Not a chatbot. An actual operating system.</p>
+      <div class="work-tag">Live · SaaS · 2026 · purplechipmonk.com</div>
+      <h3 class="work-title">PurpleChipmonk</h3>
+      <p class="work-desc">An 18-skill agentic operating system for the modern job search. Eighteen specialized AI skills, persistent state across sessions, and a self-improving playbook that learns from every correction. Not a chatbot. An actual operating system. Co-founded with Zach Berenzweig.</p>
       <div class="work-stack">
         <span>Next.js 15</span><span>Supabase</span><span>Claude API</span><span>tRPC</span>
       </div>
@@ -531,7 +631,7 @@
   </div>
 
   <div class="work-more reveal">
-    <a href="/portfolio.html">View full portfolio · 10 projects <span>→</span></a>
+    <a href="/portfolio.html">View full portfolio · 9 projects <span>→</span></a>
   </div>
 </section>
 

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <pattern id="grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#1c1917"/>
+    </pattern>
+    <radialGradient id="glow" cx="20%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="line" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#fb923c" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="630" fill="#0c0a09"/>
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.6"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- top accent line -->
+  <rect x="0" y="0" width="1200" height="2" fill="url(#line)"/>
+
+  <!-- mark: pulse dot + name -->
+  <g transform="translate(72, 80)">
+    <circle cx="6" cy="6" r="6" fill="#fb923c"/>
+    <text x="28" y="11" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="14" font-weight="500" fill="#78716c" letter-spacing="3.5">JUSTIN FOWLER</text>
+  </g>
+
+  <!-- top-right -->
+  <text x="1128" y="91" text-anchor="end" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="14" font-weight="500" fill="#57534e" letter-spacing="3">JUSTINFOWLER.COM</text>
+
+  <!-- kicker -->
+  <text x="72" y="200" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="16" font-weight="500" fill="#fb923c" letter-spacing="4.5">— OPERATOR · BUILDER · Q2 2026</text>
+
+  <!-- main hero -->
+  <g font-family="ui-serif, Georgia, 'Times New Roman', serif" font-weight="300" fill="#fafaf9" letter-spacing="-2">
+    <text x="72" y="298" font-size="84">I build <tspan font-style="italic" fill="#fdba74">AI</tspan> for people</text>
+    <text x="72" y="386" font-size="84">who do the <tspan font-style="italic" fill="#fdba74">actual</tspan> work.</text>
+  </g>
+
+  <!-- lede -->
+  <text x="72" y="464" font-family="ui-serif, Georgia, 'Times New Roman', serif" font-style="italic" font-size="22" font-weight="300" fill="#e7e5e4">Salesforce operator. Agentic-AI infrastructure. Co-founder of PurpleChipmonk.</text>
+
+  <!-- chip row -->
+  <g transform="translate(72, 530)" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="13" font-weight="500" letter-spacing="2.5">
+    <g>
+      <rect x="0" y="0" width="200" height="34" rx="17" fill="none" stroke="#292524" stroke-width="1"/>
+      <text x="100" y="22" text-anchor="middle" fill="#a8a29e">SALESFORCE + AI</text>
+    </g>
+    <g transform="translate(212, 0)">
+      <rect x="0" y="0" width="180" height="34" rx="17" fill="none" stroke="#292524" stroke-width="1"/>
+      <text x="90" y="22" text-anchor="middle" fill="#a8a29e">MULTI-AGENT</text>
+    </g>
+    <g transform="translate(404, 0)">
+      <rect x="0" y="0" width="160" height="34" rx="17" fill="none" stroke="#292524" stroke-width="1"/>
+      <text x="80" y="22" text-anchor="middle" fill="#a8a29e">REVOPS 2030</text>
+    </g>
+    <g transform="translate(576, 0)">
+      <rect x="0" y="0" width="200" height="34" rx="17" fill="none" stroke="#292524" stroke-width="1"/>
+      <text x="100" y="22" text-anchor="middle" fill="#a8a29e">LOCAL-FIRST AI</text>
+    </g>
+  </g>
+
+  <!-- bottom-right portfolio cue -->
+  <g transform="translate(1128, 565)">
+    <text text-anchor="end" font-family="ui-serif, Georgia, 'Times New Roman', serif" font-style="italic" font-size="20" font-weight="300" fill="#fdba74">Selected work →</text>
+  </g>
+</svg>

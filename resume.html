@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Resume — Justin Fowler</title>
+<meta name="description" content="Resume of Justin Fowler — Salesforce operator, agentic-AI infrastructure builder, co-founder of PurpleChipmonk. Capabilities, selected work, contact." />
+<meta name="theme-color" content="#0c0a09" />
+
+<link rel="canonical" href="https://justinfowler.com/resume.html" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+<link rel="manifest" href="/manifest.webmanifest" />
+
+<meta property="og:title" content="Resume — Justin Fowler" />
+<meta property="og:description" content="Salesforce operator. Agentic AI infrastructure. Co-founder of PurpleChipmonk." />
+<meta property="og:type" content="profile" />
+<meta property="og:url" content="https://justinfowler.com/resume.html" />
+<meta property="og:image" content="https://justinfowler.com/og-image.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Resume — Justin Fowler" />
+<meta name="twitter:description" content="Salesforce operator. Agentic AI infrastructure. Co-founder of PurpleChipmonk." />
+<meta name="twitter:image" content="https://justinfowler.com/og-image.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Justin Fowler",
+  "url": "https://justinfowler.com",
+  "image": "https://justinfowler.com/og-image.svg",
+  "jobTitle": "Salesforce Admin · IT Lead",
+  "worksFor": { "@type": "Organization", "name": "ClearSpeed" },
+  "knowsAbout": [
+    "Salesforce administration",
+    "Agentic AI systems",
+    "Multi-agent orchestration",
+    "RevOps engineering",
+    "ISO 27001 compliance",
+    "ISO 27701 compliance",
+    "Apex", "LWC", "SOQL", "tRPC", "Next.js", "Supabase",
+    "Claude API", "Local LLMs", "Ollama"
+  ],
+  "sameAs": [
+    "https://linkedin.com/in/justinfowler",
+    "https://github.com/justinfowler925"
+  ],
+  "address": { "@type": "PostalAddress", "addressRegion": "WI", "addressCountry": "US" }
+}
+</script>
+
+<style>
+  :root {
+    --ink: #0c0a09;
+    --ink-2: #1c1917;
+    --ink-3: #292524;
+    --ink-4: #44403c;
+    --paper: #fafaf9;
+    --paper-2: #e7e5e4;
+    --mute: #78716c;
+    --mute-2: #57534e;
+    --accent: #fb923c;
+    --accent-2: #fdba74;
+    --accent-soft: rgba(251, 146, 60, 0.08);
+    --accent-line: rgba(251, 146, 60, 0.2);
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.5; min-height: 100vh; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  a { color: inherit; }
+
+  /* skip link */
+  .skip { position: absolute; left: -9999px; top: 8px; padding: 10px 16px; background: var(--accent); color: var(--ink); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; border-radius: 999px; z-index: 999; }
+  .skip:focus { left: 24px; }
+
+  .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  }
+
+  .container { max-width: 920px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  @media (min-width: 768px) { .container { padding: 0 48px; } }
+
+  nav { padding: 28px 0 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
+
+  .toolbar { display: flex; gap: 8px; flex-wrap: wrap; padding: 28px 0 0; }
+  .toolbtn { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; padding: 8px 14px; background: var(--ink-2); border: 1px solid var(--ink-3); color: var(--paper); border-radius: 999px; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+  .toolbtn:hover { border-color: var(--accent); color: var(--accent); }
+  .toolbtn.primary { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+  .toolbtn.primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: var(--ink); }
+
+  header.hero { padding: 64px 0 48px; }
+  @media (min-width: 768px) { header.hero { padding: 100px 0 60px; } }
+  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); margin-bottom: 28px; }
+  .breadcrumb a { color: var(--mute); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { color: var(--mute-2); margin: 0 12px; }
+  .breadcrumb .here { color: var(--accent); }
+
+  h1.name { font-family: var(--serif); font-variation-settings: 'opsz' 144, 'SOFT' 50; font-size: clamp(48px, 9vw, 96px); font-weight: 300; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 16px; }
+  h1.name em { font-style: italic; color: var(--accent-2); font-weight: 300; }
+  .role { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 28px); line-height: 1.4; color: var(--paper-2); margin-bottom: 32px; max-width: 720px; }
+  .role em { color: var(--accent-2); font-style: italic; }
+  .contactbar { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--ink-3); border: 1px solid var(--ink-3); border-radius: 12px; overflow: hidden; }
+  @media (min-width: 600px) { .contactbar { grid-template-columns: repeat(4, 1fr); } }
+  .contactbar a, .contactbar span { background: var(--ink-2); padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: inherit; transition: background 0.2s; }
+  .contactbar a:hover { background: var(--ink-3); }
+  .contactbar .clabel { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); }
+  .contactbar .cval { font-family: var(--serif); font-size: 16px; color: var(--paper); }
+
+  section.block { padding: 56px 0; border-top: 1px solid var(--ink-3); }
+  .section-head { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 32px; align-items: baseline; }
+  @media (min-width: 768px) { .section-head { grid-template-columns: 180px 1fr; gap: 24px; } }
+  .section-num { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); }
+  .section-title { font-family: var(--serif); font-size: clamp(28px, 4.4vw, 44px); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; }
+  .section-title em { font-style: italic; color: var(--mute); }
+
+  .summary p { font-family: var(--serif); font-size: clamp(18px, 2vw, 22px); line-height: 1.55; color: var(--paper-2); margin-bottom: 18px; max-width: 760px; }
+  .summary p:last-child { margin-bottom: 0; }
+  .summary p em { color: var(--accent-2); font-style: italic; }
+  .summary p strong { color: var(--paper); font-weight: 600; }
+
+  .role-list { display: grid; gap: 18px; }
+  .role-item { padding: 22px 24px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 14px; }
+  .role-item .rmeta { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: baseline; margin-bottom: 10px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); }
+  .role-item .rmeta .rtag { color: var(--accent); }
+  .role-item .rmeta .ryear { margin-left: auto; }
+  .role-item h3 { font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.15; margin-bottom: 8px; }
+  .role-item h3 em { color: var(--accent-2); font-style: italic; }
+  .role-item p { color: var(--paper-2); font-size: 15px; line-height: 1.6; margin-bottom: 10px; }
+  .role-item p:last-child { margin-bottom: 0; }
+  .role-item ul { list-style: none; padding: 0; margin-top: 8px; }
+  .role-item ul li { font-size: 14px; color: var(--paper-2); padding: 4px 0 4px 18px; position: relative; line-height: 1.55; }
+  .role-item ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-family: var(--mono); }
+
+  .capgrid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--ink-3); border: 1px solid var(--ink-3); border-radius: 14px; overflow: hidden; }
+  @media (min-width: 700px) { .capgrid { grid-template-columns: 1fr 1fr; } }
+  .cap { background: var(--ink-2); padding: 22px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .cap-domain { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); }
+  .cap-name { font-family: var(--serif); font-size: 18px; font-weight: 400; line-height: 1.15; color: var(--paper); }
+  .cap-stack { font-family: var(--mono); font-size: 11px; color: var(--mute); line-height: 1.6; }
+
+  .work-list { display: grid; gap: 12px; }
+  .work-row { display: grid; grid-template-columns: 1fr; gap: 6px; padding: 16px 18px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 10px; transition: border-color 0.2s; }
+  @media (min-width: 700px) { .work-row { grid-template-columns: 80px 1fr 200px; gap: 18px; align-items: center; } }
+  .work-row:hover { border-color: var(--accent-line); }
+  .work-row .wnum { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.22em; }
+  .work-row h4 { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--paper); }
+  .work-row h4 em { color: var(--accent-2); font-style: italic; }
+  .work-row .wdesc { font-size: 13px; color: var(--mute); margin-top: 2px; }
+  .work-row a { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--paper); padding: 8px 14px; border: 1px solid var(--ink-3); border-radius: 999px; text-decoration: none; transition: all 0.2s; text-align: center; justify-self: start; }
+  @media (min-width: 700px) { .work-row a { justify-self: end; } }
+  .work-row a:hover { border-color: var(--accent); color: var(--accent); }
+
+  .compliance { display: flex; flex-wrap: wrap; gap: 8px; }
+  .compliance span { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--paper-2); padding: 6px 12px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 999px; }
+
+  footer { padding: 48px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute-2); }
+
+  /* focus rings */
+  a:focus-visible, button:focus-visible, .toolbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+
+  /* ─── PRINT ─────────────────────────────── */
+  @media print {
+    @page { margin: 18mm; size: letter; }
+    body { background: #fff !important; color: #000 !important; font-family: 'Georgia', 'Times New Roman', serif; line-height: 1.4; }
+    .grain, .toolbar, nav, footer, .breadcrumb { display: none !important; }
+    .container { max-width: 100%; padding: 0 !important; }
+    a { color: #000 !important; text-decoration: none; }
+    a[href^="http"]::after, a[href^="mailto"]::after { content: " (" attr(href) ")"; font-size: 9pt; color: #555; }
+    h1.name, h2, h3, h4 { color: #000 !important; page-break-after: avoid; }
+    h1.name { font-size: 32pt !important; line-height: 1.05 !important; margin-bottom: 6pt !important; }
+    h1.name em { color: #000 !important; }
+    .role { font-size: 14pt !important; color: #333 !important; margin-bottom: 12pt !important; }
+    .role em { color: #000 !important; }
+    .contactbar { display: flex !important; flex-wrap: wrap; border: none !important; background: none !important; padding: 0 0 12pt 0 !important; gap: 18pt !important; border-radius: 0 !important; }
+    .contactbar a, .contactbar span { background: none !important; padding: 0 !important; border: none !important; flex: 0 0 auto !important; }
+    .contactbar .clabel { font-size: 8pt !important; color: #888 !important; }
+    .contactbar .cval { font-size: 11pt !important; color: #000 !important; }
+    section.block { padding: 14pt 0 !important; border-color: #ccc !important; page-break-inside: auto; }
+    .section-head { grid-template-columns: 1fr !important; margin-bottom: 8pt !important; }
+    .section-num { color: #999 !important; font-size: 9pt !important; }
+    .section-title { font-size: 16pt !important; }
+    .section-title em { color: #888 !important; }
+    .summary p { font-size: 11pt !important; color: #222 !important; max-width: none !important; margin-bottom: 8pt !important; }
+    .summary p em, .summary p strong { color: #000 !important; }
+    .role-item, .work-row, .cap, .capgrid { background: none !important; border: 1px solid #ccc !important; border-radius: 4pt !important; page-break-inside: avoid; }
+    .capgrid { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 6pt !important; background: none !important; border: none !important; }
+    .role-item ul li { color: #333 !important; }
+    .role-item ul li::before { color: #555 !important; }
+    .compliance span { background: none !important; border: 1px solid #999 !important; color: #000 !important; }
+    .work-row a { display: none; }
+    ::selection { background: none; color: inherit; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="container">
+
+<nav aria-label="Primary">
+  <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/resume.html" aria-current="page">Resume</a>
+    <a href="/now.html">Now</a>
+    <a href="/writing.html">Writing</a>
+  </div>
+</nav>
+
+<div class="toolbar" aria-label="Resume actions">
+  <button type="button" class="toolbtn primary" onclick="window.print()" aria-label="Print or save as PDF">Print · Save PDF</button>
+  <a class="toolbtn" href="mailto:justin@justinfowler.com?subject=Resume%20follow-up">Email me</a>
+  <a class="toolbtn" href="https://linkedin.com/in/justinfowler" target="_blank" rel="noopener">LinkedIn ↗</a>
+  <a class="toolbtn" href="/portfolio.html">Full portfolio →</a>
+</div>
+
+<main id="main">
+
+<header class="hero">
+  <div class="breadcrumb">
+    <a href="/">Home</a><span class="sep">/</span><span class="here">Resume</span>
+  </div>
+  <h1 class="name">Justin <em>Fowler</em></h1>
+  <p class="role">
+    <em>Salesforce operator</em> building production AI infrastructure — from autonomous Apex / LWC pipelines on the day job to multi-agent systems running on local hardware. Co-founder of <em>PurpleChipmonk</em>, an 18-skill agentic OS for the modern job search.
+  </p>
+  <div class="contactbar">
+    <a href="mailto:justin@justinfowler.com">
+      <span class="clabel">Email</span>
+      <span class="cval">justin@justinfowler.com</span>
+    </a>
+    <a href="https://linkedin.com/in/justinfowler" target="_blank" rel="noopener">
+      <span class="clabel">LinkedIn</span>
+      <span class="cval">/in/justinfowler</span>
+    </a>
+    <a href="https://github.com/justinfowler925" target="_blank" rel="noopener">
+      <span class="clabel">GitHub</span>
+      <span class="cval">@justinfowler925</span>
+    </a>
+    <span>
+      <span class="clabel">Based</span>
+      <span class="cval">Wisconsin · USA</span>
+    </span>
+  </div>
+</header>
+
+<section class="block" id="summary">
+  <div class="section-head">
+    <div class="section-num">§ 01</div>
+    <h2 class="section-title">Summary</h2>
+  </div>
+  <div class="summary">
+    <p><strong>I do the unsexy work, made faster.</strong> Salesforce administration on a 59-package production org with full ISO 27001 / 27701 compliance lane, plus an eight-agent autonomous metadata pipeline — Apex, LWC, test classes, deployments — drafted overnight and reviewed in the morning. Zero browser interactions; everything goes through JWT, API, or CLI.</p>
+    <p>Outside the day job, I run <em>multi-agent systems on real hardware</em>. Three named agents (Alpha · Beta · Gamma) plus a coding agent on an M3 Ultra with native Ollama. A nightly cloud-triggered RevOps build agent that picks the highest-scored phase from a roadmap and ships PRs to <code>main</code>. A version-controlled "personal AI OS" (<em>fowler-brain</em>) where every Claude / Cursor / local-model surface bootstraps from one git repo.</p>
+    <p>Co-founded <strong>PurpleChipmonk</strong> — a Next.js 15 + Supabase + Claude Sonnet 4.6 SaaS — with a binary 90-day kill-or-scale gate. Built nine quality gates between LLM and user to prevent the failure modes that make raw GPT tools dangerous. <em>Operators over thought leaders. Compound assets over one-time wins.</em></p>
+  </div>
+</section>
+
+<section class="block" id="experience">
+  <div class="section-head">
+    <div class="section-num">§ 02</div>
+    <h2 class="section-title">Selected <em>experience</em></h2>
+  </div>
+  <div class="role-list">
+
+    <div class="role-item">
+      <div class="rmeta">
+        <span class="rtag">Day job · enterprise</span>
+        <span>Salesforce + AI delivery</span>
+        <span class="ryear">2024 — present</span>
+      </div>
+      <h3>Salesforce Admin · IT Lead — <em>ClearSpeed</em></h3>
+      <p>San Diego–based voice-analytics company. Production + sandbox orgs with 59 managed packages. Lead admin on the security/compliance lane (ISO 27001 + ISO 27701).</p>
+      <ul>
+        <li>Designed and deployed Contract lifecycle flows (Stage Validation, Renewal Counter, Expiration Alert, Target Start Date) with sandbox-aware email guards</li>
+        <li>Built an eight-agent autonomous metadata pipeline — Apex / LWC / test classes / deploys — drafted overnight via Claude Code + Atlas Direct, reviewed in the morning</li>
+        <li>OAuth / JWT / SF CLI / Tooling API only — zero-browser policy for repeatable, auditable change</li>
+        <li>Runs full audit-trail observability via SetupAuditTrail SOQL pipeline + GitLab CI for SFDX repo, Doppler-routed credentials</li>
+      </ul>
+    </div>
+
+    <div class="role-item">
+      <div class="rmeta">
+        <span class="rtag">Co-founder · live product</span>
+        <span>Lifestyle SaaS</span>
+        <span class="ryear">Apr 2026 — present</span>
+      </div>
+      <h3>Co-founder · <em>PurpleChipmonk</em> (purplechipmonk.com)</h3>
+      <p>50/50 co-founder with Zach Berenzweig. Lifestyle business — not raising, not optimizing for exit. Binary 90-day gate: 10 paid customers at list price by July 31, 2026 determines kill-or-scale.</p>
+      <ul>
+        <li>18-skill agentic OS for the modern job search · Next.js 15 · tRPC · Supabase · Claude Sonnet 4.6 · Voyage AI embeddings · Stripe · Vercel</li>
+        <li>Nine quality gates between LLM and user — prevents resume fabrication, comp-math errors, persona mismatch, fabricated experience claims</li>
+        <li>Launched April 21, 2026 with binary 9/9 launch checklist · PostHog telemetry · Sentry-bridged structured error logs</li>
+        <li>Authored full GTM operating doc — pricing strategy memo, partner alignment memo, channel ranking, launch checklist, weekly cadence</li>
+      </ul>
+    </div>
+
+    <div class="role-item">
+      <div class="rmeta">
+        <span class="rtag">Personal infrastructure</span>
+        <span>Multi-agent · Local-first</span>
+        <span class="ryear">2026 — present</span>
+      </div>
+      <h3>Operator · <em>OpenClaw HQ</em>, <em>Atlas Direct</em>, <em>Atlas3</em>, <em>fowler-brain</em></h3>
+      <p>A stack of named systems that compose into something larger than any one of them. All running on hardware I own. All US/EU model-origin only. All version-controlled, lessons-graduating, drift-reviewed weekly.</p>
+      <ul>
+        <li><strong>OpenClaw HQ</strong> — three-tier multi-agent platform · BullMQ + Redis + pgvector · M3 Ultra · 96 GB unified memory · ~18 tok/s on llama3.3:70b</li>
+        <li><strong>Atlas Direct</strong> — autonomous RevOps build agent · Anthropic CCR cloud trigger nightly @ 22:00 PT · scored ROADMAP · ships PRs to <code>main</code> · ~70 phases planned</li>
+        <li><strong>Atlas3</strong> — local Aider-based coding system · FastAPI port 7800 · compliant model stack (codestral · llama · devstral · phi4)</li>
+        <li><strong>fowler-brain</strong> — version-controlled personal AI OS · 21 lessons captured · 11 workflows · 8 adapters · Saturday automated coaching review</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="block" id="capabilities">
+  <div class="section-head">
+    <div class="section-num">§ 03</div>
+    <h2 class="section-title">Capabilities <em>by domain</em></h2>
+  </div>
+  <div class="capgrid">
+    <div class="cap">
+      <span class="cap-domain">01 · Salesforce</span>
+      <span class="cap-name">Production-grade admin + platform engineering</span>
+      <span class="cap-stack">Apex · LWC · SOQL · Flow Builder · jsforce · SF CLI · SFDX · Tooling API · External Client Apps · Metadata API</span>
+    </div>
+    <div class="cap">
+      <span class="cap-domain">02 · Compliance + IT</span>
+      <span class="cap-name">Security and audit lanes that hold up under review</span>
+      <span class="cap-stack">ISO 27001 · ISO 27701 · SOC 2 alignment · OAuth / JWT · Doppler · GitLab CI · Audit trail observability · Least-privilege OAuth split</span>
+    </div>
+    <div class="cap">
+      <span class="cap-domain">03 · Agentic AI</span>
+      <span class="cap-name">Multi-agent systems, in production</span>
+      <span class="cap-stack">Claude Sonnet 4.6 · Claude Code · Aider · Ollama (native) · BullMQ · pgvector · MCP servers · skill design · LLM tool-use validation</span>
+    </div>
+    <div class="cap">
+      <span class="cap-domain">04 · Web + product</span>
+      <span class="cap-name">Shipping a real SaaS, not a side project</span>
+      <span class="cap-stack">Next.js 15 · TypeScript · tRPC · Supabase · Postgres + RLS · Stripe · Vercel · Voyage embeddings · PostHog · Sentry</span>
+    </div>
+    <div class="cap">
+      <span class="cap-domain">05 · Local AI infra</span>
+      <span class="cap-name">Serious models on hardware you own</span>
+      <span class="cap-stack">M3 Ultra · 96 GB unified · native Ollama (no Docker) · ngrok tunnels · launchd · Redis · Postgres · ComfyUI · complexity-scored routing</span>
+    </div>
+    <div class="cap">
+      <span class="cap-domain">06 · Strategy + GTM</span>
+      <span class="cap-name">Operating documents, not slideware</span>
+      <span class="cap-stack">Five-year P&L · unit economics · CPG channel modeling · GTM design · 90-day binary gates · investor decks · partner agreements · pricing memos</span>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="work">
+  <div class="section-head">
+    <div class="section-num">§ 04</div>
+    <h2 class="section-title">Selected <em>work</em></h2>
+  </div>
+  <div class="work-list">
+    <div class="work-row">
+      <span class="wnum">§ 01</span>
+      <div>
+        <h4><em>PurpleChipmonk</em></h4>
+        <span class="wdesc">Live SaaS · 18-skill agentic OS · co-founded with Zach Berenzweig</span>
+      </div>
+      <a href="/portfolio.html#purplechipmonk">View case study →</a>
+    </div>
+    <div class="work-row">
+      <span class="wnum">§ 02</span>
+      <div>
+        <h4><em>fowler-brain</em></h4>
+        <span class="wdesc">Personal AI OS · 4 phases shipped · 21 lessons captured</span>
+      </div>
+      <a href="/portfolio.html#fowler-brain">View case study →</a>
+    </div>
+    <div class="work-row">
+      <span class="wnum">§ 03</span>
+      <div>
+        <h4><em>Atlas Direct</em></h4>
+        <span class="wdesc">Autonomous RevOps build agent · cloud-triggered · ~70 phases planned</span>
+      </div>
+      <a href="/portfolio.html#atlas-direct">View case study →</a>
+    </div>
+    <div class="work-row">
+      <span class="wnum">§ 04</span>
+      <div>
+        <h4><em>Atlas3</em></h4>
+        <span class="wdesc">Local autonomous coding system · Aider + headless Claude · M3 Ultra</span>
+      </div>
+      <a href="/portfolio.html#atlas3">View case study →</a>
+    </div>
+    <div class="work-row">
+      <span class="wnum">§ 05</span>
+      <div>
+        <h4><em>OpenClaw HQ</em></h4>
+        <span class="wdesc">Three-tier multi-agent workforce · BullMQ + pgvector · gateway port 7777</span>
+      </div>
+      <a href="/portfolio.html#openclaw-hq">View case study →</a>
+    </div>
+    <div class="work-row">
+      <span class="wnum">§ 06</span>
+      <div>
+        <h4>Marketing 2030 · <em>RevOps 2030</em></h4>
+        <span class="wdesc">Signal-Led Growth Engine · 11-section blueprint · ABM for 24-mo cycles</span>
+      </div>
+      <a href="/portfolio.html#request">Request access →</a>
+    </div>
+    <div class="work-row">
+      <span class="wnum">§ 07</span>
+      <div>
+        <h4>Monch Monch · <em>Matchbox 7</em></h4>
+        <span class="wdesc">Five-year strategic + operational plan · CPG financial modeling · NDA-gated</span>
+      </div>
+      <a href="/portfolio.html#request">Request access →</a>
+    </div>
+    <div class="work-row">
+      <span class="wnum">§ 08</span>
+      <div>
+        <h4>ClearSpeed <em>Salesforce + AI</em></h4>
+        <span class="wdesc">Day-job · 8-agent autonomous metadata pipeline · ISO 27001/27701</span>
+      </div>
+      <a href="/portfolio.html#request">Request access →</a>
+    </div>
+    <div class="work-row">
+      <span class="wnum">§ 09</span>
+      <div>
+        <h4>CS HubSpot <em>RevOps</em></h4>
+        <span class="wdesc">19-workflow playbook · Project-Knowledge distribution model</span>
+      </div>
+      <a href="/portfolio.html#request">Request access →</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="compliance">
+  <div class="section-head">
+    <div class="section-num">§ 05</div>
+    <h2 class="section-title">Compliance <em>+ standards</em></h2>
+  </div>
+  <div class="compliance">
+    <span>ISO 27001</span>
+    <span>ISO 27701</span>
+    <span>SOC 2 alignment</span>
+    <span>GDPR-aware data handling</span>
+    <span>OAuth 2.0 / JWT</span>
+    <span>Least-privilege OAuth split</span>
+    <span>Audit-trail observability</span>
+    <span>Salesforce Shield-aware design</span>
+    <span>Data residency</span>
+  </div>
+</section>
+
+<section class="block" id="references">
+  <div class="section-head">
+    <div class="section-num">§ 06</div>
+    <h2 class="section-title">References <em>+ history</em></h2>
+  </div>
+  <div class="summary">
+    <p>Full employment history, dates, references, and additional certifications are available <a href="https://linkedin.com/in/justinfowler" target="_blank" rel="noopener" style="color: var(--accent-2); text-decoration: underline; text-underline-offset: 4px;">on LinkedIn</a> or by direct request. Confidential client work — strategic artifacts, financial models, internal RevOps playbooks — is gated on the <a href="/portfolio.html#request" style="color: var(--accent-2); text-decoration: underline; text-underline-offset: 4px;">portfolio access request form</a>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 · Justin Fowler</span>
+  <span>Resume · v1.0 · Q2 2026 · Last updated 2026-04-25</span>
+</footer>
+
+</div>
+
+</body>
+</html>

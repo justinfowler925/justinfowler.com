@@ -1,0 +1,31 @@
+/* TEAM */
+  Operator: Justin Fowler
+  Site: https://justinfowler.com
+  LinkedIn: https://linkedin.com/in/justinfowler
+  GitHub: https://github.com/justinfowler925
+  Location: Wisconsin, USA
+
+/* THANKS */
+  Anthropic — Claude Sonnet 4.6 (production stack)
+  Vercel — hosting for PurpleChipmonk
+  Supabase — Postgres + auth for the same
+  Voyage AI — embeddings
+  PostHog — telemetry
+  Sentry — error bridging
+  Mistral · Meta · Microsoft · Nomic — local model weights
+  GitHub Pages — this site you're reading
+
+/* SITE */
+  Last update: 2026/04/25
+  Standards: HTML5, CSS3, ES2022
+  Components: Vanilla JS, Intersection Observer, scroll-snap
+  Hosting: GitHub Pages → Cloudflare DNS
+  Build: zero — single-file static
+  Source: https://github.com/justinfowler925/justinfowler.com
+
+/* PRINCIPLES */
+  Ship the work, not the framework.
+  Local-first when possible.
+  US/EU model origin only.
+  Operators over thought leaders.
+  Compound assets > one-time wins.

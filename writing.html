@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Writing — Justin Fowler</title>
+<meta name="description" content="Notes from doing the work — agentic AI for operators, multi-agent systems in practice, the Salesforce admin's AI playbook, and building in public honestly." />
+<meta name="theme-color" content="#0c0a09" />
+
+<link rel="canonical" href="https://justinfowler.com/writing.html" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+<link rel="manifest" href="/manifest.webmanifest" />
+
+<meta property="og:title" content="Writing — Justin Fowler" />
+<meta property="og:description" content="Notes from doing the work — agentic AI for operators, multi-agent systems in practice, the Salesforce admin's AI playbook, building in public honestly." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://justinfowler.com/writing.html" />
+<meta property="og:image" content="https://justinfowler.com/og-image.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://justinfowler.com/og-image.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink: #0c0a09; --ink-2: #1c1917; --ink-3: #292524; --ink-4: #44403c;
+    --paper: #fafaf9; --paper-2: #e7e5e4; --mute: #78716c; --mute-2: #57534e;
+    --accent: #fb923c; --accent-2: #fdba74;
+    --accent-soft: rgba(251, 146, 60, 0.08); --accent-line: rgba(251, 146, 60, 0.2);
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.5; min-height: 100vh; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  .skip { position: absolute; left: -9999px; top: 8px; padding: 10px 16px; background: var(--accent); color: var(--ink); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; border-radius: 999px; z-index: 999; }
+  .skip:focus { left: 24px; }
+  .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  @media (min-width: 768px) { .container { padding: 0 48px; } }
+  nav { padding: 28px 0 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
+
+  header.hero { padding: 80px 0 40px; }
+  @media (min-width: 768px) { header.hero { padding: 120px 0 60px; } }
+  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); margin-bottom: 28px; }
+  .breadcrumb a { color: var(--mute); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { color: var(--mute-2); margin: 0 12px; }
+  .breadcrumb .here { color: var(--accent); }
+  .stamp { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 28px; padding: 8px 14px; display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent-line); border-radius: 999px; }
+  h1 { font-family: var(--serif); font-variation-settings: 'opsz' 144, 'SOFT' 50; font-size: clamp(48px, 9vw, 96px); font-weight: 300; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 24px; }
+  h1 em { font-style: italic; color: var(--accent-2); font-weight: 300; }
+  .lede { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); line-height: 1.45; color: var(--paper-2); max-width: 720px; margin-bottom: 24px; }
+  .lede em { color: var(--accent-2); font-style: italic; }
+  .lede strong { color: var(--paper); font-weight: 600; }
+
+  section.block { padding: 56px 0; border-top: 1px solid var(--ink-3); }
+  .section-num { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 8px; }
+  h2.st { font-family: var(--serif); font-size: clamp(30px, 4.4vw, 44px); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 32px; }
+  h2.st em { font-style: italic; color: var(--mute); }
+
+  /* themes */
+  .themes { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 700px) { .themes { grid-template-columns: 1fr 1fr; gap: 32px 36px; } }
+  .theme { padding-bottom: 24px; border-bottom: 1px solid var(--ink-3); }
+  .theme-num { font-family: var(--mono); font-size: 11px; color: var(--mute-2); margin-bottom: 12px; }
+  .theme-title { font-family: var(--serif); font-size: 24px; font-weight: 400; line-height: 1.18; color: var(--paper); margin-bottom: 12px; }
+  .theme-title em { color: var(--accent-2); font-style: italic; }
+  .theme-desc { color: var(--paper-2); font-size: 15px; line-height: 1.65; }
+
+  /* posts list */
+  .post-list { display: grid; gap: 12px; }
+  .post { display: grid; grid-template-columns: 1fr; gap: 6px; padding: 18px 22px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 12px; transition: border-color 0.2s; }
+  @media (min-width: 700px) { .post { grid-template-columns: 110px 1fr 90px; gap: 24px; align-items: center; } }
+  .post:hover { border-color: var(--accent-line); }
+  .post .pdate { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase; }
+  .post h3 { font-family: var(--serif); font-size: 18px; font-weight: 400; line-height: 1.25; color: var(--paper); }
+  .post .tag { font-family: var(--mono); font-size: 9px; color: var(--mute); letter-spacing: 0.22em; text-transform: uppercase; justify-self: start; }
+  @media (min-width: 700px) { .post .tag { justify-self: end; } }
+  .post.scheduled { opacity: 0.65; }
+  .post.scheduled .pdate { color: var(--mute); }
+
+  .empty-note { padding: 28px 28px; background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-left: 2px solid var(--accent); border-radius: 0 12px 12px 0; }
+  .empty-note p { font-family: var(--serif); font-size: 17px; line-height: 1.55; color: var(--paper-2); }
+  .empty-note p em { color: var(--accent-2); font-style: italic; }
+  .empty-note .when { display: block; margin-top: 10px; font-family: var(--mono); font-size: 11px; color: var(--mute); letter-spacing: 0.18em; text-transform: uppercase; }
+
+  /* subscribe */
+  .subscribe { background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-radius: 20px; padding: 36px 28px; position: relative; overflow: hidden; }
+  @media (min-width: 700px) { .subscribe { padding: 52px 56px; } }
+  .subscribe::before { content: ''; position: absolute; top: -120px; right: -120px; width: 320px; height: 320px; background: radial-gradient(circle, rgba(251, 146, 60, 0.08) 0%, transparent 70%); pointer-events: none; }
+  .subscribe h3 { font-family: var(--serif); font-size: clamp(26px, 3.4vw, 40px); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 18px; }
+  .subscribe h3 em { color: var(--accent-2); font-style: italic; }
+  .subscribe p { font-family: var(--serif); font-size: 17px; line-height: 1.55; color: var(--paper-2); margin-bottom: 24px; max-width: 560px; }
+  .sub-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; padding: 14px 22px; border: 1px solid var(--ink-3); color: var(--paper); border-radius: 999px; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+  .btn.primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: var(--ink); }
+
+  footer { padding: 48px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute-2); }
+
+  a:focus-visible, button:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="container">
+
+<nav aria-label="Primary">
+  <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/resume.html">Resume</a>
+    <a href="/now.html">Now</a>
+    <a href="/writing.html" aria-current="page">Writing</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="hero">
+  <div class="breadcrumb">
+    <a href="/">Home</a><span class="sep">/</span><span class="here">Writing</span>
+  </div>
+  <div class="stamp">— New cadence · 1 substantive post / week · 52 weeks</div>
+  <h1>Notes from doing <em>the work</em>.</h1>
+  <p class="lede">
+    Not the hype version. Not the influencer version. The version where I'm <em>18 months ahead</em> of the operators I'm writing for, and I'm willing to show every receipt — what worked, what broke, what I had to walk back.
+  </p>
+  <p class="lede">
+    Posts ship Friday mornings. Substantive enough to be worth your time. <strong>No threads. No engagement-bait.</strong> No claims I can't demonstrate at a terminal in front of you.
+  </p>
+</header>
+
+<section class="block" id="themes">
+  <div class="section-num">§ 01</div>
+  <h2 class="st">What I'll be <em>writing about</em></h2>
+
+  <div class="themes">
+    <div class="theme">
+      <div class="theme-num">01</div>
+      <h3 class="theme-title">Local-first AI <em>for operators</em></h3>
+      <p class="theme-desc">Running serious models on serious hardware that you actually own. Why the cloud isn't always the answer for people who care about cost, latency, and never sending their work somewhere they can't see it. Pieces drawn from running OpenClaw HQ on an M3 Ultra and Atlas3 in Aider for autonomous coding.</p>
+    </div>
+    <div class="theme">
+      <div class="theme-num">02</div>
+      <h3 class="theme-title">Multi-agent systems, <em>in practice</em></h3>
+      <p class="theme-desc">Not the hype version — the version where you actually have to maintain them. What works when one agent has to hand off to another, what breaks, and why orchestration is harder than the demo videos suggest. Lane-locks, complexity-scored routing, the failure modes nobody warns you about.</p>
+    </div>
+    <div class="theme">
+      <div class="theme-num">03</div>
+      <h3 class="theme-title">The Salesforce admin's <em>AI playbook</em></h3>
+      <p class="theme-desc">Specific patterns for using AI inside the most boring-looking but most-used software on the planet. Apex generation, LWC scaffolding, test class authoring, debug log triage, eight-agent autonomous metadata pipelines. The unsexy work, made faster.</p>
+    </div>
+    <div class="theme">
+      <div class="theme-num">04</div>
+      <h3 class="theme-title">Building in public, <em>honestly</em></h3>
+      <p class="theme-desc">A solo builder shipping a SaaS while keeping a day job. The 90-day gates. The portfolio with a floor. The mistakes I'm making in real time. No pretending the path is straight. No "founder mindset" content; just the actual decisions and their actual consequences.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="posts">
+  <div class="section-num">§ 02</div>
+  <h2 class="st">Recent <em>posts</em></h2>
+
+  <div class="post-list">
+    <div class="post scheduled">
+      <span class="pdate">Apr 25 · Fri</span>
+      <h3>Why your AI strategy probably needs <em>two models</em>, not one</h3>
+      <span class="tag">Plank 03 · #1</span>
+    </div>
+  </div>
+
+  <div class="empty-note" style="margin-top: 24px;">
+    <p>This is week 0. The cadence starts now — <em>one substantive post per week, every week, for fifty-two weeks</em>. Posts go live on LinkedIn first; archive shows up here within a day. The empty list is honest, not a placeholder.</p>
+    <span class="when">First post · 2026-04-25</span>
+  </div>
+</section>
+
+<section class="block" id="subscribe">
+  <div class="section-num">§ 03</div>
+  <h2 class="st">Get them in your <em>inbox</em></h2>
+  <div class="subscribe">
+    <h3>Want the posts <em>without the algorithm</em>?</h3>
+    <p>The newsletter goes out Friday mornings — same content as the LinkedIn post, no doom-scroll required. Email me to be added to the list while I migrate to a proper provider.</p>
+    <div class="sub-actions">
+      <a class="btn primary" href="mailto:justin@justinfowler.com?subject=Subscribe%20me%20to%20the%20newsletter&body=Add%20me%20to%20the%20list.%20Name%3A%20%0AReason%20you%20want%20it%3A%20">Subscribe via email</a>
+      <a class="btn" href="https://linkedin.com/in/justinfowler" target="_blank" rel="noopener">Follow on LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 · Justin Fowler</span>
+  <span>Writing · v1.0 · Last updated 2026-04-25</span>
+</footer>
+
+</div>
+
+</body>
+</html>
