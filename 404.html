@@ -211,13 +211,23 @@
 
   <div class="actions">
     <a class="btn primary" href="/">Return home</a>
-    <a class="btn" href="mailto:justin@justinfowler.com">Email me</a>
+    <button type="button" class="btn" data-email style="font-family:inherit; cursor:pointer;">Email me</button>
   </div>
 
   <div class="meta">
     <span><span class="label">Status</span> 404 · Not Found</span>
   </div>
 </div>
+
+<script>
+  document.querySelectorAll('[data-email]').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      var addr = atob('anVzdGlu') + '@' + atob('anVzdGluZm93bGVyLmNvbQ==');
+      window.location.href = 'mailto:' + addr;
+    });
+  });
+</script>
 
 </body>
 </html>

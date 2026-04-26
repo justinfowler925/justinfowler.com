@@ -208,7 +208,7 @@
     <h3>Want the posts <em>without the algorithm</em>?</h3>
     <p>The newsletter goes out Friday mornings — same content as the LinkedIn post, no doom-scroll required. Email me to be added to the list while I migrate to a proper provider.</p>
     <div class="sub-actions">
-      <a class="btn primary" href="mailto:justin@justinfowler.com?subject=Subscribe%20me%20to%20the%20newsletter&body=Add%20me%20to%20the%20list.%20Name%3A%20%0AReason%20you%20want%20it%3A%20">Subscribe via email</a>
+      <button type="button" class="btn primary" data-email data-subject="Subscribe me to the newsletter" data-body="Add me to the list. Name: &#10;Reason you want it: " style="font-family:inherit; cursor:pointer;">Subscribe via email</button>
       <a class="btn" href="https://linkedin.com/in/justinfowler" target="_blank" rel="noopener">Follow on LinkedIn ↗</a>
     </div>
   </div>
@@ -222,6 +222,19 @@
 </footer>
 
 </div>
+
+<script>
+  document.querySelectorAll('[data-email]').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      var addr = atob('anVzdGlu') + '@' + atob('anVzdGluZm93bGVyLmNvbQ==');
+      var qs = [];
+      if (el.dataset.subject) qs.push('subject=' + encodeURIComponent(el.dataset.subject));
+      if (el.dataset.body)    qs.push('body=' + encodeURIComponent(el.dataset.body));
+      window.location.href = 'mailto:' + addr + (qs.length ? '?' + qs.join('&') : '');
+    });
+  });
+</script>
 
 </body>
 </html>

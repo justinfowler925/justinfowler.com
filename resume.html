@@ -35,23 +35,35 @@
   "name": "Justin Fowler",
   "url": "https://justinfowler.com",
   "image": "https://justinfowler.com/og-image.svg",
-  "jobTitle": "Salesforce Admin · IT Lead",
-  "worksFor": { "@type": "Organization", "name": "ClearSpeed" },
+  "jobTitle": "Director of Revenue Operations · Co-founder, PurpleChipmonk",
+  "worksFor": { "@type": "Organization", "name": "Clearspeed" },
   "knowsAbout": [
-    "Salesforce administration",
+    "Revenue Operations",
+    "Product Management",
     "Agentic AI systems",
     "Multi-agent orchestration",
-    "RevOps engineering",
-    "ISO 27001 compliance",
-    "ISO 27701 compliance",
-    "Apex", "LWC", "SOQL", "tRPC", "Next.js", "Supabase",
+    "Cross-functional team leadership",
+    "Sales analytics",
+    "CRM / CSM integration",
+    "Go-to-market strategy",
+    "Pricing strategy",
+    "A/B testing",
+    "Salesforce administration",
+    "Agile · Scrum · Kanban",
+    "UX / UI design",
+    "User research",
+    "Tableau", "SQL", "Python", "JavaScript", "AWS",
     "Claude API", "Local LLMs", "Ollama"
+  ],
+  "alumniOf": [
+    { "@type": "EducationalOrganization", "name": "St. Mary's College of California" },
+    { "@type": "EducationalOrganization", "name": "California State University, Hayward" }
   ],
   "sameAs": [
     "https://linkedin.com/in/justinfowler",
     "https://github.com/justinfowler925"
   ],
-  "address": { "@type": "PostalAddress", "addressRegion": "WI", "addressCountry": "US" }
+  "address": { "@type": "PostalAddress", "addressLocality": "Chicago", "addressRegion": "IL", "addressCountry": "US" }
 }
 </script>
 
@@ -118,8 +130,9 @@
   .role em { color: var(--accent-2); font-style: italic; }
   .contactbar { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--ink-3); border: 1px solid var(--ink-3); border-radius: 12px; overflow: hidden; }
   @media (min-width: 600px) { .contactbar { grid-template-columns: repeat(4, 1fr); } }
-  .contactbar a, .contactbar span { background: var(--ink-2); padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: inherit; transition: background 0.2s; }
-  .contactbar a:hover { background: var(--ink-3); }
+  .contactbar a, .contactbar span, .contactbar button.cbar-email { background: var(--ink-2); padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: inherit; transition: background 0.2s; border: 0; font-family: inherit; font-size: inherit; text-align: left; cursor: pointer; width: 100%; }
+  .contactbar a:hover, .contactbar button.cbar-email:hover { background: var(--ink-3); }
+  .contactbar button.cbar-email .cval { color: var(--accent-2); }
   .contactbar .clabel { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); }
   .contactbar .cval { font-family: var(--serif); font-size: 16px; color: var(--paper); }
 
@@ -286,7 +299,7 @@
 <div class="toolbar" aria-label="Resume actions">
   <a class="toolbtn primary" href="/assets/justin-fowler-resume.pdf" download="justin-fowler-resume.pdf" aria-label="Download résumé as PDF">Download PDF ↓</a>
   <button type="button" class="toolbtn" onclick="window.print()" aria-label="Print">Print</button>
-  <a class="toolbtn" href="mailto:justin@justinfowler.com?subject=Resume%20follow-up">Email me</a>
+  <button type="button" class="toolbtn" data-email data-subject="Résumé follow-up">Email me</button>
   <a class="toolbtn" href="https://linkedin.com/in/justinfowler" target="_blank" rel="noopener">LinkedIn ↗</a>
   <a class="toolbtn" href="/portfolio.html">Full portfolio →</a>
 </div>
@@ -303,17 +316,17 @@
     <div>
       <h1 class="name">Justin <em>Fowler</em></h1>
       <p class="role">
-        <em>Salesforce operator</em> building production AI infrastructure — from autonomous Apex / LWC pipelines on the day job to multi-agent systems running on local hardware. Co-founder of <em>PurpleChipmonk</em>, an 18-skill agentic OS for the modern job search.
+        <em>Director of Revenue Operations</em> · Senior PM background · co-founder of <em>PurpleChipmonk</em>. I ship the production AI systems behind the demo — quality gates, observability, GTM that holds up.
       </p>
     </div>
   </div>
   <div class="contactbar">
-    <a href="mailto:justin@justinfowler.com">
-      <span class="clabel">Email</span>
-      <span class="cval">justin@justinfowler.com</span>
-    </a>
+    <button type="button" class="cbar-email" data-email data-subject="Résumé follow-up">
+      <span class="clabel">Contact</span>
+      <span class="cval">Email me ↗</span>
+    </button>
     <a href="https://linkedin.com/in/justinfowler" target="_blank" rel="noopener">
-      <span class="clabel">LinkedIn · 11K followers</span>
+      <span class="clabel">LinkedIn</span>
       <span class="cval">/in/justinfowler</span>
     </a>
     <a href="https://github.com/justinfowler925" target="_blank" rel="noopener">
@@ -322,7 +335,7 @@
     </a>
     <span>
       <span class="clabel">Based</span>
-      <span class="cval">Chicago, Illinois</span>
+      <span class="cval">Chicago, Illinois · USA</span>
     </span>
   </div>
 </header>
@@ -333,9 +346,9 @@
     <h2 class="section-title">Summary</h2>
   </div>
   <div class="summary">
-    <p><strong>I do the unsexy work, made faster.</strong> Salesforce administration on a 59-package production org with full ISO 27001 / 27701 compliance lane, plus an eight-agent autonomous metadata pipeline — Apex, LWC, test classes, deployments — drafted overnight and reviewed in the morning. Zero browser interactions; everything goes through JWT, API, or CLI.</p>
-    <p>Outside the day job, I run <em>multi-agent systems on real hardware</em>. Three named agents (Alpha · Beta · Gamma) plus a coding agent on an M3 Ultra with native Ollama. A nightly cloud-triggered RevOps build agent that picks the highest-scored phase from a roadmap and ships PRs to <code>main</code>. A version-controlled "personal AI OS" (<em>fowler-brain</em>) where every Claude / Cursor / local-model surface bootstraps from one git repo.</p>
-    <p>Co-founded <strong>PurpleChipmonk</strong> — a Next.js 15 + Supabase + Claude Sonnet 4.6 SaaS — with a binary 90-day kill-or-scale gate. Built nine quality gates between LLM and user to prevent the failure modes that make raw GPT tools dangerous. <em>Operators over thought leaders. Compound assets over one-time wins.</em></p>
+    <p><strong>Director of Revenue Operations</strong> at Clearspeed (voice-analytics SaaS · financial services / government / security). Cross-functional team of four — RevOps, solution architects, partnerships. Strategic revenue growth: <em>25% YoY</em>. CRM / CSM integration that cut manual data entry <em>70%</em>. Sales analytics dashboards that cut report-generation time <em>50%</em> and lifted conversion <em>3 points</em>. Training program that improved team performance <em>40%</em>.</p>
+    <p>Senior Product Manager before that — <em>4.5 years</em> owning the full product lifecycle of an enterprise B2B SaaS for AI voice fraud detection. Wireframe to launch to post-release iteration. <em>30% time-to-market reduction</em>, <em>50% customer-service-time reduction</em> via UI/UX redesign, <em>25% revenue growth</em> from a consumer GTM I crafted and shipped. MBA · St. Mary's. BS Industrial Psychology · Cal State Hayward, cum laude.</p>
+    <p>The AI work is mine, not assigned. Co-founded <strong>PurpleChipmonk</strong> (live SaaS, April 2026) — Next.js 15 + Supabase + Claude Sonnet 4.6 + Voyage embeddings + Stripe. Nine quality gates between LLM and user. Binary 90-day kill-or-scale gate. Outside that I run a stack of personal AI infrastructure: <em>fowler-brain</em> (version-controlled OS · 4 phases shipped), <em>Atlas Direct + Atlas3</em> (autonomous coding agents), <em>OpenClaw HQ</em> (three-tier multi-agent on Apple Silicon · 18 tok/s on a 70B model · $0/Mtok). <em>Operators over thought leaders. Compound assets over one-time wins.</em></p>
   </div>
 </section>
 
@@ -349,16 +362,34 @@
     <div class="role-item">
       <div class="rmeta">
         <span class="rtag">Day job · enterprise</span>
-        <span>Salesforce + AI delivery</span>
-        <span class="ryear">2024 — present</span>
+        <span>Revenue Operations leadership</span>
+        <span class="ryear">Jan 2024 — present</span>
       </div>
-      <h3>Salesforce Admin · IT Lead — <em>ClearSpeed</em></h3>
-      <p>San Diego–based voice-analytics company. Production + sandbox orgs with 59 managed packages. Lead admin on the security/compliance lane (ISO 27001 + ISO 27701).</p>
+      <h3>Director of Revenue Operations — <em>Clearspeed</em></h3>
+      <p>Voice-analytics SaaS serving enterprises in financial services, government, and security verticals. Lead a team of 4 direct reports — revenue operations, solution architects, partnership management. Chicago, IL.</p>
       <ul>
-        <li>Designed and deployed Contract lifecycle flows (Stage Validation, Renewal Counter, Expiration Alert, Target Start Date) with sandbox-aware email guards</li>
-        <li>Built an eight-agent autonomous metadata pipeline — Apex / LWC / test classes / deploys — drafted overnight via Claude Code + Atlas Direct, reviewed in the morning</li>
-        <li>OAuth / JWT / SF CLI / Tooling API only — zero-browser policy for repeatable, auditable change</li>
-        <li>Runs full audit-trail observability via SetupAuditTrail SOQL pipeline + GitLab CI for SFDX repo, Doppler-routed credentials</li>
+        <li><strong>Strategic revenue growth:</strong> designed and implemented comprehensive growth strategies — pricing-model optimization, sales-funnel efficiency, new-market expansion — yielding <em>25% YoY revenue increase</em>. Market research + competitive analysis to inform strategic decisions.</li>
+        <li><strong>Data analytics + reporting:</strong> SQL · Salesforce · Tableau dashboards monitoring sales performance and market trends. Reduced report generation time <em>50%</em>; lifted sales conversion <em>3 points</em>.</li>
+        <li><strong>Cross-functional leadership:</strong> aligned sales, marketing, customer success, and finance against common revenue targets. Collaborative framework improved team productivity <em>20%</em>; tightened interdepartmental communication.</li>
+        <li><strong>Process optimization + automation:</strong> spearheaded CRM ↔ CSM integration, automating key revenue-ops processes. Reduced manual data entry <em>70%</em>; minimized errors; supported scalable growth.</li>
+        <li><strong>Training + development:</strong> built and executed a training program — advanced sales analytics, financial modeling, strategic planning. Lifted team performance metrics <em>40%</em>.</li>
+      </ul>
+    </div>
+
+    <div class="role-item">
+      <div class="rmeta">
+        <span class="rtag">Prior · enterprise SaaS</span>
+        <span>Product management</span>
+        <span class="ryear">Jul 2019 — Jan 2024</span>
+      </div>
+      <h3>Senior Product Manager — <em>Clearspeed</em></h3>
+      <p>Owned the complete product lifecycle of an enterprise B2B SaaS application for AI voice fraud detection — wireframe to launch to post-release iteration. Drove the prioritized product roadmap in Jira + Confluence. San Francisco, CA.</p>
+      <ul>
+        <li>Led product research, user-persona work, and mental-model behaviors. Synthesized stakeholder pain points to scope the MVP.</li>
+        <li>Created stakeholder consensus across leadership, investors, and customers — presenting business cases and projected value-added for the redevelopment of the enterprise SaaS.</li>
+        <li>Streamlined research and product-market-fit A/B testing to iterate on new features. <em>Reduced time to market 30%</em>.</li>
+        <li>Designed UI / UX of a new back-end platform with new tools and methodologies for the operations team. <em>Decreased average customer-service time 50%</em>.</li>
+        <li>Crafted product marketing materials and the GTM plan for a consumer-facing version of the enterprise SaaS, opening <em>25% revenue-growth opportunity</em>.</li>
       </ul>
     </div>
 
@@ -586,40 +617,23 @@
     <div class="section-num">§ 08</div>
     <h2 class="section-title">Education</h2>
   </div>
-  <div class="edu-row">
-    <span class="ewhen">2000 — 2003</span>
-    <h4><em>St. Mary's College of California</em></h4>
-    <span class="efield">Finance emphasis</span>
-  </div>
-</section>
-
-<section class="block" id="volunteer">
-  <div class="section-head">
-    <div class="section-num">§ 09</div>
-    <h2 class="section-title">Volunteer <em>+ community</em></h2>
-  </div>
-  <div class="vol-list">
-    <div class="vol-row">
-      <span class="vwhen">2024 — present</span>
-      <span class="vname"><em>RevGenius</em> · member</span>
-      <span class="vrole">RevOps community</span>
+  <div style="display: grid; grid-template-columns: 1fr; gap: 14px;">
+    <div class="edu-row">
+      <div class="ewhen">Graduate · MBA</div>
+      <h4><em>St. Mary's College of California</em> · Moraga, CA</h4>
+      <span class="efield">Master of Business Administration · Finance</span>
     </div>
-    <div class="vol-row">
-      <span class="vwhen">Active</span>
-      <span class="vname"><em>Product Gym</em> · coach</span>
-      <span class="vrole">Product career mentorship</span>
-    </div>
-    <div class="vol-row">
-      <span class="vwhen">Sep — Dec 2019</span>
-      <span class="vname"><em>WeSolve World Inc.</em> · product consultant</span>
-      <span class="vrole">Volunteer engagement</span>
+    <div class="edu-row">
+      <div class="ewhen">Undergraduate · cum laude</div>
+      <h4><em>California State University, Hayward</em></h4>
+      <span class="efield">BS Industrial Psychology · AS Fellow · Golden Key Honors · Psi Chi Honors</span>
     </div>
   </div>
 </section>
 
 <section class="block" id="references">
   <div class="section-head">
-    <div class="section-num">§ 10</div>
+    <div class="section-num">§ 09</div>
     <h2 class="section-title">References <em>+ history</em></h2>
   </div>
   <div class="summary">
@@ -635,6 +649,37 @@
 </footer>
 
 </div>
+
+<script>
+  // Email obfuscation: address never appears in HTML/DOM as text.
+  // Built at click time only; subject/body via data-* attributes.
+  (function () {
+    function addr() {
+      // base64 of 'justin' and 'justinfowler.com'
+      return atob('anVzdGlu') + '@' + atob('anVzdGluZm93bGVyLmNvbQ==');
+    }
+    function makeMailto(opts) {
+      var qs = [];
+      if (opts && opts.subject) qs.push('subject=' + encodeURIComponent(opts.subject));
+      if (opts && opts.body)    qs.push('body=' + encodeURIComponent(opts.body));
+      return 'mailto:' + addr() + (qs.length ? '?' + qs.join('&') : '');
+    }
+    document.querySelectorAll('[data-email]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.location.href = makeMailto({
+          subject: el.dataset.subject,
+          body: el.dataset.body
+        });
+      });
+    });
+    document.querySelectorAll('form[data-email-form]').forEach(function (form) {
+      form.addEventListener('submit', function () {
+        form.action = makeMailto({});
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>

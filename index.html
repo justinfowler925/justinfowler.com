@@ -241,6 +241,112 @@
     to { opacity: 1; }
   }
 
+  /* ─── HERO PORTRAIT ────────────────────── */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1.55fr 1fr;
+      gap: 80px;
+    }
+  }
+
+  .hero-portrait {
+    position: relative;
+    margin: 0;
+    max-width: 420px;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border: 1px solid var(--ink-3);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--ink-2);
+    box-shadow:
+      0 30px 60px -20px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(251, 146, 60, 0.05);
+    opacity: 0;
+    animation: rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    justify-self: center;
+  }
+  @media (min-width: 900px) {
+    .hero-portrait { justify-self: end; max-width: 460px; }
+  }
+
+  .hero-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 22%;
+    display: block;
+    filter: contrast(1.02) saturate(1.04);
+    transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hero-portrait:hover img { transform: scale(1.015); }
+
+  .hero-portrait::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, transparent 50%, rgba(12, 10, 9, 0.72) 88%, rgba(12, 10, 9, 0.92) 100%),
+      linear-gradient(135deg, transparent 60%, rgba(251, 146, 60, 0.08) 100%);
+    pointer-events: none;
+  }
+
+  .portrait-cap {
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    bottom: 22px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .portrait-cap .cap-kicker {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+  }
+  .portrait-cap .cap-role {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 1.2;
+    color: var(--paper);
+    letter-spacing: -0.01em;
+  }
+  .portrait-cap .cap-role em {
+    font-style: italic;
+    color: var(--accent-2);
+    font-weight: 300;
+  }
+  .portrait-cap .cap-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--mute);
+    margin-top: 2px;
+  }
+
+  /* keep h1 readable on left when portrait is on right */
+  @media (min-width: 900px) {
+    .hero h1 { font-size: clamp(48px, 8.5vw, 112px); }
+  }
+
+  /* respect reduced-motion: skip fade-ins, show content immediately */
+  @media (prefers-reduced-motion: reduce) {
+    .kicker, .lede, .meta-bar, h1, .hero-portrait,
+    .reveal { opacity: 1 !important; transform: none !important; animation: none !important; }
+  }
+
   /* ─── SECTIONS ─────────────────────────── */
   section.block { padding: 80px 0; border-top: 1px solid var(--ink-3); }
 
@@ -653,17 +759,29 @@
 </nav>
 
 <header class="hero">
-  <div class="kicker">— Operator · Builder · Q2 2026</div>
-  <h1>I build <em>AI</em><br />for people who<br />do the <em>actual</em> work.</h1>
-  <p class="lede">
-    I'm a Salesforce operator who got tired of waiting for AI tools to be built for people like me — so I started building them myself.
-    <s>Thought leader.</s> <em>Practitioner.</em> Multi-agent systems running on the desk under my monitor. A SaaS in the wild. The notes from doing the work, in public.
-  </p>
-  <div class="meta-bar">
-    <span><span class="label">Based</span> Wisconsin · USA</span>
-    <span><span class="label">Day job</span> Salesforce + AI delivery</span>
-    <span><span class="label">Side bet</span> Signal OS</span>
-    <span><span class="label">Stack</span> M3 Ultra · Llama · Claude</span>
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="kicker">— Operator · Builder · Q2 2026</div>
+      <h1>I build <em>AI</em><br />for people who<br />do the <em>actual</em> work.</h1>
+      <p class="lede">
+        Director of Revenue Operations turned <em>AI practitioner</em>. Senior PM background.
+        <s>Thought leader.</s> <em>Practitioner.</em> Multi-agent systems running on the desk under my monitor. A SaaS in the wild. The notes from doing the work, in public.
+      </p>
+      <div class="meta-bar">
+        <span><span class="label">Based</span> Chicago, IL · USA</span>
+        <span><span class="label">Day job</span> Director of Revenue Operations</span>
+        <span><span class="label">Side bet</span> PurpleChipmonk</span>
+        <span><span class="label">Stack</span> M3 Ultra · Llama · Claude</span>
+      </div>
+    </div>
+    <figure class="hero-portrait">
+      <img src="/assets/photo.jpg" alt="Portrait of Justin Fowler" loading="eager" width="1200" height="1500" />
+      <figcaption class="portrait-cap">
+        <span class="cap-kicker">— Justin Fowler</span>
+        <span class="cap-role">Director of <em>Revenue Operations</em></span>
+        <span class="cap-meta">Chicago · 2026</span>
+      </figcaption>
+    </figure>
   </div>
 </header>
 
@@ -740,10 +858,10 @@
         <span class="cta-label">Download PDF ↓</span>
         <span class="cta-sub">786 KB · dark editorial · 1 file</span>
       </a>
-      <a class="hire-cta muted" href="mailto:justin@justinfowler.com?subject=Engagement%20inquiry">
+      <button type="button" class="hire-cta muted" data-email data-subject="Engagement inquiry" style="text-align:left; font-family:inherit; cursor:pointer;">
         <span class="cta-label">Email me →</span>
-        <span class="cta-sub">justin@justinfowler.com · fastest path</span>
-      </a>
+        <span class="cta-sub">Hidden mailto · fastest path</span>
+      </button>
     </div>
   </div>
 </section>
@@ -819,10 +937,10 @@
       <span class="contact-label">Code I share</span>
       <span class="contact-value">GitHub ↗</span>
     </a>
-    <a class="contact-link" href="mailto:justin@justinfowler.com">
+    <button type="button" class="contact-link" data-email style="text-align:left; font-family:inherit; cursor:pointer;">
       <span class="contact-label">Direct line</span>
       <span class="contact-value">Email ↗</span>
-    </a>
+    </button>
   </div>
 </section>
 
@@ -838,6 +956,23 @@
     entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  // Email obfuscation — address never appears in HTML/DOM
+  (function () {
+    function makeMailto(opts) {
+      var addr = atob('anVzdGlu') + '@' + atob('anVzdGluZm93bGVyLmNvbQ==');
+      var qs = [];
+      if (opts && opts.subject) qs.push('subject=' + encodeURIComponent(opts.subject));
+      if (opts && opts.body)    qs.push('body=' + encodeURIComponent(opts.body));
+      return 'mailto:' + addr + (qs.length ? '?' + qs.join('&') : '');
+    }
+    document.querySelectorAll('[data-email]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.location.href = makeMailto({ subject: el.dataset.subject, body: el.dataset.body });
+      });
+    });
+  })();
 </script>
 
 </body>
