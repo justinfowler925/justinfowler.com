@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Justin Fowler — Press Kit</title>
+<meta name="description" content="Press, speaking, and podcast resources for Justin Fowler. Bios, headshots, talk topics, brand assets." />
+<meta name="theme-color" content="#0c0a09" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href="https://justinfowler.com/press.html" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<meta property="og:title" content="Justin Fowler — Press Kit" />
+<meta property="og:description" content="Press, speaking, and podcast resources for Justin Fowler." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://justinfowler.com/press.html" />
+<meta property="og:image" content="https://justinfowler.com/og-image.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --accent: #fb923c; --ink: #0c0a09; --paper: #fafaf9; --mute: #78716c; --hair: #292524;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans:  'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono:  'JetBrains Mono', 'Courier New', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--ink); color: var(--paper); font-family: var(--sans); font-size: 16px; line-height: 1.6; min-height: 100vh; }
+
+  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 28px 56px; border-bottom: 1px solid #1c1917; font-family: var(--mono); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--mute); }
+  .topbar a { color: var(--mute); text-decoration: none; margin-left: 24px; }
+  .topbar a:hover { color: var(--accent); }
+  .topbar .brand { color: var(--paper); }
+  .topbar .brand .dot { color: var(--accent); }
+
+  .container { max-width: 980px; margin: 0 auto; padding: 64px 32px 96px; }
+
+  h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(40px, 6vw, 72px); letter-spacing: -2px; line-height: 1.05; margin-bottom: 12px; }
+  h1 em { color: #fdba74; font-style: italic; }
+  .lede { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 22px; color: #d6d3d1; max-width: 720px; margin-bottom: 56px; }
+
+  section { margin-bottom: 56px; padding-top: 32px; border-top: 1px solid #1c1917; }
+  section:first-of-type { border-top: none; padding-top: 0; }
+  h2 { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  h3 { font-family: var(--serif); font-weight: 400; font-size: 22px; margin: 16px 0 6px; color: var(--paper); }
+
+  p { margin-bottom: 14px; color: #d6d3d1; }
+  p strong { color: var(--paper); font-weight: 500; }
+
+  ul { padding-left: 22px; margin-bottom: 14px; }
+  ul li { margin-bottom: 6px; color: #d6d3d1; }
+  ul li::marker { color: var(--accent); }
+
+  .bios { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .bio { padding: 20px; border: 1px solid var(--hair); border-radius: 8px; background: rgba(28,25,23,0.4); }
+  .bio .label { font-family: var(--mono); font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .bio .copy { font-family: var(--serif); font-size: 16px; line-height: 1.5; font-weight: 300; color: var(--paper); }
+  .bio button { margin-top: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 12px; background: transparent; color: var(--mute); border: 1px solid var(--hair); border-radius: 999px; cursor: pointer; transition: all 0.15s; }
+  .bio button:hover { color: var(--accent); border-color: var(--accent); }
+
+  .topics { list-style: none; padding: 0; }
+  .topics li { padding: 12px 0; border-bottom: 1px dotted var(--hair); }
+  .topics li::marker { content: ""; }
+  .topics li::before { content: "→  "; color: var(--accent); font-weight: 500; }
+  .topics li strong { font-family: var(--serif); font-weight: 500; font-style: italic; color: var(--paper); }
+
+  .assets { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .asset { padding: 16px; border: 1px solid var(--hair); border-radius: 8px; background: rgba(28,25,23,0.4); }
+  .asset .name { font-family: var(--mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--paper); margin-bottom: 6px; }
+  .asset .meta { font-family: var(--mono); font-size: 10px; color: var(--mute); margin-bottom: 8px; letter-spacing: 1.5px; }
+  .asset a { font-family: var(--mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); text-decoration: none; }
+  .asset a:hover { text-decoration: underline; }
+
+  .contact { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--paper); }
+  .contact a { color: var(--accent); text-decoration: none; }
+  .contact a:hover { text-decoration: underline; }
+
+  .footer { padding: 32px 56px; border-top: 1px solid #1c1917; font-family: var(--mono); font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--mute); display: flex; justify-content: space-between; }
+  .footer .accent { color: var(--accent); }
+
+  @media (max-width: 720px) {
+    .topbar { padding: 20px 24px; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .topbar nav a:first-child { margin-left: 0; }
+    .container { padding: 40px 20px 64px; }
+    .bios { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="dot">●</span> &nbsp;JUSTIN FOWLER</div>
+  <nav>
+    <a href="/">HOME</a>
+    <a href="/portfolio.html">WORK</a>
+    <a href="/resume.html">RESUME</a>
+    <a href="/writing.html">WRITING</a>
+    <a href="/press.html" style="color:var(--paper);">PRESS</a>
+  </nav>
+</div>
+
+<div class="container">
+
+  <h1>Press <em>kit</em>.</h1>
+  <p class="lede">Bios, headshots, talk topics, brand assets. Everything you'd need to write me up, book me, or run me on your show.</p>
+
+  <section>
+    <h2>Bios — copy &amp; paste</h2>
+    <div class="bios">
+      <div class="bio">
+        <div class="label">Short · ~30 words</div>
+        <div class="copy">Director of Revenue Operations at Clearspeed. Co-founder of PurpleChipmonk. Builds production agentic systems on local-first hardware. Writes at justinfowler.com.</div>
+        <button onclick="navigator.clipboard.writeText(this.previousElementSibling.innerText)">Copy</button>
+      </div>
+      <div class="bio">
+        <div class="label">Long · ~80 words</div>
+        <div class="copy">Justin Fowler is Director of Revenue Operations at Clearspeed, where he runs an ISO-27001 lane for a voice-analytics SaaS serving financial services and government. He's a senior PM by background (4.5 years at Clearspeed before RevOps) and a co-founder of PurpleChipmonk, a live SaaS on a 90-day kill-or-scale gate. On the side, he ships local-first multi-agent infrastructure. The notes from doing the work live at justinfowler.com.</div>
+        <button onclick="navigator.clipboard.writeText(this.previousElementSibling.innerText)">Copy</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Talk topics</h2>
+    <ul class="topics">
+      <li><strong>The two-model AI stack.</strong> Why most production AI needs a deterministic spine + a reasoning model on top — and what breaks when you skip either.</li>
+      <li><strong>RevOps in the age of agents.</strong> What changes when 4 of your 7 reports become 4 humans + 12 agents.</li>
+      <li><strong>Local-first AI for operators.</strong> A $7K Mac Studio replaces $40K/yr of cloud inference for the workloads that don't need frontier reasoning.</li>
+      <li><strong>The 90-day kill-or-scale gate.</strong> Running a SaaS experiment with pre-committed exit conditions instead of indefinite optimism.</li>
+      <li><strong>Salesforce + Claude in production.</strong> Patterns that hold up, anti-patterns that look fine until they don't.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Format-fit</h2>
+    <p><strong>Conference keynote.</strong> 30-45 min. Practitioner POV with concrete production artifacts.</p>
+    <p><strong>Workshop.</strong> 2-3 hr. Hands-on agent-stack design, including a live deterministic-spine build.</p>
+    <p><strong>Panel.</strong> Operator angle on AI strategy, vendor selection, RevOps modernization, ISO-compliance lanes.</p>
+    <p><strong>Podcast.</strong> 45-60 min long-form. Best on shows where the host actually reads code or runs ops.</p>
+  </section>
+
+  <section>
+    <h2>What I won't do</h2>
+    <ul>
+      <li>Generic "AI is changing everything" talks. The frame is the problem.</li>
+      <li>Vendor sponsorships disguised as keynotes.</li>
+      <li>Anything pitched as "thought leadership." I'm a practitioner.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Brand assets</h2>
+    <p>Logos, headshot, banners. Everything is rendered from the same brand system as the rest of the site (ink #0c0a09 · accent #fb923c · Fraunces / Geist / JetBrains Mono).</p>
+    <div class="assets">
+      <div class="asset">
+        <div class="name">Headshot — large</div>
+        <div class="meta">JPG · 1200px · 191 KB</div>
+        <a href="/assets/photo.jpg" download>Download</a>
+      </div>
+      <div class="asset">
+        <div class="name">Headshot — small</div>
+        <div class="meta">JPG · 600px</div>
+        <a href="/assets/photo-sm.jpg" download>Download</a>
+      </div>
+      <div class="asset">
+        <div class="name">Speaker one-pager</div>
+        <div class="meta">PDF · letter</div>
+        <a href="/assets/speaker-one-pager.pdf" download>Download</a>
+      </div>
+      <div class="asset">
+        <div class="name">Podcast guest one-pager</div>
+        <div class="meta">PDF · letter</div>
+        <a href="/assets/podcast-guest-one-pager.pdf" download>Download</a>
+      </div>
+      <div class="asset">
+        <div class="name">OG image</div>
+        <div class="meta">SVG · 1200×630</div>
+        <a href="/og-image.svg" download>Download</a>
+      </div>
+      <div class="asset">
+        <div class="name">Resume</div>
+        <div class="meta">PDF · 8 pages · dark editorial</div>
+        <a href="/assets/justin-fowler-resume.pdf" download>Download</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p class="contact">Booking, press, speaking — start with the <a href="/" data-email data-subject="Press / speaking">contact button on the homepage</a> (the email's obfuscated by design; the click handler builds it).</p>
+    <p style="font-family: var(--mono); font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--mute); margin-top: 24px;">Response time: ~48 hours weekdays.</p>
+  </section>
+
+</div>
+
+<div class="footer">
+  <span><span class="accent">●</span> JUSTINFOWLER.COM</span>
+  <span>CHICAGO · SHIPPING IN PUBLIC</span>
+  <span>EST. 2026</span>
+</div>
+
+<script src="/assets/analytics.js"></script>
+
+</body>
+</html>

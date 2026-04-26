@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1584 396" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <pattern id="grid" x="0" y="0" width="36" height="36" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.9" fill="#1c1917"/>
+    </pattern>
+    <radialGradient id="glow1" cx="22%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="topline" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#fb923c" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1584" height="396" fill="#0c0a09"/>
+  <rect width="1584" height="396" fill="url(#grid)" opacity="0.55"/>
+  <rect width="1584" height="396" fill="url(#glow1)"/>
+  <rect x="0" y="0" width="1584" height="2" fill="url(#topline)"/>
+
+  <!-- Top-left identity stamp (LinkedIn profile pic covers bottom-left ~280×280; keep this clear of that zone) -->
+  <g transform="translate(72, 56)">
+    <circle cx="6" cy="6" r="6" fill="#fb923c"/>
+    <text x="28" y="11" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="14" font-weight="500" fill="#a8a29e" letter-spacing="4">JUSTIN FOWLER</text>
+  </g>
+  <text x="1512" y="67" text-anchor="end" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="14" font-weight="500" fill="#57534e" letter-spacing="3.5">JUSTINFOWLER.COM</text>
+
+  <!-- Hero — biased to the right of center to avoid LinkedIn's profile-pic crop on the bottom-left -->
+  <g transform="translate(440, 0)">
+    <g font-family="ui-mono, 'JetBrains Mono', Menlo, monospace">
+      <rect x="0" y="148" width="28" height="2" fill="#fb923c"/>
+      <text x="44" y="154" font-size="14" font-weight="500" fill="#fb923c" letter-spacing="4.5">DIRECTOR · REVOPS · AI PRACTITIONER</text>
+    </g>
+    <g font-family="ui-serif, Georgia, 'Times New Roman', serif" font-weight="300" fill="#fafaf9" letter-spacing="-1.6">
+      <text x="0" y="222" font-size="54">I build <tspan font-style="italic" fill="#fdba74">AI</tspan> for people</text>
+      <text x="0" y="284" font-size="54">who do the <tspan font-style="italic" fill="#fdba74">actual</tspan> work.</text>
+    </g>
+    <text x="0" y="334" font-family="ui-serif, Georgia, 'Times New Roman', serif" font-style="italic" font-size="17" font-weight="300" fill="#a8a29e">Salesforce + agentic systems · Co-founder, PurpleChipmonk · Chicago</text>
+  </g>
+</svg>

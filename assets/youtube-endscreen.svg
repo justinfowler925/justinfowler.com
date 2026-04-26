@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <pattern id="grid" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.1" fill="#1c1917"/>
+    </pattern>
+    <radialGradient id="glow1" cx="20%" cy="30%" r="55%">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="topline" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#fb923c" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="#0c0a09"/>
+  <rect width="1920" height="1080" fill="url(#grid)" opacity="0.55"/>
+  <rect width="1920" height="1080" fill="url(#glow1)"/>
+  <rect x="0" y="0" width="1920" height="2" fill="url(#topline)"/>
+
+  <!-- top-left identity -->
+  <g transform="translate(120, 100)">
+    <circle cx="7" cy="7" r="7" fill="#fb923c"/>
+    <text x="32" y="13" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="500" fill="#a8a29e" letter-spacing="4.5">JUSTIN FOWLER</text>
+  </g>
+  <text x="1800" y="113" text-anchor="end" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="500" fill="#57534e" letter-spacing="4">JUSTINFOWLER.COM</text>
+
+  <!-- main message; YouTube end-screen elements (subscribe button + 2 video tiles) typically in lower-right and lower-center.
+       Standard end-screen layout: keep text in upper 40% and reserve lower 60% for video/subscribe widgets. -->
+  <g transform="translate(960, 0)" text-anchor="middle">
+    <g font-family="ui-mono, 'JetBrains Mono', Menlo, monospace">
+      <text y="240" font-size="20" font-weight="500" fill="#fb923c" letter-spacing="6">— THANKS FOR WATCHING —</text>
+    </g>
+    <g font-family="ui-serif, Georgia, 'Times New Roman', serif" font-weight="300" fill="#fafaf9" letter-spacing="-2.5">
+      <text y="340" font-size="84">If this was useful,</text>
+      <text y="430" font-size="84"><tspan font-style="italic" fill="#fdba74">subscribe</tspan> for the next build.</text>
+    </g>
+    <text y="500" font-family="ui-serif, Georgia, 'Times New Roman', serif" font-style="italic" font-size="22" font-weight="300" fill="#a8a29e">New videos every week — notes from production agentic systems.</text>
+  </g>
+
+  <!-- Subscribe widget placeholder zone (lower-right ~480×270 reserved for YouTube's overlay) -->
+  <g transform="translate(1280, 720)" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" fill="#44403c" font-size="14" letter-spacing="3">
+    <rect x="0" y="0" width="480" height="270" rx="8" fill="none" stroke="#1c1917" stroke-width="1" stroke-dasharray="4,6"/>
+    <text x="240" y="142" text-anchor="middle">[ SUBSCRIBE WIDGET ]</text>
+  </g>
+  <!-- Next-video tile placeholders (lower-left + lower-center) -->
+  <g transform="translate(160, 720)" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" fill="#44403c" font-size="14" letter-spacing="3">
+    <rect x="0" y="0" width="480" height="270" rx="8" fill="none" stroke="#1c1917" stroke-width="1" stroke-dasharray="4,6"/>
+    <text x="240" y="142" text-anchor="middle">[ NEXT VIDEO ]</text>
+    <rect x="540" y="0" width="480" height="270" rx="8" fill="none" stroke="#1c1917" stroke-width="1" stroke-dasharray="4,6"/>
+    <text x="780" y="142" text-anchor="middle">[ NEXT VIDEO ]</text>
+  </g>
+</svg>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Justin Fowler — Speaker One-Pager</title>
+<style>
+  @page { size: letter; margin: 0.6in; }
+  :root {
+    --ink: #0c0a09; --paper: #fafaf9; --accent: #fb923c; --mute: #78716c;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans:  'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono:  'JetBrains Mono', 'Courier New', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 10.5pt; line-height: 1.45; }
+  body { padding: 0; }
+  .page { max-width: 7.3in; margin: 0 auto; padding: 0.2in 0; }
+
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--ink); padding-bottom: 10pt; margin-bottom: 16pt; }
+  header h1 { font-family: var(--serif); font-weight: 300; font-size: 28pt; letter-spacing: -1px; }
+  header h1 em { color: var(--accent); }
+  header .stamp { font-family: var(--mono); font-size: 8pt; color: var(--mute); letter-spacing: 2.5px; text-transform: uppercase; text-align: right; }
+  header .stamp .accent { color: var(--accent); }
+
+  .lede { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 14pt; color: #292524; margin-bottom: 16pt; line-height: 1.4; }
+
+  h2 { font-family: var(--mono); font-size: 8.5pt; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin: 14pt 0 6pt; padding-bottom: 3pt; border-bottom: 1px solid #e7e5e4; }
+  h2:first-of-type { margin-top: 0; }
+  p { margin-bottom: 6pt; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt 22pt; }
+  .grid h3 { font-family: var(--serif); font-weight: 400; font-size: 11.5pt; margin-bottom: 3pt; }
+  .grid p { font-size: 10pt; color: #292524; }
+
+  ul.compact { padding-left: 14pt; }
+  ul.compact li { margin-bottom: 3pt; font-size: 10pt; }
+  ul.compact li::marker { color: var(--accent); }
+
+  .topics { list-style: none; padding: 0; }
+  .topics li { padding: 4pt 0; border-bottom: 1px dotted #d6d3d1; font-size: 10pt; }
+  .topics li::before { content: "→  "; color: var(--accent); font-weight: 500; }
+  .topics li strong { font-family: var(--serif); font-weight: 500; font-style: italic; }
+
+  footer { margin-top: 18pt; padding-top: 8pt; border-top: 2px solid var(--ink); display: flex; justify-content: space-between; font-family: var(--mono); font-size: 8.5pt; color: var(--mute); letter-spacing: 1.5px; text-transform: uppercase; }
+  footer .accent { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>Justin Fowler<em>.</em></h1>
+    <div class="stamp">Speaker One-Pager<br/><span class="accent">●</span> 2026 SEASON</div>
+  </header>
+
+  <p class="lede">"I build AI for people who do the actual work." Director of Revenue Operations at Clearspeed. Co-founder of PurpleChipmonk. Operator who ships the production systems behind the demo.</p>
+
+  <h2>Bio (long, ~80 words)</h2>
+  <p>Justin Fowler is Director of Revenue Operations at Clearspeed, where he runs an ISO-27001 lane for a voice-analytics SaaS serving financial services and government. He's a senior PM by background (4.5 years at Clearspeed before RevOps) and a co-founder of PurpleChipmonk, a live SaaS on a 90-day kill-or-scale gate. On the side, he ships local-first multi-agent infrastructure. The notes from doing the work live at justinfowler.com.</p>
+
+  <h2>Bio (short, ~30 words)</h2>
+  <p>Director of Revenue Operations at Clearspeed. Co-founder of PurpleChipmonk. Builds production agentic systems on local-first hardware. Writes at justinfowler.com.</p>
+
+  <h2>Talk topics</h2>
+  <ul class="topics">
+    <li><strong>The two-model AI stack.</strong> Why most production AI needs a deterministic spine + a reasoning model on top — and what breaks when you skip either.</li>
+    <li><strong>RevOps in the age of agents.</strong> What changes when 4 of your 7 reports become 4 humans + 12 agents.</li>
+    <li><strong>Local-first AI for operators.</strong> How a $7K Mac Studio replaces $40K/yr of cloud inference for the workloads that don't need frontier reasoning.</li>
+    <li><strong>The 90-day kill-or-scale gate.</strong> How to run a SaaS experiment with pre-committed exit conditions instead of indefinite optimism.</li>
+    <li><strong>Salesforce + Claude in production.</strong> Patterns that hold up, anti-patterns that look fine until they don't.</li>
+  </ul>
+
+  <h2 style="margin-top:14pt;">Format-fit</h2>
+  <div class="grid">
+    <div>
+      <h3>Conference keynote</h3>
+      <p>30-45 min. RevOps, B2B SaaS, AI-builder tracks. Practitioner POV with concrete production artifacts.</p>
+    </div>
+    <div>
+      <h3>Workshop</h3>
+      <p>2-3 hr. Hands-on agent stack design, including a live build of the deterministic-spine pattern.</p>
+    </div>
+    <div>
+      <h3>Panel</h3>
+      <p>Operator angle on AI strategy, vendor selection, RevOps modernization, ISO-compliance lanes.</p>
+    </div>
+    <div>
+      <h3>Podcast</h3>
+      <p>45-60 min. Best on shows where the host actually reads code or runs ops. Not "trends" shows.</p>
+    </div>
+  </div>
+
+  <h2>What I won't do</h2>
+  <ul class="compact">
+    <li>Generic "AI is changing everything" talks. The frame is the problem.</li>
+    <li>Vendor sponsorships disguised as keynotes.</li>
+    <li>Anything pitched as "thought leadership." I'm a practitioner.</li>
+  </ul>
+
+  <footer>
+    <span><span class="accent">●</span> JUSTINFOWLER.COM</span>
+    <span>BOOK · SEE SITE FOR EMAIL</span>
+    <span>CHICAGO · 2026</span>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 1152" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <pattern id="grid" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.1" fill="#1c1917"/>
+    </pattern>
+    <radialGradient id="glow1" cx="20%" cy="30%" r="55%">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="85%" cy="78%" r="48%">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="topline" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#fb923c" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="hairline" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#292524" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#44403c" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#292524" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ============== BACKGROUND (full 2048x1152, TV-only on edges) ============== -->
+  <rect width="2048" height="1152" fill="#0c0a09"/>
+  <rect width="2048" height="1152" fill="url(#grid)" opacity="0.55"/>
+  <rect width="2048" height="1152" fill="url(#glow1)"/>
+  <rect width="2048" height="1152" fill="url(#glow2)"/>
+
+  <!-- top accent line -->
+  <rect x="0" y="0" width="2048" height="2" fill="url(#topline)"/>
+
+  <!-- ============== DESKTOP-ONLY OUTER BAND (cropped on mobile) ============== -->
+  <!-- top-left identity stamp -->
+  <g transform="translate(160, 168)">
+    <circle cx="7" cy="7" r="7" fill="#fb923c"/>
+    <text x="32" y="13" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="500" fill="#a8a29e" letter-spacing="4.5">JUSTIN FOWLER</text>
+  </g>
+  <!-- top-right URL -->
+  <text x="1888" y="181" text-anchor="end" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="500" fill="#57534e" letter-spacing="4">JUSTINFOWLER.COM</text>
+
+  <!-- bottom-left context line -->
+  <g transform="translate(160, 990)">
+    <text font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="15" font-weight="500" fill="#57534e" letter-spacing="3.5">CHICAGO  ·  EST. 2026  ·  SHIPPING IN PUBLIC</text>
+  </g>
+  <!-- bottom-right subscribe cue -->
+  <g transform="translate(1888, 1003)">
+    <text text-anchor="end" font-family="ui-serif, Georgia, 'Times New Roman', serif" font-style="italic" font-size="26" font-weight="300" fill="#fdba74">New builds → every week</text>
+  </g>
+
+  <!-- ============== SAFE AREA (1235×338, centered) — guaranteed visible ============== -->
+  <!-- safe area is x:406.5–1641.5, y:407–745 -->
+
+  <!-- kicker line -->
+  <g transform="translate(560, 470)">
+    <rect x="0" y="9" width="36" height="2" fill="#fb923c"/>
+    <text x="56" y="16" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="20" font-weight="500" fill="#fb923c" letter-spacing="5.5">OPERATOR · BUILDER · PRACTITIONER</text>
+  </g>
+
+  <!-- main hero, centered -->
+  <g font-family="ui-serif, Georgia, 'Times New Roman', serif" font-weight="300" fill="#fafaf9" letter-spacing="-2.5" text-anchor="middle">
+    <text x="1024" y="595" font-size="104">I build <tspan font-style="italic" fill="#fdba74">AI</tspan> for people</text>
+    <text x="1024" y="700" font-size="104">who do the <tspan font-style="italic" fill="#fdba74">actual</tspan> work.</text>
+  </g>
+
+  <!-- ============== TABLET / DESKTOP BAND (visible on tablet+, cropped on phone) ============== -->
+  <!-- hairline divider above chip row -->
+  <rect x="624" y="838" width="800" height="1" fill="url(#hairline)" opacity="0.7"/>
+
+  <!-- chip row, centered -->
+  <g transform="translate(1024, 870)" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="16" font-weight="500" letter-spacing="3">
+    <!-- chip 1: SALESFORCE + AI (width 250) -->
+    <g transform="translate(-516, 0)">
+      <rect x="0" y="0" width="250" height="42" rx="21" fill="none" stroke="#292524" stroke-width="1.2"/>
+      <text x="125" y="27" text-anchor="middle" fill="#d6d3d1">SALESFORCE + AI</text>
+    </g>
+    <!-- chip 2: MULTI-AGENT (width 220) -->
+    <g transform="translate(-250, 0)">
+      <rect x="0" y="0" width="220" height="42" rx="21" fill="none" stroke="#292524" stroke-width="1.2"/>
+      <text x="110" y="27" text-anchor="middle" fill="#d6d3d1">MULTI-AGENT</text>
+    </g>
+    <!-- chip 3: REVOPS 2030 (width 220) -->
+    <g transform="translate(-15, 0)">
+      <rect x="0" y="0" width="220" height="42" rx="21" fill="none" stroke="#292524" stroke-width="1.2"/>
+      <text x="110" y="27" text-anchor="middle" fill="#d6d3d1">REVOPS 2030</text>
+    </g>
+    <!-- chip 4: LOCAL-FIRST AI (width 250) -->
+    <g transform="translate(220, 0)">
+      <rect x="0" y="0" width="250" height="42" rx="21" fill="none" stroke="#292524" stroke-width="1.2"/>
+      <text x="125" y="27" text-anchor="middle" fill="#d6d3d1">LOCAL-FIRST AI</text>
+    </g>
+  </g>
+
+  <!-- bottom italic lede, just inside tablet band -->
+  <text x="1024" y="958" text-anchor="middle" font-family="ui-serif, Georgia, 'Times New Roman', serif" font-style="italic" font-size="26" font-weight="300" fill="#a8a29e">Notes from production agentic systems — the demo is the proof.</text>
+</svg>
