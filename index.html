@@ -368,6 +368,87 @@
   }
   .work-more a span { color: var(--accent); }
 
+  /* ─── HIRE BAND ────────────────────────── */
+  .hire-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  @media (min-width: 768px) {
+    .hire-grid { grid-template-columns: 1.2fr 1fr; gap: 56px; }
+  }
+  .hire-pitch .hire-lede {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(22px, 2.6vw, 30px);
+    line-height: 1.35;
+    color: var(--paper);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .hire-pitch .hire-lede em {
+    font-style: italic;
+    color: var(--accent-2);
+  }
+  .hire-pitch .hire-sub {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--paper-2);
+    max-width: 520px;
+  }
+  .hire-pitch .hire-sub strong {
+    color: var(--paper);
+    font-weight: 500;
+  }
+  .hire-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .hire-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 18px 22px;
+    border: 1px solid var(--ink-3);
+    border-radius: 8px;
+    text-decoration: none;
+    background: var(--ink);
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  }
+  .hire-cta:hover {
+    border-color: var(--accent);
+    background: var(--ink-2);
+    transform: translateX(4px);
+  }
+  .hire-cta.primary {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, rgba(251,146,60,0.14), rgba(251,146,60,0.04));
+  }
+  .hire-cta.primary:hover {
+    background: linear-gradient(135deg, rgba(251,146,60,0.22), rgba(251,146,60,0.08));
+  }
+  .hire-cta.muted .cta-label { color: var(--paper-2); }
+  .hire-cta .cta-label {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--paper);
+    letter-spacing: -0.01em;
+  }
+  .hire-cta.primary .cta-label { color: var(--accent-2); }
+  .hire-cta .cta-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--mute);
+  }
+
   /* ─── WRITE THEMES ─────────────────────── */
   .themes { display: grid; grid-template-columns: 1fr; gap: 24px; }
 
@@ -635,9 +716,41 @@
   </div>
 </section>
 
-<section class="block" id="writing">
+<section class="block hire-band" id="hire">
   <div class="section-head reveal">
     <div class="section-num">§ 02</div>
+    <h2 class="section-title">Hire <em>me</em></h2>
+  </div>
+  <div class="hire-grid reveal">
+    <div class="hire-pitch">
+      <p class="hire-lede">
+        I build <em>production AI</em> for operators. Quality gates between LLM and user. Salesforce-fluent. Multi-agent shipping. Founding-engineer scope or focused consulting.
+      </p>
+      <p class="hire-sub">
+        Six practice areas. Five live systems. One résumé that walks you through all of it.
+        <strong>Visually-stunning PDF</strong> for the lazy reader; full HTML for the curious one.
+      </p>
+    </div>
+    <div class="hire-actions">
+      <a class="hire-cta primary" href="/resume.html">
+        <span class="cta-label">View résumé</span>
+        <span class="cta-sub">HTML · interactive · linked</span>
+      </a>
+      <a class="hire-cta" href="/assets/justin-fowler-resume.pdf" download="justin-fowler-resume.pdf">
+        <span class="cta-label">Download PDF ↓</span>
+        <span class="cta-sub">786 KB · dark editorial · 1 file</span>
+      </a>
+      <a class="hire-cta muted" href="mailto:justin@justinfowler.com?subject=Engagement%20inquiry">
+        <span class="cta-label">Email me →</span>
+        <span class="cta-sub">justin@justinfowler.com · fastest path</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="writing">
+  <div class="section-head reveal">
+    <div class="section-num">§ 03</div>
     <h2 class="section-title">What I <em>write about</em></h2>
   </div>
 
@@ -667,7 +780,7 @@
 
 <section class="block">
   <div class="section-head reveal">
-    <div class="section-num">§ 03</div>
+    <div class="section-num">§ 04</div>
     <h2 class="section-title">A <em>position</em></h2>
   </div>
 
@@ -689,7 +802,7 @@
 
 <section class="block" id="contact">
   <div class="section-head reveal">
-    <div class="section-num">§ 04</div>
+    <div class="section-num">§ 05</div>
     <h2 class="section-title">Find <em>me</em></h2>
   </div>
 
