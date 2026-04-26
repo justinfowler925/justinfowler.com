@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Share-link builder · Justin Fowler</title>
+<meta name="robots" content="noindex,nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #0c0a09; --ink-2: #1c1917; --ink-3: #292524; --ink-4: #44403c;
+    --paper: #fafaf9; --paper-2: #e7e5e4;
+    --mute: #78716c; --mute-2: #57534e;
+    --accent: #fb923c; --accent-2: #fdba74;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); padding: 56px 24px 80px; }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  .kicker { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 20px; }
+  h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(40px, 6vw, 64px); line-height: 1; letter-spacing: -0.03em; margin-bottom: 12px; }
+  h1 em { font-style: italic; color: var(--accent-2); }
+  .lede { font-family: var(--serif); font-weight: 300; font-size: 18px; line-height: 1.5; color: var(--paper-2); margin-bottom: 40px; max-width: 560px; }
+  .lede em { color: var(--accent-2); font-style: italic; }
+  fieldset { border: 1px solid var(--ink-3); border-radius: 12px; padding: 24px; margin-bottom: 16px; background: var(--ink-2); }
+  legend { padding: 0 8px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); }
+  label { display: block; margin-bottom: 14px; }
+  label > .l { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); display: block; margin-bottom: 6px; }
+  select, input { width: 100%; padding: 12px 14px; background: var(--ink); color: var(--paper); border: 1px solid var(--ink-3); border-radius: 8px; font-family: var(--mono); font-size: 13px; }
+  input::placeholder { color: var(--mute-2); }
+  select:focus, input:focus { border-color: var(--accent); outline: none; }
+  .row { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  @media (min-width: 600px) { .row { grid-template-columns: 1fr 1fr; gap: 16px; } }
+  .out { margin-top: 24px; padding: 24px; background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--accent); border-radius: 12px; }
+  .out .label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 10px; }
+  .out .url { font-family: var(--mono); font-size: 13px; color: var(--paper); word-break: break-all; line-height: 1.55; user-select: all; }
+  .actions { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
+  button.copy { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; padding: 10px 16px; background: var(--accent); color: var(--ink); border: 0; border-radius: 999px; cursor: pointer; transition: background 0.2s; }
+  button.copy:hover { background: var(--accent-2); }
+  button.copy.copied { background: #4ade80; }
+  .preset { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; padding: 9px 14px; background: var(--ink); color: var(--paper-2); border: 1px solid var(--ink-3); border-radius: 999px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+  .preset:hover { border-color: var(--accent); color: var(--accent); }
+  .presets { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .footnote { font-family: var(--mono); font-size: 10px; color: var(--mute); margin-top: 32px; line-height: 1.7; letter-spacing: 0.05em; }
+  a { color: var(--accent-2); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="kicker">— Internal · noindex · share-link builder</div>
+  <h1>Tag your <em>links</em>.</h1>
+  <p class="lede">
+    Generates pre-tagged short links so you know what channel + campaign drove each visit.
+    All routes through <em>justinfowler.com/share</em>, which redirects with proper UTMs that PostHog auto-captures.
+  </p>
+
+  <form id="f">
+    <fieldset>
+      <legend>Destination</legend>
+      <label>
+        <span class="l">Where they land</span>
+        <select name="to">
+          <option value="home">Home (/)</option>
+          <option value="portfolio" selected>Portfolio (/portfolio.html)</option>
+          <option value="resume">Résumé (/resume.html)</option>
+          <option value="pdf">Résumé PDF (download)</option>
+          <option value="hire">Hire-me section (/#hire)</option>
+          <option value="writing">Writing (/writing.html)</option>
+          <option value="now">Now page (/now.html)</option>
+          <option value="pcm">PurpleChipmonk (external)</option>
+        </select>
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Source — where the link is posted</legend>
+      <label>
+        <span class="l">Source</span>
+        <select name="src">
+          <option value="linkedin" selected>linkedin</option>
+          <option value="x">x (twitter)</option>
+          <option value="email">email</option>
+          <option value="newsletter">newsletter</option>
+          <option value="hackernews">hackernews</option>
+          <option value="substack">substack</option>
+          <option value="reddit">reddit</option>
+          <option value="slack">slack</option>
+          <option value="referral">referral</option>
+          <option value="qr">qr-code</option>
+          <option value="profile">linkedin-profile-bio</option>
+          <option value="">— custom (type below) —</option>
+        </select>
+      </label>
+      <label>
+        <span class="l">Custom source (overrides if filled)</span>
+        <input name="src_custom" placeholder="e.g. revgenius, gtmpartners, conf-2026" />
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Campaign — what you're driving</legend>
+      <div class="row">
+        <label>
+          <span class="l">Campaign slug (kebab-case)</span>
+          <input name="campaign" placeholder="launch-apr26" value="launch-apr26" />
+        </label>
+        <label>
+          <span class="l">Content / variant (optional)</span>
+          <input name="content" placeholder="hero-cta-a" />
+        </label>
+      </div>
+      <label>
+        <span class="l">Medium (default: share)</span>
+        <input name="medium" placeholder="share · social · paid · referral" />
+      </label>
+      <div class="presets">
+        <button type="button" class="preset" data-preset="li-launch">LinkedIn launch</button>
+        <button type="button" class="preset" data-preset="recruiter">Recruiter outbound</button>
+        <button type="button" class="preset" data-preset="conf">Conference talk</button>
+        <button type="button" class="preset" data-preset="newsletter">Newsletter</button>
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="out">
+    <div class="label">Tagged short link</div>
+    <div class="url" id="url">—</div>
+    <div class="actions">
+      <button type="button" class="copy" id="copy">Copy link</button>
+      <button type="button" class="copy" id="copy-md" style="background:var(--ink); color:var(--paper); border:1px solid var(--ink-3);">Copy as markdown</button>
+      <a class="copy" id="open" href="#" target="_blank" style="background:var(--ink); color:var(--paper); border:1px solid var(--ink-3); text-decoration:none; display:inline-flex; align-items:center;">Test ↗</a>
+    </div>
+  </div>
+
+  <p class="footnote">
+    Auto-decodes in the redirect: <code>utm_source · utm_medium · utm_campaign · utm_term · utm_content</code>. PostHog captures these as event properties on every action.
+    Filter dashboards by <code>site = justinfowler.com</code>. View live data at <a href="https://us.posthog.com/" target="_blank">us.posthog.com</a>.
+  </p>
+</div>
+
+<script>
+  var BASE = location.origin || 'https://justinfowler.com';
+  var f = document.getElementById('f');
+  var out = document.getElementById('url');
+  var openBtn = document.getElementById('open');
+
+  var presets = {
+    'li-launch':  { src: 'linkedin', medium: 'social',    campaign: 'launch-apr26', content: '' },
+    'recruiter':  { src: 'email',    medium: 'outbound',  campaign: 'recruiter-outreach', content: '' },
+    'conf':       { src: 'qr',       medium: 'event',     campaign: 'conf-talk',    content: 'qr-slide' },
+    'newsletter': { src: 'newsletter', medium: 'email',   campaign: 'weekly',       content: '' }
+  };
+
+  document.querySelectorAll('.preset').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var p = presets[b.dataset.preset];
+      if (!p) return;
+      var src = f.querySelector('[name="src"]');
+      var srcCustom = f.querySelector('[name="src_custom"]');
+      var hasOpt = Array.from(src.options).some(function (o) { return o.value === p.src; });
+      if (hasOpt) { src.value = p.src; srcCustom.value = ''; }
+      else { src.value = ''; srcCustom.value = p.src; }
+      f.querySelector('[name="medium"]').value = p.medium;
+      f.querySelector('[name="campaign"]').value = p.campaign;
+      f.querySelector('[name="content"]').value = p.content;
+      build();
+    });
+  });
+
+  function build() {
+    var data = new FormData(f);
+    var to = data.get('to') || 'home';
+    var src = (data.get('src_custom') || '').trim() || data.get('src') || '';
+    var medium = (data.get('medium') || '').trim();
+    var campaign = (data.get('campaign') || '').trim();
+    var content = (data.get('content') || '').trim();
+
+    var qs = new URLSearchParams();
+    qs.set('to', to);
+    if (src)      qs.set('src', src);
+    if (medium)   qs.set('medium', medium);
+    if (campaign) qs.set('campaign', campaign);
+    if (content)  qs.set('content', content);
+
+    var url = BASE + '/share?' + qs.toString();
+    out.textContent = url;
+    openBtn.href = url;
+  }
+
+  f.addEventListener('input', build);
+  f.addEventListener('change', build);
+  build();
+
+  document.getElementById('copy').addEventListener('click', function () {
+    navigator.clipboard.writeText(out.textContent);
+    var btn = this; btn.classList.add('copied'); btn.textContent = '✓ Copied';
+    setTimeout(function () { btn.classList.remove('copied'); btn.textContent = 'Copy link'; }, 1500);
+  });
+  document.getElementById('copy-md').addEventListener('click', function () {
+    var to = f.querySelector('[name="to"]').value;
+    var label = ({ home:'justinfowler.com', portfolio:'My portfolio', resume:'My résumé', pdf:'Résumé PDF', hire:'Hire me', writing:'Writing', now:'Now', pcm:'PurpleChipmonk' })[to] || 'Link';
+    var md = '[' + label + '](' + out.textContent + ')';
+    navigator.clipboard.writeText(md);
+    var btn = this; btn.classList.add('copied'); btn.textContent = '✓ Copied md';
+    setTimeout(function () { btn.classList.remove('copied'); btn.textContent = 'Copy as markdown'; }, 1500);
+  });
+</script>
+</body>
+</html>

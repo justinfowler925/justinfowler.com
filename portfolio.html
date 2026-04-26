@@ -1359,6 +1359,7 @@
     .lightbox-next { right: 12px; }
   }
 </style>
+<script src="/assets/analytics.js" defer></script>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -2303,6 +2304,15 @@
     lb.classList.add('open');
     lb.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    if (window.__track) {
+      const project = slider.closest('article')?.querySelector('.ptitle')?.textContent.trim() || 'unknown';
+      window.__track('slider.lightbox_opened', {
+        project: project,
+        slide_index: lbState.index,
+        slide_label: slide.dataset.capText || null,
+        total_slides: lbState.slides.length
+      });
+    }
   };
 
   const closeLb = () => {

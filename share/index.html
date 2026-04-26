@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Redirecting…</title>
+<meta name="robots" content="noindex,nofollow" />
+<meta http-equiv="refresh" content="3;url=/" />
+<style>
+  html, body { background: #0c0a09; color: #fafaf9; font-family: 'JetBrains Mono', monospace; height: 100vh; margin: 0; display: grid; place-items: center; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
+  .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #fb923c; margin-right: 10px; vertical-align: middle; animation: pulse 1.2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+</style>
+</head>
+<body>
+  <div><span class="dot"></span> Routing…</div>
+<script>
+  // /share?to=portfolio&src=linkedin&campaign=launch-apr26
+  // → redirects to /portfolio.html?utm_source=linkedin&utm_campaign=launch-apr26&utm_medium=share
+  (function () {
+    var p = new URLSearchParams(location.search);
+    var to = (p.get('to') || 'home').toLowerCase();
+    var dest = ({
+      home: '/',
+      portfolio: '/portfolio.html',
+      resume: '/resume.html',
+      pdf: '/assets/justin-fowler-resume.pdf',
+      writing: '/writing.html',
+      now: '/now.html',
+      hire: '/#hire',
+      pcm: 'https://purplechipmonk.com/'
+    })[to] || '/';
+
+    var qs = new URLSearchParams();
+    if (p.get('src'))      qs.set('utm_source', p.get('src'));
+    if (p.get('medium'))   qs.set('utm_medium', p.get('medium'));
+    else                   qs.set('utm_medium', 'share');
+    if (p.get('campaign')) qs.set('utm_campaign', p.get('campaign'));
+    if (p.get('term'))     qs.set('utm_term', p.get('term'));
+    if (p.get('content'))  qs.set('utm_content', p.get('content'));
+
+    var hash = '';
+    var hashIdx = dest.indexOf('#');
+    if (hashIdx !== -1) { hash = dest.substring(hashIdx); dest = dest.substring(0, hashIdx); }
+    var sep = dest.indexOf('?') === -1 ? '?' : '&';
+    var final = dest + (qs.toString() ? sep + qs.toString() : '') + hash;
+
+    location.replace(final);
+  })();
+</script>
+</body>
+</html>
