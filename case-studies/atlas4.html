@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Atlas4 — Justin Fowler · Case Study</title>
+<meta name="description" content="An autonomous dev agent that runs on owned hardware. Local-first inference on M3 Ultra at ~70 tokens per second. Four parallel lane workers, in-process event bus, Linear-webhook intake. No cloud-API dependency for primary work." />
+<meta name="theme-color" content="#0c0a09" />
+<meta name="author" content="Justin Fowler" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+
+<link rel="canonical" href="https://justinfowler.com/case-studies/atlas4.html" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+<link rel="manifest" href="/manifest.webmanifest" />
+
+<meta property="og:title" content="Atlas4 · Case Study" />
+<meta property="og:description" content="An autonomous dev agent on owned hardware. Gemma 4 26B MoE at ~70 tok/s on M3 Ultra. Four parallel lane workers. Linear-webhook intake. No cloud dependency for primary work." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://justinfowler.com/case-studies/atlas4.html" />
+<meta property="og:image" content="https://justinfowler.com/og-image.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Atlas4 — Case Study" />
+<meta name="twitter:description" content="An autonomous dev agent on M3 Ultra. Local-first. Lane-parallel. No cloud dependency for primary work." />
+<meta name="twitter:image" content="https://justinfowler.com/og-image.svg" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Atlas4 — an autonomous dev agent on owned M3 Ultra hardware",
+  "description": "Local-first inference (Gemma 4 26B MoE at ~70 tok/s). Four parallel lane workers. In-process event bus. Linear-webhook intake. ~$0 marginal compute.",
+  "author": {
+    "@type": "Person",
+    "name": "Justin Fowler",
+    "url": "https://justinfowler.com/"
+  },
+  "datePublished": "2026-05-16",
+  "image": "https://justinfowler.com/og-image.svg",
+  "publisher": {
+    "@type": "Person",
+    "name": "Justin Fowler",
+    "url": "https://justinfowler.com/"
+  },
+  "mainEntityOfPage": "https://justinfowler.com/case-studies/atlas4.html"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink: #0c0a09; --ink-2: #1c1917; --ink-3: #292524; --ink-4: #44403c;
+    --paper: #fafaf9; --paper-2: #e7e5e4; --mute: #78716c; --mute-2: #57534e;
+    --accent: #fb923c; --accent-2: #fdba74; --accent-3: #ea580c;
+    --accent-soft: rgba(251, 146, 60, 0.08); --accent-line: rgba(251, 146, 60, 0.2);
+    --crit: #ef4444; --warn: #f59e0b; --ok: #22c55e;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.55; min-height: 100vh; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  .skip { position: absolute; left: -9999px; top: 8px; padding: 10px 16px; background: var(--accent); color: var(--ink); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; border-radius: 999px; z-index: 999; }
+  .skip:focus { left: 24px; }
+  .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  @media (min-width: 768px) { .container { padding: 0 48px; } }
+
+  nav { padding: 28px 0 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
+
+  header.hero { padding: 80px 0 40px; }
+  @media (min-width: 768px) { header.hero { padding: 120px 0 60px; } }
+  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); margin-bottom: 28px; }
+  .breadcrumb a { color: var(--mute); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { color: var(--mute-2); margin: 0 12px; }
+  .breadcrumb .here { color: var(--accent); }
+
+  h1 { font-family: var(--serif); font-variation-settings: 'opsz' 144, 'SOFT' 50; font-size: clamp(42px, 8vw, 86px); font-weight: 300; line-height: 0.98; letter-spacing: -0.04em; margin-bottom: 24px; }
+  h1 em { font-style: italic; color: var(--accent-2); font-weight: 300; }
+  .stamp { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 28px; padding: 8px 14px; display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent-line); border-radius: 999px; }
+  .lede { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); line-height: 1.45; color: var(--paper-2); max-width: 760px; margin-bottom: 20px; }
+  .lede em { color: var(--accent-2); font-style: italic; }
+  .convention { font-family: var(--serif); font-size: 16px; font-style: italic; color: var(--mute); max-width: 760px; }
+
+  .tldr { padding: 36px 0 12px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .tldr { grid-template-columns: repeat(4, 1fr); } }
+  .tldr-cell { padding: 18px 20px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 12px; }
+  .tldr-cell .lbl { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); display: block; margin-bottom: 8px; }
+  .tldr-cell .val { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--paper); }
+  .tldr-cell .val em { font-style: italic; color: var(--accent-2); }
+
+  section.block { padding: 56px 0; border-top: 1px solid var(--ink-3); }
+  .section-num { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 8px; }
+  h2.st { font-family: var(--serif); font-size: clamp(28px, 4.2vw, 42px); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 24px; }
+  h2.st em { font-style: italic; color: var(--mute); }
+  h3.sst { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); font-weight: 400; line-height: 1.25; margin: 24px 0 12px; color: var(--paper); }
+  h3.sst em { font-style: italic; color: var(--accent-2); }
+
+  p { margin-bottom: 16px; max-width: 760px; color: var(--paper-2); }
+  p strong { color: var(--paper); font-weight: 600; }
+  p em { color: var(--accent-2); font-style: italic; }
+  p code, .ic { font-family: var(--mono); font-size: 0.88em; color: var(--accent-2); background: var(--ink-2); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--ink-3); }
+  ul { margin: 12px 0 16px 24px; max-width: 760px; }
+  ul li { color: var(--paper-2); margin-bottom: 8px; }
+  ul li strong { color: var(--paper); }
+
+  /* Stack diagram */
+  .stack { display: grid; gap: 10px; margin: 28px 0; }
+  .stack-row { display: grid; grid-template-columns: 90px 1fr; gap: 18px; align-items: center; padding: 16px 20px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 10px; position: relative; overflow: hidden; }
+  .stack-row::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); opacity: 0.7; }
+  .stack-row .layer-tag { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); }
+  .stack-row h4 { font-family: var(--serif); font-size: 17px; color: var(--paper); font-weight: 500; margin-bottom: 4px; }
+  .stack-row p { font-family: var(--mono); font-size: 12px; color: var(--mute); margin: 0; line-height: 1.5; }
+
+  /* Flow diagram */
+  .flow { display: grid; gap: 12px; margin: 24px 0; }
+  .flow-step { display: grid; grid-template-columns: 60px 1fr; gap: 18px; align-items: center; padding: 16px 20px; background: var(--ink-2); border: 1px solid var(--ink-3); border-left: 3px solid var(--accent); border-radius: 10px; }
+  .flow-step .fnum { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; }
+  .flow-step h4 { font-family: var(--serif); font-size: 17px; color: var(--paper); font-weight: 500; margin-bottom: 4px; }
+  .flow-step p { margin: 0; font-size: 14px; color: var(--paper-2); }
+
+  /* Lanes grid */
+  .lanes { display: grid; gap: 12px; grid-template-columns: 1fr; margin: 24px 0; }
+  @media (min-width: 720px) { .lanes { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .lanes { grid-template-columns: repeat(4, 1fr); } }
+  .lane-card { padding: 20px; background: var(--ink-2); border: 1px solid var(--ink-3); border-top: 3px solid var(--accent); border-radius: 10px; }
+  .lane-card h4 { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 8px; }
+  .lane-card p { font-family: var(--serif); font-size: 14px; color: var(--paper); margin: 0; line-height: 1.5; }
+  .lane-card .ksize { font-family: var(--mono); font-size: 10px; color: var(--mute); display: block; margin-top: 8px; letter-spacing: 0.06em; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--ink-3); }
+  th { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); font-weight: 500; }
+  td { color: var(--paper-2); }
+  td.num { font-family: var(--mono); text-align: right; color: var(--paper); }
+  td code { font-family: var(--mono); font-size: 0.88em; color: var(--accent-2); background: var(--ink-3); padding: 2px 6px; border-radius: 4px; }
+
+  /* Quote */
+  .quote { padding: 32px 28px; background: var(--ink-2); border: 1px solid var(--ink-3); border-left: 3px solid var(--accent); border-radius: 14px; margin: 28px 0; }
+  .quote p { font-family: var(--serif); font-size: 19px; font-style: italic; color: var(--paper); line-height: 1.55; max-width: none; }
+  .quote .who { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); display: block; margin-top: 14px; }
+
+  /* CTA */
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; border-radius: 999px; transition: all 0.2s; }
+  .btn.primary { background: var(--accent); color: var(--ink); border: 1px solid var(--accent); }
+  .btn.primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
+  .btn.secondary { background: transparent; color: var(--accent); border: 1px solid var(--accent-line); }
+  .btn.secondary:hover { background: var(--accent-soft); }
+
+  /* Compare */
+  .compare { display: grid; gap: 14px; grid-template-columns: 1fr; margin: 28px 0; }
+  @media (min-width: 768px) { .compare { grid-template-columns: 1fr 1fr; } }
+  .compare-col { padding: 22px 24px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 12px; }
+  .compare-col h4 { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); margin-bottom: 14px; }
+  .compare-col.this h4 { color: var(--accent); }
+  .compare-col ul { margin: 0 0 0 18px; }
+  .compare-col li { color: var(--paper-2); font-size: 14px; margin-bottom: 8px; }
+
+  /* Principles */
+  .principles { display: grid; gap: 14px; margin: 24px 0; }
+  .principle { padding: 18px 22px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 10px; }
+  .principle .ptag { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); display: block; margin-bottom: 8px; }
+  .principle h4 { font-family: var(--serif); font-size: 18px; color: var(--paper); font-weight: 500; margin-bottom: 6px; }
+  .principle p { margin: 0; font-size: 14px; color: var(--paper-2); }
+
+  footer { padding: 40px 0; margin-top: 40px; border-top: 1px solid var(--ink-3); display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); }
+  footer a { color: var(--mute); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="container">
+
+<nav aria-label="Primary">
+  <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/portfolio.html" aria-current="page">Portfolio</a>
+    <a href="/resume.html">Resume</a>
+    <a href="/now.html">Now</a>
+    <a href="/writing.html">Writing</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="hero">
+  <div class="breadcrumb">
+    <a href="/">Home</a><span class="sep">/</span><a href="/portfolio.html">Portfolio</a><span class="sep">/</span><span class="here">Case Study</span>
+  </div>
+  <div class="stamp">Case study · autonomous agent · 2026</div>
+  <h1>Atlas<em>4</em>.</h1>
+  <p class="lede">An <em>autonomous dev agent</em> that runs on owned M3 Ultra hardware. <em>Local-first inference</em> at ~70 tokens/sec. Four parallel lane workers, in-process event bus, Linear-webhook intake. No cloud-API dependency for primary work.</p>
+  <p class="convention">Renamed from <code>atlas-direct</code> · cloud-triggered worker model retired · current shape is a local manager + on-demand worker split with hot-swappable inference backends.</p>
+</header>
+
+<section class="tldr">
+  <div class="tldr-cell"><span class="lbl">Inference throughput</span><span class="val">~<em>70</em> tok/s</span></div>
+  <div class="tldr-cell"><span class="lbl">Active lanes</span><span class="val"><em>4</em> warm</span></div>
+  <div class="tldr-cell"><span class="lbl">Dispatch latency</span><span class="val">~<em>50</em>ms</span></div>
+  <div class="tldr-cell"><span class="lbl">Marginal compute cost</span><span class="val">$<em>0</em></span></div>
+</section>
+
+<section class="block" id="problem">
+  <div class="section-num">§ 01 · The problem</div>
+  <h2 class="st">Cloud AI is renting <em>someone else's lever</em>.</h2>
+  <p>Every cloud-API-dependent agent has the same shape: each unit of work costs money, latency rises with token count, throughput throttles when the provider says so, and the data you process leaves your network. For a personal autonomous agent doing dozens of small jobs per day, those four constraints compound:</p>
+  <ul>
+    <li><strong>Cost scales linearly with work.</strong> A useful agent runs hot — many small requests, many tool calls, many retries. At cloud token prices, a productive day costs more than the work it offsets.</li>
+    <li><strong>Latency is opaque.</strong> Provider-side queues, cold-start spikes, rate-limit backoffs — the agent can't reason about its own latency budget when the floor moves underneath it.</li>
+    <li><strong>Data residency is renegotiated daily.</strong> Every request sends customer context, internal ticket bodies, and proprietary code to a third party. Defensible for one-off use; sketchy for a daemon that runs every five minutes.</li>
+    <li><strong>You don't own the lever.</strong> The provider deprecates a model, changes pricing, rotates an API surface — your agent's behavior changes without you authoring the change.</li>
+  </ul>
+  <p>The alternative — own the lever — was theoretical until very recently. The M3 Ultra running 4-bit quantized MoE models changed the economics. Atlas4 is what owning that lever looks like in practice.</p>
+</section>
+
+<section class="block" id="stack">
+  <div class="section-num">§ 02 · The stack</div>
+  <h2 class="st">Local-first. Fallback-aware. <em>One machine</em>.</h2>
+  <div class="stack">
+    <div class="stack-row">
+      <span class="layer-tag">Primary</span>
+      <div>
+        <h4>Rapid-MLX · Gemma 4 26B-A4B MoE 4-bit</h4>
+        <p>127.0.0.1:8081 · ~13 GB resident · ~70 tok/s on M3 Ultra · Anthropic-API-compatible endpoint</p>
+      </div>
+    </div>
+    <div class="stack-row">
+      <span class="layer-tag">Fallback</span>
+      <div>
+        <h4>Ollama · llama3.3:70b</h4>
+        <p>127.0.0.1:11434 · auto-fall-through when Rapid-MLX is unavailable · same API contract</p>
+      </div>
+    </div>
+    <div class="stack-row">
+      <span class="layer-tag">Embeddings</span>
+      <div>
+        <h4>nomic-embed-text-v2-moe</h4>
+        <p>via Ollama · 768-dim multilingual MoE · runs locally for retrieval + clustering</p>
+      </div>
+    </div>
+    <div class="stack-row">
+      <span class="layer-tag">Cloud</span>
+      <div>
+        <h4>Anthropic-direct path · opt-in, OFF by default</h4>
+        <p><code>atlas_bot.legacy_anthropic_sdk: false</code> · path exists for exceptional reasoning loads · not used in standard operation</p>
+      </div>
+    </div>
+    <div class="stack-row">
+      <span class="layer-tag">Manager</span>
+      <div>
+        <h4>Atlas4 mini-IDE · 127.0.0.1:8766</h4>
+        <p>Chat surface, triage, dispatch · owns the conversation; delegates execution to lane workers via in-process event bus</p>
+      </div>
+    </div>
+    <div class="stack-row">
+      <span class="layer-tag">Workers</span>
+      <div>
+        <h4>Four lane workers · KeepAlive launchd</h4>
+        <p>pcm · sfdc · atlas-d · research · per-lane heartbeat + inbox watcher · ~50ms dispatch latency</p>
+      </div>
+    </div>
+    <div class="stack-row">
+      <span class="layer-tag">Intake</span>
+      <div>
+        <h4>Linear webhook → state/inbox/&lt;lane&gt;/*.txt</h4>
+        <p>Canonical event source · 4-hour cron poller is the safety net · Slack listening retired</p>
+      </div>
+    </div>
+  </div>
+  <p>Every component on the stack runs on the same Mac Studio. No SaaS dependency on the hot path. The fallback chain (Rapid-MLX → Ollama → opt-in cloud) means a single component failure degrades gracefully rather than taking the whole agent down.</p>
+</section>
+
+<section class="block" id="flow">
+  <div class="section-num">§ 03 · The intake-to-execution flow</div>
+  <h2 class="st">From <em>ticket</em> to <em>diff</em>.</h2>
+  <div class="flow">
+    <div class="flow-step"><span class="fnum">Step 01</span><div><h4>Ticket created in Linear</h4><p>Webhook fires to <code>com.jfstudio.atlas4hook-receiver</code> on localhost:19801. Payload normalized, routed to the right lane based on project (REV-* → sfdc, github-pcm → pcm, etc.).</p></div></div>
+    <div class="flow-step"><span class="fnum">Step 02</span><div><h4>Lane inbox file written</h4><p>One file per ticket at <code>state/inbox/&lt;lane&gt;/&lt;ticket-id&gt;.txt</code>. <code>watchdog</code>-backed file watcher in the lane worker picks it up in ~50ms — 100× faster than the prior 10-second polling loop.</p></div></div>
+    <div class="flow-step"><span class="fnum">Step 03</span><div><h4>Worker grounds in real reads</h4><p>Worker uses <code>python_exec_chat</code> + anti-lie wrappers to read the actual state (SOQL queries, git diff, file inspection). No work proceeds on assumed state.</p></div></div>
+    <div class="flow-step"><span class="fnum">Step 04</span><div><h4>Methodical dispatch from manager</h4><p>Atlas4 (manager) composes a complete single-shot dispatch — full context, clear acceptance criteria, exact deliverable shape. Worker doesn't bounce back asking for clarification.</p></div></div>
+    <div class="flow-step"><span class="fnum">Step 05</span><div><h4>Execution · autonomous on internal · approval on external</h4><p>Internal-only changes (new tool code, tests, docs, config-gated-off features) ship autonomously. External writes (SF DML, HubSpot mutations, Gmail send) require Linear-comment approval before merge.</p></div></div>
+    <div class="flow-step"><span class="fnum">Step 06</span><div><h4>Approval via Linear comment</h4><p>Reviewer drops <code>approve</code> / <code>yes</code> / <code>go</code> on the ticket. Worker reads the approval signal, applies the gated change, posts the result back as a Linear comment.</p></div></div>
+    <div class="flow-step"><span class="fnum">Step 07</span><div><h4>Events stream to mission-control UI</h4><p>Every <code>worker.*</code> and <code>job.*</code> event publishes through the in-process event bus and SSE endpoint. The Atlas4 mini-IDE lights up in real time. Operator sees state, doesn't reconstruct it.</p></div></div>
+  </div>
+</section>
+
+<section class="block" id="lanes">
+  <div class="section-num">§ 04 · The four lanes</div>
+  <h2 class="st">Parallel by design. <em>Crash-isolated</em>.</h2>
+  <p>Phase 47 replaced a single Atlas3 catch-all worker plus 10-second inbox polling with four KeepAlive lane workers communicating with the manager over an in-process event bus. Each lane is a separate process; a crash in one doesn't take down the others.</p>
+  <div class="lanes">
+    <div class="lane-card">
+      <h4>Lane · pcm</h4>
+      <p>PurpleChipMonk delivery · feature work + agent-system changes scoped to that repo</p>
+      <span class="ksize">GitHub purplechipmonk · KeepAlive · per-lane logs</span>
+    </div>
+    <div class="lane-card">
+      <h4>Lane · sfdc</h4>
+      <p>Salesforce + RevOps delivery · Linear-issue intake for REV-* tickets · primary mission</p>
+      <span class="ksize">Linear REV-* · KeepAlive · per-lane logs</span>
+    </div>
+    <div class="lane-card">
+      <h4>Lane · atlas-d</h4>
+      <p>Atlas-Direct self-build · feature work on the agent runtime itself</p>
+      <span class="ksize">justinfowler925/atlas4 issues · KeepAlive</span>
+    </div>
+    <div class="lane-card">
+      <h4>Lane · research</h4>
+      <p>Exploration · reading new models, prototyping new tools, ad-hoc investigation</p>
+      <span class="ksize">Operator-driven · KeepAlive</span>
+    </div>
+  </div>
+  <p>Each lane writes a heartbeat to <code>state/workers/&lt;lane&gt;.heartbeat.json</code> every 5 seconds. The manager subscribes; if a heartbeat goes stale, the manager surfaces the gap immediately rather than letting silence look like quiet productivity.</p>
+</section>
+
+<section class="block" id="principles">
+  <div class="section-num">§ 05 · Operating principles</div>
+  <h2 class="st">Locked in <em>2026-05-16</em>.</h2>
+  <div class="principles">
+    <div class="principle">
+      <span class="ptag">Principle 01</span>
+      <h4>Honest</h4>
+      <p>Atlas4 always grounds in real reads. Tool calls (<code>python_exec_chat</code>, helpers, anti-lie wrappers) precede any reasoning about state. No claims about a system without first reading the system.</p>
+    </div>
+    <div class="principle">
+      <span class="ptag">Principle 02</span>
+      <h4>Fast</h4>
+      <p>Optimize within the Gemma 4 + Rapid-MLX + no-prefix-cache constraint. The constraint is fixed; the work happens inside it. Dispatch latency ~50ms · single-shot dispatches · in-process events.</p>
+    </div>
+    <div class="principle">
+      <span class="ptag">Principle 03</span>
+      <h4>Methodical dispatch</h4>
+      <p>Atlas4 (manager) composes complete, single-shot dispatches. Atlas3 (worker) executes without bouncing back. The manager front-loads the context cost so the worker can run cold.</p>
+    </div>
+    <div class="principle">
+      <span class="ptag">Principle 04</span>
+      <h4>Maximum autonomy</h4>
+      <p>Autonomous-on-timeout default for internal work. Planning-first only on destructive operations (Salesforce DML, HubSpot mutations, mail send, money movement). The agent owns the boring, escalates the irreversible.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="economics">
+  <div class="section-num">§ 06 · The economics</div>
+  <h2 class="st">Why owning the lever <em>matters</em>.</h2>
+  <div class="compare">
+    <div class="compare-col">
+      <h4>Cloud-API-dependent agent</h4>
+      <ul>
+        <li>Variable cost per work item · rises with token count · rises with retries</li>
+        <li>Latency floor set by the provider · cold starts, queue depth, throttling</li>
+        <li>Data residency renegotiated every request</li>
+        <li>Behavior changes when the provider deprecates a model</li>
+        <li>Productive daemon costs $300–1,500/month at scale</li>
+      </ul>
+    </div>
+    <div class="compare-col this">
+      <h4>Atlas4 on owned hardware</h4>
+      <ul>
+        <li>Fixed capital cost · marginal compute per work item ≈ $0</li>
+        <li>Latency floor is the model + the machine · operator-tunable, observable</li>
+        <li>Customer data stays on the local network · no third-party DPA on the hot path</li>
+        <li>Behavior changes only when I author the change</li>
+        <li>Capital cost amortizes in roughly two months vs. the cloud-API equivalent</li>
+      </ul>
+    </div>
+  </div>
+  <p>The M3 Ultra was a one-time purchase. Electricity is a few dollars per month. The marginal cost of asking Atlas4 to do another job is effectively zero. For a daemon that runs every five minutes — and increasingly, every five seconds — that economic shape is the whole point.</p>
+  <div class="quote">
+    <p>"Cloud AI made it easy to start. Owning the lever made it sustainable. Local-first wasn't a privacy preference — it was a unit-economics decision that happened to also be a privacy preference."</p>
+    <span class="who">— Operating principle · local-first inference</span>
+  </div>
+</section>
+
+<section class="block" id="trajectory">
+  <div class="section-num">§ 07 · Where it's going</div>
+  <h2 class="st">From <em>warm factory</em> to <em>always-on operator</em>.</h2>
+  <p>Atlas4 is at Phase 47 — parallel lane workers shipped, dispatch latency cut 100×, mission-control UI lighting up in real time. The forward roadmap is shaped by three trajectories:</p>
+  <ul>
+    <li><strong>More lanes.</strong> Today's four lanes cover the primary surfaces. Customer-facing automation (a sixth lane for prospective audit work) is on the horizon — same architecture, same KeepAlive, same approval gates.</li>
+    <li><strong>Better grounding.</strong> The anti-lie wrapper pattern is improving every release. Each new tool gets a "real read" companion so the agent never reasons from cached state when fresh state is cheap.</li>
+    <li><strong>Wider intake.</strong> Linear is the canonical source today. GitHub issues, Slack mentions, and email-as-ticket are next — same lane-router pattern, different webhook receivers.</li>
+  </ul>
+  <p>The North Star: an always-on operator that handles the boring parts of running a multi-system RevOps stack, escalates the interesting parts, and stays out of the way the rest of the time. The boring parts are 80% of the work; getting them autonomous releases the operator for the interesting 20%.</p>
+</section>
+
+<section class="block" id="disclosure">
+  <div class="section-num">§ 08 · Methodology &amp; disclosure</div>
+  <h2 class="st">Private repo. <em>Open architecture</em>.</h2>
+  <p>Atlas4 is a private repository — runtime configs, customer-specific ticket flows, and proprietary integration paths wouldn't survive open publication. What's portable is the <strong>architectural pattern</strong>: the local-first inference posture, the manager/worker split with in-process events, the lane-isolation model, the autonomy + approval-gate dichotomy.</p>
+  <div class="compare">
+    <div class="compare-col">
+      <h4>Private</h4>
+      <ul>
+        <li>Repository contents, including <code>atlas/</code> package, <code>config.yaml</code>, runtime knobs</li>
+        <li>Specific Linear projects, ticket flows, and webhook receivers</li>
+        <li>Tool implementations that touch customer Salesforce / HubSpot</li>
+        <li>The exact prompt strings and persona configurations</li>
+      </ul>
+    </div>
+    <div class="compare-col this">
+      <h4>Open</h4>
+      <ul>
+        <li>The local-first + Anthropic-API-compatible fallback chain pattern</li>
+        <li>The manager (Atlas4) / worker (Atlas3) split using in-process events</li>
+        <li>The lane-isolation model with per-lane KeepAlive workers</li>
+        <li>The four operating principles (honest · fast · methodical · autonomous)</li>
+        <li>The intake-to-execution flow (webhook → inbox file → watchdog → dispatch → approval)</li>
+      </ul>
+    </div>
+  </div>
+  <p>If you're building a personal autonomous agent on owned hardware: the bottleneck isn't the model anymore. It's the architecture around the model — the intake, the dispatch, the grounding, the approval gates. Atlas4's contribution is in that architecture, not in the inference.</p>
+</section>
+
+<section class="block" id="resources">
+  <div class="section-num">§ 09 · Read the source</div>
+  <h2 class="st">Architecture <em>on request</em>.</h2>
+  <p>The Atlas4 source repository is private. The architecture, the operating principles, and the lessons that justified each design decision are described here and are free for any operator to adapt to their own setup.</p>
+  <div class="cta-row">
+    <a class="btn primary" href="/portfolio.html">Back to portfolio</a>
+    <a class="btn secondary" href="/#contact">Contact me</a>
+  </div>
+  <p style="margin-top: 28px; font-size: 14px; color: var(--mute);">If you're building something similar — <a href="/#contact" style="color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px;">reach out</a>. I'm happy to walk through the design decisions and the failure modes that shaped each one.</p>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 · Justin Fowler</span>
+  <span>Case study · v1.0 · Published 2026-05-16</span>
+  <span><a href="/portfolio.html">Portfolio ↗</a></span>
+</footer>
+
+</div>
+
+<script>
+  const sections = document.querySelectorAll('section.block, header.hero, section.tldr');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+  sections.forEach(s => { s.style.opacity = '0'; s.style.transform = 'translateY(20px)'; s.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; io.observe(s); });
+</script>
+
+</body>
+</html>

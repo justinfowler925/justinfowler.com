@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>fowler-brain — Justin Fowler · Case Study</title>
+<meta name="description" content="A version-controlled personal AI operating system. Eight tool adapters compile from one git repo. Lessons graduate to rules. Strategy lives alongside the operating model. Four phases shipped." />
+<meta name="theme-color" content="#0c0a09" />
+<meta name="author" content="Justin Fowler" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+
+<link rel="canonical" href="https://justinfowler.com/case-studies/fowler-brain.html" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+<link rel="manifest" href="/manifest.webmanifest" />
+
+<meta property="og:title" content="fowler-brain · Case Study" />
+<meta property="og:description" content="A version-controlled personal AI operating system. Eight tool adapters from one git repo. Lessons graduate to rules. Strategy lives alongside the operating model." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://justinfowler.com/case-studies/fowler-brain.html" />
+<meta property="og:image" content="https://justinfowler.com/og-image.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="fowler-brain — Case Study" />
+<meta name="twitter:description" content="A version-controlled personal AI operating system. The Brain compiles into adapters for every AI tool I use." />
+<meta name="twitter:image" content="https://justinfowler.com/og-image.svg" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "fowler-brain — a portable, version-controlled personal AI operating system",
+  "description": "A two-layer git repo: Brain (operating system) plus Strategy (life plan). Compiles into adapters for every AI tool. Lessons graduate to rules. Four phases shipped.",
+  "author": {
+    "@type": "Person",
+    "name": "Justin Fowler",
+    "url": "https://justinfowler.com/"
+  },
+  "datePublished": "2026-05-16",
+  "image": "https://justinfowler.com/og-image.svg",
+  "publisher": {
+    "@type": "Person",
+    "name": "Justin Fowler",
+    "url": "https://justinfowler.com/"
+  },
+  "mainEntityOfPage": "https://justinfowler.com/case-studies/fowler-brain.html"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink: #0c0a09; --ink-2: #1c1917; --ink-3: #292524; --ink-4: #44403c;
+    --paper: #fafaf9; --paper-2: #e7e5e4; --mute: #78716c; --mute-2: #57534e;
+    --accent: #fb923c; --accent-2: #fdba74; --accent-3: #ea580c;
+    --accent-soft: rgba(251, 146, 60, 0.08); --accent-line: rgba(251, 146, 60, 0.2);
+    --crit: #ef4444; --warn: #f59e0b; --ok: #22c55e;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.55; min-height: 100vh; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  .skip { position: absolute; left: -9999px; top: 8px; padding: 10px 16px; background: var(--accent); color: var(--ink); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; border-radius: 999px; z-index: 999; }
+  .skip:focus { left: 24px; }
+  .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  @media (min-width: 768px) { .container { padding: 0 48px; } }
+
+  nav { padding: 28px 0 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
+
+  header.hero { padding: 80px 0 40px; }
+  @media (min-width: 768px) { header.hero { padding: 120px 0 60px; } }
+  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); margin-bottom: 28px; }
+  .breadcrumb a { color: var(--mute); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { color: var(--mute-2); margin: 0 12px; }
+  .breadcrumb .here { color: var(--accent); }
+
+  h1 { font-family: var(--serif); font-variation-settings: 'opsz' 144, 'SOFT' 50; font-size: clamp(42px, 8vw, 86px); font-weight: 300; line-height: 0.98; letter-spacing: -0.04em; margin-bottom: 24px; }
+  h1 em { font-style: italic; color: var(--accent-2); font-weight: 300; }
+  .stamp { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 28px; padding: 8px 14px; display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent-line); border-radius: 999px; }
+  .lede { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); line-height: 1.45; color: var(--paper-2); max-width: 760px; margin-bottom: 20px; }
+  .lede em { color: var(--accent-2); font-style: italic; }
+  .convention { font-family: var(--serif); font-size: 16px; font-style: italic; color: var(--mute); max-width: 760px; }
+
+  .tldr { padding: 36px 0 12px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .tldr { grid-template-columns: repeat(4, 1fr); } }
+  .tldr-cell { padding: 18px 20px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 12px; }
+  .tldr-cell .lbl { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); display: block; margin-bottom: 8px; }
+  .tldr-cell .val { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--paper); }
+  .tldr-cell .val em { font-style: italic; color: var(--accent-2); }
+
+  section.block { padding: 56px 0; border-top: 1px solid var(--ink-3); }
+  .section-num { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 8px; }
+  h2.st { font-family: var(--serif); font-size: clamp(28px, 4.2vw, 42px); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 24px; }
+  h2.st em { font-style: italic; color: var(--mute); }
+  h3.sst { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); font-weight: 400; line-height: 1.25; margin: 24px 0 12px; color: var(--paper); }
+  h3.sst em { font-style: italic; color: var(--accent-2); }
+
+  p { margin-bottom: 16px; max-width: 760px; color: var(--paper-2); }
+  p strong { color: var(--paper); font-weight: 600; }
+  p em { color: var(--accent-2); font-style: italic; }
+  p code, .ic { font-family: var(--mono); font-size: 0.88em; color: var(--accent-2); background: var(--ink-2); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--ink-3); }
+  ul { margin: 12px 0 16px 24px; max-width: 760px; }
+  ul li { color: var(--paper-2); margin-bottom: 8px; }
+  ul li strong { color: var(--paper); }
+
+  /* Two-layer split */
+  .twolayer { display: grid; gap: 16px; grid-template-columns: 1fr; margin: 28px 0; }
+  @media (min-width: 768px) { .twolayer { grid-template-columns: 1fr 1fr; } }
+  .layer-card { padding: 26px 28px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 14px; position: relative; overflow: hidden; }
+  .layer-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); opacity: 0.65; }
+  .layer-card .lbl { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); display: block; margin-bottom: 12px; }
+  .layer-card h4 { font-family: var(--serif); font-size: 22px; color: var(--paper); margin-bottom: 10px; font-weight: 500; }
+  .layer-card h4 em { font-style: italic; color: var(--accent-2); }
+  .layer-card p { font-size: 15px; color: var(--paper-2); margin-bottom: 12px; }
+  .layer-card ul { margin: 6px 0 0 18px; }
+  .layer-card li { font-size: 14px; color: var(--paper-2); margin-bottom: 6px; }
+
+  /* Loop / process steps */
+  .steps { display: grid; gap: 10px; margin: 24px 0; }
+  .step { display: grid; grid-template-columns: 48px 1fr; gap: 16px; padding: 16px 20px; background: var(--ink-2); border: 1px solid var(--ink-3); border-left: 3px solid var(--accent); border-radius: 10px; }
+  .step .snum { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); align-self: center; }
+  .step h4 { font-family: var(--serif); font-size: 17px; color: var(--paper); font-weight: 500; margin-bottom: 4px; }
+  .step p { margin: 0; font-size: 14px; color: var(--paper-2); }
+
+  /* Distribution matrix */
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--ink-3); }
+  th { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); font-weight: 500; }
+  td { color: var(--paper-2); }
+  td.num { font-family: var(--mono); text-align: right; color: var(--paper); }
+  td code { font-family: var(--mono); font-size: 0.88em; color: var(--accent-2); background: var(--ink-3); padding: 2px 6px; border-radius: 4px; }
+  td .pill { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; padding: 2px 8px; border-radius: 4px; display: inline-block; background: var(--ink-3); color: var(--mute); }
+  td .pill.ok { background: rgba(34, 197, 94, 0.12); color: var(--ok); }
+  td .pill.now { background: rgba(251, 146, 60, 0.12); color: var(--accent); }
+  td .pill.defer { background: var(--ink-3); color: var(--mute); }
+
+  /* Phase scorecard */
+  .phases { display: grid; gap: 10px; margin: 24px 0; }
+  .phase-row { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 16px; padding: 14px 18px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 10px; }
+  .phase-row .pnum { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); }
+  .phase-row .pname { font-family: var(--serif); font-size: 17px; color: var(--paper); font-weight: 500; }
+  .phase-row .pdesc { font-family: var(--mono); font-size: 11px; color: var(--mute); margin-top: 2px; letter-spacing: 0.04em; }
+  .phase-row .pstatus { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; padding: 4px 10px; border-radius: 999px; }
+  .pstatus.done { background: rgba(34, 197, 94, 0.12); color: var(--ok); border: 1px solid rgba(34, 197, 94, 0.3); }
+  .pstatus.defer { background: var(--ink-3); color: var(--mute); border: 1px solid var(--ink-4); }
+
+  /* Quote */
+  .quote { padding: 32px 28px; background: var(--ink-2); border: 1px solid var(--ink-3); border-left: 3px solid var(--accent); border-radius: 14px; margin: 28px 0; }
+  .quote p { font-family: var(--serif); font-size: 19px; font-style: italic; color: var(--paper); line-height: 1.55; max-width: none; }
+  .quote .who { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); display: block; margin-top: 14px; }
+
+  /* CTA */
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; border-radius: 999px; transition: all 0.2s; }
+  .btn.primary { background: var(--accent); color: var(--ink); border: 1px solid var(--accent); }
+  .btn.primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
+  .btn.secondary { background: transparent; color: var(--accent); border: 1px solid var(--accent-line); }
+  .btn.secondary:hover { background: var(--accent-soft); }
+
+  /* Compare */
+  .compare { display: grid; gap: 14px; grid-template-columns: 1fr; margin: 28px 0; }
+  @media (min-width: 768px) { .compare { grid-template-columns: 1fr 1fr; } }
+  .compare-col { padding: 22px 24px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 12px; }
+  .compare-col h4 { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); margin-bottom: 14px; }
+  .compare-col.this h4 { color: var(--accent); }
+  .compare-col ul { margin: 0 0 0 18px; }
+  .compare-col li { color: var(--paper-2); font-size: 14px; margin-bottom: 8px; }
+
+  footer { padding: 40px 0; margin-top: 40px; border-top: 1px solid var(--ink-3); display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); }
+  footer a { color: var(--mute); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="container">
+
+<nav aria-label="Primary">
+  <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/portfolio.html" aria-current="page">Portfolio</a>
+    <a href="/resume.html">Resume</a>
+    <a href="/now.html">Now</a>
+    <a href="/writing.html">Writing</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="hero">
+  <div class="breadcrumb">
+    <a href="/">Home</a><span class="sep">/</span><a href="/portfolio.html">Portfolio</a><span class="sep">/</span><span class="here">Case Study</span>
+  </div>
+  <div class="stamp">Case study · personal infrastructure · 2026</div>
+  <h1>fowler-<em>brain</em>.</h1>
+  <p class="lede">A <em>portable, version-controlled personal AI operating system</em>. Two layers in one git repo. Eight tool adapters compile from a single source of truth. Lessons graduate to rules. Strategy lives alongside the operating model.</p>
+  <p class="convention">The Brain without Strategy is a better prompt. Strategy without Brain is a file that gets ignored. The integration is the point.</p>
+</header>
+
+<section class="tldr">
+  <div class="tldr-cell"><span class="lbl">Phases shipped</span><span class="val"><em>4</em> / 6</span></div>
+  <div class="tldr-cell"><span class="lbl">Tool adapters</span><span class="val"><em>8</em></span></div>
+  <div class="tldr-cell"><span class="lbl">Lessons captured</span><span class="val"><em>80+</em></span></div>
+  <div class="tldr-cell"><span class="lbl">Cadence</span><span class="val">Sat <em>8a CT</em></span></div>
+</section>
+
+<section class="block" id="problem">
+  <div class="section-num">§ 01 · The problem</div>
+  <h2 class="st">Every AI tool drifts <em>independently</em>.</h2>
+  <p>If you use Claude Code in one terminal, Cursor in another, Claude.ai for ideation, an Ollama model for offline work, and a custom agent or two on top — you're maintaining five separate notions of "how Justin works." Each tool gets re-taught the same lessons. Each tool drifts in its own direction. None of them remember what you decided last quarter.</p>
+  <p>The conventional fix is a prompt library. Save the good prompts somewhere, paste them when needed. This breaks at scale — prompts aren't enough to encode how you actually think, the prompts don't propagate when you switch tools, and the prompts have no lifecycle: nothing graduates, nothing retires, nothing connects an in-the-moment insight to the rule that should prevent the next occurrence.</p>
+  <p>The deeper problem: <strong>the most valuable assets in your work — the lessons you've learned, the way you frame decisions, the vocabulary you've evolved — are the assets least likely to be version-controlled.</strong> They live in your head, where they drift. They live in scattered notes, where they rot. They live in chat history, where they're lost when the context window resets.</p>
+</section>
+
+<section class="block" id="layers">
+  <div class="section-num">§ 02 · The architecture</div>
+  <h2 class="st">Two layers. <em>One repo</em>.</h2>
+  <div class="twolayer">
+    <div class="layer-card">
+      <span class="lbl">Layer 1</span>
+      <h4>The <em>Brain</em> — operating system</h4>
+      <p>How I think, work, and communicate. Compiled into adapters for every AI tool I use. Single source of truth; tools recompile downstream.</p>
+      <ul>
+        <li><code>global/</code> — identity, principles, communication norms, model policy</li>
+        <li><code>contexts/</code> — per-project knowledge (Salesforce, PurpleChipmonk, Atlas, infra)</li>
+        <li><code>workflows/</code> — 11+ named protocols (spec-first, error-triage, lesson-capture)</li>
+        <li><code>templates/</code> — PR descriptions, decision docs, incident reports, one-pagers</li>
+        <li><code>vocabulary/</code> — phrases, glossary, failure modes, anti-patterns</li>
+        <li><code>lessons/</code> — capture · promote · archive</li>
+      </ul>
+    </div>
+    <div class="layer-card">
+      <span class="lbl">Layer 2</span>
+      <h4>The <em>Strategy</em> — life plan</h4>
+      <p>What I'm doing with my career, my capital, and my decade. Plans, weekly actions, tracked metrics, falsifiable tests with pre-committed kill conditions.</p>
+      <ul>
+        <li><code>strategy/plans/</code> — 10-year plan, three planks, 90-day gate</li>
+        <li><code>strategy/weekly/</code> — current week's action plan and commitments</li>
+        <li><code>strategy/tracking/</code> — post backlog, metrics, post log</li>
+        <li><code>strategy/reviews/</code> — Saturday-coaching outputs, decisions log</li>
+        <li><code>strategy/templates/</code> — manager email, network email patterns</li>
+      </ul>
+    </div>
+  </div>
+  <p>A Brain that knows my style but not my goals optimizes the wrong thing. A Strategy file with no operating discipline gets ignored after week 2. Bundling them keeps Tuesday's decisions traceable to Saturday's strategy review traceable to the long-range plan — without any of those layers losing their own granularity.</p>
+</section>
+
+<section class="block" id="loop">
+  <div class="section-num">§ 03 · The operating loop</div>
+  <h2 class="st">Capture. Review. Promote. <em>Distribute</em>. Execute.</h2>
+  <div class="steps">
+    <div class="step"><span class="snum">01</span><div><h4>Capture</h4><p>Friction, insights, decisions land in <code>lessons/</code> via <code>scripts/capture.sh</code> or the <code>/capture</code> slash command. Same act for every AI tool — the lesson lands once, regardless of where the friction happened.</p></div></div>
+    <div class="step"><span class="snum">02</span><div><h4>Review</h4><p>Saturday 8–9 AM CT coaching review covers both layers: rule health (Brain) and plank scoring (Strategy). Automated coaching script flags rules that haven't been touched in 90 days, lessons with 3+ occurrences, and strategy drift.</p></div></div>
+    <div class="step"><span class="snum">03</span><div><h4>Promote</h4><p>Lessons with 3+ occurrences graduate to rules. Domain-specific rules land in <code>contexts/&lt;project&gt;.md</code>. Global rules land in <code>global/principles.md</code> or <code>global/communication.md</code>. Lessons that didn't generalize get archived but stay searchable.</p></div></div>
+    <div class="step"><span class="snum">04</span><div><h4>Distribute</h4><p><code>scripts/rebuild.sh</code> compiles the Brain into tool-specific adapters: <code>CLAUDE.md</code> for Claude Code, <code>.cursor/rules/*.mdc</code> for Cursor, system prompts for local agents, preferences bundles for Claude.ai projects.</p></div></div>
+    <div class="step"><span class="snum">05</span><div><h4>Execute</h4><p>The tools consume the adapters. I work. New friction becomes new lessons. The loop closes weekly at the Saturday review. The Brain compounds; nothing slips out the back.</p></div></div>
+  </div>
+</section>
+
+<section class="block" id="distribution">
+  <div class="section-num">§ 04 · The distribution matrix</div>
+  <h2 class="st">One source. <em>Eight surfaces</em>.</h2>
+  <p>The compile step is what makes this different from a notes folder. Every adapter is a deterministic function of the Brain — so a change to <code>global/communication.md</code> propagates to every downstream surface on the next <code>rebuild.sh</code>.</p>
+  <table>
+    <thead>
+      <tr><th>Surface</th><th>Adapter format</th><th>Where it lands</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Claude Code · main project</td><td><code>CLAUDE.md</code></td><td>Project repo root</td></tr>
+      <tr><td>Claude Code · secondary project</td><td><code>CLAUDE.md</code></td><td>Secondary repo root</td></tr>
+      <tr><td>Cursor</td><td><code>.cursor/rules/*.mdc</code></td><td>Per-project rule directory</td></tr>
+      <tr><td>Atlas worker agents</td><td>system prompt</td><td>Agent system-prompt directory</td></tr>
+      <tr><td>OpenClaw HQ</td><td>system prompt</td><td>Multi-agent gateway base prompt</td></tr>
+      <tr><td>Claude.ai · per-project</td><td>project instructions</td><td>Manually pasted, bootstrap URL referenced</td></tr>
+      <tr><td>Claude.ai · user preferences</td><td>preferences bundle</td><td>Account-level user preferences</td></tr>
+      <tr><td>Local Ollama models</td><td>system prompt</td><td>Per-model prompt template</td></tr>
+    </tbody>
+  </table>
+  <p>One change at the source. Eight surfaces stay coherent. The cost of changing my mind about how to write a PR description goes from "update eight places, miss one, drift starts" to "edit one file, run one script."</p>
+</section>
+
+<section class="block" id="phases">
+  <div class="section-num">§ 05 · Phase status</div>
+  <h2 class="st">Four phases <em>shipped</em>. Two <em>trigger-deferred</em>.</h2>
+  <div class="phases">
+    <div class="phase-row">
+      <span class="pnum">Phase 1</span>
+      <div>
+        <div class="pname">Foundation</div>
+        <div class="pdesc">repo · gitleaks · launchd · saturday review live</div>
+      </div>
+      <span class="pstatus done">Complete</span>
+    </div>
+    <div class="phase-row">
+      <span class="pnum">Phase 2</span>
+      <div>
+        <div class="pname">Protocols</div>
+        <div class="pdesc">11 workflows · 7 templates · 9 prompts · phrase recognition</div>
+      </div>
+      <span class="pstatus done">Complete</span>
+    </div>
+    <div class="phase-row">
+      <span class="pnum">Phase 3</span>
+      <div>
+        <div class="pname">Automation</div>
+        <div class="pdesc">rebuild · capture · emergency-freeze · brain-test · dashboard-build</div>
+      </div>
+      <span class="pstatus done">Complete</span>
+    </div>
+    <div class="phase-row">
+      <span class="pnum">Phase 4</span>
+      <div>
+        <div class="pname">Integration</div>
+        <div class="pdesc">adapters distributed to Atlas, OpenClaw, Cursor, Claude Code</div>
+      </div>
+      <span class="pstatus done">Complete</span>
+    </div>
+    <div class="phase-row">
+      <span class="pnum">Phase 5</span>
+      <div>
+        <div class="pname">Sophistication</div>
+        <div class="pdesc">lesson-promotion algorithm · dormant asset detection · rule conflict resolution</div>
+      </div>
+      <span class="pstatus defer">Trigger-deferred</span>
+    </div>
+    <div class="phase-row">
+      <span class="pnum">Phase 6</span>
+      <div>
+        <div class="pname">Evolution</div>
+        <div class="pdesc">quarterly architecture review · versioning · migration runbook</div>
+      </div>
+      <span class="pstatus defer">Trigger-deferred</span>
+    </div>
+  </div>
+  <p>Phases 5 and 6 are deferred by design — they fire when their triggers fire, not on a calendar. Sophistication starts when a month of accumulated lessons gives the promotion algorithm enough signal. Evolution starts at the first quarterly architecture review. Neither is "behind schedule"; both are queued behind the conditions that make them worth doing.</p>
+</section>
+
+<section class="block" id="why">
+  <div class="section-num">§ 06 · Why this beats the alternatives</div>
+  <h2 class="st">Compounds <em>across tools</em>.</h2>
+  <div class="compare">
+    <div class="compare-col">
+      <h4>What most operators do</h4>
+      <ul>
+        <li>A folder of saved prompts that drifts from how you actually work</li>
+        <li>Per-tool settings panels — each tool gets its own truth</li>
+        <li>Lessons live in chat history; lost on context reset</li>
+        <li>Strategy documents written annually, ignored monthly</li>
+        <li>No connection between Tuesday's friction and Saturday's review</li>
+      </ul>
+    </div>
+    <div class="compare-col this">
+      <h4>fowler-brain</h4>
+      <ul>
+        <li>Single git repo · branchable, diffable, blameable</li>
+        <li>One source of truth · eight tool adapters compile from it</li>
+        <li>Lessons captured at the moment of friction, reviewed weekly, promoted when they repeat</li>
+        <li>Strategy lives in the same repo; Saturday review covers both</li>
+        <li>iPhone-editable via Working Copy when an insight lands away from the desk</li>
+      </ul>
+    </div>
+  </div>
+  <p>The architectural win: <strong>the Brain is a small, stable system that powers a large, evolving set of tools.</strong> Adding a new tool means writing one new adapter, not re-deriving how I want it to behave. Changing how I work means editing one file and re-running the compile.</p>
+</section>
+
+<section class="block" id="prevention">
+  <div class="section-num">§ 07 · Prevention layers</div>
+  <h2 class="st">Each rule pays for <em>a past incident</em>.</h2>
+  <p>The Brain isn't theoretical. Most of its rules were paid for in real friction — incidents that cost time, broke a deploy, or generated the wrong output. A few examples (all are real rules, all are documented in <code>lessons/</code>):</p>
+  <ul>
+    <li><strong>Never-silent-delegation rule.</strong> When a delegated subsystem (Atlas, Linear webhook, MCP server) is unhealthy, announce the red channel before falling back to a local path. Came from an incident where a Linear webhook was silently down and the local fallback masked the outage for hours.</li>
+    <li><strong>MCP preflight banner.</strong> At session start, a banner prints the count of failed MCP dispatches in the last 24 hours. Surfaced after an Atlas-down event went unnoticed across multiple sessions.</li>
+    <li><strong>Verification-before-completion rule.</strong> No "done" / "fixed" / "deployed" claim without a verification path on a different surface than the one being verified. Came from a series of incidents where a tool's success message was reported as truth — when the actual prod state was broken.</li>
+    <li><strong>No-speculative-Supabase-views rule.</strong> Verify a view exists before wiring a UI page to it. Caused by wiring three dashboard pages to view names that had never been created.</li>
+    <li><strong>Twin-label-field detector.</strong> Codified as a rule in the operating context for Salesforce work, and as a detector in the audit primitive (<a href="/case-studies/revops-integration-audit.html" style="color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px;">see Six-Layer Integration Audit</a>).</li>
+  </ul>
+  <p>Each rule is small. Each one prevents a specific class of recurrence. The compounding value isn't in any single rule — it's in the population of rules, every one earned, every one indexed by the lesson that justified it.</p>
+</section>
+
+<section class="block" id="disclosure">
+  <div class="section-num">§ 08 · Methodology &amp; disclosure</div>
+  <h2 class="st">Personal. Private. <em>Open architecture</em>.</h2>
+  <p>fowler-brain is a private repository — the contents include identity files, strategy decisions, weekly action plans, and lessons from real engagements that wouldn't survive open publication. What's portable, however, is the <strong>architecture</strong>: the two-layer split, the capture-review-promote-distribute-execute loop, the rebuild-script-as-distribution model, the lesson-bound-rule pattern.</p>
+  <div class="compare">
+    <div class="compare-col">
+      <h4>Private</h4>
+      <ul>
+        <li>Repository contents, including all lessons, contexts, and strategy files</li>
+        <li>Specific rule contents (e.g. the exact text of the never-silent-delegation rule)</li>
+        <li>Identity, financial, and customer-engagement specifics in strategy</li>
+        <li>Adapters as distributed to specific surfaces (paths and configs)</li>
+      </ul>
+    </div>
+    <div class="compare-col this">
+      <h4>Open</h4>
+      <ul>
+        <li>The two-layer architectural pattern (Brain + Strategy in one repo)</li>
+        <li>The five-step operating loop (capture → review → promote → distribute → execute)</li>
+        <li>The rebuild-script-as-compiler model (one source · many adapters)</li>
+        <li>The lesson-bound-rule pattern (each rule cites the incident that justified it)</li>
+        <li>The phase-status framework with trigger-deferred phases</li>
+      </ul>
+    </div>
+  </div>
+  <p>If you're an operator considering building something similar: the architecture works. The discipline is harder than the architecture. The compounding only starts after about three months — by which point the rebuilt adapters are already cheaper to maintain than per-tool settings would be.</p>
+</section>
+
+<section class="block" id="resources">
+  <div class="section-num">§ 09 · Read the source</div>
+  <h2 class="st">Architecture <em>on request</em>.</h2>
+  <p>The fowler-brain source repository is private. The architecture pattern, distribution model, and operating loop are described in this case study and are free for any operator to adapt to their own setup.</p>
+  <div class="cta-row">
+    <a class="btn primary" href="/portfolio.html">Back to portfolio</a>
+    <a class="btn secondary" href="/#contact">Contact me</a>
+  </div>
+  <p style="margin-top: 28px; font-size: 14px; color: var(--mute);">If you'd like architectural diagrams or a walkthrough — <a href="/#contact" style="color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px;">reach out</a>. I'm happy to share the design rationale and the failure modes I've worked around.</p>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 · Justin Fowler</span>
+  <span>Case study · v1.0 · Published 2026-05-16</span>
+  <span><a href="/portfolio.html">Portfolio ↗</a></span>
+</footer>
+
+</div>
+
+<script>
+  const sections = document.querySelectorAll('section.block, header.hero, section.tldr');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+  sections.forEach(s => { s.style.opacity = '0'; s.style.transform = 'translateY(20px)'; s.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; io.observe(s); });
+</script>
+
+</body>
+</html>

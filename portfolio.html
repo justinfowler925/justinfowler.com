@@ -54,8 +54,8 @@
     "numberOfItems": 10,
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "PurpleChipmonk", "description": "18-skill agentic OS for the modern job search · live SaaS · purplechipmonk.com", "url": "https://purplechipmonk.com" },
-      { "@type": "ListItem", "position": 2, "name": "fowler-brain", "description": "Personal AI operating system · 4 phases shipped · 21 lessons captured" },
-      { "@type": "ListItem", "position": 3, "name": "Atlas Direct", "description": "Autonomous RevOps build agent · cloud-triggered · ~70 phases planned" },
+      { "@type": "ListItem", "position": 2, "name": "fowler-brain", "description": "Personal AI operating system · 4 phases shipped · 80+ lessons captured · 8 tool adapters", "url": "https://justinfowler.com/case-studies/fowler-brain.html" },
+      { "@type": "ListItem", "position": 3, "name": "Atlas4", "description": "Autonomous dev agent · local-first inference on M3 Ultra · Gemma 4 26B MoE @ ~70 tok/s · 4 parallel lane workers", "url": "https://justinfowler.com/case-studies/atlas4.html" },
       { "@type": "ListItem", "position": 4, "name": "Atlas3", "description": "Local autonomous coding system · Aider + headless Claude · M3 Ultra" },
       { "@type": "ListItem", "position": 5, "name": "OpenClaw HQ", "description": "Three-tier multi-agent workforce · BullMQ + pgvector · REST + WebSocket gateway" },
       { "@type": "ListItem", "position": 6, "name": "RevOps 2030", "description": "Signal-Led Growth Engine · enterprise ABM blueprint · v2 in flight" },
@@ -1591,11 +1591,12 @@
         </aside>
       </div>
       <div class="plinks">
-        <span class="plink muted">Private repo · architecture available on request</span>
+        <a class="plink" href="/case-studies/fowler-brain.html">Read the case study →</a>
+        <span class="plink muted">Private repo · architecture on request</span>
       </div>
     </article>
 
-    <!-- ── 03 ATLAS DIRECT ─────────────────────────────────── -->
+    <!-- ── 03 ATLAS4 ───────────────────────────────────────── -->
     <article class="project reveal" data-cat="ai">
       <div class="pmeta">
         <span class="pidx">§ 03</span>
@@ -1629,42 +1630,43 @@
 
       <div class="pgrid">
         <div>
-          <h2 class="ptitle">Atlas <em>Direct</em>
-            <span class="sub">Autonomous RevOps build agent · Claude Sonnet 4.6 worker</span>
+          <h2 class="ptitle">Atlas<em>4</em>
+            <span class="sub">Autonomous dev agent · local-first inference · 4 parallel lane workers</span>
           </h2>
           <div class="psynopsis">
-            <p>A <strong>headless autonomous coding agent</strong> specialized for Salesforce + RevOps delivery. Claude Sonnet 4.6 worker managed by Claude Code as supervisor. Runs as an on-demand local service — spun up when there's a ticket, shut down when done. Picks the highest-scored unchecked phase from a scored ROADMAP each night, builds the slice, opens a PR to <code>main</code>, self-curates the backlog.</p>
-            <p>Three automation layers: hourly local supervisor combining <strong>5 polling tasks into 1 session</strong> (Linear + Slack + SFDC errors + agent health + SF deploy gate, hard time cap), nightly cloud trigger for RevOps build-out, ticket-specific watchers that delete themselves on close. Hard rule: external-write operations (SF DML, HubSpot mutate, Gmail send) ship behind <code>TODO(approval)</code> gates with feature flags off.</p>
-            <p>Roadmap covers <strong>~70 phases</strong> across SF, HubSpot, ZoomInfo, Zoom recordings, Google Workspace, Slack, orchestration skills, data pipelines, reporting, and policy/guardrails. Budget target: inside a single Claude subscription tier.</p>
+            <p>An <strong>autonomous dev agent that runs on owned M3 Ultra hardware</strong>. Renamed from <code>atlas-direct</code> (May 2026); cloud-triggered worker model retired in favor of a local manager + on-demand worker split with hot-swappable inference backends. Primary inference: Rapid-MLX serving <strong>Gemma 4 26B-A4B MoE 4-bit at ~70 tok/s</strong>. Fallback: Ollama with llama3.3:70b. Cloud-API path opt-in, OFF by default.</p>
+            <p>Phase 47 replaced single-worker + 10-second inbox polling with <strong>four KeepAlive lane workers</strong> (pcm · sfdc · atlas-d · research) communicating with the manager over an in-process event bus. Dispatch latency dropped from ~5s avg to ~50ms — 100× improvement. Per-lane crash isolation, real-time mission-control UI on <code>127.0.0.1:8766</code>, heartbeat-based liveness.</p>
+            <p>Intake: <strong>Linear webhook → lane inbox → watchdog file watcher → worker</strong>. Approval gates via Linear comments for external writes (SF DML, HubSpot mutations, mail send); internal-only changes ship autonomously. Operating principles locked 2026-05-16: <em>honest, fast, methodical dispatch, maximum autonomy</em>. Marginal compute cost: ~$0.</p>
           </div>
         </div>
         <aside class="pside">
           <div class="metrics">
-            <div class="metric"><span class="mval"><em>~70</em></span><span class="mlabel">Roadmap phases planned</span></div>
-            <div class="metric"><span class="mval"><em>5→1</em></span><span class="mlabel">Polling tasks consolidated</span></div>
-            <div class="metric"><span class="mval"><em>Nightly</em></span><span class="mlabel">Cloud build trigger</span></div>
-            <div class="metric"><span class="mval"><em>1×</em></span><span class="mlabel">Claude subscription · scoped</span></div>
+            <div class="metric"><span class="mval">~<em>70</em></span><span class="mlabel">tok/s · M3 Ultra · Gemma 4 26B MoE</span></div>
+            <div class="metric"><span class="mval"><em>4</em></span><span class="mlabel">Warm lane workers · parallel</span></div>
+            <div class="metric"><span class="mval">~<em>50</em>ms</span><span class="mlabel">Dispatch latency · 100× cut</span></div>
+            <div class="metric"><span class="mval">$<em>0</em></span><span class="mlabel">Marginal compute cost</span></div>
           </div>
           <div class="pblock">
             <div class="pblock-label">Skills deployed</div>
             <div class="skills">
-              <span>Claude Sonnet 4.6</span><span>Claude Code</span><span>launchd</span><span>Salesforce CLI</span><span>SOQL</span><span>Apex</span><span>HubSpot API</span><span>Linear MCP</span><span>Tonic gRPC</span><span>Phase scoring · R×I×C/E</span><span>Feature flags</span><span>Bash</span>
+              <span>Rapid-MLX</span><span>Gemma 4 26B MoE</span><span>Ollama</span><span>llama3.3:70b</span><span>nomic-embed-text-v2-moe</span><span>Python 3.13</span><span>launchd</span><span>watchdog</span><span>In-process event bus</span><span>SQLite event log</span><span>SSE streaming</span><span>Linear webhooks</span><span>Salesforce CLI</span><span>SOQL</span>
             </div>
           </div>
           <div class="pblock">
-            <div class="pblock-label">Operating model</div>
+            <div class="pblock-label">Architecture</div>
             <div class="timeline">
-              <div class="tline"><span class="twhen">Layer 1</span><span class="twhat"><strong>Local supervisor</strong> · hourly · hard time cap</span></div>
-              <div class="tline"><span class="twhen">Layer 2</span><span class="twhat"><strong>Cloud trigger</strong> · nightly RevOps build-out</span></div>
-              <div class="tline"><span class="twhen">Layer 3</span><span class="twhat"><strong>Ticket watchers</strong> · self-deleting</span></div>
-              <div class="tline"><span class="twhen">Apr 21</span><span class="twhat">Recalibration design locked · 7-phase migration</span></div>
+              <div class="tline"><span class="twhen">Manager</span><span class="twhat"><strong>Atlas4 mini-IDE</strong> · :8766 · chat + triage + dispatch</span></div>
+              <div class="tline"><span class="twhen">Workers</span><span class="twhat"><strong>4 lanes</strong> · pcm · sfdc · atlas-d · research</span></div>
+              <div class="tline"><span class="twhen">Inference</span><span class="twhat"><strong>Rapid-MLX</strong> primary · Ollama fallback · cloud opt-in</span></div>
+              <div class="tline"><span class="twhen">Intake</span><span class="twhat"><strong>Linear webhook</strong> → state/inbox/&lt;lane&gt;/*.txt</span></div>
+              <div class="tline"><span class="twhen">Approval</span><span class="twhat"><strong>Linear comments</strong> for external writes · auto on internal</span></div>
             </div>
           </div>
         </aside>
       </div>
       <div class="plinks">
-        <span class="plink muted">Private repo · access on request</span>
-        <span class="plink muted">Demo + architecture · on request</span>
+        <a class="plink" href="/case-studies/atlas4.html">Read the case study →</a>
+        <span class="plink muted">Private repo · architecture on request</span>
       </div>
     </article>
 
