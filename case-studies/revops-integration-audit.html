@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>The Six-Layer Integration Audit — Justin Fowler · Case Study</title>
+<meta name="description" content="A consulting-grade HubSpot ↔ Salesforce integration audit primitive. Five-minute run produces the deliverable Big-Four firms charge $150K–$500K for. Case study from a live engagement against production + sandbox + HubSpot." />
+<meta name="theme-color" content="#0c0a09" />
+<meta name="author" content="Justin Fowler" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+
+<link rel="canonical" href="https://justinfowler.com/case-studies/revops-integration-audit.html" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+<link rel="manifest" href="/manifest.webmanifest" />
+
+<meta property="og:title" content="The Six-Layer Integration Audit · Case Study" />
+<meta property="og:description" content="Consulting-grade HubSpot↔Salesforce audit primitive — what Big-Four firms charge $300K for, compressed into five minutes of compute. Case study from a live engagement." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://justinfowler.com/case-studies/revops-integration-audit.html" />
+<meta property="og:image" content="https://justinfowler.com/og-image.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="The Six-Layer Integration Audit" />
+<meta name="twitter:description" content="Consulting-grade HubSpot↔Salesforce audit, codified as a reusable primitive. Real engagement results inside." />
+<meta name="twitter:image" content="https://justinfowler.com/og-image.svg" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Six-Layer Integration Audit",
+  "description": "A consulting-grade HubSpot ↔ Salesforce integration audit primitive. Case study from a live engagement.",
+  "author": {
+    "@type": "Person",
+    "name": "Justin Fowler",
+    "url": "https://justinfowler.com/"
+  },
+  "datePublished": "2026-05-16",
+  "image": "https://justinfowler.com/og-image.svg",
+  "publisher": {
+    "@type": "Person",
+    "name": "Justin Fowler",
+    "url": "https://justinfowler.com/"
+  },
+  "mainEntityOfPage": "https://justinfowler.com/case-studies/revops-integration-audit.html"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink: #0c0a09; --ink-2: #1c1917; --ink-3: #292524; --ink-4: #44403c;
+    --paper: #fafaf9; --paper-2: #e7e5e4; --mute: #78716c; --mute-2: #57534e;
+    --accent: #fb923c; --accent-2: #fdba74; --accent-3: #ea580c;
+    --accent-soft: rgba(251, 146, 60, 0.08); --accent-line: rgba(251, 146, 60, 0.2);
+    --crit: #ef4444; --warn: #f59e0b; --ok: #22c55e;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.55; min-height: 100vh; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  .skip { position: absolute; left: -9999px; top: 8px; padding: 10px 16px; background: var(--accent); color: var(--ink); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; border-radius: 999px; z-index: 999; }
+  .skip:focus { left: 24px; }
+  .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  @media (min-width: 768px) { .container { padding: 0 48px; } }
+
+  nav { padding: 28px 0 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
+
+  header.hero { padding: 80px 0 40px; }
+  @media (min-width: 768px) { header.hero { padding: 120px 0 60px; } }
+  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); margin-bottom: 28px; }
+  .breadcrumb a { color: var(--mute); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { color: var(--mute-2); margin: 0 12px; }
+  .breadcrumb .here { color: var(--accent); }
+
+  h1 { font-family: var(--serif); font-variation-settings: 'opsz' 144, 'SOFT' 50; font-size: clamp(42px, 8vw, 86px); font-weight: 300; line-height: 0.98; letter-spacing: -0.04em; margin-bottom: 24px; }
+  h1 em { font-style: italic; color: var(--accent-2); font-weight: 300; }
+  .stamp { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 28px; padding: 8px 14px; display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent-line); border-radius: 999px; }
+  .lede { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); line-height: 1.45; color: var(--paper-2); max-width: 760px; margin-bottom: 20px; }
+  .lede em { color: var(--accent-2); font-style: italic; }
+  .convention { font-family: var(--serif); font-size: 16px; font-style: italic; color: var(--mute); max-width: 760px; }
+
+  /* TL;DR strip */
+  .tldr { padding: 36px 0 12px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .tldr { grid-template-columns: repeat(4, 1fr); } }
+  .tldr-cell { padding: 18px 20px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 12px; }
+  .tldr-cell .lbl { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); display: block; margin-bottom: 8px; }
+  .tldr-cell .val { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--paper); }
+  .tldr-cell .val em { font-style: italic; color: var(--accent-2); }
+
+  section.block { padding: 56px 0; border-top: 1px solid var(--ink-3); }
+  .section-num { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 8px; }
+  h2.st { font-family: var(--serif); font-size: clamp(28px, 4.2vw, 42px); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 24px; }
+  h2.st em { font-style: italic; color: var(--mute); }
+  h3.sst { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); font-weight: 400; line-height: 1.25; margin: 24px 0 12px; color: var(--paper); }
+  h3.sst em { font-style: italic; color: var(--accent-2); }
+
+  p { margin-bottom: 16px; max-width: 760px; color: var(--paper-2); }
+  p strong { color: var(--paper); font-weight: 600; }
+  p em { color: var(--accent-2); font-style: italic; }
+  p code, .ic { font-family: var(--mono); font-size: 0.88em; color: var(--accent-2); background: var(--ink-2); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--ink-3); }
+  ul { margin: 12px 0 16px 24px; max-width: 760px; }
+  ul li { color: var(--paper-2); margin-bottom: 8px; }
+  ul li strong { color: var(--paper); }
+
+  /* Six-layer pyramid */
+  .pyramid { display: grid; gap: 8px; margin: 28px 0; }
+  .layer { padding: 18px 22px; background: var(--ink-2); border: 1px solid var(--ink-3); border-left: 3px solid var(--accent); border-radius: 10px; display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center; }
+  .layer .lnum { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); }
+  .layer .lbody h4 { font-family: var(--serif); font-size: 18px; font-weight: 500; color: var(--paper); margin-bottom: 4px; }
+  .layer .lbody p { font-family: var(--mono); font-size: 12px; color: var(--mute); margin: 0; line-height: 1.5; }
+
+  /* Lesson-detector flow */
+  .flow { display: grid; gap: 12px; margin: 24px 0; }
+  .flow-row { display: grid; gap: 12px; grid-template-columns: 1fr; align-items: stretch; }
+  @media (min-width: 720px) { .flow-row { grid-template-columns: 1fr auto 1fr; } }
+  .flow-card { padding: 16px 18px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 10px; }
+  .flow-card.lesson { border-left: 3px solid var(--mute-2); }
+  .flow-card.detector { border-left: 3px solid var(--accent); }
+  .flow-card .lbl { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); display: block; margin-bottom: 8px; }
+  .flow-card .body { font-family: var(--serif); font-size: 15px; color: var(--paper); }
+  .flow-arrow { display: flex; align-items: center; justify-content: center; font-family: var(--mono); color: var(--accent); font-size: 18px; }
+
+  /* Scorecard */
+  .scorecard { display: grid; gap: 10px; margin: 24px 0; }
+  .score-row { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 16px; padding: 14px 18px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 10px; }
+  .score-row .name { font-family: var(--serif); font-size: 17px; color: var(--paper); }
+  .score-row .bar { width: 120px; height: 8px; background: var(--ink-3); border-radius: 999px; overflow: hidden; position: relative; }
+  .score-row .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; }
+  .fill.s1 { width: 20%; background: var(--crit); }
+  .fill.s2 { width: 40%; background: var(--warn); }
+  .fill.s3 { width: 60%; background: var(--accent); }
+  .fill.s4 { width: 80%; background: var(--accent-2); }
+  .fill.s5 { width: 100%; background: var(--ok); }
+  .score-row .val { font-family: var(--mono); font-size: 13px; color: var(--paper); letter-spacing: 0.05em; }
+
+  /* Severity distribution */
+  .sevs { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; margin: 24px 0; }
+  @media (min-width: 720px) { .sevs { grid-template-columns: repeat(4, 1fr); } }
+  .sevcell { padding: 22px 18px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 12px; text-align: center; }
+  .sevcell.p1 { border-color: rgba(239, 68, 68, 0.35); }
+  .sevcell.p2 { border-color: rgba(245, 158, 11, 0.35); }
+  .sevcell.p3 { border-color: rgba(251, 146, 60, 0.25); }
+  .sevcell.info { border-color: var(--ink-3); }
+  .sevcell .count { font-family: var(--serif); font-size: 48px; font-weight: 400; line-height: 1; margin-bottom: 8px; }
+  .sevcell.p1 .count { color: var(--crit); }
+  .sevcell.p2 .count { color: var(--warn); }
+  .sevcell.p3 .count { color: var(--accent); }
+  .sevcell.info .count { color: var(--mute); }
+  .sevcell .lbl { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); display: block; }
+
+  /* Findings table */
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--ink-3); }
+  th { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); font-weight: 500; }
+  td { color: var(--paper-2); }
+  td.num { font-family: var(--mono); text-align: right; color: var(--paper); }
+  td .sev { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; padding: 2px 8px; border-radius: 4px; display: inline-block; }
+  td .sev.p1 { background: rgba(239, 68, 68, 0.12); color: var(--crit); }
+  td .sev.p2 { background: rgba(245, 158, 11, 0.12); color: var(--warn); }
+  td .sev.p3 { background: rgba(251, 146, 60, 0.12); color: var(--accent); }
+  td .sev.info { background: var(--ink-3); color: var(--mute); }
+
+  /* AI roadmap */
+  .horizon { padding: 24px 0; }
+  .horizon h3 { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 14px; }
+  .plays { display: grid; gap: 10px; }
+  .play { padding: 16px 20px; background: var(--ink-2); border: 1px solid var(--ink-3); border-left: 3px solid var(--accent); border-radius: 10px; display: grid; gap: 6px; }
+  .play h4 { font-family: var(--serif); font-size: 17px; color: var(--paper); font-weight: 500; }
+  .play .meta { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--mute); }
+  .play p { font-size: 14px; margin: 4px 0 0; color: var(--paper-2); max-width: none; }
+
+  /* Quote */
+  .quote { padding: 32px 28px; background: var(--ink-2); border: 1px solid var(--ink-3); border-left: 3px solid var(--accent); border-radius: 14px; margin: 28px 0; }
+  .quote p { font-family: var(--serif); font-size: 19px; font-style: italic; color: var(--paper); line-height: 1.55; max-width: none; }
+  .quote .who { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); display: block; margin-top: 14px; }
+
+  /* CTA */
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; border-radius: 999px; transition: all 0.2s; }
+  .btn.primary { background: var(--accent); color: var(--ink); border: 1px solid var(--accent); }
+  .btn.primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
+  .btn.secondary { background: transparent; color: var(--accent); border: 1px solid var(--accent-line); }
+  .btn.secondary:hover { background: var(--accent-soft); }
+
+  /* Compare table */
+  .compare { display: grid; gap: 14px; grid-template-columns: 1fr; margin: 28px 0; }
+  @media (min-width: 768px) { .compare { grid-template-columns: 1fr 1fr; } }
+  .compare-col { padding: 22px 24px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 12px; }
+  .compare-col h4 { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); margin-bottom: 14px; }
+  .compare-col.this h4 { color: var(--accent); }
+  .compare-col ul { margin: 0 0 0 18px; }
+  .compare-col li { color: var(--paper-2); font-size: 14px; margin-bottom: 8px; }
+
+  footer { padding: 40px 0; margin-top: 40px; border-top: 1px solid var(--ink-3); display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); }
+  footer a { color: var(--mute); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="container">
+
+<nav aria-label="Primary">
+  <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/portfolio.html" aria-current="page">Portfolio</a>
+    <a href="/resume.html">Resume</a>
+    <a href="/now.html">Now</a>
+    <a href="/writing.html">Writing</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="hero">
+  <div class="breadcrumb">
+    <a href="/">Home</a><span class="sep">/</span><a href="/portfolio.html">Portfolio</a><span class="sep">/</span><span class="here">Case Study</span>
+  </div>
+  <div class="stamp">Case study · 2026-05-16 · Live engagement</div>
+  <h1>The Six-Layer<br/><em>Integration Audit</em>.</h1>
+  <p class="lede">A consulting-grade <em>HubSpot ↔ Salesforce</em> integration audit primitive. Five minutes of compute produces the seven-deliverable package <em>Big-Four firms charge $150K–$500K</em> and three to six months to assemble.</p>
+  <p class="convention">All customer-identifying values redacted. The audit shape, finding distribution, and detector behavior are presented as the case study evidence — no marketing copy.</p>
+</header>
+
+<section class="tldr">
+  <div class="tldr-cell"><span class="lbl">Build time</span><span class="val">One <em>session</em></span></div>
+  <div class="tldr-cell"><span class="lbl">Run time</span><span class="val">~<em>5</em> min</span></div>
+  <div class="tldr-cell"><span class="lbl">Findings produced</span><span class="val"><em>104</em></span></div>
+  <div class="tldr-cell"><span class="lbl">Equivalent engagement</span><span class="val">$<em>150–500K</em></span></div>
+</section>
+
+<section class="block" id="problem">
+  <div class="section-num">§ 01 · The problem</div>
+  <h2 class="st">Every B2B integration <em>decays silently</em>.</h2>
+  <p>Every company that has been around more than three years has a HubSpot ↔ Salesforce integration. Almost none of them know whether it works.</p>
+  <p>The failure mode isn't "the sync is broken." Broken syncs trigger pager alerts and get fixed in days. The failure mode is <strong>silent drift</strong>:</p>
+  <ul>
+    <li>Two Salesforce fields share the same UI label. Reps fill both. Reports built on different fields return different numbers from the same database. Nobody knows which dashboard is "real."</li>
+    <li>A canonical cross-system ID field is <em>declared</em> in the integration's settings but doesn't actually exist on the receiving object. Every reconciliation runs against a missing key.</li>
+    <li>A custom field's fill rate climbs from 0% in 2019 to 100% in 2026. Any time-series report silently mixes "mostly blank" historicals with "mostly filled" recents.</li>
+    <li>The partial sandbox has a field with one API name; production has the same label but a different API name. Sandbox-first validation gives false confidence; the deploy fails in prod.</li>
+  </ul>
+  <p>Each of these has a real incident behind it. The primitive encodes the incidents as <strong>detectors</strong> — a junior engineer running the audit catches the exact silent-failure shapes a senior engineer learned the hard way.</p>
+  <p>The Big-Four firms sell a six-figure audit to fix this. The audit takes months. By the time it's delivered, the drift has compounded.</p>
+</section>
+
+<section class="block" id="approach">
+  <div class="section-num">§ 02 · The approach</div>
+  <h2 class="st">Six audit layers. <em>Twenty-plus detectors.</em></h2>
+  <p>The primitive runs against any HubSpot portal + Salesforce org pair. It produces seven role-targeted deliverables — exec summary for the CRO, deep dives for RevOps engineers, AI roadmap for both.</p>
+  <div class="pyramid">
+    <div class="layer">
+      <span class="lnum">L 1</span>
+      <div class="lbody">
+        <h4>Architecture &amp; Mapping</h4>
+        <p>object pairs · field coverage · canonical IDs · pipeline parity · picklist parity</p>
+      </div>
+    </div>
+    <div class="layer">
+      <span class="lnum">L 2</span>
+      <div class="lbody">
+        <h4>Data Quality</h4>
+        <p>twin labels · schema drift · orphan rate · gradual fill rate · orphan picklists · required-field blanks</p>
+      </div>
+    </div>
+    <div class="layer">
+      <span class="lnum">L 3</span>
+      <div class="lbody">
+        <h4>Sync Health</h4>
+        <p>create skew · stale tail · connector inventory · latency inference</p>
+      </div>
+    </div>
+    <div class="layer">
+      <span class="lnum">L 4</span>
+      <div class="lbody">
+        <h4>Process Fidelity</h4>
+        <p>lifecycle alignment · stale leads · inactive owners · attribution chain</p>
+      </div>
+    </div>
+    <div class="layer">
+      <span class="lnum">L 5</span>
+      <div class="lbody">
+        <h4>Governance</h4>
+        <p>ownership · documentation · monitoring · integration-user permissions</p>
+      </div>
+    </div>
+    <div class="layer">
+      <span class="lnum">L 6</span>
+      <div class="lbody">
+        <h4>AI Augmentation</h4>
+        <p>detect · repair · maintain · augment · audit · decide</p>
+      </div>
+    </div>
+  </div>
+  <p>Each layer scores 1–5 against a maturity rubric. Each finding cites the underlying query so the buyer can reproduce it. The rubric, the finding taxonomy, and the detector library are the consulting IP — codified, the deliverable reads senior-grade even when run by a junior engineer.</p>
+</section>
+
+<section class="block" id="lesson-bound">
+  <div class="section-num">§ 03 · The differentiator</div>
+  <h2 class="st">Lesson-bound <em>detectors</em>.</h2>
+  <p>The audit's most consequential detectors exist because real incidents proved they were necessary. Each prior silent-failure shape became a named, calibrated check. A future engagement running the same audit catches the failure on the <em>first</em> run.</p>
+  <div class="flow">
+    <div class="flow-row">
+      <div class="flow-card lesson">
+        <span class="lbl">Incident</span>
+        <div class="body">Two fields on one Salesforce object share the same UI label. Reports built on different fields silently diverge.</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-card detector">
+        <span class="lbl">Detector</span>
+        <div class="body"><code>twin_label_detector</code> — fires P1 whenever any sObject has two or more fields with identical labels.</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-card lesson">
+        <span class="lbl">Incident</span>
+        <div class="body">Same field label has different API names across prod and the partial sandbox. Sandbox-first validation becomes a trap.</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-card detector">
+        <span class="lbl">Detector</span>
+        <div class="body"><code>schema_drift_detector</code> — describes both orgs, surfaces every label/API-name divergence.</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-card lesson">
+        <span class="lbl">Incident</span>
+        <div class="body">Custom field's fill rate climbs from 0% (historicals) to 100% (recents). Time-series reports silently mix two regimes.</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-card detector">
+        <span class="lbl">Detector</span>
+        <div class="body"><code>gradual_fill_rate_detector</code> — flags any field whose year-over-year fill rate climbs from &lt;10% to &gt;90%.</div>
+      </div>
+    </div>
+  </div>
+  <p>The detector library compounds. Every new engagement that surfaces a new silent-failure shape becomes the next detector. The fiftieth engagement is materially better than the fifth because the detector library has been hardened against fifty real-world failure modes.</p>
+</section>
+
+<section class="block" id="results">
+  <div class="section-num">§ 04 · A live engagement</div>
+  <h2 class="st">A live <em>B2B SaaS</em> production environment.</h2>
+  <p>The primitive was built and immediately run against a live production Salesforce + partial sandbox + HubSpot portal. Customer name redacted; the audit's actual outputs are reproduced below.</p>
+
+  <h3 class="sst">Severity <em>distribution</em></h3>
+  <div class="sevs">
+    <div class="sevcell p1"><span class="count">22</span><span class="lbl">P1 · Critical</span></div>
+    <div class="sevcell p2"><span class="count">18</span><span class="lbl">P2 · Material</span></div>
+    <div class="sevcell p3"><span class="count">63</span><span class="lbl">P3 · Quality</span></div>
+    <div class="sevcell info"><span class="count">1</span><span class="lbl">INFO</span></div>
+  </div>
+
+  <h3 class="sst">Maturity <em>scorecard</em></h3>
+  <div class="scorecard">
+    <div class="score-row"><span class="name">Architecture &amp; Mapping</span><span class="bar"><span class="fill s1"></span></span><span class="val">1 / 5 · Critical</span></div>
+    <div class="score-row"><span class="name">Data Quality</span><span class="bar"><span class="fill s2"></span></span><span class="val">2 / 5 · At-risk</span></div>
+    <div class="score-row"><span class="name">Sync Health</span><span class="bar"><span class="fill s5"></span></span><span class="val">5 / 5 · Excellent</span></div>
+    <div class="score-row"><span class="name">Process Fidelity</span><span class="bar"><span class="fill s5"></span></span><span class="val">5 / 5 · Excellent</span></div>
+    <div class="score-row"><span class="name">Governance</span><span class="bar"><span class="fill s4"></span></span><span class="val">4 / 5 · Strong</span></div>
+    <div class="score-row"><span class="name">AI Augmentation Readiness</span><span class="bar"><span class="fill s5"></span></span><span class="val">5 / 5 · Excellent</span></div>
+  </div>
+  <p><strong>Overall: 3.67 / 5.0.</strong> The weighted average looks healthy at first glance — but the lowest layer score is the headline number. Architecture is structurally broken; everything above it sits on a shaky foundation. The audit makes that legible in two minutes of reading.</p>
+
+  <h3 class="sst">Headline finding <em>classes</em></h3>
+  <p>The audit produced 104 findings. The headline classes, anonymized:</p>
+  <table>
+    <thead>
+      <tr><th>Finding class</th><th style="text-align:right">Count</th><th>Severity</th><th>What it represents</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Zero canonical cross-system ID fields</td><td class="num">8</td><td><span class="sev p1">P1</span></td><td>Reconciliation runs entirely on email matching. Structural orphan tail.</td></tr>
+      <tr><td>Twin-label fields on a single object</td><td class="num">10</td><td><span class="sev p1">P1</span></td><td>Multiple cases of two fields sharing the same UI label. Silent dashboard divergence.</td></tr>
+      <tr><td>Insufficient field mapping coverage</td><td class="num">4</td><td><span class="sev p1">P1</span></td><td>Below 50% of HubSpot properties have a plausible Salesforce counterpart.</td></tr>
+      <tr><td>Sandbox/prod schema drift</td><td class="num">1</td><td><span class="sev p2">P2</span></td><td>A reporting field has different API names across prod and sandbox.</td></tr>
+      <tr><td>Gradual fill-rate regime change</td><td class="num">4</td><td><span class="sev p2">P2</span></td><td>Custom Opportunity fields lying silently in time-series reports.</td></tr>
+      <tr><td>Bidirectional picklist divergence</td><td class="num">11</td><td><span class="sev p2">P2</span></td><td>HubSpot and Salesforce picklists disagree in both directions.</td></tr>
+      <tr><td>Unilateral picklist surplus</td><td class="num">59</td><td><span class="sev p3">P3</span></td><td>HubSpot default lists carry values SF picklist doesn't. Usually benign.</td></tr>
+      <tr><td>Governance gaps</td><td class="num">2</td><td><span class="sev p2">P2/P3</span></td><td>No declared monitoring URL, no documentation runbook.</td></tr>
+    </tbody>
+  </table>
+  <p>The single most consequential finding: <strong>zero cross-system canonical IDs.</strong> The integration believes it has reconciliation keys; it doesn't. Every other defect is downstream of that one.</p>
+
+  <h3 class="sst">A detector that <em>generalized</em></h3>
+  <p>The <code>twin_label_detector</code> was built from a single prior incident: a managed customer-managed <code>Opportunity Type</code> field collision between a Salesforce standard field and a custom field. The detector caught that exact collision in the engagement — as expected.</p>
+  <p>It <strong>also</strong> caught a previously-unknown class: a third-party data-enrichment vendor's two Salesforce managed packages (legacy + current generation) both install a field labelled with the vendor's name plus "Last Updated." The detector found the collision on three separate objects without any vendor-specific code.</p>
+  <div class="quote">
+    <p>"The encoded lesson generalizes beyond the original incident. The audit's value isn't catching the exact bugs you've seen before — it's catching the <em>class of bugs</em> you've seen before, in places you haven't looked yet."</p>
+    <span class="who">— Operating principle · lesson-bound-detector architecture</span>
+  </div>
+</section>
+
+<section class="block" id="ai">
+  <div class="section-num">§ 05 · The AI augmentation layer</div>
+  <h2 class="st">Audit as <em>lead</em>. Roadmap as <em>engagement</em>.</h2>
+  <p>Layer 6 doesn't detect defects. It consumes findings from layers 1–5 and produces a prioritized roadmap of AI plays — what to automate, with what tools, on what horizon. The roadmap is what turns the audit into a retainer rather than a one-time deliverable.</p>
+  <p>Each play defaults to <strong>local-first inference</strong> on owned hardware for data-privacy reasons; cloud is allowlisted to providers with signed DPAs.</p>
+
+  <div class="horizon">
+    <h3>Horizon · Now (≤ 6 weeks)</h3>
+    <div class="plays">
+      <div class="play">
+        <span class="meta">Detect · 0.25 wk effort</span>
+        <h4>Continuous integration audit</h4>
+        <p>Re-run the audit on a schedule, diff against last week's, post P1 deltas to Slack. Catches sync regressions in days instead of quarters.</p>
+      </div>
+      <div class="play">
+        <span class="meta">Repair · 2.0 wk effort</span>
+        <h4>LLM-assisted twin-label resolution</h4>
+        <p>For each twin-label finding, an LLM proposes the canonical field by analyzing fill rate, integration usage, and downstream report dependencies. Human approves; script runs the migration.</p>
+      </div>
+      <div class="play">
+        <span class="meta">Maintain · 0.5 wk effort</span>
+        <h4>LLM-suggested picklist value mappings</h4>
+        <p>For each picklist-parity finding, an LLM proposes a value-mapping table between HubSpot and Salesforce. Human approves; connector mapping updates.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="horizon">
+    <h3>Horizon · Next (3–6 months)</h3>
+    <div class="plays">
+      <div class="play">
+        <span class="meta">Augment · 3 wk effort</span>
+        <h4>Embedding-based cross-system dedup</h4>
+        <p>Embed contact records, cluster by similarity, surface candidate matches between systems that lack a canonical-ID link. Reduces orphan tail 50–80% in typical engagements.</p>
+      </div>
+      <div class="play">
+        <span class="meta">Repair · 4 wk effort</span>
+        <h4>LLM-driven attribution backfill</h4>
+        <p>For closed-won opportunities with blank attribution, an LLM cross-references HubSpot original-source, first-touch timestamps, and related engagements to propose a most-likely attribution. Restores CAC-by-channel reporting integrity.</p>
+      </div>
+      <div class="play">
+        <span class="meta">Decide · 3 wk effort</span>
+        <h4>Revenue-at-risk quantifier</h4>
+        <p>Convert audit findings into per-finding revenue impact estimates with cited assumptions. Turns data hygiene into a CFO conversation.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="horizon">
+    <h3>Horizon · Later (6–12 months)</h3>
+    <div class="plays">
+      <div class="play">
+        <span class="meta">Audit · 2 wk effort</span>
+        <h4>Schema-change-aware audit trail</h4>
+        <p>Every schema or sync-config change gets an LLM-generated rationale and risk class, written to a markdown changelog. Future audits trace "when did this drift start" to a specific change.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="why">
+  <div class="section-num">§ 06 · Why this beats the traditional model</div>
+  <h2 class="st">Compounds <em>across engagements</em>.</h2>
+  <div class="compare">
+    <div class="compare-col">
+      <h4>Traditional Big-Four model</h4>
+      <ul>
+        <li>12-week engagement, $200K–$500K per customer</li>
+        <li>Deliverable is a bespoke slide deck per customer</li>
+        <li>Findings are senior consultants' judgment, undocumented</li>
+        <li>Drift starts compounding the day after delivery</li>
+        <li>No AI implementation plan included</li>
+        <li>Each engagement is a one-off</li>
+      </ul>
+    </div>
+    <div class="compare-col this">
+      <h4>This primitive</h4>
+      <ul>
+        <li>~5 minutes of compute, then one day of consulting per engagement</li>
+        <li>Seven markdown files, identical structure every time</li>
+        <li>Findings cite the SOQL / API call that produced them — reproducible</li>
+        <li>Designed for quarterly re-runs; scorecard tracks improvement</li>
+        <li>AI augmentation roadmap is layer 6 of the audit</li>
+        <li>Codified detector library compounds value across customers</li>
+      </ul>
+    </div>
+  </div>
+  <p><strong>The structural advantage: every engagement makes the next engagement faster.</strong> Detector calibration tuning, new lesson-bound detectors, customer-segment severity defaults — they all roll back into the primitive. Big-Four firms can't replicate this because their billable model resists codification.</p>
+</section>
+
+<section class="block" id="engagement">
+  <div class="section-num">§ 07 · Engagement model</div>
+  <h2 class="st">Three tiers. <em>One primitive</em>.</h2>
+  <table>
+    <thead>
+      <tr><th>Tier</th><th>Scope</th><th>What's included</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Audit</strong></td>
+        <td>One-shot run + walkthrough</td>
+        <td>Seven deliverables · 90-min review with CRO/RevOps lead · prioritized remediation list</td>
+      </tr>
+      <tr>
+        <td><strong>Audit + Sprint 1</strong></td>
+        <td>Above + P1 remediation</td>
+        <td>I execute the highest-severity remediations · re-audit on completion to confirm score improvement</td>
+      </tr>
+      <tr>
+        <td><strong>Annual program</strong></td>
+        <td>Quarterly audits + AI roadmap delivery</td>
+        <td>Quarterly re-runs comparing maturity scorecards · 1–2 AI plays delivered per quarter · standing channel for incident response</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Pricing is engagement-dependent; the primitive's economics are structural — variable cost per audit is roughly one day of senior engineer time plus modest API quotas. <strong>Margin is in the codified judgment, not the labor.</strong></p>
+</section>
+
+<section class="block" id="resources">
+  <div class="section-num">§ 08 · Read the source</div>
+  <h2 class="st">Two ways to <em>go deeper</em>.</h2>
+  <p>The primitive's source code is private. The case study, methodology, sample deliverables, and engagement model are open.</p>
+  <div class="cta-row">
+    <a class="btn primary" href="https://github.com/justinfowler925/revops-integration-audit" target="_blank" rel="noopener">Full case study on GitHub ↗</a>
+    <a class="btn secondary" href="/portfolio.html">Back to portfolio</a>
+  </div>
+  <p style="margin-top: 28px; font-size: 14px; color: var(--mute);">If you run RevOps and want this audit on your own systems — <a href="/#contact" style="color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px;">reach out</a>. I take a small number of engagements per quarter and the bookings move fast once the case study is shared.</p>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 · Justin Fowler</span>
+  <span>Case study · v1.0 · Published 2026-05-16</span>
+  <span><a href="https://github.com/justinfowler925/revops-integration-audit" target="_blank" rel="noopener">GitHub ↗</a></span>
+</footer>
+
+</div>
+
+<script>
+  // Lightweight reveal-on-scroll for sections
+  const sections = document.querySelectorAll('section.block, header.hero, section.tldr');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+  sections.forEach(s => { s.style.opacity = '0'; s.style.transform = 'translateY(20px)'; s.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; io.observe(s); });
+</script>
+
+</body>
+</html>
