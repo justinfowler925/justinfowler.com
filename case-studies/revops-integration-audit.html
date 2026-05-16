@@ -530,10 +530,58 @@
   <p>Pricing is engagement-dependent; the primitive's economics are structural — variable cost per audit is roughly one day of senior engineer time plus modest API quotas. <strong>Margin is in the codified judgment, not the labor.</strong></p>
 </section>
 
+<section class="block" id="methodology">
+  <div class="section-num">§ 08 · Methodology &amp; disclosure</div>
+  <h2 class="st">What was <em>redacted</em>. What was <em>preserved</em>.</h2>
+  <p>Consulting case studies frequently fall into one of two failure modes: scrub so heavily that the evidence becomes unfalsifiable marketing copy, or expose enough specificity that the customer recognizes themselves on the open web. This case study takes a third path — <strong>redact identity, preserve evidence</strong> — and discloses that distinction explicitly so the reader can calibrate trust.</p>
+  <div class="compare">
+    <div class="compare-col">
+      <h4>Redacted</h4>
+      <ul>
+        <li>Customer name (referred to as "the engagement" or "a B2B SaaS production environment")</li>
+        <li>Customer industry beyond "B2B SaaS" framing</li>
+        <li>Specific opportunity, account, lead, and record names</li>
+        <li>Third-party vendor names that appeared in twin-label findings (referred to as "a data-enrichment vendor")</li>
+        <li>Annual recurring revenue softened from precise figure to "single-digit millions"</li>
+        <li>Email addresses, HubSpot portal IDs, Salesforce org IDs, sfdx aliases</li>
+      </ul>
+    </div>
+    <div class="compare-col this">
+      <h4>Preserved</h4>
+      <ul>
+        <li>Total finding count: <strong>104</strong></li>
+        <li>Severity distribution: <strong>22 P1 · 18 P2 · 63 P3 · 1 INFO</strong></li>
+        <li>Maturity scores per layer: <strong>1 · 2 · 5 · 5 · 4 · 5</strong></li>
+        <li>Overall maturity: <strong>3.67 / 5.0</strong></li>
+        <li>Detector behavior, including the lesson-bound generalization</li>
+        <li>Audit duration, deliverable structure, and remediation framing</li>
+      </ul>
+    </div>
+  </div>
+  <p>The audit shape, finding distribution, and detector behavior are the load-bearing pieces of evidence — anonymizing them would defeat the point of publishing a case study at all. Redacting the customer identity protects the engagement; preserving the audit mechanics is what makes the case study useful to a prospective customer evaluating the methodology.</p>
+  <h3 class="sst">The seven-deliverable <em>structure</em></h3>
+  <p>Every audit run produces the same seven files, audience-targeted so each role opens only what they need:</p>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Deliverable</th><th>Audience</th><th>When to open it</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="num">00</td><td>Executive Summary</td><td>CEO · CRO · CFO</td><td>First read · severity at a glance</td></tr>
+      <tr><td class="num">01</td><td>Findings Matrix</td><td>RevOps engineer</td><td>The exhaustive list, sorted by severity</td></tr>
+      <tr><td class="num">02</td><td>Maturity Scorecard</td><td>Exec · RevOps lead</td><td>Quarterly progress reviews</td></tr>
+      <tr><td class="num">03</td><td>Data Quality Deep Dive</td><td>RevOps engineer</td><td>Triaging a P1 or P2 in data_quality</td></tr>
+      <tr><td class="num">04</td><td>Sync Health Deep Dive</td><td>RevOps engineer</td><td>When the sync is misbehaving</td></tr>
+      <tr><td class="num">05</td><td>Remediation Playbook</td><td>RevOps engineer</td><td>Workplan source-of-truth · sprint-by-sprint</td></tr>
+      <tr><td class="num">06</td><td>AI Augmentation Roadmap</td><td>Exec · RevOps lead</td><td>AI investment planning</td></tr>
+    </tbody>
+  </table>
+  <p>Plus a <code>99_evidence/</code> folder of raw JSON snapshots, query outputs, and source-of-truth artifacts — every claim in the deliverable cites its evidence file so the buyer can reproduce the finding cold.</p>
+</section>
+
 <section class="block" id="resources">
-  <div class="section-num">§ 08 · Read the source</div>
+  <div class="section-num">§ 09 · Read the source</div>
   <h2 class="st">Two ways to <em>go deeper</em>.</h2>
-  <p>The primitive's source code is private. The case study, methodology, sample deliverables, and engagement model are open.</p>
+  <p>The primitive's source code is private. The case study, methodology, sample deliverables, and engagement model are open under CC BY-NC-SA 4.0.</p>
   <div class="cta-row">
     <a class="btn primary" href="https://github.com/justinfowler925/revops-integration-audit" target="_blank" rel="noopener">Full case study on GitHub ↗</a>
     <a class="btn secondary" href="/portfolio.html">Back to portfolio</a>
