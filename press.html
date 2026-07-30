@@ -77,8 +77,10 @@
   .contact a { color: var(--accent); text-decoration: none; }
   .contact a:hover { text-decoration: underline; }
 
-  .footer { padding: 32px 56px; border-top: 1px solid #1c1917; font-family: var(--mono); font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--mute); display: flex; justify-content: space-between; }
+  .footer { padding: 32px 56px; border-top: 1px solid #1c1917; font-family: var(--mono); font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--mute); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
   .footer .accent { color: var(--accent); }
+  .footer a { color: var(--mute); text-decoration: none; }
+  .footer a:hover { color: var(--accent); }
 
   @media (max-width: 720px) {
     .topbar { padding: 20px 24px; flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -197,6 +199,7 @@
 
 <div class="footer">
   <span><span class="accent">●</span> JUSTINFOWLER.COM</span>
+  <span><a href="/terms.html">TERMS</a> · <a href="/privacy.html">PRIVACY</a></span>
   <span>CHICAGO · SHIPPING IN PUBLIC</span>
   <span>EST. 2026</span>
 </div>

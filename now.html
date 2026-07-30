@@ -102,6 +102,8 @@
   .quote .who { display: block; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); margin-top: 12px; }
 
   footer { padding: 48px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute-2); }
+  footer a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
+  footer a:hover { color: var(--accent); }
 
   a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
   @media (prefers-reduced-motion: reduce) {
@@ -234,6 +236,7 @@
 
 <footer>
   <span>© 2026 · Justin Fowler</span>
+  <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></span>
   <span>Now · v1.0 · Last updated 2026-04-25</span>
 </footer>
 

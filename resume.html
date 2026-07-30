@@ -184,6 +184,8 @@
   .compliance span { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--paper-2); padding: 6px 12px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 999px; }
 
   footer { padding: 48px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute-2); }
+  footer a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
+  footer a:hover { color: var(--accent); }
 
   /* photo + hero layout */
   .hero-row { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; margin-bottom: 18px; }
@@ -646,6 +648,7 @@
 
 <footer>
   <span>© 2026 · Justin Fowler</span>
+  <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></span>
   <span>Resume · v1.0 · Q2 2026 · Last updated 2026-04-25</span>
 </footer>
 

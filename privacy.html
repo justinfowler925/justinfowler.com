@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Privacy Policy — Justin Fowler</title>
+<meta name="description" content="Privacy policy for justinfowler.com." />
+<meta name="theme-color" content="#0c0a09" />
+<meta name="robots" content="noindex,follow" />
+
+<link rel="canonical" href="https://justinfowler.com/privacy.html" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+<link rel="manifest" href="/manifest.webmanifest" />
+
+<meta property="og:title" content="Privacy Policy — Justin Fowler" />
+<meta property="og:description" content="Privacy policy for justinfowler.com." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://justinfowler.com/privacy.html" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink: #0c0a09; --ink-2: #1c1917; --ink-3: #292524; --ink-4: #44403c;
+    --paper: #fafaf9; --paper-2: #e7e5e4; --mute: #78716c; --mute-2: #57534e;
+    --accent: #fb923c; --accent-2: #fdba74;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.5; min-height: 100vh; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  .skip { position: absolute; left: -9999px; top: 8px; padding: 10px 16px; background: var(--accent); color: var(--ink); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; border-radius: 999px; z-index: 999; }
+  .skip:focus { left: 24px; }
+  .container { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+  @media (min-width: 768px) { .container { padding: 0 48px; } }
+
+  nav { padding: 28px 0 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  header.hero { padding: 64px 0 32px; }
+  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); margin-bottom: 24px; }
+  .breadcrumb a { color: var(--mute); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { color: var(--mute-2); margin: 0 12px; }
+  .breadcrumb .here { color: var(--accent); }
+  h1 { font-family: var(--serif); font-variation-settings: 'opsz' 144, 'SOFT' 50; font-size: clamp(38px, 7vw, 64px); font-weight: 300; line-height: 1; letter-spacing: -0.03em; margin-bottom: 16px; }
+  h1 em { font-style: italic; color: var(--accent-2); font-weight: 300; }
+  .stamp { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); }
+
+  section.legal { padding: 32px 0; border-top: 1px solid var(--ink-3); }
+  section.legal h2 { font-family: var(--mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 14px; }
+  section.legal p { color: var(--paper-2); font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+  section.legal p:last-child { margin-bottom: 0; }
+  section.legal a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; }
+  section.legal ul { padding-left: 20px; margin-bottom: 12px; }
+  section.legal li { color: var(--paper-2); font-size: 15px; line-height: 1.7; margin-bottom: 6px; }
+  section.legal li::marker { color: var(--accent); }
+
+  footer { padding: 48px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute-2); }
+  footer a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
+  footer a:hover { color: var(--accent); }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+</style>
+<script src="/assets/analytics.js" defer></script>
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+
+<div class="container">
+
+<nav aria-label="Primary">
+  <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/resume.html">Resume</a>
+    <a href="/now.html">Now</a>
+    <a href="/writing.html">Writing</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="hero">
+  <div class="breadcrumb">
+    <a href="/">Home</a><span class="sep">/</span><span class="here">Privacy</span>
+  </div>
+  <h1>Privacy <em>policy</em>.</h1>
+  <p class="stamp">Last updated 2026-07-30</p>
+</header>
+
+<section class="legal">
+  <h2>The short version</h2>
+  <p>There's no login, no e-commerce, and no form on this site that stores what you type. The only data collected is standard, privacy-conscious website analytics — which pages get read, which links get clicked — so I know what's worth writing more of. I never sell your data.</p>
+</section>
+
+<section class="legal">
+  <h2>Who this covers</h2>
+  <p>This policy applies to justinfowler.com and its subpages, operated by Justin Fowler. It doesn't cover third-party sites this site links to (LinkedIn, GitHub, PurpleChipmonk, and others) — check their own privacy policies.</p>
+</section>
+
+<section class="legal">
+  <h2>What's collected</h2>
+  <p>The site uses <a href="https://posthog.com/privacy" target="_blank" rel="noopener">PostHog</a> for analytics. When you visit, PostHog automatically collects standard usage data: pages viewed, links and buttons clicked, approximate location (from IP, not exact address), device/browser type, and referring site. It may set a cookie or use browser local storage to recognize repeat visits from the same browser.</p>
+  <p>The site also records anonymized session replays (mouse movement and scrolling) to help me understand how pages are used. All form-style input fields are masked by default, so nothing you type is ever captured in a replay.</p>
+  <p>Your browser's Do Not Track setting or an ad/tracker blocker will prevent most or all of this from running — that's fine, the site works identically either way.</p>
+</section>
+
+<section class="legal">
+  <h2>What's <em>not</em> collected</h2>
+  <ul>
+    <li>There's no account system, so no passwords, profiles, or saved preferences.</li>
+    <li>There's no newsletter signup form — the "subscribe" button just opens your own email client, addressed to me. I don't receive or store anything unless you actually send that email.</li>
+    <li>No email address or phone number appears anywhere as plain text on the site — contact links are built at click time in your browser.</li>
+  </ul>
+</section>
+
+<section class="legal">
+  <h2>How the data is used</h2>
+  <p>Analytics data is used only to understand which content is useful and to improve the site. It's not used for advertising, and it's not shared with any data broker or ad network.</p>
+</section>
+
+<section class="legal">
+  <h2>Who it's shared with</h2>
+  <p>PostHog (PostHog Inc., US-based) processes analytics data on my behalf as a data processor. I don't sell, rent, or otherwise share your data with anyone else.</p>
+</section>
+
+<section class="legal">
+  <h2>Your choices</h2>
+  <p>Since nothing here is tied to an account, there's no dashboard to manage. If you'd like to know what analytics data exists about your visits, or want it deleted, email me and I'll take care of it directly in PostHog.</p>
+</section>
+
+<section class="legal">
+  <h2>Children's privacy</h2>
+  <p>This site isn't directed at children, and I don't knowingly collect data from anyone under 13.</p>
+</section>
+
+<section class="legal">
+  <h2>Changes</h2>
+  <p>I may update this policy as the site or its tools change. The "last updated" date at the top always reflects the current version.</p>
+</section>
+
+<section class="legal">
+  <h2>Contact</h2>
+  <p>Questions about privacy, or want your analytics data deleted? Reach out via the <a href="/" data-email data-subject="Privacy question">contact button on the homepage</a>. See also the <a href="/terms.html">terms &amp; conditions</a>.</p>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 · Justin Fowler</span>
+  <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></span>
+</footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('[data-email]').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      var addr = atob('anVzdGlu') + '@' + atob('anVzdGluZm93bGVyLmNvbQ==');
+      var qs = [];
+      if (el.dataset.subject) qs.push('subject=' + encodeURIComponent(el.dataset.subject));
+      if (el.dataset.body)    qs.push('body=' + encodeURIComponent(el.dataset.body));
+      window.location.href = 'mailto:' + addr + (qs.length ? '?' + qs.join('&') : '');
+    });
+  });
+</script>
+
+</body>
+</html>
