@@ -3,7 +3,7 @@
   Site: https://justinfowler.com
   LinkedIn: https://linkedin.com/in/justinfowler
   GitHub: https://github.com/justinfowler925
-  Location: Wisconsin, USA
+  Location: Chicago, IL, USA
 
 /* THANKS */
   Anthropic — Claude Sonnet 4.6 (production stack)
@@ -16,10 +16,10 @@
   GitHub Pages — this site you're reading
 
 /* SITE */
-  Last update: 2026/04/25
+  Last update: 2026/07/31
   Standards: HTML5, CSS3, ES2022
   Components: Vanilla JS, Intersection Observer, scroll-snap
-  Hosting: GitHub Pages → Cloudflare DNS
+  Hosting: Vercel → GoDaddy DNS
   Build: zero — single-file static
   Source: https://github.com/justinfowler925/justinfowler.com
 
