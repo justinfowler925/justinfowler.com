@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>Portfolio — Justin Fowler · 12 projects · Salesforce + Agentic AI</title>
+<title>Portfolio — Justin Fowler · 17 projects · Salesforce + Agentic AI</title>
 <meta name="description" content="Selected work from Justin Fowler — Salesforce operator, co-founder of PurpleChipmonk, builder of agentic AI systems. Live products, AI infrastructure, strategic artifacts, and enterprise delivery — with case studies." />
 <meta name="theme-color" content="#0c0a09" />
 <meta name="author" content="Justin Fowler" />
@@ -38,7 +38,7 @@
   "@id": "https://justinfowler.com/portfolio.html#portfolio",
   "url": "https://justinfowler.com/portfolio.html",
   "name": "Portfolio — Justin Fowler",
-  "description": "Selected work from Justin Fowler — twelve projects across live products, AI infrastructure, strategic artifacts, and enterprise delivery.",
+  "description": "Selected work from Justin Fowler — seventeen projects across live products, AI infrastructure, strategic artifacts, and enterprise delivery.",
   "isPartOf": { "@type": "WebSite", "@id": "https://justinfowler.com/#website" },
   "author": {
     "@type": "Person",
@@ -1379,7 +1379,7 @@
   <div class="hero-stats">
     <div class="hstat">
       <span class="hslabel">Projects</span>
-      <span class="hsvalue"><em>12</em></span>
+      <span class="hsvalue"><em>17</em></span>
       <span class="hssub">Selected · Q3 2026</span>
     </div>
     <div class="hstat">
@@ -1576,10 +1576,225 @@
       </div>
     </article>
 
-    <!-- ── 03 FOWLER-BRAIN ─────────────────────────────────── -->
+    <!-- ── 03 BRUTUS ───────────────────────────────────────── -->
     <article class="project reveal" data-cat="ai">
       <div class="pmeta">
         <span class="pidx">§ 03</span>
+        <span class="ptag">Live · Local-first · Voice</span>
+        <span class="pcat">AI infrastructure</span>
+        <span class="pyear">Jul 2026 — present</span>
+      </div>
+
+      <div class="pgrid">
+        <div>
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+              <g stroke="rgba(251,146,60,0.22)" stroke-width="0.5" fill="none">
+                <line x1="160" y1="34" x2="70" y2="104"/>
+                <line x1="160" y1="34" x2="160" y2="104"/>
+                <line x1="160" y1="34" x2="250" y2="104"/>
+                <line x1="70" y1="104" x2="70" y2="146"/>
+                <line x1="250" y1="104" x2="250" y2="146"/>
+              </g>
+              <g fill="rgba(251,146,60,0.55)" stroke="rgba(251,146,60,0.85)" stroke-width="0.5">
+                <rect x="112" y="22" width="96" height="24" rx="12"/>
+              </g>
+              <g fill="rgba(251,146,60,0.20)" stroke="rgba(251,146,60,0.55)" stroke-width="0.5">
+                <rect x="34" y="94" width="72" height="20" rx="2"/>
+                <rect x="124" y="94" width="72" height="20" rx="2"/>
+                <rect x="214" y="94" width="72" height="20" rx="2"/>
+                <rect x="34" y="138" width="72" height="16" rx="2"/>
+                <rect x="214" y="138" width="72" height="16" rx="2"/>
+              </g>
+              <g fill="rgba(251,146,60,0.9)" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.06em" text-anchor="middle">
+                <text x="160" y="38">ONE CONVERSATION</text>
+                <text x="70" y="107">FAST LANE</text>
+                <text x="160" y="107">REGISTRY</text>
+                <text x="250" y="107">DEEP LANE</text>
+                <text x="70" y="149">~1s</text>
+                <text x="250" y="149">CONSULT</text>
+              </g>
+            </svg>
+            <span class="thumb-label">§ 03 · Two lanes · routed in code</span>
+          </div>
+          <h2 class="ptitle">Brut<em>us</em>
+            <span class="sub">Conversational front door to an agent estate · voice-first · runs on my own hardware</span>
+          </h2>
+          <div class="psynopsis">
+            <p>A <strong>conversational right hand</strong> built from one instruction — <em>"you never navigate, you talk, and the screen follows."</em> Voice and typing produce identical turns; the reply is generated once and rendered twice, full to the screen and shortened to the mouth. Behind it sits a <strong>24-tool registry</strong> that reaches a work ledger, a build agent, a coding agent, mail and Slack, with a local 14B open-weights model on-device for the lane that has to answer in about a second.</p>
+            <p><strong>Two lanes, decided in code, never by the model.</strong> A recognized lookup takes the fast lane; a real question goes deep — the local model clarifies and mirrors a brief back first, and only on an explicit <em>go</em> does it fire a single remote consult, rather than a fat tool loop that invents from board titles. <strong>Writes are objects, not sentences:</strong> a mutating phrase builds an <code>Artifact {tool, args}</code>, and approving it calls the registry with the stored arguments and <strong>no model in between</strong>. Destructive writes are gated; the rest of the notepad is free.</p>
+            <p>The operational discipline is the point. Code runs from a <strong>detached worktree with its own venv</strong> and state lives outside every checkout, because the daemon twice served a branch nobody intended from a shared one. The deploy asserts <em>which</em> code is running — <code>lsof</code> on the process — not merely that something answers. And a <strong><code>hey rewind</code></strong> codeword pulls the real transcript out of SQLite before anything is diagnosed: both times it has run, the transcript held a worse bug than the one I noticed.</p>
+          </div>
+        </div>
+        <aside class="pside">
+          <div class="metrics">
+            <div class="metric"><span class="mval"><em>24</em></span><span class="mlabel">Tools in the registry</span></div>
+            <div class="metric"><span class="mval"><em>2</em></span><span class="mlabel">Lanes · routed in code</span></div>
+            <div class="metric"><span class="mval"><em>28</em></span><span class="mlabel">Test modules</span></div>
+            <div class="metric"><span class="mval"><em>0</em></span><span class="mlabel">Models between approval and a write</span></div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Skills deployed</div>
+            <div class="skills">
+              <span>Python</span><span>FastAPI</span><span>SQLite</span><span>Server-sent events</span><span>launchd</span><span>On-device LLM (MLX)</span><span>Web Speech API</span><span>Speech synthesis</span><span>MCP</span><span>Tool-use registries</span><span>Agent design</span><span>Voice UX</span><span>Deploy verification</span><span>Salesforce CLI</span>
+            </div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Timeline</div>
+            <div class="timeline">
+              <div class="tline"><span class="twhen">Jul 29</span><span class="twhat"><strong>Front door, not another agent</strong> · scope decided against a second ledger</span></div>
+              <div class="tline"><span class="twhen">Aug 6</span><span class="twhat">Conversation phases 0–4 · <strong>the screen follows the talking</strong></span></div>
+              <div class="tline"><span class="twhen">Aug 6</span><span class="twhat">Approval objects · gated writes · avatar faces generated locally</span></div>
+              <div class="tline"><span class="twhen">Aug 8</span><span class="twhat"><strong>Sync-then-consult</strong> deep lane · board advance signals</span></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="plinks">
+        <span class="plink muted">Private repo · runs local-only, not exposed</span>
+        <span class="plink muted">Architecture · on request</span>
+      </div>
+    </article>
+
+    <!-- ── 04 CRO SUITE (restricted) ───────────────────────── -->
+    <article class="project restricted reveal" data-cat="ai">
+      <div class="pmeta">
+        <span class="pidx">§ 04</span>
+        <span class="lock-badge">Restricted · Request access</span>
+        <span class="pcat">AI infrastructure</span>
+        <span class="pyear">Aug 2026 — present</span>
+      </div>
+      <div class="pgrid">
+        <div>
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+              <g fill="rgba(251,146,60,0.20)" stroke="rgba(251,146,60,0.45)" stroke-width="0.5">
+                <rect x="26" y="30" width="46" height="120" rx="2"/>
+                <rect x="82" y="30" width="46" height="120" rx="2"/>
+                <rect x="138" y="30" width="46" height="120" rx="2"/>
+                <rect x="194" y="30" width="46" height="120" rx="2"/>
+                <rect x="250" y="30" width="46" height="120" rx="2"/>
+              </g>
+              <g fill="rgba(251,146,60,0.55)">
+                <rect x="26" y="30" width="270" height="6" rx="2"/>
+              </g>
+              <g fill="rgba(251,146,60,0.85)">
+                <circle cx="49" cy="60" r="3"/><circle cx="105" cy="60" r="3"/><circle cx="161" cy="60" r="3"/><circle cx="217" cy="60" r="3"/><circle cx="273" cy="60" r="3"/>
+              </g>
+            </svg>
+            <span class="thumb-redacted">Approval-gated</span>
+            <span class="thumb-label">§ 04 · Five analyst roles</span>
+          </div>
+          <h2 class="ptitle">CRO <em>Suite</em>
+            <span class="sub">Five revenue agents + a standing executive brief · built for a consumer, not a builder</span>
+          </h2>
+          <div class="psynopsis">
+            <p>An executive agent suite for a <strong>Chief Revenue Officer</strong> who asked for analyst roles and standing outputs, and who wanted to <em>consume</em> them rather than operate them. Five agent definitions — chief of staff, revenue analyst, deal strategist, government affairs, board &amp; investor writer — packaged as an installable plugin so the suite lives on his surface instead of on one laptop. A weekday brief renders to a gated page and a spoken version of the same script.</p>
+            <p>The architectural rule that was paid for: <strong>the agent gathers, the code judges.</strong> Ranking and evidence validation happen in ordinary Python, not in a prompt — because on the first real run, gatherer commentary in an item body silently gamed the ranking signals. Every figure carries the query that produced it, and <strong>a quote must be an exact substring of its source</strong> or the item is dropped and the drop logged. CRM access is read-only by construction: a test tokenizes the package and fails on a write verb in executable position. A failed source renders as a visible gap, so a short brief and a broken brief can never look the same.</p>
+            <p><em>Approval-gated.</em> The forecast-discipline finding, collector design, evidence rules, and the delivery architecture are available on request.</p>
+          </div>
+        </div>
+        <aside class="pside">
+          <div class="metrics locked" aria-label="Locked metrics — request access">
+            <div class="metric"><span class="mval"><em>0</em></span><span class="mlabel">Agent roles defined</span></div>
+            <div class="metric"><span class="mval"><em>00</em></span><span class="mlabel">Tests · brief assembly</span></div>
+            <div class="metric"><span class="mval"><em>0</em>:00</span><span class="mlabel">Spoken brief · per run</span></div>
+            <div class="metric"><span class="mval"><em>00</em>%</span><span class="mlabel">Read-only CRM surface</span></div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Skills deployed</div>
+            <div class="skills">
+              <span>Python</span><span>SOQL</span><span>Read-only collectors</span><span>Agent design</span><span>Claude Code plugins</span><span>Evidence validation</span><span>Deterministic ranking</span><span>Vercel</span><span>Design tokens</span><span>GitHub Actions CI</span><span>Email-code auth</span><span>Text-to-speech</span><span>Accessibility (axe)</span>
+            </div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Output map · approval-gated</div>
+            <div class="timeline">
+              <div class="locked-line"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+              <div class="locked-line short"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+              <div class="locked-line shorter"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+              <div class="locked-line tiny"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="plinks">
+        <button type="button" class="btn-request" data-asset="CRO Suite">Request access →</button>
+      </div>
+    </article>
+
+    <!-- ── 05 CEO MORNING BRIEF (restricted) ───────────────── -->
+    <article class="project restricted reveal" data-cat="ai">
+      <div class="pmeta">
+        <span class="pidx">§ 05</span>
+        <span class="lock-badge">Restricted · Request access</span>
+        <span class="pcat">AI infrastructure</span>
+        <span class="pyear">Aug 2026 — present</span>
+      </div>
+      <div class="pgrid">
+        <div>
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+              <g fill="rgba(251,146,60,0.20)" stroke="rgba(251,146,60,0.45)" stroke-width="0.5">
+                <rect x="46" y="26" width="228" height="24" rx="2"/>
+                <rect x="46" y="58" width="228" height="16" rx="2"/>
+                <rect x="46" y="80" width="228" height="16" rx="2"/>
+                <rect x="46" y="102" width="228" height="16" rx="2"/>
+                <rect x="46" y="124" width="228" height="16" rx="2"/>
+              </g>
+              <g fill="rgba(251,146,60,0.85)" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.06em">
+                <text x="54" y="42">06:30 · TODAY</text>
+                <text x="54" y="69">01</text><text x="54" y="91">02</text><text x="54" y="113">03</text><text x="54" y="135">…</text>
+              </g>
+              <g stroke="rgba(251,146,60,0.55)" stroke-width="0.5" fill="none">
+                <line x1="46" y1="152" x2="274" y2="152"/>
+              </g>
+            </svg>
+            <span class="thumb-redacted">Approval-gated</span>
+            <span class="thumb-label">§ 05 · One email · seven items max</span>
+          </div>
+          <h2 class="ptitle">CEO <em>Morning Brief</em>
+            <span class="sub">Private Google Workspace brief for one CEO · read-only by design</span>
+          </h2>
+          <div class="psynopsis">
+            <p>A production-shaped daily brief with <strong>one surface</strong>: a complete email, plus a matching web view for evidence and corrections. It holds <strong>read-only Gmail and Calendar scopes only</strong> — Google never receives a send scope, and the product creates drafts it will never send. Ranking is deterministic with inspectable component scores and stable tie-breaking, capped at seven items, every quote validated against its source, and each brief frozen as an <strong>immutable snapshot</strong> so yesterday's brief cannot be quietly rewritten.</p>
+            <p>The unglamorous parts are the ones that make it real: a Postgres job queue with idempotency keys, <code>FOR UPDATE SKIP LOCKED</code>, exponential retry and a dead-letter state; purpose-bound AES-256-GCM encryption keeping OAuth tokens and source content in separate cryptographic lanes; a <strong>prompt-injection boundary</strong> in front of extraction with a safe deterministic fallback behind it. Seven surfaces — Today, Revenue, Prep, Delegate, People, Weekly, Settings — with revenue read from the CRO suite's collectors in absolute dollars.</p>
+            <p><em>Approval-gated.</em> Ranking model, security architecture, and the failure-state design are available on request.</p>
+          </div>
+        </div>
+        <aside class="pside">
+          <div class="metrics locked" aria-label="Locked metrics — request access">
+            <div class="metric"><span class="mval"><em>0</em></span><span class="mlabel">Surfaces shipped</span></div>
+            <div class="metric"><span class="mval"><em>0</em></span><span class="mlabel">Items · hard cap per brief</span></div>
+            <div class="metric"><span class="mval"><em>0</em></span><span class="mlabel">Google scopes requested</span></div>
+            <div class="metric"><span class="mval"><em>0</em></span><span class="mlabel">Send scopes · by design</span></div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Skills deployed</div>
+            <div class="skills">
+              <span>Next.js App Router</span><span>TypeScript (strict)</span><span>PostgreSQL</span><span>Drizzle</span><span>Job queues</span><span>Gmail API</span><span>Calendar API</span><span>OAuth</span><span>AES-256-GCM</span><span>HMAC sessions</span><span>Prompt-injection defense</span><span>Playwright</span><span>Vitest</span><span>Vercel</span>
+            </div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Surface map · approval-gated</div>
+            <div class="timeline">
+              <div class="locked-line"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+              <div class="locked-line short"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+              <div class="locked-line shorter"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+              <div class="locked-line tiny"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="plinks">
+        <button type="button" class="btn-request" data-asset="CEO Morning Brief">Request access →</button>
+      </div>
+    </article>
+
+    <!-- ── 06 FOWLER-BRAIN ─────────────────────────────────── -->
+    <article class="project reveal" data-cat="ai">
+      <div class="pmeta">
+        <span class="pidx">§ 06</span>
         <span class="ptag">Personal OS · 4 phases shipped</span>
         <span class="pcat">AI infrastructure</span>
         <span class="pyear">Apr 2026 — present</span>
@@ -1654,10 +1869,10 @@
       </div>
     </article>
 
-    <!-- ── 04 ATLAS4 ───────────────────────────────────────── -->
+    <!-- ── 07 ATLAS4 ───────────────────────────────────────── -->
     <article class="project reveal" data-cat="ai">
       <div class="pmeta">
-        <span class="pidx">§ 04</span>
+        <span class="pidx">§ 07</span>
         <span class="ptag">Autonomous · Production</span>
         <span class="pcat">AI infrastructure</span>
         <span class="pyear">2026 — present</span>
@@ -1728,10 +1943,10 @@
       </div>
     </article>
 
-    <!-- ── 05 ATLAS3 ───────────────────────────────────────── -->
+    <!-- ── 08 ATLAS3 ───────────────────────────────────────── -->
     <article class="project reveal" data-cat="ai">
       <div class="pmeta">
-        <span class="pidx">§ 05</span>
+        <span class="pidx">§ 08</span>
         <span class="ptag">Local · M3 Ultra</span>
         <span class="pcat">AI infrastructure</span>
         <span class="pyear">2026</span>
@@ -1796,10 +2011,10 @@
       </div>
     </article>
 
-    <!-- ── 06 OPENCLAW HQ ──────────────────────────────────── -->
+    <!-- ── 09 OPENCLAW HQ ──────────────────────────────────── -->
     <article class="project reveal" data-cat="ai">
       <div class="pmeta">
-        <span class="pidx">§ 06</span>
+        <span class="pidx">§ 09</span>
         <span class="ptag">Multi-agent · Native Ollama</span>
         <span class="pcat">AI infrastructure</span>
         <span class="pyear">2026</span>
@@ -1868,10 +2083,10 @@
       </div>
     </article>
 
-    <!-- ── 07 MARKETING / REVOPS 2030 (restricted) ─────────── -->
+    <!-- ── 10 MARKETING / REVOPS 2030 (restricted) ─────────── -->
     <article class="project restricted reveal" data-cat="strategy">
       <div class="pmeta">
-        <span class="pidx">§ 07</span>
+        <span class="pidx">§ 10</span>
         <span class="lock-badge">Restricted · Request access</span>
         <span class="pcat">Strategic artifact</span>
         <span class="pyear">Apr 2026</span>
@@ -1895,7 +2110,7 @@
               <circle cx="160" cy="151" r="6" fill="none" stroke="rgba(251,146,60,0.55)" stroke-width="0.5"/>
             </svg>
             <span class="thumb-redacted">Refreshing · v2 in flight</span>
-            <span class="thumb-label">§ 06 · Funnel reset</span>
+            <span class="thumb-label">§ 10 · Funnel reset</span>
           </div>
           <h2 class="ptitle">RevOps <em>2030</em>
             <span class="sub">Signal-Led Growth Engine · enterprise ABM blueprint · v2 incoming</span>
@@ -1934,10 +2149,10 @@
       </div>
     </article>
 
-    <!-- ── 08 MONCH MONCH / MATCHBOX 7 (restricted) ────────── -->
+    <!-- ── 11 MONCH MONCH / MATCHBOX 7 (restricted) ────────── -->
     <article class="project restricted reveal" data-cat="strategy">
       <div class="pmeta">
-        <span class="pidx">§ 08</span>
+        <span class="pidx">§ 11</span>
         <span class="lock-badge">Confidential · Request access</span>
         <span class="pcat">Strategic artifact</span>
         <span class="pyear">Apr 2026</span>
@@ -1965,7 +2180,7 @@
               <path d="M 74 124 L 122 100 L 170 74 L 218 56 L 266 38" stroke="rgba(251,146,60,0.95)" stroke-width="1.2" fill="none"/>
             </svg>
             <span class="thumb-redacted">NDA-gated</span>
-            <span class="thumb-label">§ 07 · 5-yr trajectory</span>
+            <span class="thumb-label">§ 11 · 5-yr trajectory</span>
           </div>
           <h2 class="ptitle">Bio<em>Lumen</em>
             <span class="sub">Functional health platform · proprietary fiber technology · five-year operating plan</span>
@@ -2004,10 +2219,10 @@
       </div>
     </article>
 
-    <!-- ── 09 CLEARSPEED SF + AI DELIVERY (restricted) ─────── -->
+    <!-- ── 12 CLEARSPEED SF + AI DELIVERY (restricted) ─────── -->
     <article class="project restricted reveal" data-cat="enterprise">
       <div class="pmeta">
-        <span class="pidx">§ 09</span>
+        <span class="pidx">§ 12</span>
         <span class="lock-badge">Restricted · Request access</span>
         <span class="pcat">Enterprise delivery</span>
         <span class="pyear">2024 — present</span>
@@ -2041,7 +2256,7 @@
               <circle cx="160" cy="90" r="20" fill="none" stroke="rgba(251,146,60,0.32)" stroke-width="0.6"/>
             </svg>
             <span class="thumb-redacted">Internal</span>
-            <span class="thumb-label">§ 08 · 8-agent network</span>
+            <span class="thumb-label">§ 12 · 8-agent network</span>
           </div>
           <h2 class="ptitle">Salesforce + <em>AI</em>
             <span class="sub">Eight-agent autonomous metadata pipeline · ISO 27001 / 27701</span>
@@ -2080,10 +2295,10 @@
       </div>
     </article>
 
-    <!-- ── 10 CS HUBSPOT REVOPS (restricted) ───────────────── -->
+    <!-- ── 13 CS HUBSPOT REVOPS (restricted) ───────────────── -->
     <article class="project restricted reveal" data-cat="enterprise">
       <div class="pmeta">
-        <span class="pidx">§ 10</span>
+        <span class="pidx">§ 13</span>
         <span class="lock-badge">Restricted · Request access</span>
         <span class="pcat">Enterprise delivery</span>
         <span class="pyear">Apr 2026</span>
@@ -2123,7 +2338,7 @@
               <circle cx="40" cy="100" r="5.5" fill="rgba(251,146,60,0.95)" stroke="rgba(251,146,60,1)" stroke-width="0.6"/>
             </svg>
             <span class="thumb-redacted">Internal</span>
-            <span class="thumb-label">§ 09 · Workflow graph</span>
+            <span class="thumb-label">§ 13 · Workflow graph</span>
           </div>
           <h2 class="ptitle">HubSpot + <em>AI</em>
             <span class="sub">19-workflow playbook · Project-Knowledge distribution model</span>
@@ -2162,10 +2377,146 @@
       </div>
     </article>
 
-    <!-- ── 11 GITHUB FOR REVOPS ────────────────────────────── -->
+    <!-- ── 14 PM TRACKER (restricted) ──────────────────────── -->
+    <article class="project restricted reveal" data-cat="enterprise">
+      <div class="pmeta">
+        <span class="pidx">§ 14</span>
+        <span class="lock-badge">Restricted · Request access</span>
+        <span class="pcat">Enterprise delivery</span>
+        <span class="pyear">May 2026 — present</span>
+      </div>
+      <div class="pgrid">
+        <div>
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+              <g fill="rgba(251,146,60,0.20)" stroke="rgba(251,146,60,0.45)" stroke-width="0.5">
+                <rect x="30" y="34" width="118" height="12" rx="2"/>
+                <rect x="30" y="54" width="164" height="12" rx="2"/>
+                <rect x="30" y="74" width="92" height="12" rx="2"/>
+                <rect x="30" y="94" width="206" height="12" rx="2"/>
+                <rect x="30" y="114" width="140" height="12" rx="2"/>
+                <rect x="30" y="134" width="184" height="12" rx="2"/>
+              </g>
+              <g stroke="rgba(251,146,60,0.55)" stroke-width="0.5" fill="none">
+                <line x1="250" y1="26" x2="250" y2="154"/>
+              </g>
+              <g fill="rgba(251,146,60,0.85)">
+                <circle cx="250" cy="40" r="3"/><circle cx="250" cy="80" r="3"/><circle cx="250" cy="120" r="3"/>
+              </g>
+            </svg>
+            <span class="thumb-redacted">NDA-gated · client work</span>
+            <span class="thumb-label">§ 14 · Phases · gates · audit trail</span>
+          </div>
+          <h2 class="ptitle">PM <em>Tracker</em>
+            <span class="sub">Salesforce-native delivery tracking · shipped to production · pilot-accepted</span>
+          </h2>
+          <div class="psynopsis">
+            <p>Customer implementation tracking rebuilt <strong>native to the CRM</strong> rather than bolted beside it in a spreadsheet. Projects and their child items — success criteria, discovery, proof of value, comms plan, change control, timeline phases, AI suggestions and an <strong>immutable audit event</strong> — share one generic child object with a discriminating type, instead of eight near-identical objects nobody would maintain. Today it runs on <strong>40 Apex classes and 23 Lightning web components across 9 custom objects</strong>, with an AI service behind a named credential, its own permission sets, a Lightning tab and a launchpad tile.</p>
+            <p>It shipped to production on a validated deploy — <strong>74 of 74 specified tests green across 188 components</strong> — then went to a four-user pilot behind a documented UAT gate and written acceptance. The root causes that gate surfaced were the useful part: user-mode field-level security was silently failing tests for anyone without the permission set assigned, and a test factory was stamping only one of two required fields. Both would have read as "flaky tests" and shipped.</p>
+            <p><em>NDA-gated.</em> Object model, permission architecture, deployment evidence and the UAT design are available on request.</p>
+          </div>
+        </div>
+        <aside class="pside">
+          <div class="metrics locked" aria-label="Locked metrics — request access">
+            <div class="metric"><span class="mval"><em>00</em></span><span class="mlabel">Apex classes live</span></div>
+            <div class="metric"><span class="mval"><em>00</em></span><span class="mlabel">Lightning web components</span></div>
+            <div class="metric"><span class="mval"><em>000</em></span><span class="mlabel">Components · prod deploy</span></div>
+            <div class="metric"><span class="mval"><em>0</em>/<em>0</em></span><span class="mlabel">Pilot users accepted</span></div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Skills deployed</div>
+            <div class="skills">
+              <span>Apex</span><span>Lightning Web Components</span><span>SOQL</span><span>Custom objects</span><span>Permission sets</span><span>FLS / CRUD</span><span>Named credentials</span><span>sfdx</span><span>Deployment validation</span><span>UAT design</span><span>Lightning App Builder</span><span>Claude API</span><span>CI pipelines</span>
+            </div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Delivery map · NDA-gated</div>
+            <div class="timeline">
+              <div class="locked-line"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+              <div class="locked-line short"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+              <div class="locked-line shorter"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+              <div class="locked-line tiny"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="plinks">
+        <button type="button" class="btn-request" data-asset="PM Tracker">Request access →</button>
+      </div>
+    </article>
+
+    <!-- ── 15 CAPTURE TRACKER (restricted) ─────────────────── -->
+    <article class="project restricted reveal" data-cat="enterprise">
+      <div class="pmeta">
+        <span class="pidx">§ 15</span>
+        <span class="lock-badge">Restricted · Request access</span>
+        <span class="pcat">Enterprise delivery</span>
+        <span class="pyear">2026</span>
+      </div>
+      <div class="pgrid">
+        <div>
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+              <g fill="rgba(251,146,60,0.20)" stroke="rgba(251,146,60,0.45)" stroke-width="0.5">
+                <path d="M26 44 h74 l14 18 -14 18 h-74 z"/>
+                <path d="M108 44 h74 l14 18 -14 18 h-74 z"/>
+                <path d="M190 44 h74 l14 18 -14 18 h-74 z"/>
+              </g>
+              <g stroke="rgba(251,146,60,0.55)" stroke-width="0.5" fill="none" stroke-dasharray="3 3">
+                <line x1="160" y1="94" x2="160" y2="118"/>
+              </g>
+              <g fill="rgba(251,146,60,0.55)" stroke="rgba(251,146,60,0.85)" stroke-width="0.5">
+                <rect x="96" y="118" width="128" height="26" rx="2"/>
+              </g>
+              <g fill="rgba(251,146,60,0.9)" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.06em" text-anchor="middle">
+                <text x="160" y="135">HANDOFF</text>
+              </g>
+            </svg>
+            <span class="thumb-redacted">NDA-gated · client work</span>
+            <span class="thumb-label">§ 15 · Capture → handoff → forecast</span>
+          </div>
+          <h2 class="ptitle">Capture <em>Tracker</em>
+            <span class="sub">Government pursuit pipeline · the year before an opportunity exists</span>
+          </h2>
+          <div class="psynopsis">
+            <p>Government and federal business is won long before anything appears in a CRM as an opportunity. The Capture Tracker gives that <strong>pre-opportunity stretch its own structure</strong> — capture stages, teaming and partner posture, bid / no-bid decision points, and proposal milestones — so a pursuit that has already consumed a year of relationship-building is visible and reviewable rather than living in one person's head and leaving with them.</p>
+            <p>It sits <strong>upstream of the opportunity</strong> and hands off at a defined line, which is what keeps the forecast honest: capture work stops inflating pipeline, and an opportunity gets created when there is something real to forecast against. The alternative — the one most organizations actually run — is either a pursuit that is invisible until it is late, or a pipeline padded with deals that were never deals.</p>
+            <p><em>NDA-gated.</em> Stage definitions, bid / no-bid criteria, gate-review cadence and the handoff contract are available on request.</p>
+          </div>
+        </div>
+        <aside class="pside">
+          <div class="metrics locked" aria-label="Locked metrics — request access">
+            <div class="metric"><span class="mval"><em>0</em></span><span class="mlabel">Capture stages</span></div>
+            <div class="metric"><span class="mval"><em>0</em></span><span class="mlabel">Gate reviews</span></div>
+            <div class="metric"><span class="mval"><em>00</em></span><span class="mlabel">Bid / no-bid criteria</span></div>
+            <div class="metric"><span class="mval"><em>00</em></span><span class="mlabel">Fields on handoff</span></div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Skills deployed</div>
+            <div class="skills">
+              <span>Capture management</span><span>Government / federal sales</span><span>Bid–no-bid frameworks</span><span>Stage-gate design</span><span>Teaming strategy</span><span>Salesforce architecture</span><span>Forecast hygiene</span><span>Pipeline governance</span><span>Executive reporting</span>
+            </div>
+          </div>
+          <div class="pblock">
+            <div class="pblock-label">Stage map · NDA-gated</div>
+            <div class="timeline">
+              <div class="locked-line"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+              <div class="locked-line short"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+              <div class="locked-line shorter"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+              <div class="locked-line tiny"><span class="twhen">§ —</span><div class="lockbar"></div></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="plinks">
+        <button type="button" class="btn-request" data-asset="Capture Tracker">Request access →</button>
+      </div>
+    </article>
+
+    <!-- ── 16 GITHUB FOR REVOPS ────────────────────────────── -->
     <article class="project reveal" data-cat="enterprise">
       <div class="pmeta">
-        <span class="pidx">§ 11</span>
+        <span class="pidx">§ 16</span>
         <span class="ptag">Live · Internal · Org-SSO gated</span>
         <span class="pcat">Enterprise delivery</span>
         <span class="pyear">Jul 2026</span>
@@ -2195,7 +2546,7 @@
                 <text x="250" y="158" text-anchor="middle">PR → CI</text>
               </g>
             </svg>
-            <span class="thumb-label">§ 11 · Branch → PR → CI</span>
+            <span class="thumb-label">§ 16 · Branch → PR → CI</span>
           </div>
           <h2 class="ptitle">GitHub for <em>RevOps</em>
             <span class="sub">10-module training program · zero-to-competent for non-engineers</span>
@@ -2235,10 +2586,10 @@
       </div>
     </article>
 
-    <!-- ── 12 SIX-LAYER INTEGRATION AUDIT ─────────────────── -->
+    <!-- ── 17 SIX-LAYER INTEGRATION AUDIT ─────────────────── -->
     <article class="project reveal" data-cat="ai">
       <div class="pmeta">
-        <span class="pidx">§ 12</span>
+        <span class="pidx">§ 17</span>
         <span class="ptag">Case study · Public · Consulting primitive</span>
         <span class="pcat">AI infrastructure</span>
         <span class="pyear">May 2026</span>
@@ -2279,7 +2630,7 @@
                 <circle cx="60"  cy="134" r="3"/>
               </g>
             </svg>
-            <span class="thumb-label">§ 10 · Maturity scorecard · live engagement</span>
+            <span class="thumb-label">§ 17 · Maturity scorecard · live engagement</span>
           </div>
           <h2 class="ptitle">The Six-Layer <em>Integration Audit</em>
             <span class="sub">Consulting-grade HubSpot↔Salesforce primitive · case study from a live engagement</span>
@@ -2366,10 +2717,14 @@
         <label for="rasset">Asset of interest <span class="req">*</span></label>
         <select id="rasset" name="Asset" required>
           <option value="" disabled selected>Choose an asset…</option>
-          <option value="RevOps 2030">§ 06 · RevOps 2030</option>
-          <option value="BioLumen">§ 07 · BioLumen</option>
-          <option value="Salesforce + AI">§ 08 · Salesforce + AI</option>
-          <option value="HubSpot + AI">§ 09 · HubSpot + AI</option>
+          <option value="CRO Suite">§ 04 · CRO Suite</option>
+          <option value="CEO Morning Brief">§ 05 · CEO Morning Brief</option>
+          <option value="RevOps 2030">§ 10 · RevOps 2030</option>
+          <option value="BioLumen">§ 11 · BioLumen</option>
+          <option value="Salesforce + AI">§ 12 · Salesforce + AI</option>
+          <option value="HubSpot + AI">§ 13 · HubSpot + AI</option>
+          <option value="PM Tracker">§ 14 · PM Tracker</option>
+          <option value="Capture Tracker">§ 15 · Capture Tracker</option>
           <option value="All restricted assets">All gated assets · evaluation</option>
           <option value="Other / Consulting inquiry">Other · consulting inquiry</option>
         </select>
