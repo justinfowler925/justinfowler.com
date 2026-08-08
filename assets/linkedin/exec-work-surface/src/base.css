@@ -1,0 +1,91 @@
+@import './fonts.css';
+@import './tokens.css';
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 1200px;
+  height: 1200px;
+  background: var(--shine-color-bg);
+  color: var(--shine-color-fg);
+  font-family: var(--shine-font-sans);
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+}
+
+.card {
+  width: 1200px;
+  height: 1200px;
+  padding: var(--shine-space-8);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* hairline frame — separation by border, never by fill */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 24px;
+  border: 1px solid var(--shine-color-border);
+  border-radius: var(--shine-radius-lg);
+  pointer-events: none;
+}
+
+.kicker {
+  font-family: var(--shine-font-mono);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--shine-color-fg-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--shine-space-3);
+}
+
+.kicker .tick {
+  width: 28px;
+  height: 2px;
+  background: var(--shine-color-primary);
+  display: inline-block;
+}
+
+.kicker .num { color: var(--shine-color-primary); }
+
+h1 {
+  font-size: 84px;
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.032em;
+  text-wrap: balance;
+}
+
+h1 .accent { color: var(--shine-color-primary); }
+h1 .dim { color: var(--shine-color-stone-500); }
+
+.lede {
+  font-size: 26px;
+  line-height: 1.5;
+  color: var(--shine-color-fg-muted);
+  letter-spacing: -0.006em;
+  max-width: 24ch;
+  text-wrap: pretty;
+}
+
+.spacer { flex: 1; }
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--shine-space-5);
+  border-top: 1px solid var(--shine-color-border);
+  font-family: var(--shine-font-mono);
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: var(--shine-color-stone-400);
+}
+
+footer .who { color: var(--shine-color-stone-200); }
