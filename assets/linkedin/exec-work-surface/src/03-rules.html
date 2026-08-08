@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>03 — Four rules</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  h1 { font-size: 66px; max-width: 18ch; margin-top: var(--shine-space-6); }
+  ol { list-style: none; margin-top: var(--shine-space-6); display: flex; flex-direction: column; }
+  li { display: grid; grid-template-columns: 84px 1fr; gap: var(--shine-space-5);
+       padding: var(--shine-space-6) 0; border-top: 1px solid var(--shine-color-border); }
+  li:last-child { border-bottom: 1px solid var(--shine-color-border); }
+  .n { font-family: var(--shine-font-mono); font-size: 20px; font-weight: 500;
+       color: var(--shine-color-primary); letter-spacing: 0.06em; padding-top: 6px; }
+  .t { font-size: 33px; font-weight: 600; letter-spacing: -0.018em; line-height: 1.25; }
+  .d { font-size: 21px; line-height: 1.5; color: var(--shine-color-fg-muted);
+       margin-top: var(--shine-space-2); max-width: 46ch; text-wrap: pretty; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="kicker"><span class="tick"></span><span class="num">03</span><span>The rules underneath</span></div>
+  <h1>The model is not the interesting part.</h1>
+  <ol>
+    <li><span class="n">01</span><div>
+      <div class="t">The agent gathers. The code judges.</div>
+      <div class="d">Ranking is deterministic. A model that decides what matters today decides differently tomorrow.</div>
+    </div></li>
+    <li><span class="n">02</span><div>
+      <div class="t">Every claim carries its source, verbatim.</div>
+      <div class="d">A quote must be an exact substring of what it came from — or the item is dropped, and the drop is logged.</div>
+    </div></li>
+    <li><span class="n">03</span><div>
+      <div class="t">A broken source is a visible gap.</div>
+      <div class="d">A quiet morning and a failed integration must never look the same on the page.</div>
+    </div></li>
+    <li><span class="n">04</span><div>
+      <div class="t">Writes are proposals.</div>
+      <div class="d">It drafts, it never sends. Approving runs a stored action with stored arguments — no model between the click and the effect.</div>
+    </div></li>
+  </ol>
+  <div class="spacer"></div>
+  <footer><span class="who">Justin Fowler</span><span>justinfowler.com</span></footer>
+</div>
+</body>
+</html>

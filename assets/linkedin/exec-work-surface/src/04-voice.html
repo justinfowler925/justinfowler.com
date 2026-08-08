@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>04 — Voice layer</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  h1 { font-size: 70px; max-width: 16ch; margin-top: var(--shine-space-6); }
+  .chain { margin-top: var(--shine-space-7); display: flex; flex-direction: column; gap: var(--shine-space-4); }
+  .step { border: 1px solid var(--shine-color-border); border-radius: var(--shine-radius-lg);
+          padding: var(--shine-space-5); }
+  .step .lab { font-family: var(--shine-font-mono); font-size: 14px; letter-spacing: 0.14em;
+               text-transform: uppercase; color: var(--shine-color-stone-400); }
+  .said { margin-top: var(--shine-space-3); font-size: 27px; line-height: 1.35;
+          letter-spacing: -0.012em; }
+  .obj { margin-top: var(--shine-space-3); font-family: var(--shine-font-mono); font-size: 19px;
+         line-height: 1.6; color: var(--shine-color-stone-200); }
+  .obj .k { color: var(--shine-color-primary); }
+  .obj .p { color: var(--shine-color-stone-400); }
+  .arrow { font-family: var(--shine-font-mono); font-size: 20px; color: var(--shine-color-stone-400);
+           text-align: center; letter-spacing: 0.3em; }
+  .approve { display: flex; align-items: center; gap: var(--shine-space-4); margin-top: var(--shine-space-3); }
+  .btn { border-radius: var(--shine-radius-md); padding: 10px 24px; font-size: 20px; font-weight: 600;
+         background: var(--shine-color-primary); color: var(--shine-color-primary-fg); }
+  .btn.ghost { background: transparent; color: var(--shine-color-fg-muted);
+               border: 1px solid var(--shine-color-border); font-weight: 400; }
+  .note { font-size: 21px; color: var(--shine-color-fg-muted); margin-left: auto; }
+  .note b { color: var(--shine-color-fg); font-weight: 600; }
+  .close { font-size: 34px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3;
+           padding-bottom: var(--shine-space-6); max-width: 34ch; text-wrap: balance; }
+  .close .dimmed { color: var(--shine-color-stone-500); font-weight: 400; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="kicker"><span class="tick"></span><span class="num">04</span><span>The voice layer</span></div>
+  <h1>You never navigate. <span class="accent">You talk, and the screen follows.</span></h1>
+
+  <div class="chain">
+    <div class="step">
+      <div class="lab">Spoken</div>
+      <div class="said">“Push the renewal review to Thursday and draft the note to their team.”</div>
+    </div>
+    <div class="arrow">&darr;</div>
+    <div class="step">
+      <div class="lab">Becomes an object, not a sentence</div>
+      <div class="obj">
+        <span class="p">{</span> <span class="k">tool</span>: "draft_email",<br>
+        &nbsp;&nbsp;<span class="k">args</span>: { thread: 8814, send: <span class="k">false</span> } <span class="p">}</span>
+      </div>
+      <div class="approve">
+        <span class="btn">Approve</span><span class="btn ghost">Discard</span>
+        <span class="note">Approving runs the <b>stored</b> args. No model in between.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+  <p class="close">The words are the interface. <span class="dimmed">The guardrail is that nothing leaves the building without a human click.</span></p>
+  <footer><span class="who">Justin Fowler</span><span>justinfowler.com</span></footer>
+</div>
+</body>
+</html>
