@@ -7,17 +7,17 @@
 <style>
   .card { padding: var(--shine-space-7); }
   .head { display: flex; align-items: baseline; justify-content: space-between; }
-  .title { font-size: 30px; font-weight: 600; letter-spacing: -0.02em; }
+  .title { font-size: 30px; line-height: 1.2; font-weight: 600; letter-spacing: -0.02em; }
   .stamp { font-family: var(--shine-font-mono); font-size: 16px; color: var(--shine-color-stone-400);
            letter-spacing: 0.08em; display: flex; align-items: center; gap: var(--shine-space-3); }
   .chip { border: 1px solid var(--shine-color-border); border-radius: var(--shine-radius-full);
-          padding: 4px 12px; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+          padding: 4px 12px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
           color: var(--shine-color-stone-400); }
 
   .app { flex: 1; margin-top: var(--shine-space-5); display: grid; grid-template-columns: 232px 1fr;
          border: 1px solid var(--shine-color-border); border-radius: var(--shine-radius-lg); overflow: hidden; }
   nav { background: var(--shine-color-bg-subtle); border-right: 1px solid var(--shine-color-border);
-        padding: var(--shine-space-5) 0; display: flex; flex-direction: column; gap: 2px; }
+        padding: var(--shine-space-5) 0; display: flex; flex-direction: column; gap: var(--shine-space-1); }
   nav a { display: flex; justify-content: space-between; align-items: center;
           padding: var(--shine-space-3) var(--shine-space-5); font-size: 19px;
           color: var(--shine-color-fg-muted); border-left: 3px solid transparent; text-decoration: none; }
@@ -26,15 +26,15 @@
   nav .badge { font-family: var(--shine-font-mono); font-size: 15px; color: var(--shine-color-stone-400); }
   nav a.on .badge { color: var(--shine-color-primary); }
 
-  main { padding: var(--shine-space-5) var(--shine-space-6) var(--shine-space-5);
+  .pane { padding: var(--shine-space-5) var(--shine-space-6) var(--shine-space-5);
          display: flex; flex-direction: column; }
   .sec.later { margin-top: var(--shine-space-5); }
   .row { display: flex; align-items: baseline; gap: var(--shine-space-4);
          padding: var(--shine-space-4) 0; border-bottom: 1px solid var(--shine-color-border);
-         font-size: 20px; color: var(--shine-color-stone-200); }
-  .row .tag { margin-left: auto; font-family: var(--shine-font-mono); font-size: 14px;
+         font-size: 19px; color: var(--shine-color-stone-200); }
+  .row .tag { margin-left: auto; font-family: var(--shine-font-mono); font-size: 12px;
               color: var(--shine-color-stone-400); letter-spacing: 0.03em; }
-  .sec { font-family: var(--shine-font-mono); font-size: 14px; letter-spacing: 0.14em;
+  .sec { font-family: var(--shine-font-mono); font-size: 12px; letter-spacing: 0.14em;
          text-transform: uppercase; color: var(--shine-color-stone-400); }
   .item { padding: var(--shine-space-4) 0; border-bottom: 1px solid var(--shine-color-border); }
   .item:first-of-type { padding-top: var(--shine-space-4); }
@@ -46,7 +46,7 @@
            border-left: 2px solid var(--shine-color-ember-line); font-size: 19px; line-height: 1.5;
            color: var(--shine-color-stone-200); }
   .src { margin-top: var(--shine-space-2); padding-left: var(--shine-space-4);
-         font-family: var(--shine-font-mono); font-size: 14px; color: var(--shine-color-stone-400);
+         font-family: var(--shine-font-mono); font-size: 12px; color: var(--shine-color-stone-400);
          letter-spacing: 0.03em; }
   .gap { margin-top: var(--shine-space-4); border: 1px dashed var(--shine-color-stone-700);
          border-radius: var(--shine-radius-md); padding: var(--shine-space-4);
@@ -54,24 +54,24 @@
          display: flex; align-items: center; gap: var(--shine-space-3); }
   .dot { width: 8px; height: 8px; border-radius: var(--shine-radius-full);
          background: var(--shine-color-status-warn); flex: none; }
-  .strip { margin-top: auto; padding-top: var(--shine-space-5);
+  .strip { padding-top: var(--shine-space-5);
            border-top: 1px solid var(--shine-color-border);
            display: flex; align-items: flex-end; gap: var(--shine-space-7); }
-  .strip .k { display: block; font-family: var(--shine-font-mono); font-size: 13px;
+  .strip .k { display: block; font-family: var(--shine-font-mono); font-size: 12px;
               letter-spacing: 0.12em; text-transform: uppercase; color: var(--shine-color-stone-400); }
   .strip .v { display: block; margin-top: var(--shine-space-2); font-size: 30px; font-weight: 600;
               letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-  .strip .asof { margin-left: auto; font-family: var(--shine-font-mono); font-size: 14px;
+  .strip .asof { margin-left: auto; font-family: var(--shine-font-mono); font-size: 12px;
                  color: var(--shine-color-stone-400); }
-  .caption { margin-top: var(--shine-space-5); margin-bottom: var(--shine-space-5); max-width: 62ch; font-size: 21px; color: var(--shine-color-fg-muted);
+  .caption { margin-top: var(--shine-space-5); margin-bottom: var(--shine-space-5); max-width: 62ch; font-size: 23px; color: var(--shine-color-fg-muted);
              letter-spacing: -0.004em; }
   .caption b { color: var(--shine-color-fg); font-weight: 600; }
 </style>
 </head>
 <body>
-<div class="card">
+<main class="card">
   <div class="head">
-    <span class="title">The executive opens one page.</span>
+    <h1 class="title">The executive opens one page.</h1>
     <span class="stamp"><span class="chip">sample data</span>06:30 · TUE</span>
   </div>
 
@@ -84,7 +84,7 @@
       <a>People <span class="badge">—</span></a>
       <a>Weekly <span class="badge">—</span></a>
     </nav>
-    <main>
+    <section class="pane">
       <div class="sec">Needs you today — 2 of 6</div>
 
       <div class="item">
@@ -106,18 +106,19 @@
       <div class="row">Prep pack ready for the 14:00 <span class="tag">prep · 6 sources</span></div>
       <div class="row">Weekly close-out — nothing needed from you <span class="tag">weekly · clear</span></div>
 
+      <div class="spacer"></div>
       <div class="strip">
         <div><span class="k">Open pipeline</span><span class="v">$48.2M</span></div>
         <div><span class="k">Slipped this week</span><span class="v">3 deals</span></div>
         <div><span class="k">Untouched 30d+</span><span class="v">11 · $9.4M</span></div>
         <span class="asof">as of yesterday</span>
       </div>
-    </main>
+    </section>
   </div>
 
   <div class="caption">No prompt. No chat. <b>Ranked by code, not by vibes</b> — and every line traceable to the thing it came from.</div>
 
   <footer><span class="who">Justin Fowler</span><span>justinfowler.com</span></footer>
-</div>
+</main>
 </body>
 </html>

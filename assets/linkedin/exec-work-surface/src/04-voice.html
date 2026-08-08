@@ -9,7 +9,7 @@
   .chain { margin-top: var(--shine-space-7); display: flex; flex-direction: column; gap: var(--shine-space-4); }
   .step { border: 1px solid var(--shine-color-border); border-radius: var(--shine-radius-lg);
           padding: var(--shine-space-5); }
-  .step .lab { font-family: var(--shine-font-mono); font-size: 14px; letter-spacing: 0.14em;
+  .step .lab { font-family: var(--shine-font-mono); font-size: 15px; letter-spacing: 0.14em;
                text-transform: uppercase; color: var(--shine-color-stone-400); }
   .said { margin-top: var(--shine-space-3); font-size: 27px; line-height: 1.35;
           letter-spacing: -0.012em; }
@@ -17,14 +17,14 @@
          line-height: 1.6; color: var(--shine-color-stone-200); }
   .obj .k { color: var(--shine-color-primary); }
   .obj .p { color: var(--shine-color-stone-400); }
-  .arrow { font-family: var(--shine-font-mono); font-size: 20px; color: var(--shine-color-stone-400);
+  .arrow { font-family: var(--shine-font-mono); font-size: 19px; color: var(--shine-color-stone-400);
            text-align: center; letter-spacing: 0.3em; }
   .approve { display: flex; align-items: center; gap: var(--shine-space-4); margin-top: var(--shine-space-3); }
-  .btn { border-radius: var(--shine-radius-md); padding: 10px 24px; font-size: 20px; font-weight: 600;
+  .btn { border-radius: var(--shine-radius-md); padding: var(--shine-space-3) var(--shine-space-5); font-size: 19px; font-weight: 600;
          background: var(--shine-color-primary); color: var(--shine-color-primary-fg); }
   .btn.ghost { background: transparent; color: var(--shine-color-fg-muted);
                border: 1px solid var(--shine-color-border); font-weight: 400; }
-  .note { font-size: 21px; color: var(--shine-color-fg-muted); margin-left: auto; }
+  .note { font-size: 19px; color: var(--shine-color-fg-muted); margin-left: auto; }
   .note b { color: var(--shine-color-fg); font-weight: 600; }
   .close { font-size: 34px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3;
            padding-bottom: var(--shine-space-6); max-width: 34ch; text-wrap: balance; }
@@ -32,7 +32,7 @@
 </style>
 </head>
 <body>
-<div class="card">
+<main class="card">
   <div class="kicker"><span class="tick"></span><span class="num">04</span><span>The voice layer</span></div>
   <h1>You never navigate. <span class="accent">You talk, and the screen follows.</span></h1>
 
@@ -58,6 +58,6 @@
   <div class="spacer"></div>
   <p class="close">The words are the interface. <span class="dimmed">The guardrail is that nothing leaves the building without a human click.</span></p>
   <footer><span class="who">Justin Fowler</span><span>justinfowler.com</span></footer>
-</div>
+</main>
 </body>
 </html>
