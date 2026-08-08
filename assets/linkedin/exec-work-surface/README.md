@@ -33,12 +33,33 @@ Then, per card:
   --virtual-time-budget=3000 --screenshot=01-hook.png "file://$PWD/01-hook.html"
 ```
 
-Playwright is not installed in `~/Projects/shine`, so `verify/measure.mjs` will not run
-here. Contrast was measured off the rendered raster instead: `sips -s format bmp`, then
-count colours over the whole image and compute WCAG ratio against the dominant
-background. Result on these four: all normal-size text at **7.83:1** or
-**15.7–18.9:1**; two colours at **4.12:1** (the 92px dim headline on card 1, the 34px
-semibold closer on card 4) which clear the 3:1 large-text floor; one **1.92:1** value
-that is the dashed border on the gap notice, not text.
+## Verification
 
-Colours come from `@shine/personal` tokens only — no raw hex anywhere in `src/`.
+The shine measure loop **does** run here — playwright 1.62.1 lives at
+`~/Projects/ceo-morning-brief/node_modules`, not in `~/Projects/shine`, so it needs
+`NODE_PATH`:
+
+```sh
+cd ~/Projects/shine && NODE_PATH=~/Projects/ceo-morning-brief/node_modules \
+  node verify/measure.mjs <path>/03-rules.html
+```
+
+Final state on all four cards: **axe 0 violations**, type scale within the 6-size cap
+(12/15/16/19/23/30 and 15/16/19/27/34/70), no off-scale computed spacing.
+
+The loop still reports contrast FAILs of 1.00–2.17:1 on wrapped display text. Those are
+box-not-glyph artifacts, confirmed two ways rather than assumed:
+
+- **Geometry.** `span.accent` on card 4 returns `getClientRects().length === 2` — it
+  wraps, so its union bounding box encloses background between the line ends and a
+  worst-case pixel pair samples bg against bg. Same shape for the nav rows on card 2,
+  where the label sits left and the badge right across a 232px box.
+- **The raster.** A colour census over the finished 2400×2400 PNGs finds only six
+  significant inks: 18.92:1, 15.73:1, 8.73:1, 7.83:1, and 4.12:1 — the last used only
+  for the 92px dim headline (card 1) and the 34px semibold closer (card 4), both above
+  the 3:1 large-text floor. No 1.00:1 ink exists in any image.
+
+The probe's `p5` column agrees with the census (4.12 / 6.93 / 7.83 / 8.73 / 14.84),
+which is the tell that `worst` is measuring the box.
+
+Colours come from `@shine/personal` tokens only — no raw hex in `src/`.
