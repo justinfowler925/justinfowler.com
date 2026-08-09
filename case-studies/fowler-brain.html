@@ -70,7 +70,7 @@
   .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
   .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
-  .nav-links { display: flex; gap: 24px; }
+  .nav-links { display: flex; gap: 8px 24px; flex-wrap: wrap; }
   .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
 
@@ -107,6 +107,9 @@
   p strong { color: var(--paper); font-weight: 600; }
   p em { color: var(--accent-2); font-style: italic; }
   p code, .ic { font-family: var(--mono); font-size: 0.88em; color: var(--accent-2); background: var(--ink-2); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--ink-3); }
+  /* Long unbreakable identifiers (paths, config keys) must wrap rather than
+     widen the page — they were the last source of h-scroll at 320px. */
+  code, .ic { overflow-wrap: anywhere; }
   ul { margin: 12px 0 16px 24px; max-width: 760px; }
   ul li { color: var(--paper-2); margin-bottom: 8px; }
   ul li strong { color: var(--paper); }
@@ -132,6 +135,9 @@
 
   /* Distribution matrix */
   table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  /* A table narrower than its content scrolls inside this box, so the page never does. */
+  .table-scroll { overflow-x: auto; margin: 20px 0; -webkit-overflow-scrolling: touch; }
+  .table-scroll table { margin: 0; }
   th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--ink-3); }
   th { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); font-weight: 500; }
   td { color: var(--paper-2); }
@@ -149,6 +155,10 @@
   .phase-row .pname { font-family: var(--serif); font-size: 17px; color: var(--paper); font-weight: 500; }
   .phase-row .pdesc { font-family: var(--mono); font-size: 11px; color: var(--mute); margin-top: 2px; letter-spacing: 0.04em; }
   .phase-row .pstatus { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; padding: 4px 10px; border-radius: 999px; }
+  @media (max-width: 600px) {
+    .phase-row { grid-template-columns: 1fr; gap: 8px; }
+    .phase-row .pstatus { justify-self: start; }
+  }
   .pstatus.done { background: rgba(34, 197, 94, 0.12); color: var(--ok); border: 1px solid rgba(34, 197, 94, 0.3); }
   .pstatus.defer { background: var(--ink-3); color: var(--mute); border: 1px solid var(--ink-4); }
 
@@ -273,6 +283,7 @@
   <div class="section-num">§ 04 · The distribution matrix</div>
   <h2 class="st">One source. <em>Eight surfaces</em>.</h2>
   <p>The compile step is what makes this different from a notes folder. Every adapter is a deterministic function of the Brain — so a change to <code>global/communication.md</code> propagates to every downstream surface on the next <code>rebuild.sh</code>.</p>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="Table, scrolls horizontally">
   <table>
     <thead>
       <tr><th>Surface</th><th>Adapter format</th><th>Where it lands</th></tr>
@@ -288,6 +299,7 @@
       <tr><td>Local Ollama models</td><td>system prompt</td><td>Per-model prompt template</td></tr>
     </tbody>
   </table>
+  </div>
   <p>One change at the source. Eight surfaces stay coherent. The cost of changing my mind about how to write a PR description goes from "update eight places, miss one, drift starts" to "edit one file, run one script."</p>
 </section>
 

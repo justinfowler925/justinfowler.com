@@ -70,7 +70,7 @@
   .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
   .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
-  .nav-links { display: flex; gap: 24px; }
+  .nav-links { display: flex; gap: 8px 24px; flex-wrap: wrap; }
   .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
 
@@ -108,6 +108,9 @@
   p strong { color: var(--paper); font-weight: 600; }
   p em { color: var(--accent-2); font-style: italic; }
   p code, .ic { font-family: var(--mono); font-size: 0.88em; color: var(--accent-2); background: var(--ink-2); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--ink-3); }
+  /* Long unbreakable identifiers (paths, config keys) must wrap rather than
+     widen the page — they were the last source of h-scroll at 320px. */
+  code, .ic { overflow-wrap: anywhere; }
   ul { margin: 12px 0 16px 24px; max-width: 760px; }
   ul li { color: var(--paper-2); margin-bottom: 8px; }
   ul li strong { color: var(--paper); }
@@ -142,6 +145,10 @@
   .fill.s4 { width: 80%; background: var(--accent-2); }
   .fill.s5 { width: 100%; background: var(--ok); }
   .score-row .val { font-family: var(--mono); font-size: 13px; color: var(--paper); letter-spacing: 0.05em; }
+  @media (max-width: 600px) {
+    .score-row { grid-template-columns: 1fr; gap: 8px; }
+    .score-row .bar { width: 100%; }
+  }
 
   /* Severity distribution */
   .sevs { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; margin: 24px 0; }
@@ -160,6 +167,9 @@
 
   /* Findings table */
   table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  /* A table narrower than its content scrolls inside this box, so the page never does. */
+  .table-scroll { overflow-x: auto; margin: 20px 0; -webkit-overflow-scrolling: touch; }
+  .table-scroll table { margin: 0; }
   th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--ink-3); }
   th { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); font-weight: 500; }
   td { color: var(--paper-2); }
@@ -377,6 +387,7 @@
 
   <h3 class="sst">Headline finding <em>classes</em></h3>
   <p>The audit produced 104 findings. The headline classes, anonymized:</p>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="Table, scrolls horizontally">
   <table>
     <thead>
       <tr><th>Finding class</th><th style="text-align:right">Count</th><th>Severity</th><th>What it represents</th></tr>
@@ -392,6 +403,7 @@
       <tr><td>Governance gaps</td><td class="num">2</td><td><span class="sev p2">P2/P3</span></td><td>No declared monitoring URL, no documentation runbook.</td></tr>
     </tbody>
   </table>
+  </div>
   <p>The single most consequential finding: <strong>zero cross-system canonical IDs.</strong> The integration believes it has reconciliation keys; it doesn't. Every other defect is downstream of that one.</p>
 
   <h3 class="sst">A detector that <em>generalized</em></h3>
@@ -496,6 +508,7 @@
 <section class="block" id="engagement">
   <div class="section-num">§ 07 · Engagement model</div>
   <h2 class="st">Three tiers. <em>One primitive</em>.</h2>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="Table, scrolls horizontally">
   <table>
     <thead>
       <tr><th>Tier</th><th>Scope</th><th>What's included</th></tr>
@@ -518,6 +531,7 @@
       </tr>
     </tbody>
   </table>
+  </div>
   <p>Pricing is engagement-dependent; the primitive's economics are structural — variable cost per audit is roughly one day of senior engineer time plus modest API quotas. <strong>Margin is in the codified judgment, not the labor.</strong></p>
 </section>
 
@@ -552,6 +566,7 @@
   <p>The audit shape, finding distribution, and detector behavior are the load-bearing pieces of evidence — anonymizing them would defeat the point of publishing a case study at all. Redacting the customer identity protects the engagement; preserving the audit mechanics is what makes the case study useful to a prospective customer evaluating the methodology.</p>
   <h3 class="sst">The seven-deliverable <em>structure</em></h3>
   <p>Every audit run produces the same seven files, audience-targeted so each role opens only what they need:</p>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="Table, scrolls horizontally">
   <table>
     <thead>
       <tr><th>#</th><th>Deliverable</th><th>Audience</th><th>When to open it</th></tr>
@@ -566,6 +581,7 @@
       <tr><td class="num">06</td><td>AI Augmentation Roadmap</td><td>Exec · RevOps lead</td><td>AI investment planning</td></tr>
     </tbody>
   </table>
+  </div>
   <p>Plus a <code>99_evidence/</code> folder of raw JSON snapshots, query outputs, and source-of-truth artifacts — every claim in the deliverable cites its evidence file so the buyer can reproduce the finding cold.</p>
 </section>
 

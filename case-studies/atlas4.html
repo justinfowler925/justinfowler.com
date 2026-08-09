@@ -70,7 +70,7 @@
   .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
   .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
-  .nav-links { display: flex; gap: 24px; }
+  .nav-links { display: flex; gap: 8px 24px; flex-wrap: wrap; }
   .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
 
@@ -107,6 +107,9 @@
   p strong { color: var(--paper); font-weight: 600; }
   p em { color: var(--accent-2); font-style: italic; }
   p code, .ic { font-family: var(--mono); font-size: 0.88em; color: var(--accent-2); background: var(--ink-2); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--ink-3); }
+  /* Long unbreakable identifiers (paths, config keys) must wrap rather than
+     widen the page — they were the last source of h-scroll at 320px. */
+  code, .ic { overflow-wrap: anywhere; }
   ul { margin: 12px 0 16px 24px; max-width: 760px; }
   ul li { color: var(--paper-2); margin-bottom: 8px; }
   ul li strong { color: var(--paper); }
@@ -122,6 +125,10 @@
   /* Flow diagram */
   .flow { display: grid; gap: 12px; margin: 24px 0; }
   .flow-step { display: grid; grid-template-columns: 60px 1fr; gap: 18px; align-items: center; padding: 16px 20px; background: var(--ink-2); border: 1px solid var(--ink-3); border-left: 3px solid var(--accent); border-radius: 10px; }
+  @media (max-width: 600px) {
+    .flow-step { grid-template-columns: 1fr; gap: 8px; }
+    .stack-row { grid-template-columns: 1fr; gap: 8px; }
+  }
   .flow-step .fnum { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; }
   .flow-step h4 { font-family: var(--serif); font-size: 17px; color: var(--paper); font-weight: 500; margin-bottom: 4px; }
   .flow-step p { margin: 0; font-size: 14px; color: var(--paper-2); }
@@ -137,6 +144,9 @@
 
   /* Tables */
   table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  /* A table narrower than its content scrolls inside this box, so the page never does. */
+  .table-scroll { overflow-x: auto; margin: 20px 0; -webkit-overflow-scrolling: touch; }
+  .table-scroll table { margin: 0; }
   th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--ink-3); }
   th { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); font-weight: 500; }
   td { color: var(--paper-2); }
