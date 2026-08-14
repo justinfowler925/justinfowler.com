@@ -1,0 +1,346 @@
+<!doctype html>
+<!-- shine-lint: off type color
+     Reproduces justinfowler.com's existing chrome verbatim — same nav, hero, section and
+     footer CSS as writing.html and case-studies/*.html, which predate shine's type/tracking
+     rules and carry these literals today. COLOR all comes from /assets/tokens.css (vendored
+     shine); the one raw hex is the <meta name="theme-color"> shared by every page. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>voice-mode — Justin Fowler</title>
+<meta name="description" content="Hands-free voice control on macOS that actually works. Five-minute setup, the complete undocumented .voicecommands format, why commands silently fail, and a diagnostic that tells you which half is broken." />
+<meta name="theme-color" content="#0c0a09" />
+
+<link rel="canonical" href="https://justinfowler.com/voice-mode.html" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+<link rel="manifest" href="/manifest.webmanifest" />
+
+<meta property="og:title" content="voice-mode — hands-free macOS, done right" />
+<meta property="og:description" content="Five-minute setup, the complete undocumented .voicecommands format, and a diagnostic that tells you why a command silently fails." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://justinfowler.com/voice-mode.html" />
+<meta property="og:image" content="https://justinfowler.com/og-image.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://justinfowler.com/og-image.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="/assets/tokens.css" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.5; min-height: 100vh; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  .skip { position: absolute; left: -9999px; top: 8px; padding: 10px 16px; background: var(--accent); color: var(--ink); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; border-radius: 999px; z-index: 999; }
+  .skip:focus { left: 24px; }
+  .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  @media (min-width: 768px) { .container { padding: 0 48px; } }
+  nav { padding: 28px 0 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  .nav-links { display: flex; gap: 8px 24px; flex-wrap: wrap; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
+
+  header.hero { padding: 72px 0 40px; }
+  @media (min-width: 768px) { header.hero { padding: 100px 0 52px; } }
+  .stamp { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 26px; padding: 8px 14px; display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent-line); border-radius: 999px; }
+  h1 { font-family: var(--mono); font-size: clamp(40px, 7vw, 74px); font-weight: 600; line-height: 1; letter-spacing: -0.05em; margin-bottom: 22px; color: var(--paper); }
+  h1 .slash { color: var(--accent); }
+  .lede { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); line-height: 1.45; color: var(--paper-2); max-width: 700px; }
+  .lede strong { color: var(--paper); font-weight: 600; }
+  .lede em { color: var(--accent-2); font-style: italic; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .btn { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; padding: 14px 22px; border: 1px solid var(--ink-3); color: var(--paper); border-radius: 999px; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+  .btn.primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
+
+  section.block { padding: 52px 0; border-top: 1px solid var(--ink-3); }
+  .section-num { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 8px; }
+  h2.st { font-family: var(--serif); font-size: clamp(28px, 4.2vw, 42px); font-weight: 300; line-height: 1.06; letter-spacing: -0.02em; margin-bottom: 26px; }
+  h2.st em { font-style: italic; color: var(--mute); }
+  h3.sub { font-family: var(--mono); font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--paper); margin: 30px 0 12px; }
+  .prose { max-width: 680px; display: flex; flex-direction: column; gap: 18px; }
+  .prose p { font-family: var(--serif); font-size: 17px; line-height: 1.68; color: var(--paper-2); }
+  .prose p strong { color: var(--paper); font-weight: 600; }
+  .prose p em { color: var(--accent-2); font-style: italic; }
+  code { font-family: var(--mono); font-size: 0.87em; color: var(--accent-2); background: var(--ink-2); border: 1px solid var(--ink-3); padding: 2px 7px; border-radius: 5px; }
+  pre { font-family: var(--mono); font-size: 12.5px; line-height: 1.7; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 12px; padding: 18px 20px; overflow-x: auto; color: var(--paper-2); }
+  pre code { background: none; border: none; padding: 0; color: inherit; font-size: inherit; }
+  pre .c { color: var(--mute-2); }
+  pre .k { color: var(--accent-2); }
+
+  /* numbered setup steps */
+  .steps { counter-reset: s; display: flex; flex-direction: column; gap: 26px; }
+  .step { display: grid; grid-template-columns: 30px 1fr; gap: 6px 16px; }
+  .step::before { counter-increment: s; content: counter(s); font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; grid-row: 1 / span 3; }
+  .step h4 { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--paper); margin-bottom: 6px; }
+  .step p { font-family: var(--serif); font-size: 16px; line-height: 1.6; color: var(--paper-2); max-width: 640px; }
+  .step pre { margin-top: 10px; }
+
+  /* the warning callout */
+  .warn { background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-left: 2px solid var(--accent); border-radius: 0 14px 14px 0; padding: 24px 26px; display: flex; flex-direction: column; gap: 12px; }
+  .warn .label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); }
+  .warn p { font-family: var(--serif); font-size: 17px; line-height: 1.6; color: var(--paper-2); }
+  .warn p strong { color: var(--paper); font-weight: 600; }
+
+  .scroller { overflow-x: auto; border: 1px solid var(--ink-3); border-radius: 12px; background: var(--ink-2); }
+  table { border-collapse: collapse; width: 100%; font-family: var(--mono); font-size: 12px; }
+  th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--ink-3); vertical-align: top; }
+  th { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute); font-weight: 500; }
+  td { color: var(--paper-2); line-height: 1.55; }
+  tr:last-child td { border-bottom: none; }
+  td.say { color: var(--accent); white-space: nowrap; font-weight: 600; }
+  td.ok { color: var(--accent-2); white-space: nowrap; }
+  td.no { color: var(--paper); white-space: nowrap; }
+
+  /* troubleshooting */
+  .tshoot { display: flex; flex-direction: column; gap: 12px; }
+  .tcase { background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 12px; padding: 20px 22px; }
+  .tcase .sym { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--paper); margin-bottom: 8px; }
+  .tcase p { font-family: var(--serif); font-size: 16px; line-height: 1.6; color: var(--paper-2); }
+  .tcase p + p { margin-top: 8px; }
+  .tcase .fix { color: var(--paper); border-left: 1px solid var(--accent-line); padding-left: 14px; }
+
+  footer { padding: 46px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 20px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute-2); }
+  footer a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
+  footer a:hover { color: var(--accent); }
+  a { color: var(--accent); }
+  a:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+</style>
+<script src="/assets/analytics.js" defer></script>
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="container">
+
+<nav aria-label="Primary">
+  <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/resume.html">Resume</a>
+    <a href="/now.html">Now</a>
+    <a href="/writing.html">Writing</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="hero">
+  <div class="stamp">Open source · MIT · macOS 26+</div>
+  <h1>voice<span class="slash">-</span>mode</h1>
+  <p class="lede">Talk to your Mac and have it actually do things. <strong>No hotkey to hold, no third-party app, no subscription.</strong> Five minutes to working, and a diagnostic that tells you <em>why</em> a command failed instead of leaving you guessing.</p>
+  <div class="cta-row">
+    <a class="btn primary" href="#quickstart">Start here ↓</a>
+    <a class="btn" href="https://github.com/justinfowler925/voice-mode" target="_blank" rel="noopener">GitHub ↗</a>
+    <a class="btn" href="/writing/voice-optimization-stack.html">The full stack</a>
+    <a class="btn" href="/writing/heard-not-obeyed.html">How I found this</a>
+  </div>
+</header>
+
+<section class="block">
+  <div class="section-num">§ 01 — What this is</div>
+  <h2 class="st">macOS already does this. <em>Nobody tells you how.</em></h2>
+  <div class="prose">
+    <p>Apple ships a feature called Voice Control that can drive your entire Mac by voice — type into any app, press any button, switch apps, edit text. It's free, it's built in, and it runs on-device.</p>
+    <p>It is also almost completely undocumented past the settings pane, and it has a handful of traps that make it look broken when it isn't. <strong>voice-mode is the missing manual plus the tools.</strong></p>
+    <p>Two audiences, both covered on this page. If you just want to talk to your computer, do §&nbsp;02 and stop. If you want to build your own command sets or understand the format, keep going to §&nbsp;05.</p>
+  </div>
+
+  <div class="warn" style="margin-top:28px">
+    <span class="label">The trap that wastes everyone's evening</span>
+    <p><strong>A voice command bound to a plain <code>Return</code> is silently ignored by Claude, Cursor, Slack, VS Code, Discord and Notion.</strong> It doesn't error. The command is recognized. Nothing happens.</p>
+    <p>Bind it to <code>Cmd+Return</code> instead and it works in all of them. Same mechanism, same event, one modifier key. That single fact is most of what this project exists to tell you.</p>
+  </div>
+</section>
+
+<section class="block" id="quickstart">
+  <div class="section-num">§ 02 — Quickstart</div>
+  <h2 class="st">Working in <em>five minutes</em></h2>
+  <div class="prose" style="margin-bottom:30px">
+    <p>No terminal required for this part. You'll turn on Voice Control, import a set of commands, and say one phrase to send a message.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <h4>Turn on Voice Control</h4>
+      <p>System Settings → Accessibility → Voice Control → switch it on. macOS downloads a small on-device model the first time. Nothing you say leaves your Mac.</p>
+    </div>
+    <div class="step">
+      <h4>Free up the microphone key, if you use one</h4>
+      <p>Voice Control listens continuously — there is no key to hold. If you'd previously set up a push-to-talk dictation app, turn it off so the two don't fight over the microphone.</p>
+    </div>
+    <div class="step">
+      <h4>Download the starter command set</h4>
+      <p>Grab <code>sets/core.voicecommands</code> from the repo. It's a plain file — ten commands, every one bound to a mechanism that works.</p>
+      <pre><code><span class="c"># or clone the whole thing</span>
+git clone https://github.com/justinfowler925/voice-mode</code></pre>
+    </div>
+    <div class="step">
+      <h4>Import it</h4>
+      <p>System Settings → Accessibility → Voice Control → Commands → <strong>Import</strong>, and pick that file. Your commands appear immediately, already switched on.</p>
+    </div>
+    <div class="step">
+      <h4>Say <strong>“punch it”</strong></h4>
+      <p>Click into any message box, talk normally, then say <em>punch it</em>. It sends. That works in Claude, Cursor, Slack — anywhere, with no per-app setup.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">§ 03 — The commands</div>
+  <h2 class="st">What to <em>say</em></h2>
+  <div class="scroller">
+    <table>
+      <thead><tr><th>Say this</th><th>It does</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td class="say">punch it</td><td>Sends the message</td><td>The one you'll use constantly. Works everywhere.</td></tr>
+        <tr><td class="say">click <em>&lt;name&gt;</em></td><td>Presses any labelled button</td><td>Built in. Say what's written on it: <code>click Save</code>.</td></tr>
+        <tr><td class="say">show numbers</td><td>Numbers everything clickable</td><td>Built in. For buttons with no label — say the number.</td></tr>
+        <tr><td class="say">show commands</td><td>Apple's full list</td><td>Built in, and app-specific. Your best reference.</td></tr>
+        <tr><td class="say">scratch that</td><td>Deletes your last phrase</td><td>Built in. Faster than any correction.</td></tr>
+        <tr><td class="say">go to cursor</td><td>Switches apps</td><td>One per app you use.</td></tr>
+        <tr><td class="say">hands</td><td>Stop transcribing</td><td>Commands still work. Say this before talking <em>about</em> a command.</td></tr>
+        <tr><td class="say">talk</td><td>Resume transcribing</td><td></td></tr>
+        <tr><td class="say">select all</td><td>Cmd+A</td><td>Then <code>copy that</code>, <code>paste that</code>, <code>undo that</code>.</td></tr>
+        <tr><td class="say">go to sleep</td><td>Stop listening</td><td>Built in. <code>wake up</code> to resume.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose" style="margin-top:24px">
+    <p><strong>Why “punch it” and not “send it.”</strong> A trigger phrase competes with the sentence being transcribed — the recognizer has to decide whether your words are a command or more dictation, and a conversational phrase loses that call about half the time. Worse, phrases like <em>that's it</em> and <em>go ahead</em> occur in ordinary speech, so they fire mid-thought and submit half-written messages. Pick something you would never say in a sentence.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">§ 04 — When it doesn't work</div>
+  <h2 class="st">Troubleshooting, by <em>symptom</em></h2>
+  <div class="tshoot">
+    <div class="tcase">
+      <div class="sym">I say the command and absolutely nothing happens</div>
+      <p>Two completely different bugs look like this, and they have nothing in common. Either it never heard you, or it heard you and the action is wrong.</p>
+      <p class="fix">Run <code>voice-mode doctor</code>. It reads Apple's own recognition counter — a number macOS keeps and shows in no interface — and tells you which one you're in. If the count moved, the binding is wrong; if it never moved, the phrase is wrong.</p>
+    </div>
+    <div class="tcase">
+      <div class="sym">It works in some apps but not others</div>
+      <p>You've almost certainly bound it to a plain unmodified key. Electron apps drop those silently.</p>
+      <p class="fix">Rebind to a modified key — <code>Cmd+Return</code> rather than <code>Return</code>. <code>doctor</code> flags every command in this category by name.</p>
+    </div>
+    <div class="tcase">
+      <div class="sym">My words get typed out instead of running the command</div>
+      <p>The phrase is too conversational, so the recognizer treated it as dictation.</p>
+      <p class="fix">Rename it to something unsayable. Two or more words, no single syllables — that's Apple's guidance too.</p>
+    </div>
+    <div class="tcase">
+      <div class="sym">Commands fire when I didn't mean them</div>
+      <p>Same root cause, opposite direction: your trigger occurs in normal speech.</p>
+      <p class="fix">Rename it. And say <code>hands</code> before you discuss commands out loud, <code>talk</code> to resume.</p>
+    </div>
+    <div class="tcase">
+      <div class="sym">“click Send” does nothing in one particular app</div>
+      <p>That app's button has no accessible name, so there's nothing to match. Cursor's send arrow is exactly this.</p>
+      <p class="fix">Use <code>show numbers</code> and say the number, or bind the app's keyboard shortcut instead.</p>
+    </div>
+    <div class="tcase">
+      <div class="sym">A built-in command stopped working after I added my own</div>
+      <p>A custom command silently <em>disables</em> the built-in that shares its phrase — and the native one usually rides a better mechanism than whatever you bound.</p>
+      <p class="fix">Delete your custom version. <code>doctor</code> lists built-ins that have been switched off this way.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">§ 05 — For developers</div>
+  <h2 class="st">The format, and the <em>tiers</em></h2>
+  <div class="prose">
+    <p>There is <strong>no public API</strong>. No framework, no XPC service, no entitlement. Voice Control commands live in one undocumented property list, and the supported interface is the settings pane plus <code>.voicecommands</code> import/export.</p>
+    <p>The repo carries the complete per-command schema, derived by reading a live command table and writing to it until every field's behaviour was known. It isn't documented anywhere else.</p>
+  </div>
+
+  <h3 class="sub">Reliability is a property of the binding</h3>
+  <div class="prose">
+    <p>Sort commands into these tiers and you can predict which of yours will fail before testing any of them.</p>
+  </div>
+  <div class="scroller" style="margin-top:16px">
+    <table>
+      <thead><tr><th>Verdict</th><th>Mechanism</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td class="ok">Works</td><td>Modified keystroke — <code>Cmd+Return</code></td><td>Survives Electron composers. Verified.</td></tr>
+        <tr><td class="ok">Works</td><td>Accessibility action — click by label, menu item</td><td>Needs the control to have a name.</td></tr>
+        <tr><td class="ok">Works</td><td>App / URL launch</td><td>Nothing in the path to swallow it.</td></tr>
+        <tr><td class="no">Fails</td><td>Bare unmodified key — <code>Return</code>, <code>Escape</code></td><td>Silently dropped. Verified: 8 fires, 0 sends.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">Two stores, two shapes — the trap that eats your config</h3>
+  <div class="prose">
+    <p>The export file wraps commands in a <code>CommandsTable</code> key. <strong>The live store is flat</strong> — command ids sit at the top level. Assume the wrapper when writing the live store and you create an empty table, orphaning every command you have, with no error anywhere.</p>
+  </div>
+  <pre><code><span class="c"># read the live store — there is no CommandsTable key here</span>
+defaults export com.apple.speech.recognition.AppleSpeechRecognition.CustomCommands -
+
+<span class="c"># import MERGES: edits stick, deletions do not. Remove one command by key:</span>
+defaults delete <span class="k">&lt;domain&gt;</span> Custom.808351004.970543146
+
+<span class="c"># reload the recognizer. Do NOT also kill cfprefsd — it can undo your write.</span>
+killall DictationIM</code></pre>
+
+  <h3 class="sub">The CLI</h3>
+  <pre><code><span class="c"># diagnose every command by tier and fire count</span>
+./bin/voice-mode doctor
+
+<span class="c"># readable JSON set -> importable .voicecommands</span>
+./bin/voice-mode build sets/core.json -o core.voicecommands
+
+<span class="c"># run the gates (31 checks)</span>
+./tests/run</code></pre>
+  <div class="prose" style="margin-top:18px">
+    <p>Python 3 standard library only, no dependencies. <code>build</code> <strong>refuses</strong> a bare-key binding rather than warning about it — you have to pass <code>allow_bare</code> to force one through.</p>
+    <p>Also in the repo: the undocumented <code>notify</code> control surface, with five recognizer modes rather than the two Settings exposes — including a code-dictation mode with its own language model that Apple never surfaced. Plus the full 161-command built-in catalog and the 82 nameable keys.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">§ 06 — Honest limits</div>
+  <h2 class="st">What this <em>doesn't</em> solve</h2>
+  <div class="prose">
+    <p><strong>Accuracy is the OS's, not mine.</strong> Expect roughly 95% on clear speech with a decent microphone in a quiet room, and noticeably worse with background noise. An external mic is the single biggest improvement available.</p>
+    <p><strong>Proper nouns get mangled</strong> until you add them to Voice Control's vocabulary. That pane exists and syncs across devices — but its import file format is undiscovered, so words go in one at a time, or by voice with <code>Text.AddSelectionToVocabulary</code>.</p>
+    <p><strong>Everything here is unsupported.</strong> No API means Apple can change the plist shape in any release. The format doc records how each field was verified so a future reader can tell what's fact and what's inference.</p>
+    <p><strong>Local speech-to-text apps can't replace this.</strong> MacParakeet, superwhisper, Wispr Flow — the whole category is push-to-talk or toggle. Better transcription, but none of them do continuous hands-free, so none of them meet the bar.</p>
+  </div>
+  <div class="cta-row" style="margin-top:32px">
+    <a class="btn primary" href="https://github.com/justinfowler925/voice-mode" target="_blank" rel="noopener">Get it on GitHub ↗</a>
+    <a class="btn" href="/writing/voice-optimization-stack.html">Read the full stack</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 · Justin Fowler</span>
+  <span>voice-mode · MIT · Updated 2026-08-14</span>
+  <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></span>
+  <span><a href="/writing.html">Writing ↗</a></span>
+</footer>
+
+</div>
+</body>
+</html>
