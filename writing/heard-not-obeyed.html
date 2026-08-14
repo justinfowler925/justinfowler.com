@@ -1,0 +1,343 @@
+<!doctype html>
+<!-- shine-lint: off type color
+     This page reproduces justinfowler.com's existing chrome verbatim — the same nav,
+     hero, section and footer CSS as writing.html and case-studies/*.html, which all
+     predate shine's type/tracking rules and carry these literals today. Diverging here
+     would make this the single visually inconsistent page on the site. All COLOR comes
+     from /assets/tokens.css (vendored shine) via --ink/--paper/--accent; the one raw hex
+     is the <meta name="theme-color"> value copied from every other page. Migrating the
+     whole site onto shine type tokens is its own change, not an article PR. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Heard, Not Obeyed — Justin Fowler</title>
+<meta name="description" content="An evening spent building hands-free dictation on macOS. The machine understood every word — that turned out to be the hard part. Seven dead ends, the counter that settles them, and the one binding that works." />
+<meta name="theme-color" content="#0c0a09" />
+
+<link rel="canonical" href="https://justinfowler.com/writing/heard-not-obeyed.html" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+<link rel="manifest" href="/manifest.webmanifest" />
+
+<meta property="og:title" content="Heard, Not Obeyed — Justin Fowler" />
+<meta property="og:description" content="Hands-free dictation on macOS: seven dead ends, the counter that tells you which half is broken, and the one binding that survives." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-08-13" />
+<meta property="og:url" content="https://justinfowler.com/writing/heard-not-obeyed.html" />
+<meta property="og:image" content="https://justinfowler.com/og-image.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://justinfowler.com/og-image.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="/assets/tokens.css" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.5; min-height: 100vh; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  .skip { position: absolute; left: -9999px; top: 8px; padding: 10px 16px; background: var(--accent); color: var(--ink); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; border-radius: 999px; z-index: 999; }
+  .skip:focus { left: 24px; }
+  .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  @media (min-width: 768px) { .container { padding: 0 48px; } }
+  nav { padding: 28px 0 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  .nav-links { display: flex; gap: 8px 24px; flex-wrap: wrap; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
+
+  header.hero { padding: 72px 0 40px; }
+  @media (min-width: 768px) { header.hero { padding: 104px 0 56px; } }
+  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); margin-bottom: 28px; }
+  .breadcrumb a { color: var(--mute); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { color: var(--mute-2); margin: 0 12px; }
+  .breadcrumb .here { color: var(--accent); }
+  .stamp { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 28px; padding: 8px 14px; display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent-line); border-radius: 999px; }
+  h1 { font-family: var(--serif); font-variation-settings: 'opsz' 144, 'SOFT' 50; font-size: clamp(44px, 8vw, 88px); font-weight: 300; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 24px; }
+  h1 em { font-style: italic; color: var(--accent-2); font-weight: 300; }
+  .lede { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); line-height: 1.45; color: var(--paper-2); max-width: 720px; }
+  .lede em { color: var(--accent-2); font-style: italic; }
+  .lede strong { color: var(--paper); font-weight: 600; }
+
+  section.block { padding: 56px 0; border-top: 1px solid var(--ink-3); }
+  .section-num { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 8px; }
+  h2.st { font-family: var(--serif); font-size: clamp(30px, 4.4vw, 44px); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 28px; }
+  h2.st em { font-style: italic; color: var(--mute); }
+  .prose { max-width: 680px; display: flex; flex-direction: column; gap: 20px; }
+  .prose p { font-family: var(--serif); font-size: 17px; line-height: 1.68; color: var(--paper-2); }
+  .prose p strong { color: var(--paper); font-weight: 600; }
+  .prose p em { color: var(--accent-2); font-style: italic; }
+  code { font-family: var(--mono); font-size: 0.87em; color: var(--accent-2); background: var(--ink-2); border: 1px solid var(--ink-3); padding: 2px 7px; border-radius: 5px; white-space: nowrap; }
+
+  /* readout */
+  .readout { display: grid; grid-template-columns: 1fr; border: 1px solid var(--ink-3); border-radius: 16px; overflow: hidden; background: var(--ink-2); margin-top: 40px; }
+  @media (min-width: 700px) { .readout { grid-template-columns: 1fr 1fr 1.5fr; } }
+  .rcell { padding: 28px 26px; border-bottom: 1px solid var(--ink-3); display: flex; flex-direction: column; gap: 8px; }
+  @media (min-width: 700px) { .rcell { border-bottom: none; border-right: 1px solid var(--ink-3); } .rcell:last-child { border-right: none; } }
+  .rfig { font-family: var(--mono); font-size: clamp(52px, 8vw, 76px); font-weight: 600; line-height: 0.85; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; }
+  .rfig.hit { color: var(--accent); }
+  .rfig.miss { color: var(--mute); }
+  .rcap { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); line-height: 1.6; }
+  .rcell.note { justify-content: center; }
+  .rcell.note p { font-family: var(--serif); font-size: 16px; line-height: 1.6; color: var(--paper-2); }
+
+  /* the answer */
+  .answer { background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-left: 2px solid var(--accent); border-radius: 0 16px 16px 0; padding: 32px 28px; display: flex; flex-direction: column; gap: 16px; }
+  @media (min-width: 700px) { .answer { padding: 40px 44px; } }
+  .answer .cmdline { font-family: var(--mono); font-size: clamp(24px, 4vw, 38px); font-weight: 600; letter-spacing: -0.02em; color: var(--accent); }
+  .answer p { font-family: var(--serif); font-size: 17px; line-height: 1.65; color: var(--paper-2); max-width: 660px; }
+  .answer p strong { color: var(--paper); font-weight: 600; }
+
+  /* tier table */
+  .scroller { overflow-x: auto; border: 1px solid var(--ink-3); border-radius: 14px; background: var(--ink-2); }
+  table { border-collapse: collapse; width: 100%; font-family: var(--mono); font-size: 12px; }
+  th, td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--ink-3); vertical-align: top; }
+  th { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mute); font-weight: 500; }
+  td { color: var(--paper-2); line-height: 1.6; }
+  tr:last-child td { border-bottom: none; }
+  td.verdict-ok { color: var(--accent); white-space: nowrap; }
+  td.verdict-no { color: var(--paper); white-space: nowrap; }
+  td.mech { color: var(--paper); white-space: nowrap; }
+
+  /* dead ends */
+  .entries { display: flex; flex-direction: column; gap: 14px; }
+  .entry { background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 14px; padding: 26px 24px; display: grid; grid-template-columns: 1fr; gap: 12px; }
+  @media (min-width: 760px) { .entry { grid-template-columns: 48px 1fr; column-gap: 24px; padding: 28px 30px; } .entry .enum { grid-row: 1 / span 4; } }
+  .enum { font-family: var(--mono); font-size: 11px; color: var(--mute-2); letter-spacing: 0.12em; padding-top: 4px; }
+  .entry h3 { font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.22; color: var(--paper); }
+  .entry h3 em { color: var(--accent-2); font-style: italic; }
+  .entry p { font-family: var(--serif); font-size: 16px; line-height: 1.65; color: var(--paper-2); }
+  .entry p.why { color: var(--paper); border-left: 1px solid var(--accent-line); padding-left: 16px; }
+  .tagchip { font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line); padding: 4px 10px; border-radius: 999px; justify-self: start; }
+
+  /* rules */
+  .rules { list-style: none; display: flex; flex-direction: column; gap: 22px; counter-reset: r; max-width: 700px; }
+  .rules li { display: grid; grid-template-columns: 34px 1fr; gap: 4px 12px; }
+  .rules li::before { counter-increment: r; content: counter(r, decimal-leading-zero); font-family: var(--mono); font-size: 11px; color: var(--accent); padding-top: 6px; }
+  .rules b { display: block; font-family: var(--serif); font-size: 19px; font-weight: 400; color: var(--paper); line-height: 1.3; margin-bottom: 6px; }
+  .rules span.body { font-family: var(--serif); font-size: 16px; line-height: 1.65; color: var(--paper-2); }
+
+  .endnote { padding: 28px; background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-radius: 14px; }
+  .endnote p { font-family: var(--mono); font-size: 12px; line-height: 1.8; color: var(--mute); }
+  .endnote p strong { color: var(--paper-2); font-weight: 500; }
+
+  footer { padding: 48px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute-2); }
+  footer a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
+  footer a:hover { color: var(--accent); }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+</style>
+<script src="/assets/analytics.js" defer></script>
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="container">
+
+<nav aria-label="Primary">
+  <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/resume.html">Resume</a>
+    <a href="/now.html">Now</a>
+    <a href="/writing.html" aria-current="page">Writing</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="hero">
+  <div class="breadcrumb">
+    <a href="/">Home</a><span class="sep">/</span><a href="/writing.html">Writing</a><span class="sep">/</span><span class="here">Heard, Not Obeyed</span>
+  </div>
+  <div class="stamp">Field report · 13 Aug 2026</div>
+  <h1>Heard, <em>Not Obeyed</em></h1>
+  <p class="lede">I spent an evening trying to talk to my computer without touching it. The machine understood me the entire time. <strong>That turned out to be the hard part</strong> — because <em>“it didn't hear me”</em> and <em>“it heard me and did nothing”</em> look identical from the chair, and have nothing in common as bugs.</p>
+
+  <div class="readout">
+    <div class="rcell">
+      <span class="rfig hit">8</span>
+      <span class="rcap">times the phrase<br />was recognized</span>
+    </div>
+    <div class="rcell">
+      <span class="rfig miss">0</span>
+      <span class="rcap">messages<br />actually sent</span>
+    </div>
+    <div class="rcell note">
+      <p>macOS keeps that first number and shows it to nobody. Every hour I lost was spent not knowing it.</p>
+    </div>
+  </div>
+</header>
+
+<section class="block">
+  <div class="section-num">01 — The answer</div>
+  <h2 class="st">One command, <em>every app</em></h2>
+  <div class="answer">
+    <div class="cmdline">punch it</div>
+    <p>Apple Voice Control left listening continuously, and a single custom command bound to <strong>Cmd+Return</strong>. That is the entire working configuration. It sends in Claude, in Cursor, in Slack — one phrase, no per-app code, no background processes.</p>
+    <p>What it replaced: four background agents, eleven helper apps, and a local speech engine that had never successfully transcribed a single word.</p>
+    <p><strong>The part that cost the evening: plain <code>Return</code> is swallowed by those apps. <code>Cmd+Return</code> is not.</strong> Same mechanism, same synthetic event, opposite outcome. I concluded from the first that keystrokes were closed off entirely, and that one over-generalisation sent everything down a different road for hours.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">02 — The useful part</div>
+  <h2 class="st">Reliability is a property of the <em>binding</em></h2>
+  <div class="prose">
+    <p>This is the piece worth stealing. A spoken command's reliability has almost nothing to do with the app it lands in and almost everything to do with the mechanism it is bound to. Sort your commands into these tiers and you can predict which ones work before testing any of them.</p>
+  </div>
+  <div class="scroller" style="margin-top:28px">
+    <table>
+      <thead>
+        <tr><th>Verdict</th><th>Mechanism</th><th>Evidence</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="verdict-ok">Works</td>
+          <td class="mech">Modified keystroke<br />Cmd+Return, Cmd+A/C/V/Z</td>
+          <td>Verified — 12 fires, messages landed in three apps</td>
+        </tr>
+        <tr>
+          <td class="verdict-ok">Works</td>
+          <td class="mech">Accessibility action<br />click by label, native scroll</td>
+          <td>Verified — but needs the control to actually have a name</td>
+        </tr>
+        <tr>
+          <td class="verdict-ok">Works</td>
+          <td class="mech">App launch</td>
+          <td>Nothing in the path to swallow it</td>
+        </tr>
+        <tr>
+          <td class="verdict-no">Fails</td>
+          <td class="mech">Bare unmodified key<br />Return, Escape, PageUp/Down</td>
+          <td>Verified failing — 8 fires, 0 sends</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose" style="margin-top:28px">
+    <p>So when a spoken command does nothing, <strong>check its binding tier before you debug the app.</strong> That is a five-second triage instead of an evening.</p>
+    <p>There is a nasty corollary. A custom command <em>silently disables</em> the built-in one that shares its phrase. I had <code>scroll up</code> and <code>scroll down</code> hand-bound to bare PageUp and PageDown — the failing tier — which left the operating system's own accessibility-based scrolling switched off. A working native action had been replaced by a broken keystroke, invisibly, and nothing anywhere said so. <strong>Check whether the platform already ships a verb before you bind it yourself.</strong></p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">03 — The catalog</div>
+  <h2 class="st">Seven things that <em>do not work</em></h2>
+  <div class="entries">
+
+    <article class="entry">
+      <span class="enum">01</span>
+      <span class="tagchip">Impossible</span>
+      <h3>A local speech-to-text app as the always-on ear</h3>
+      <p>The whole category — MacParakeet, superwhisper, Wispr Flow — is push-to-talk or toggle. There is no open-mic mode to switch on. Excellent transcription, genuinely private, structurally unable to meet “don't make me touch a key.”</p>
+      <p class="why">Check for a continuous mode <em>before</em> evaluating accuracy. Accuracy is worthless if the trigger is a key you already said you wouldn't press.</p>
+    </article>
+
+    <article class="entry">
+      <span class="enum">02</span>
+      <span class="tagchip">Silently ignored</span>
+      <h3>Sending a synthetic <em>plain</em> Return</h3>
+      <p>Claude, Cursor and Slack are web pages in desktop wrappers, with composers made of HTML rather than real controls. A plain Return posted programmatically is delivered and then quietly dropped. No error, no bounce, nothing in any log. This is the 8 / 0 above.</p>
+      <p class="why">But Cmd+Return from the identical mechanism works in all three. The boundary is not native-versus-web and not real-versus-synthetic — it is <em>which key</em>. Skipping that one test made the next two entries look necessary.</p>
+    </article>
+
+    <article class="entry">
+      <span class="enum">03</span>
+      <span class="tagchip">Brittle</span>
+      <h3>Walking the UI tree to find the Send button</h3>
+      <p>The obvious workaround to #2: enumerate the interface, locate the send control, press it. It works often enough to ship and then fails constantly, because those trees shift with layout. My log was mostly <code>no Send button</code> and <code>focus FAILED</code>.</p>
+      <p class="why">The supported version ships with the OS — say <em>click</em> plus whatever the button is called. It is genuinely good and it is not universal: it sent in Claude, and in Cursor it fired thirteen times and pressed nothing, because that send arrow is an icon with no accessible name. It removes per-app <em>code</em>, not the need for a per-app <em>name</em>.</p>
+    </article>
+
+    <article class="entry">
+      <span class="enum">04</span>
+      <span class="tagchip">Actively hostile</span>
+      <h3>Auto-sending after a few seconds of silence</h3>
+      <p>A daemon that submits when you stop talking will submit every time you pause to think. There is no threshold that separates <em>finished</em> from <em>choosing a word</em>. Mine was three seconds and it truncated sentences all evening.</p>
+      <p class="why">An explicit trigger word is not friction to be engineered away. It is the only thing in the system that carries intent.</p>
+    </article>
+
+    <article class="entry">
+      <span class="enum">05</span>
+      <span class="tagchip">Redundant</span>
+      <h3>Per-app daemons and helper scripts</h3>
+      <p>Four background agents and eleven small apps, every one shaped around a single editor, all solving problems the dictation layer does not have — it already types into whatever holds focus. Two of the four had never been loaded at all, and nothing had noticed.</p>
+      <p class="why">A component nobody noticed was missing was never doing work. Confirm what is actually running before you extend it.</p>
+    </article>
+
+    <article class="entry">
+      <span class="enum">06</span>
+      <span class="tagchip">Unreliable by design</span>
+      <h3>Trigger phrases that sound like conversation</h3>
+      <p><code>send it</code>. <code>that's it</code>. <code>go ahead</code>. Two independent failures, both fatal. While transcribing, the recognizer has to decide whether your words are a command or the next part of your sentence — a coin flip, and it landed wrong about half the time. Worse, the phrases you say <em>constantly</em> fire mid-thought and submit half-written messages.</p>
+      <p class="why">A trigger must be something you would never say in a sentence. Distinctive beats memorable. This is not a style preference; it is the whole difference between working and not.</p>
+    </article>
+
+    <article class="entry">
+      <span class="enum">07</span>
+      <span class="tagchip">The expensive one</span>
+      <h3>Concluding one observation wider than the evidence</h3>
+      <p>Three claims went into my notes and an early draft of this page, each corrected within the hour. <em>The config is right, so it works</em> — twice; the stored settings and the running engine are different layers. <em>It works everywhere</em> — written from someone saying it “seems to work,” a hedge upgraded into a verified claim. <em>Keystrokes don't work here</em> — true of Return, false of Cmd+Return.</p>
+      <p class="why">Each was cheap to check and expensive to retract. The third is the costly kind: a bad generalisation early sends the whole investigation down a road, and the dead end you eventually hit reads like confirmation rather than the consequence of a wrong turn three steps back.</p>
+    </article>
+
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">04 — Instrumentation</div>
+  <h2 class="st">How to tell <em>which half</em> is broken</h2>
+  <div class="prose">
+    <p>Every wasted hour came from not knowing whether the machine had heard me. It had. macOS keeps a counter for exactly this — one integer per command, incremented on every recognition — and surfaces it in no interface anywhere.</p>
+    <p>Read it, and the two failures separate instantly. The number moves and nothing happens: the command fired and the action is wrong. The number sits still: it never heard you, and the phrase is the problem. Those have <strong>nothing in common</strong> as bugs, and from the chair they are indistinguishable.</p>
+    <p>Whatever you are debugging, the equivalent counter almost certainly exists. Find it before forming a theory. I formed three.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">05 — What it comes down to</div>
+  <h2 class="st">Four rules that would have <em>saved the evening</em></h2>
+  <ol class="rules">
+    <li><span><b>Separate “heard me” from “did something.”</b><span class="body">They look identical from the chair and have nothing in common as bugs. Find the counter before forming a theory — this rule alone would have saved every hour lost here.</span></span></li>
+    <li><span><b>A trigger word must be unsayable.</b><span class="body">If it can appear in a sentence, the recognizer cannot tell command from content, and you have built a coin flip.</span></span></li>
+    <li><span><b>Never generalise from one key, one app, or one “seems to work.”</b><span class="body">Return failed and Cmd+Return worked. One app's button had a name and the next one's didn't. Each gap was a single test wide, and each wrong generalisation cost hours.</span></span></li>
+    <li><span><b>The layer that reports success is the one lying.</b><span class="body">Settings correct, command fired, exit code zero — and no message sent. Only the outcome a person can see counts as evidence.</span></span></li>
+  </ol>
+</section>
+
+<section class="block">
+  <div class="endnote">
+    <p><strong>Setup, as shipped.</strong> macOS 26.6, tested against Claude, Cursor and Slack. Apple Voice Control running continuously plus one command bound to Cmd+Return. No third-party dictation app, no background daemons, no per-application code. Surviving configuration: seventeen spoken commands and nothing else.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 · Justin Fowler</span>
+  <span>Field report · Published 2026-08-13</span>
+  <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></span>
+  <span><a href="/writing.html">More writing ↗</a></span>
+</footer>
+
+</div>
+</body>
+</html>
