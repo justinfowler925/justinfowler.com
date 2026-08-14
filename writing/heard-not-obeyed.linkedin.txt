@@ -1,0 +1,24 @@
+I spent an evening trying to talk to my Mac without touching it.
+
+The send command fired 8 times. It sent 0 messages.
+
+Not "it didn't hear me." It heard me perfectly, every single time, and did nothing. Those two failures look identical from the chair and have nothing in common as bugs. macOS keeps a counter that tells you which one you're in — one integer, incremented on every recognition. It surfaces that number in no interface anywhere.
+
+Finding it was the whole fix. Before I did, I managed to publish three wrong conclusions in one evening:
+
+"The config is right, so it works." Twice. The stored settings and the running engine are different layers.
+
+"It works everywhere." Written off someone telling me it "seems to work" — a hedge I upgraded into a verified claim, then had to retract an hour later.
+
+"Keystrokes don't work in Electron apps." True of Return. False of Cmd+Return. Same mechanism, same synthetic event, opposite result — and that single over-generalisation sent the entire investigation down the wrong road for hours.
+
+The actual answer was one line of configuration: Apple Voice Control listening continuously, one phrase bound to Cmd+Return. It replaced four background daemons, eleven helper apps, and a local speech engine that had never successfully transcribed a single word.
+
+The reusable part has nothing to do with dictation.
+
+A command's reliability is a property of the mechanism it's bound to, not the app it lands in. Modified keystrokes survive. Accessibility actions survive. Bare unmodified keys get swallowed. Sort your commands that way and you can predict which ones work before you test any of them.
+
+And underneath all of it, the one that keeps earning its keep: the layer that reports success is the one lying. Settings correct. Command fired. Exit code zero. No message sent.
+
+Full write-up, including the seven dead ends so you can skip them:
+https://justinfowler.com/writing/heard-not-obeyed.html
