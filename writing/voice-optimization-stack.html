@@ -1,0 +1,393 @@
+<!doctype html>
+<!-- shine-lint: off type color
+     This page reproduces justinfowler.com's existing chrome verbatim — the same nav,
+     hero, section and footer CSS as writing.html and case-studies/*.html, which all
+     predate shine's type/tracking rules and carry these literals today. Diverging here
+     would make this the single visually inconsistent page on the site. All COLOR comes
+     from /assets/tokens.css (vendored shine) via --ink/--paper/--accent; the one raw hex
+     is the <meta name="theme-color"> value copied from every other page. Migrating the
+     whole site onto shine type tokens is its own change, not an article PR. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>The Voice Optimization Stack — Justin Fowler</title>
+<meta name="description" content="Seven layers between your mouth and a computer doing what you meant. Which ones actually move the needle on macOS, in the order worth fixing them, with the measurement for each." />
+<meta name="theme-color" content="#0c0a09" />
+
+<link rel="canonical" href="https://justinfowler.com/writing/voice-optimization-stack.html" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+<link rel="manifest" href="/manifest.webmanifest" />
+
+<meta property="og:title" content="The Voice Optimization Stack — Justin Fowler" />
+<meta property="og:description" content="Hands-free dictation on macOS: seven dead ends, the counter that tells you which half is broken, and the one binding that survives." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-08-14" />
+<meta property="og:url" content="https://justinfowler.com/writing/voice-optimization-stack.html" />
+<meta property="og:image" content="https://justinfowler.com/og-image.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://justinfowler.com/og-image.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="/assets/tokens.css" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.5; min-height: 100vh; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  .skip { position: absolute; left: -9999px; top: 8px; padding: 10px 16px; background: var(--accent); color: var(--ink); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; border-radius: 999px; z-index: 999; }
+  .skip:focus { left: 24px; }
+  .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  @media (min-width: 768px) { .container { padding: 0 48px; } }
+  nav { padding: 28px 0 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  .nav-links { display: flex; gap: 8px 24px; flex-wrap: wrap; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
+
+  header.hero { padding: 72px 0 40px; }
+  @media (min-width: 768px) { header.hero { padding: 104px 0 56px; } }
+  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); margin-bottom: 28px; }
+  .breadcrumb a { color: var(--mute); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { color: var(--mute-2); margin: 0 12px; }
+  .breadcrumb .here { color: var(--accent); }
+  .stamp { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 28px; padding: 8px 14px; display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent-line); border-radius: 999px; }
+  h1 { font-family: var(--serif); font-variation-settings: 'opsz' 144, 'SOFT' 50; font-size: clamp(44px, 8vw, 88px); font-weight: 300; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 24px; }
+  h1 em { font-style: italic; color: var(--accent-2); font-weight: 300; }
+  .lede { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); line-height: 1.45; color: var(--paper-2); max-width: 720px; }
+  .lede em { color: var(--accent-2); font-style: italic; }
+  .lede strong { color: var(--paper); font-weight: 600; }
+
+  section.block { padding: 56px 0; border-top: 1px solid var(--ink-3); }
+  .section-num { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 8px; }
+  h2.st { font-family: var(--serif); font-size: clamp(30px, 4.4vw, 44px); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 28px; }
+  h2.st em { font-style: italic; color: var(--mute); }
+  .prose { max-width: 680px; display: flex; flex-direction: column; gap: 20px; }
+  .prose p { font-family: var(--serif); font-size: 17px; line-height: 1.68; color: var(--paper-2); }
+  .prose p strong { color: var(--paper); font-weight: 600; }
+  .prose p em { color: var(--accent-2); font-style: italic; }
+  code { font-family: var(--mono); font-size: 0.87em; color: var(--accent-2); background: var(--ink-2); border: 1px solid var(--ink-3); padding: 2px 7px; border-radius: 5px; white-space: nowrap; }
+
+  /* readout */
+  .readout { display: grid; grid-template-columns: 1fr; border: 1px solid var(--ink-3); border-radius: 16px; overflow: hidden; background: var(--ink-2); margin-top: 40px; }
+  @media (min-width: 700px) { .readout { grid-template-columns: 1fr 1fr 1.5fr; } }
+  .rcell { padding: 28px 26px; border-bottom: 1px solid var(--ink-3); display: flex; flex-direction: column; gap: 8px; }
+  @media (min-width: 700px) { .rcell { border-bottom: none; border-right: 1px solid var(--ink-3); } .rcell:last-child { border-right: none; } }
+  .rfig { font-family: var(--mono); font-size: clamp(52px, 8vw, 76px); font-weight: 600; line-height: 0.85; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; }
+  .rfig.hit { color: var(--accent); }
+  .rfig.miss { color: var(--mute); }
+  .rcap { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); line-height: 1.6; }
+  .rcell.note { justify-content: center; }
+  .rcell.note p { font-family: var(--serif); font-size: 16px; line-height: 1.6; color: var(--paper-2); }
+
+  /* the answer */
+  .answer { background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-left: 2px solid var(--accent); border-radius: 0 16px 16px 0; padding: 32px 28px; display: flex; flex-direction: column; gap: 16px; }
+  @media (min-width: 700px) { .answer { padding: 40px 44px; } }
+  .answer .cmdline { font-family: var(--mono); font-size: clamp(24px, 4vw, 38px); font-weight: 600; letter-spacing: -0.02em; color: var(--accent); }
+  .answer p { font-family: var(--serif); font-size: 17px; line-height: 1.65; color: var(--paper-2); max-width: 660px; }
+  .answer p strong { color: var(--paper); font-weight: 600; }
+
+  /* tier table */
+  .scroller { overflow-x: auto; border: 1px solid var(--ink-3); border-radius: 14px; background: var(--ink-2); }
+  table { border-collapse: collapse; width: 100%; font-family: var(--mono); font-size: 12px; }
+  th, td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--ink-3); vertical-align: top; }
+  th { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mute); font-weight: 500; }
+  td { color: var(--paper-2); line-height: 1.6; }
+  tr:last-child td { border-bottom: none; }
+  td.verdict-ok { color: var(--accent); white-space: nowrap; }
+  td.verdict-no { color: var(--paper); white-space: nowrap; }
+  td.mech { color: var(--paper); white-space: nowrap; }
+
+  /* dead ends */
+  .entries { display: flex; flex-direction: column; gap: 14px; }
+  .entry { background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 14px; padding: 26px 24px; display: grid; grid-template-columns: 1fr; gap: 12px; }
+  @media (min-width: 760px) { .entry { grid-template-columns: 48px 1fr; column-gap: 24px; padding: 28px 30px; } .entry .enum { grid-row: 1 / span 4; } }
+  .enum { font-family: var(--mono); font-size: 11px; color: var(--mute-2); letter-spacing: 0.12em; padding-top: 4px; }
+  .entry h3 { font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.22; color: var(--paper); }
+  .entry h3 em { color: var(--accent-2); font-style: italic; }
+  .entry p { font-family: var(--serif); font-size: 16px; line-height: 1.65; color: var(--paper-2); }
+  .entry p.why { color: var(--paper); border-left: 1px solid var(--accent-line); padding-left: 16px; }
+  .tagchip { font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line); padding: 4px 10px; border-radius: 999px; justify-self: start; }
+
+  /* rules */
+  .rules { list-style: none; display: flex; flex-direction: column; gap: 22px; counter-reset: r; max-width: 700px; }
+  .rules li { display: grid; grid-template-columns: 34px 1fr; gap: 4px 12px; }
+  .rules li::before { counter-increment: r; content: counter(r, decimal-leading-zero); font-family: var(--mono); font-size: 11px; color: var(--accent); padding-top: 6px; }
+  .rules b { display: block; font-family: var(--serif); font-size: 19px; font-weight: 400; color: var(--paper); line-height: 1.3; margin-bottom: 6px; }
+  .rules span.body { font-family: var(--serif); font-size: 16px; line-height: 1.65; color: var(--paper-2); }
+
+  .exhibit { margin-top: 28px; padding: 12px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 14px; }
+  .exhibit img { width: 100%; display: block; border-radius: 8px; cursor: pointer; }
+  .exhibit figcaption { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute-2); padding: 16px 4px 4px; }
+
+  .endnote { padding: 28px; background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-radius: 14px; }
+  .endnote p { font-family: var(--mono); font-size: 12px; line-height: 1.8; color: var(--mute); }
+  .endnote p strong { color: var(--paper-2); font-weight: 500; }
+
+  .answer .label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); }
+  .btn { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; padding: 14px 22px; border: 1px solid var(--ink-3); color: var(--paper); border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+  .btn.primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: var(--ink); }
+  footer { padding: 48px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute-2); }
+  footer a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
+  footer a:hover { color: var(--accent); }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+</style>
+<script src="/assets/analytics.js" defer></script>
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="container">
+
+<nav aria-label="Primary">
+  <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/resume.html">Resume</a>
+    <a href="/now.html">Now</a>
+    <a href="/writing.html" aria-current="page">Writing</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="hero">
+  <div class="breadcrumb">
+    <a href="/">Home</a><span class="sep">/</span><a href="/writing.html">Writing</a><span class="sep">/</span><span class="here">The Voice Optimization Stack</span>
+  </div>
+  <div class="stamp">Field guide · 14 Aug 2026</div>
+  <h1>The Voice <em>Optimization Stack</em></h1>
+  <p class="lede">There are seven layers between your mouth and a computer doing what you meant. Six of them get all the attention. <strong>The one that decides whether any of it works is the one nobody writes about</strong> — and it sits near the bottom, where a wrong choice makes every layer above it look broken.</p>
+
+  <div class="readout">
+    
+      <div class="rcell">
+        <span class="rfig hit">L5</span>
+        <span class="rcap">binding — the layer<br />that decides everything</span>
+      </div>
+      <div class="rcell">
+        <span class="rfig miss">L1</span>
+        <span class="rcap">the microphone —<br />where everyone starts</span>
+      </div>
+      <div class="rcell note">
+        <p>A better microphone improves a transcript. It cannot make a command fire. Fix the stack from the bottom of the <em>action</em> path, not the top of the audio path.</p>
+      </div>
+  </div>
+</header>
+
+<section class="block">
+  <div class="section-num">The order that matters</div>
+  <h2 class="st">Seven layers, <em>ranked by leverage</em></h2>
+  <div class="prose" style="margin-bottom:1.8rem">
+    <p>Everything written about voice input optimizes layers 1 through 3, because those are the ones you can buy. They matter — but they only affect how accurately your words are captured. They have no bearing on whether the computer <em>does</em> anything, and that is where the failures actually live.</p>
+    <p>Here is the whole stack, worst-return-first, with what each one is actually worth.</p>
+  </div>
+
+  <div class="scroller">
+    <table>
+      <thead>
+        <tr><th>Layer</th><th>What it is</th><th>Worth fixing?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>L1</td><td>Microphone &amp; room</td><td>Real but capped. ~90% → ~95–98% on clear speech. Buy once, forget.</td></tr>
+        <tr><td>L2</td><td>Recognition engine</td><td>Mostly a trap — see below. The good ones can't do what you need.</td></tr>
+        <tr><td>L3</td><td>Vocabulary</td><td>High, and almost free. Your proper nouns are mangled until you fix it.</td></tr>
+        <tr><td>L4</td><td>Trigger phrasing</td><td>Very high. A bad phrase fails ~50% of the time <em>and</em> fires when you didn't mean it.</td></tr>
+        <tr><td><strong>L5</strong></td><td><strong>Binding mechanism</strong></td><td><strong>Decisive. Wrong choice here = 0% success, silently.</strong></td></tr>
+        <tr><td>L6</td><td>Command surface</td><td>High. Most people hand-build things the OS already ships.</td></tr>
+        <tr><td>L7</td><td>Verification</td><td>Highest of all, because without it you optimize the wrong layer for hours.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">L7 — Start here</div>
+  <h2 class="st">Verification comes <em>first</em>, not last</h2>
+  <div class="prose">
+    <p>This is out of order deliberately. Without a way to measure, every other layer is guesswork, and the guesses are expensive.</p>
+    <p>When a voice command does nothing, there are exactly two possibilities and they are <strong>indistinguishable from where you're sitting</strong>: it never heard you, or it heard you perfectly and the action did nothing. They share no cause and no fix. Optimizing for the wrong one is how an evening disappears.</p>
+    <p>macOS keeps the number that separates them — one integer per command, incremented on every recognition — and surfaces it in no interface anywhere:</p>
+  </div>
+  <div class="scroller" style="margin-top:1.5rem">
+    <table>
+      <thead><tr><th>Reading</th><th>Means</th><th>Fix the layer</th></tr></thead>
+      <tbody>
+        <tr><td>count moved, nothing happened</td><td>Recognized. The action is wrong.</td><td>L5 — binding</td></tr>
+        <tr><td>count never moved</td><td>Not recognized at all.</td><td>L4 — phrasing</td></tr>
+        <tr><td>count moved, wrong thing happened</td><td>Phrase collision.</td><td>L4 — a built-in shares your phrase</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose" style="margin-top:1.5rem">
+    <p>Whatever you're debugging, the equivalent counter almost certainly exists and nobody has told you about it. Find it before forming a theory. I formed three.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">L5 — The decisive layer</div>
+  <h2 class="st">Reliability is a property of the <em>binding</em></h2>
+  <div class="prose">
+    <p>A voice command is a phrase attached to an action. Almost everyone focuses on the phrase. <strong>The action is what determines whether it works.</strong></p>
+    <p>Modern desktop apps — Claude, Cursor, Slack, VS Code, Discord, Notion — are web pages in native wrappers. Their text boxes are HTML, not real controls. And a synthetic <em>plain</em> keypress sent to one of those is delivered and quietly dropped. No error. No bounce. Nothing in any log.</p>
+    <p>The same keypress <em>with a modifier</em> works fine.</p>
+  </div>
+
+  <div class="answer" style="margin-top:1.6rem">
+    <span class="label">Measured</span>
+    <div class="cmdline">Return → 0 · Cmd+Return → works</div>
+    <p>Bound to bare <code>Return</code>: recognized <strong>8 times</strong>, sent <strong>zero</strong> messages. Rebound to <code>Cmd+Return</code>: recognized 7 times, landed in Claude, Cursor and Slack. Identical mechanism, identical event, one modifier key.</p>
+  </div>
+
+  <div class="prose" style="margin-top:1.6rem">
+    <p>So sort every command you own into four tiers, and you can predict which will fail before testing any of them:</p>
+  </div>
+
+  <div class="scroller" style="margin-top:1.2rem">
+    <table>
+      <thead><tr><th>Verdict</th><th>Binding</th><th>Caveat</th></tr></thead>
+      <tbody>
+        <tr><td>Works</td><td>Modified keystroke</td><td>The default choice. Verified.</td></tr>
+        <tr><td>Works</td><td>Accessibility action — click by label, menu item</td><td>Needs the control to <em>have</em> a name.</td></tr>
+        <tr><td>Works</td><td>App or URL launch</td><td>Nothing in the path to swallow it.</td></tr>
+        <tr><td>Fails</td><td>Bare unmodified key</td><td>Silently. This is the whole problem.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="prose" style="margin-top:1.6rem">
+    <p><strong>The accessibility tier has a limit worth knowing.</strong> Pressing a button by its published name is app-agnostic by construction — you say one phrase and the OS finds the label in whatever is frontmost. It's excellent. It also needs the button to have a name, and plenty don't: Cursor's send arrow is an unlabelled icon, so the command fired thirteen times and pressed nothing. That removes the need for per-app <em>code</em>, not the need for a per-app <em>name</em>.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">L4 — Phrasing</div>
+  <h2 class="st">A trigger must be <em>unsayable</em></h2>
+  <div class="prose">
+    <p>While the system is transcribing, your trigger phrase is competing with the sentence. The recognizer has to decide, live, whether those words were a command or more dictation. <strong>A conversational phrase loses that decision about half the time.</strong></p>
+    <p>And it fails in both directions. My original send trigger had these aliases on it:</p>
+  </div>
+  <div class="scroller" style="margin-top:1.2rem">
+    <table>
+      <thead><tr><th>Phrase</th><th>Problem</th></tr></thead>
+      <tbody>
+        <tr><td>send it</td><td>Absorbed into the transcript about half the time you mean it.</td></tr>
+        <tr><td>that's it</td><td>Said constantly in ordinary speech — fires mid-thought.</td></tr>
+        <tr><td>go ahead</td><td>Same. Each one submits a half-written message.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose" style="margin-top:1.5rem">
+    <p>The fix isn't a cleverer phrase, it's a <em>carrier word</em> that never occurs in speech. Nothing collides with “punch,” so <code>punch it</code> and <code>punch send</code> can both exist with zero risk of a false fire — and because the carrier protects them, you can hang as many sloppy aliases off it as you like. That's the part people miss: distinctiveness is what buys you the freedom to be loose everywhere else.</p>
+    <p>Two or more words, no single syllables. That happens to be Apple's own published guidance, arrived at from the other direction.</p>
+    <p>One consequence nobody warns you about: <strong>you cannot talk about a command without firing it.</strong> Announce one out loud and it executes. There's a commands-only mode for exactly this — switch to it before discussing your own setup.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">L6 — Command surface</div>
+  <h2 class="st">Stop building what the <em>OS ships</em></h2>
+  <div class="prose">
+    <p>macOS ships <strong>161 built-in voice commands</strong>. Almost nobody knows, because the catalog is a property list inside an input method bundle and the spoken phrasing is compiled into the binary.</p>
+    <p>The practical consequence: people hand-build brittle replacements for things that already exist and work better. My own setup had four background daemons and eleven helper apps, every one of them shaped around a single editor, all solving problems the OS didn't have. Two of the four had never even loaded, and nothing had noticed — which is its own tell.</p>
+    <p>Worth knowing about specifically:</p>
+  </div>
+  <div class="scroller" style="margin-top:1.2rem">
+    <table>
+      <thead><tr><th>Capability</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td>Click by label · numbered overlay · full-screen grid</td><td>Press anything, named or not, with no code.</td></tr>
+        <tr><td>Select and correct phrases by quoting them</td><td>Far better than character-level editing.</td></tr>
+        <tr><td>Add a word to vocabulary <em>by voice</em></td><td>Routes around the undocumented vocabulary import format.</td></tr>
+        <tr><td>Create a command by voice</td><td>No plist editing at all.</td></tr>
+        <tr><td>Show the live command list, per app</td><td>The only authoritative source for real phrasing.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose" style="margin-top:1.5rem">
+    <p><strong>And a trap in the other direction.</strong> A custom command silently <em>disables</em> the built-in that shares its phrase. I had scrolling hand-bound to bare page keys — the failing tier — which had switched off the OS's own accessibility-based scrolling. A working native action replaced by a broken keystroke, invisibly, with nothing anywhere saying so. Check whether the platform already ships a verb before you bind it yourself.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">L2 — The engine trap</div>
+  <h2 class="st">The best transcription <em>can't help you</em></h2>
+  <div class="prose">
+    <p>This is where I started, and it was the wrong end of the problem entirely.</p>
+    <p>Local speech-to-text has gotten genuinely excellent — models running on-device, no cloud round trip, no subscription, better raw accuracy than the OS. So the obvious move is to install one and use it as your ear.</p>
+    <p>It doesn't work, for a structural reason no review mentions: <strong>the entire category is push-to-talk or toggle.</strong> There is no open-mic mode to enable. Every one of them requires you to press something, which fails the only requirement that mattered — don't make me touch the keyboard.</p>
+    <p>The platform's own always-listening mode is worse at transcription and the only thing that can actually do the job. So check for a continuous mode <em>before</em> evaluating accuracy. Accuracy is worthless if the trigger is a key you already said you wouldn't press.</p>
+    <p>What the good local engine <em>is</em> for: meeting capture and file transcription, where a hotkey costs nothing.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">L3 &amp; L1 — The cheap wins</div>
+  <h2 class="st">Vocabulary, then the <em>microphone</em></h2>
+  <div class="prose">
+    <p><strong>Vocabulary is the highest-return thing you can do in five minutes.</strong> Untuned, every proper noun in your working life comes out wrong — product names, colleagues, your own company. The pane exists, it syncs across your devices, and a widely-copied claim that macOS has no custom vocabulary is simply false.</p>
+    <p>Its import file format is undocumented, so entries go in one at a time — or by voice, using the built-in that adds a selected word directly.</p>
+    <p><strong>The microphone is real but capped.</strong> Roughly 90% accuracy on the built-in mic in a quiet room, 95–98% with a decent external one on clear speech at conversational pace. Background noise costs more than any setting. It's a one-time purchase and then you stop thinking about it — which is exactly why it's the wrong thing to start with.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">The stack, assembled</div>
+  <h2 class="st">What this actually looks like <em>working</em></h2>
+  <div class="answer">
+    <span class="label">The whole configuration</span>
+    <div class="cmdline">punch it</div>
+    <p>Apple Voice Control listening continuously, one command bound to <code>Cmd+Return</code>, a handful of app-switch commands, and the OS's own built-ins for everything else. Seventeen spoken commands total.</p>
+    <p>It replaced four background daemons, eleven helper apps, and a local speech engine that had never successfully transcribed a single word.</p>
+  </div>
+  <div class="prose" style="margin-top:1.8rem">
+    <p>The order to fix your own stack, then: <strong>build the measurement first (L7)</strong>, get the binding right (L5), make the trigger unsayable (L4), delete whatever duplicates a built-in (L6), load your vocabulary (L3), and buy a microphone whenever (L1). Skip L2 unless you want meeting transcripts.</p>
+    <p>The generalisable version has nothing to do with voice: <strong>a system's reliability is a property of the mechanism you bound to, not the surface it lands on</strong> — and the layer reporting success is the one lying to you. Settings correct, command fired, exit code zero, nothing happened.</p>
+  </div>
+
+  <div style="margin-top:2rem;display:flex;flex-wrap:wrap;gap:.75rem">
+    <a class="btn primary" href="/voice-mode.html">Set it up →</a>
+    <a class="btn" href="https://github.com/justinfowler925/voice-mode" target="_blank" rel="noopener">GitHub ↗</a>
+    <a class="btn" href="/writing/heard-not-obeyed.html">The evening it took</a>
+  </div>
+</section>
+
+<section class="block">
+  <div class="endnote">
+    <p><strong>Everything measured on macOS 26.6</strong>, against Claude, Cursor and Slack. Tooling, the complete undocumented command format, the 161-command catalog and the diagnostic are open source at <a href="https://github.com/justinfowler925/voice-mode">github.com/justinfowler925/voice-mode</a> — MIT. Where a claim here is inferred rather than verified, the repo says so.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 · Justin Fowler</span>
+  <span>Field guide · Published 2026-08-14</span>
+  <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></span>
+  <span><a href="/voice-mode.html">voice-mode ↗</a></span>
+</footer>
+
+</div>
+</body>
+</html>
