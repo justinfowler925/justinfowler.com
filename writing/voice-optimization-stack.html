@@ -38,7 +38,7 @@
 <link rel="stylesheet" href="/assets/tokens.css" />
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  html { color-scheme: dark; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
   body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.5; min-height: 100vh; }
   ::selection { background: var(--accent); color: var(--ink); }
   .skip { position: absolute; left: -9999px; top: 8px; padding: 10px 16px; background: var(--accent); color: var(--ink); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; border-radius: 999px; z-index: 999; }
@@ -49,19 +49,19 @@
   .container { max-width: 880px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
   @media (min-width: 768px) { .container { padding: 0 48px; } }
   nav { padding: 28px 0 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--shine-color-fg-muted); text-decoration: none; }
   .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
   .nav-links { display: flex; gap: 8px 24px; flex-wrap: wrap; }
-  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); text-decoration: none; transition: color 0.2s; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--shine-color-fg-muted); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
 
   header.hero { padding: 72px 0 40px; }
   @media (min-width: 768px) { header.hero { padding: 104px 0 56px; } }
-  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); margin-bottom: 28px; }
-  .breadcrumb a { color: var(--mute); text-decoration: none; }
+  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--shine-color-fg-muted); margin-bottom: 28px; }
+  .breadcrumb a { color: var(--shine-color-fg-muted); text-decoration: none; }
   .breadcrumb a:hover { color: var(--accent); }
-  .breadcrumb .sep { color: var(--mute-2); margin: 0 12px; }
+  .breadcrumb .sep { color: var(--shine-color-fg-muted); margin: 0 12px; }
   .breadcrumb .here { color: var(--accent); }
   .stamp { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 28px; padding: 8px 14px; display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent-line); border-radius: 999px; }
   h1 { font-family: var(--serif); font-variation-settings: 'opsz' 144, 'SOFT' 50; font-size: clamp(44px, 8vw, 88px); font-weight: 300; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 24px; }
@@ -87,8 +87,8 @@
   @media (min-width: 700px) { .rcell { border-bottom: none; border-right: 1px solid var(--ink-3); } .rcell:last-child { border-right: none; } }
   .rfig { font-family: var(--mono); font-size: clamp(52px, 8vw, 76px); font-weight: 600; line-height: 0.85; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; }
   .rfig.hit { color: var(--accent); }
-  .rfig.miss { color: var(--mute); }
-  .rcap { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); line-height: 1.6; }
+  .rfig.miss { color: var(--shine-color-fg-muted); }
+  .rcap { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--shine-color-fg-muted); line-height: 1.6; }
   .rcell.note { justify-content: center; }
   .rcell.note p { font-family: var(--serif); font-size: 16px; line-height: 1.6; color: var(--paper-2); }
 
@@ -103,7 +103,7 @@
   .scroller { overflow-x: auto; border: 1px solid var(--ink-3); border-radius: 14px; background: var(--ink-2); }
   table { border-collapse: collapse; width: 100%; font-family: var(--mono); font-size: 12px; }
   th, td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--ink-3); vertical-align: top; }
-  th { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mute); font-weight: 500; }
+  th { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--shine-color-fg-muted); font-weight: 500; }
   td { color: var(--paper-2); line-height: 1.6; }
   tr:last-child td { border-bottom: none; }
   td.verdict-ok { color: var(--accent); white-space: nowrap; }
@@ -114,7 +114,7 @@
   .entries { display: flex; flex-direction: column; gap: 14px; }
   .entry { background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 14px; padding: 26px 24px; display: grid; grid-template-columns: 1fr; gap: 12px; }
   @media (min-width: 760px) { .entry { grid-template-columns: 48px 1fr; column-gap: 24px; padding: 28px 30px; } .entry .enum { grid-row: 1 / span 4; } }
-  .enum { font-family: var(--mono); font-size: 11px; color: var(--mute-2); letter-spacing: 0.12em; padding-top: 4px; }
+  .enum { font-family: var(--mono); font-size: 11px; color: var(--shine-color-fg-muted); letter-spacing: 0.12em; padding-top: 4px; }
   .entry h3 { font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.22; color: var(--paper); }
   .entry h3 em { color: var(--accent-2); font-style: italic; }
   .entry p { font-family: var(--serif); font-size: 16px; line-height: 1.65; color: var(--paper-2); }
@@ -130,10 +130,10 @@
 
   .exhibit { margin-top: 28px; padding: 12px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 14px; }
   .exhibit img { width: 100%; display: block; border-radius: 8px; cursor: pointer; }
-  .exhibit figcaption { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute-2); padding: 16px 4px 4px; }
+  .exhibit figcaption { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--shine-color-fg-muted); padding: 16px 4px 4px; }
 
   .endnote { padding: 28px; background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-radius: 14px; }
-  .endnote p { font-family: var(--mono); font-size: 12px; line-height: 1.8; color: var(--mute); }
+  .endnote p { font-family: var(--mono); font-size: 12px; line-height: 1.8; color: var(--shine-color-fg-muted); }
   .endnote p strong { color: var(--paper-2); font-weight: 500; }
 
   .answer .label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); }
@@ -141,7 +141,7 @@
   .btn:hover { border-color: var(--accent); color: var(--accent); }
   .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--ink); }
   .btn.primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: var(--ink); }
-  footer { padding: 48px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute-2); }
+  footer { padding: 48px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--shine-color-fg-muted); }
   footer a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
   footer a:hover { color: var(--accent); }
 

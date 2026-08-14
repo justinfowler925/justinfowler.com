@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="/assets/tokens.css" />
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  html { color-scheme: dark; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
   body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.5; min-height: 100vh; }
   ::selection { background: var(--accent); color: var(--ink); }
   .skip { position: absolute; left: -9999px; top: 8px; padding: 10px 16px; background: var(--accent); color: var(--ink); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; text-decoration: none; border-radius: 999px; z-index: 999; }
@@ -78,14 +78,14 @@
   code { font-family: var(--mono); font-size: 0.87em; color: var(--accent-2); background: var(--ink-2); border: 1px solid var(--ink-3); padding: 2px 7px; border-radius: 5px; }
   pre { font-family: var(--mono); font-size: 12.5px; line-height: 1.7; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 12px; padding: 18px 20px; overflow-x: auto; color: var(--paper-2); }
   pre code { background: none; border: none; padding: 0; color: inherit; font-size: inherit; }
-  pre .c { color: var(--mute-2); }
+  pre .c { color: var(--shine-color-fg-muted); }
   pre .k { color: var(--accent-2); }
 
   /* numbered setup steps */
   .steps { counter-reset: s; display: flex; flex-direction: column; gap: 26px; }
   .step { display: grid; grid-template-columns: 30px 1fr; gap: 6px 16px; }
   .step::before { counter-increment: s; content: counter(s); font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; grid-row: 1 / span 3; }
-  .step h4 { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--paper); margin-bottom: 6px; }
+  .step h3.step-h { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--paper); margin-bottom: 6px; }
   .step p { font-family: var(--serif); font-size: 16px; line-height: 1.6; color: var(--paper-2); max-width: 640px; }
   .step pre { margin-top: 10px; }
 
@@ -98,7 +98,7 @@
   .scroller { overflow-x: auto; border: 1px solid var(--ink-3); border-radius: 12px; background: var(--ink-2); }
   table { border-collapse: collapse; width: 100%; font-family: var(--mono); font-size: 12px; }
   th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--ink-3); vertical-align: top; }
-  th { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute); font-weight: 500; }
+  th { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--shine-color-fg-muted); font-weight: 500; }
   td { color: var(--paper-2); line-height: 1.55; }
   tr:last-child td { border-bottom: none; }
   td.say { color: var(--accent); white-space: nowrap; font-weight: 600; }
@@ -113,7 +113,7 @@
   .tcase p + p { margin-top: 8px; }
   .tcase .fix { color: var(--paper); border-left: 1px solid var(--accent-line); padding-left: 14px; }
 
-  footer { padding: 46px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 20px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute-2); }
+  footer { padding: 46px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 20px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--shine-color-fg-muted); }
   footer a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
   footer a:hover { color: var(--accent); }
   a { color: var(--accent); }
@@ -179,25 +179,25 @@
 
   <div class="steps">
     <div class="step">
-      <h4>Turn on Voice Control</h4>
+      <h3 class="step-h">Turn on Voice Control</h3>
       <p>System Settings → Accessibility → Voice Control → switch it on. macOS downloads a small on-device model the first time. Nothing you say leaves your Mac.</p>
     </div>
     <div class="step">
-      <h4>Free up the microphone key, if you use one</h4>
+      <h3 class="step-h">Free up the microphone key, if you use one</h3>
       <p>Voice Control listens continuously — there is no key to hold. If you'd previously set up a push-to-talk dictation app, turn it off so the two don't fight over the microphone.</p>
     </div>
     <div class="step">
-      <h4>Download the starter command set</h4>
+      <h3 class="step-h">Download the starter command set</h3>
       <p>Grab <code>sets/core.voicecommands</code> from the repo. It's a plain file — ten commands, every one bound to a mechanism that works.</p>
       <pre><code><span class="c"># or clone the whole thing</span>
 git clone https://github.com/justinfowler925/voice-mode</code></pre>
     </div>
     <div class="step">
-      <h4>Import it</h4>
+      <h3 class="step-h">Import it</h3>
       <p>System Settings → Accessibility → Voice Control → Commands → <strong>Import</strong>, and pick that file. Your commands appear immediately, already switched on.</p>
     </div>
     <div class="step">
-      <h4>Say <strong>“punch it”</strong></h4>
+      <h3 class="step-h">Say <strong>“punch it”</strong></h3>
       <p>Click into any message box, talk normally, then say <em>punch it</em>. It sends. That works in Claude, Cursor, Slack — anywhere, with no per-app setup.</p>
     </div>
   </div>
