@@ -40,25 +40,25 @@
   .container { max-width: 880px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
   @media (min-width: 768px) { .container { padding: 0 48px; } }
   nav { padding: 28px 0 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--shine-color-fg-muted); text-decoration: none; }
   .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
   .nav-links { display: flex; gap: 8px 24px; flex-wrap: wrap; }
-  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute); text-decoration: none; transition: color 0.2s; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--shine-color-fg-muted); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
   header.hero { padding: 80px 0 40px; }
   @media (min-width: 768px) { header.hero { padding: 120px 0 60px; } }
-  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); margin-bottom: 28px; }
-  .breadcrumb a { color: var(--mute); text-decoration: none; }
+  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--shine-color-fg-muted); margin-bottom: 28px; }
+  .breadcrumb a { color: var(--shine-color-fg-muted); text-decoration: none; }
   .breadcrumb a:hover { color: var(--accent); }
-  .breadcrumb .sep { color: var(--mute-2); margin: 0 12px; }
+  .breadcrumb .sep { color: var(--shine-color-fg-muted); margin: 0 12px; }
   .breadcrumb .here { color: var(--accent); }
   h1 { font-family: var(--serif); font-variation-settings: 'opsz' 144, 'SOFT' 50; font-size: clamp(48px, 9vw, 96px); font-weight: 300; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 24px; }
   h1 em { font-style: italic; color: var(--accent-2); font-weight: 300; }
   .stamp { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 28px; padding: 8px 14px; display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent-line); border-radius: 999px; }
   .lede { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); line-height: 1.45; color: var(--paper-2); max-width: 720px; margin-bottom: 16px; }
   .lede em { color: var(--accent-2); font-style: italic; }
-  .convention { font-family: var(--serif); font-size: 16px; font-style: italic; color: var(--mute); max-width: 720px; }
+  .convention { font-family: var(--serif); font-size: 16px; font-style: italic; color: var(--shine-color-fg-muted); max-width: 720px; }
   .convention a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; }
 
   section.block { padding: 56px 0; border-top: 1px solid var(--ink-3); }
@@ -69,7 +69,7 @@
   .planks { display: grid; gap: 16px; }
   .plank { padding: 24px 26px; background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 14px; position: relative; overflow: hidden; }
   .plank::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); opacity: 0.55; }
-  .plank-meta { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: baseline; margin-bottom: 8px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); }
+  .plank-meta { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: baseline; margin-bottom: 8px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--shine-color-fg-muted); }
   .plank-meta .pnum { color: var(--accent); }
   .plank-meta .pstatus { margin-left: auto; }
   .plank-meta .pstatus.live { color: var(--accent); }
@@ -85,15 +85,15 @@
   .stack { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--ink-3); border: 1px solid var(--ink-3); border-radius: 14px; overflow: hidden; }
   @media (min-width: 700px) { .stack { grid-template-columns: 1fr 1fr 1fr; } }
   .stackcell { background: var(--ink-2); padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; }
-  .stackcell .lbl { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); }
+  .stackcell .lbl { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--shine-color-fg-muted); }
   .stackcell .val { font-family: var(--serif); font-size: 18px; color: var(--paper); }
   .stackcell .val em { color: var(--accent-2); font-style: italic; }
 
   .quote { padding: 32px 28px; border-left: 2px solid var(--accent); background: linear-gradient(135deg, var(--ink-2), var(--ink)); border-radius: 0 12px 12px 0; margin-top: 32px; }
   .quote p { font-family: var(--serif); font-size: 19px; font-style: italic; line-height: 1.5; color: var(--paper); }
-  .quote .who { display: block; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--mute); margin-top: 12px; }
+  .quote .who { display: block; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--shine-color-fg-muted); margin-top: 12px; }
 
-  footer { padding: 48px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mute-2); }
+  footer { padding: 48px 0 60px; border-top: 1px solid var(--ink-3); margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--shine-color-fg-muted); }
   footer a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
   footer a:hover { color: var(--accent); }
 
@@ -210,7 +210,7 @@
       <span class="val">~<em>5</em>h</span>
     </div>
   </div>
-  <p style="margin-top: 20px; font-family: var(--mono); font-size: 12px; color: var(--mute); letter-spacing: 0.05em;">
+  <p style="margin-top: 20px; font-family: var(--mono); font-size: 12px; color: var(--shine-color-fg-muted); letter-spacing: 0.05em;">
     Sustainable ceiling: 60–65 hours · 102-day window for the Plank 02 push · marriage and body protected · weekends with my wife are non-negotiable.
   </p>
 </section>
