@@ -24,8 +24,8 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: var(--ink); color: var(--paper); font-family: var(--sans); font-size: 16px; line-height: 1.6; min-height: 100vh; }
 
-  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 28px 56px; border-bottom: 1px solid #1c1917; font-family: var(--mono); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--mute); }
-  .topbar a { color: var(--mute); text-decoration: none; margin-left: 24px; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 28px 56px; border-bottom: 1px solid #1c1917; font-family: var(--mono); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--shine-color-fg-muted); }
+  .topbar a { color: var(--shine-color-fg-muted); text-decoration: none; margin-left: 24px; }
   .topbar a:hover { color: var(--accent); }
   .topbar .brand { color: var(--paper); }
   .topbar .brand .dot { color: var(--accent); }
@@ -64,7 +64,7 @@
   .assets { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
   .asset { padding: 16px; border: 1px solid var(--hair); border-radius: 8px; background: rgba(28,25,23,0.4); }
   .asset .name { font-family: var(--mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--paper); margin-bottom: 6px; }
-  .asset .meta { font-family: var(--mono); font-size: 10px; color: var(--mute); margin-bottom: 8px; letter-spacing: 1.5px; }
+  .asset .meta { font-family: var(--mono); font-size: 10px; color: var(--shine-color-fg-muted); margin-bottom: 8px; letter-spacing: 1.5px; }
   .asset a { font-family: var(--mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); text-decoration: none; }
   .asset a:hover { text-decoration: underline; }
 
@@ -72,9 +72,9 @@
   .contact a { color: var(--accent); text-decoration: none; }
   .contact a:hover { text-decoration: underline; }
 
-  .footer { padding: 32px 56px; border-top: 1px solid #1c1917; font-family: var(--mono); font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--mute); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer { padding: 32px 56px; border-top: 1px solid #1c1917; font-family: var(--mono); font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--shine-color-fg-muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
   .footer .accent { color: var(--accent); }
-  .footer a { color: var(--mute); text-decoration: none; }
+  .footer a { color: var(--shine-color-fg-muted); text-decoration: none; }
   .footer a:hover { color: var(--accent); }
 
   @media (max-width: 720px) {
@@ -188,7 +188,7 @@
   <section>
     <h2>Contact</h2>
     <p class="contact">Booking, press, speaking — start with the <a href="/" data-email data-subject="Press / speaking">contact button on the homepage</a> (the email's obfuscated by design; the click handler builds it).</p>
-    <p style="font-family: var(--mono); font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--mute); margin-top: 24px;">Response time: ~48 hours weekdays.</p>
+    <p style="font-family: var(--mono); font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--shine-color-fg-muted); margin-top: 24px;">Response time: ~48 hours weekdays.</p>
   </section>
 
 </div>
