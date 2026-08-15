@@ -22,3 +22,6 @@ And underneath all of it, the one that keeps earning its keep: the layer that re
 
 Full write-up, including the seven dead ends so you can skip them:
 https://justinfowler.com/writing/heard-not-obeyed.html
+
+None of this is documented anywhere, so the notes became a repo — the .voicecommands format, the four mechanism tiers, and a doctor that reads the counter and tells you which half is broken. MIT:
+https://github.com/justinfowler925/voice-mode
