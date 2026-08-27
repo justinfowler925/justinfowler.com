@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <pattern id="grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#1c1917"/>
+    </pattern>
+    <radialGradient id="glow" cx="18%" cy="28%" r="68%">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="line" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#fb923c" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="#0c0a09"/>
+  <rect width="1200" height="675" fill="url(#grid)" opacity="0.6"/>
+  <rect width="1200" height="675" fill="url(#glow)"/>
+  <rect width="1200" height="2" fill="url(#line)"/>
+
+  <g transform="translate(72,68)">
+    <circle cx="6" cy="6" r="6" fill="#fb923c"/>
+    <text x="28" y="11" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="14" font-weight="500" fill="#a8a29e" letter-spacing="4">UNFOG · OPEN SOURCE AGENT SKILL</text>
+  </g>
+  <text x="1128" y="79" text-anchor="end" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="14" font-weight="500" fill="#78716c" letter-spacing="3">MIT · 2026</text>
+
+  <text x="72" y="192" font-family="ui-serif, Georgia, 'Times New Roman', serif" font-size="70" font-weight="300" fill="#fafaf9" letter-spacing="-2">Ambiguity should be</text>
+  <text x="72" y="270" font-family="ui-serif, Georgia, 'Times New Roman', serif" font-size="70" font-weight="300" font-style="italic" fill="#fdba74" letter-spacing="-2">compiled, not complained about.</text>
+
+  <g transform="translate(72,352)" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">
+    <g>
+      <rect width="132" height="82" rx="12" fill="#1c1917" stroke="#292524"/>
+      <text x="16" y="28" font-size="12" fill="#fb923c" letter-spacing="2">01</text>
+      <text x="16" y="56" font-size="15" fill="#e7e5e4">OUTCOME</text>
+    </g>
+    <g transform="translate(146,0)">
+      <rect width="132" height="82" rx="12" fill="#1c1917" stroke="#292524"/>
+      <text x="16" y="28" font-size="12" fill="#fb923c" letter-spacing="2">02</text>
+      <text x="16" y="56" font-size="15" fill="#e7e5e4">TARGET</text>
+    </g>
+    <g transform="translate(292,0)">
+      <rect width="132" height="82" rx="12" fill="#1c1917" stroke="#292524"/>
+      <text x="16" y="28" font-size="12" fill="#fb923c" letter-spacing="2">03</text>
+      <text x="16" y="56" font-size="15" fill="#e7e5e4">PREMISE</text>
+    </g>
+    <g transform="translate(438,0)">
+      <rect width="132" height="82" rx="12" fill="#1c1917" stroke="#292524"/>
+      <text x="16" y="28" font-size="12" fill="#fb923c" letter-spacing="2">04</text>
+      <text x="16" y="56" font-size="15" fill="#e7e5e4">SCOPE</text>
+    </g>
+    <g transform="translate(584,0)">
+      <rect width="132" height="82" rx="12" fill="#1c1917" stroke="#292524"/>
+      <text x="16" y="28" font-size="12" fill="#fb923c" letter-spacing="2">05</text>
+      <text x="16" y="56" font-size="15" fill="#e7e5e4">PRESERVE</text>
+    </g>
+    <g transform="translate(730,0)">
+      <rect width="132" height="82" rx="12" fill="#1c1917" stroke="#292524"/>
+      <text x="16" y="28" font-size="12" fill="#fb923c" letter-spacing="2">06</text>
+      <text x="16" y="56" font-size="15" fill="#e7e5e4">ACCEPT</text>
+    </g>
+    <g transform="translate(876,0)">
+      <rect width="132" height="82" rx="12" fill="#1c1917" stroke="#292524"/>
+      <text x="16" y="28" font-size="12" fill="#fb923c" letter-spacing="2">07</text>
+      <text x="16" y="56" font-size="15" fill="#e7e5e4">DELIVER</text>
+    </g>
+  </g>
+
+  <path d="M72 482 H1128" stroke="#292524"/>
+  <text x="72" y="548" font-family="ui-serif, Georgia, 'Times New Roman', serif" font-size="24" font-style="italic" fill="#e7e5e4">Compressed intent in. Evidence-backed execution out.</text>
+  <text x="72" y="602" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="14" fill="#fb923c" letter-spacing="3">CODEX · CURSOR · CLAUDE · SHARED INSTALLER</text>
+  <text x="1128" y="602" text-anchor="end" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="14" fill="#a8a29e" letter-spacing="2">GITHUB.COM/JUSTINFOWLER925/UNFOG</text>
+</svg>
