@@ -1,0 +1,225 @@
+<!doctype html>
+<!-- shine-lint: off color
+     The only raw color is the shared browser theme-color meta value; all rendered
+     color comes from the vendored Shine tokens in /assets/tokens.css. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>“Did You Check It?” — Vlad, My AI Final Boss</title>
+<meta name="description" content="Why I built Vlad, an adversarial AI handoff gate that demands receipts — and the 10 real defects it caught before acceptance." />
+<meta name="theme-color" content="#0c0a09" />
+
+<link rel="canonical" href="https://justinfowler.com/writing/did-you-check-it.html" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+<link rel="manifest" href="/manifest.webmanifest" />
+
+<meta property="og:title" content="“Did You Check It?” — Vlad, My AI Final Boss" />
+<meta property="og:description" content="The discipline behind my adversarial AI handoff gate, the measured errors it caught, and the open-source skill." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-08-27" />
+<meta property="og:url" content="https://justinfowler.com/writing/did-you-check-it.html" />
+<meta property="og:image" content="https://justinfowler.com/assets/vlad/vlad-final-boss.png" />
+<meta property="og:image:width" content="1024" />
+<meta property="og:image:height" content="1024" />
+<meta property="og:image:alt" content="Fictional Vlad Final Boss character in a black tracksuit, gold chain, and cigarette" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://justinfowler.com/assets/vlad/vlad-final-boss.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&amp;family=JetBrains+Mono:wght@300;400;500;600&amp;family=Geist:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/tokens.css" />
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { color-scheme: dark; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); font-size: var(--shine-text-base); line-height: var(--shine-leading-normal); min-height: 100vh; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  a { color: inherit; }
+  .skip { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .skip:focus { width: auto; height: auto; clip-path: none; left: var(--shine-space-5); top: var(--shine-space-2); padding: var(--shine-space-3) var(--shine-space-4); background: var(--accent); color: var(--ink); border-radius: var(--shine-radius-full); z-index: 10; }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 var(--shine-space-5); }
+  nav { padding-top: var(--shine-space-6); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--shine-space-3); }
+  .mark, .nav-links a, .eyebrow, .stamp, .metric-label, figcaption, .install-label, footer { font-family: var(--mono); font-size: var(--shine-text-xs); letter-spacing: var(--shine-tracking-caps); text-transform: uppercase; }
+  .mark, .nav-links a { color: var(--shine-color-fg-muted); text-decoration: none; }
+  .mark .dot { display: inline-block; width: var(--shine-space-2); height: var(--shine-space-2); margin-right: var(--shine-space-2); border-radius: var(--shine-radius-full); background: var(--accent); vertical-align: middle; }
+  .nav-links { display: flex; flex-wrap: wrap; gap: var(--shine-space-5); }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
+
+  .hero { padding: var(--shine-space-8) 0; }
+  .breadcrumb { display: flex; flex-wrap: wrap; gap: var(--shine-space-2); margin-bottom: var(--shine-space-6); color: var(--shine-color-fg-muted); }
+  .breadcrumb a { text-decoration: none; }
+  .breadcrumb { color: var(--shine-color-fg-muted); }
+  .breadcrumb .here { color: var(--paper); }
+  .stamp { display: inline-block; margin-bottom: var(--shine-space-5); padding: var(--shine-space-2) var(--shine-space-3); color: var(--paper-2); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-full); }
+  h1 { max-width: 800px; margin-bottom: var(--shine-space-5); font-family: var(--serif); font-size: clamp(48px, 8vw, 88px); font-weight: 300; font-variation-settings: 'opsz' 144, 'SOFT' 50; line-height: 0.95; letter-spacing: -0.04em; }
+  h1 em { color: var(--accent-2); font-style: italic; font-weight: 300; }
+  .lede { max-width: 720px; font-family: var(--serif); font-size: var(--shine-text-xl); line-height: var(--shine-leading-normal); color: var(--paper-2); }
+  .lede strong { color: var(--paper); font-weight: 600; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--shine-space-3); margin-top: var(--shine-space-5); }
+  .btn { display: inline-flex; align-items: center; min-height: var(--shine-space-7); padding: 0 var(--shine-space-5); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-full); font-family: var(--mono); font-size: var(--shine-text-xs); letter-spacing: var(--shine-tracking-caps); text-transform: uppercase; text-decoration: none; transition: border-color var(--shine-duration-base) var(--shine-easing-standard), color var(--shine-duration-base) var(--shine-easing-standard), background var(--shine-duration-base) var(--shine-easing-standard); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+  .btn.secondary { color: var(--paper); }
+  .btn:hover { border-color: var(--accent-2); color: var(--accent-2); }
+  .btn.primary:hover { background: var(--accent-2); color: var(--ink); }
+  .hero-figure { margin-top: var(--shine-space-7); padding: var(--shine-space-3); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-lg); box-shadow: var(--shine-shadow-lg); }
+  .hero-figure img { display: block; width: 100%; height: auto; border-radius: var(--shine-radius-md); }
+  figcaption { padding: var(--shine-space-3) var(--shine-space-1) var(--shine-space-1); color: var(--shine-color-fg-muted); }
+
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--shine-space-3); margin-top: var(--shine-space-5); }
+  .metric { padding: var(--shine-space-5); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-lg); }
+  .metric-number { display: block; margin-bottom: var(--shine-space-2); font-family: var(--mono); font-size: var(--shine-text-2xl); font-weight: 600; color: var(--paper); }
+  .metric-label { color: var(--shine-color-fg-muted); line-height: var(--shine-leading-relaxed); }
+
+  section { padding: var(--shine-space-8) 0; border-top: 1px solid var(--ink-3); }
+  .eyebrow { margin-bottom: var(--shine-space-2); color: var(--shine-color-fg-muted); }
+  h2 { max-width: 720px; margin-bottom: var(--shine-space-6); font-family: var(--serif); font-size: clamp(36px, 5vw, 44px); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; }
+  h2 em { color: var(--mute); font-style: italic; }
+  .prose { max-width: 720px; display: flex; flex-direction: column; gap: var(--shine-space-5); }
+  .prose p, .prose li { font-family: var(--serif); font-size: var(--shine-text-lg); line-height: var(--shine-leading-relaxed); color: var(--paper-2); }
+  .prose strong { color: var(--paper); font-weight: 600; }
+  .prose em { color: var(--accent-2); }
+  .prose ul { display: flex; flex-direction: column; gap: var(--shine-space-3); padding-left: var(--shine-space-5); }
+  .quote { padding: var(--shine-space-6); background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-left: 2px solid var(--accent); border-radius: 0 var(--shine-radius-lg) var(--shine-radius-lg) 0; }
+  .quote p { font-size: var(--shine-text-xl); color: var(--paper); }
+  .receipt-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--shine-space-3); margin-top: var(--shine-space-6); }
+  .receipt { padding: var(--shine-space-5); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-lg); }
+  .receipt h3 { margin-bottom: var(--shine-space-2); font-family: var(--serif); font-size: var(--shine-text-xl); font-weight: 400; color: var(--paper); }
+  .receipt p { font-family: var(--serif); font-size: var(--shine-text-base); line-height: var(--shine-leading-relaxed); color: var(--paper-2); }
+  .install { margin-top: var(--shine-space-6); padding: var(--shine-space-6); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-lg); }
+  .install-label { display: block; margin-bottom: var(--shine-space-3); color: var(--shine-color-fg-muted); }
+  .install code { display: block; overflow-x: auto; font-family: var(--mono); font-size: var(--shine-text-sm); line-height: var(--shine-leading-relaxed); color: var(--paper); white-space: nowrap; }
+  .closing { font-family: var(--serif); font-size: var(--shine-text-2xl); line-height: var(--shine-leading-snug); color: var(--paper); }
+  .closing strong { color: var(--accent-2); font-weight: 400; }
+  footer { padding: var(--shine-space-7) 0 var(--shine-space-8); border-top: 1px solid var(--ink-3); display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--shine-space-3); color: var(--shine-color-fg-muted); }
+  footer a { text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: var(--shine-space-1); border-radius: var(--shine-radius-sm); }
+
+  @media (max-width: 700px) {
+    .metrics, .receipt-grid { grid-template-columns: 1fr; }
+    .nav-links { gap: var(--shine-space-3); }
+    .hero { padding: var(--shine-space-7) 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+<script src="../assets/analytics.js" defer></script>
+</head>
+<body data-cite="magicui-hero">
+<a href="#main" class="skip">Skip to content</a>
+
+<div class="container">
+<nav aria-label="Primary">
+  <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/resume.html">Resume</a>
+    <a href="/now.html">Now</a>
+    <a href="/writing.html" aria-current="page">Writing</a>
+  </div>
+</nav>
+
+<main id="main">
+<header class="hero" data-region="hero">
+  <div class="breadcrumb eyebrow">
+    <a href="/">Home</a><span>/</span><a href="/writing.html">Writing</a><span>/</span><span class="here">Did You Check It?</span>
+  </div>
+  <div class="stamp">Field report · 27 Aug 2026</div>
+  <h1>“Did You <em>Check It?</em>”</h1>
+  <p class="lede">Why I built <strong>Vlad — Final Boss</strong>, an AI skill whose entire job is to distrust unmeasured state and demand the receipt.</p>
+  <div class="hero-actions">
+    <a class="btn primary" data-primary href="https://github.com/justinfowler925/vlad-final-boss" target="_blank" rel="noopener">Get the skill ↗</a>
+    <a class="btn secondary" href="#receipts">Read the receipts ↓</a>
+  </div>
+
+  <figure class="hero-figure">
+    <img src="../assets/vlad/vlad-final-boss.png" width="1024" height="1024" alt="Fictional Vlad Final Boss character in a black tracksuit with a gold chain, cross, and cigarette" />
+    <figcaption>Vlad is a fictional face and a changed name. The discipline came from a real boss.</figcaption>
+  </figure>
+
+  <div class="metrics" data-shine-signature="vlad-final-boss-evidence" aria-label="Measured results from the three latest Vlad gates">
+    <div class="metric"><span class="metric-number">10</span><span class="metric-label">real defects caught before acceptance</span></div>
+    <div class="metric"><span class="metric-number">4</span><span class="metric-label">fixed before the handoff earned PASS</span></div>
+    <div class="metric"><span class="metric-number">6</span><span class="metric-label">blocked under FAIL instead of shipping a claim</span></div>
+  </div>
+</header>
+
+<section>
+  <div class="eyebrow">01 — The question</div>
+  <h2>The phrase that sounded like <em>distrust</em></h2>
+  <div class="prose">
+    <p>The most valuable AI skill I have built does not write code, research markets, or generate content. It asks one question: <strong>“Did you check it?”</strong></p>
+    <p>I learned the question from a real Eastern European boss. “Vlad” is not his real name, and the face above is deliberately fictional. I changed both before making the skill public.</p>
+    <p>To my American ear, the question initially sounded like: <em>I don’t trust you.</em> What he meant was: <em>do not trust your assumptions; check the thing itself.</em></p>
+    <p>This is not a theory about every American or every Eastern European. It is a lesson I learned from one person’s directness — and one I badly needed.</p>
+    <div class="quote"><p>A generic quality-assurance protocol is easy to wave past. Vlad standing at the exit asking for receipts is harder to ignore.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">02 — Why AI needs him</div>
+  <h2>The creating agent was <em>grading its own paper</em></h2>
+  <div class="prose">
+    <p>AI agents are very good at producing plausible declarations of success: tests passed, the deployment succeeded, the feature is live, permissions are configured, the worker completed the task.</p>
+    <p>Every sentence can be technically true while the user still experiences a broken product.</p>
+    <p>My prior work kept exposing the same pattern. A health endpoint was green while the service’s real function was dead. A deployment succeeded while the old version remained active. CI was green because the relevant suite never ran. An administrator could see a feature the affected user could not.</p>
+    <p>The failure was usually not a lack of intelligence. It was <strong>unchecked assumed state</strong> — the same agent judging the work through the same path, with the same context and the same optimism.</p>
+  </div>
+
+  <div class="receipt-grid" aria-label="Claims and the receipts Vlad requires">
+    <article class="receipt"><h3>“Merged”</h3><p>The commit is actually on current main, not sitting on a branch or inside an already-merged PR.</p></article>
+    <article class="receipt"><h3>“Tests passed”</h3><p>The relevant suite demonstrably ran and exercised the failure, not merely that a green check exists.</p></article>
+    <article class="receipt"><h3>“Live”</h3><p>The user-visible behavior works in the named environment, not that a deployment API returned success.</p></article>
+    <article class="receipt"><h3>“Permissions work”</h3><p>The affected person can perform the action, not that an administrator can.</p></article>
+  </div>
+</section>
+
+<section id="receipts">
+  <div class="eyebrow">03 — The measured result</div>
+  <h2>Did it actually <em>reduce errors?</em></h2>
+  <div class="prose">
+    <p>This is where Vlad turns around and audits the article about Vlad.</p>
+    <p>I launched the formal skill on August 3. Its persisted record contains one smoke matrix against known false-green patterns and four live handoff gates. Those four gates produced <strong>12 formal findings or receipt issues</strong>.</p>
+    <p>The three most recent gates found <strong>10 real defects before the handoff was accepted</strong>. Four were fixed before a PASS. Six stopped a production-readiness claim with a FAIL.</p>
+    <p>They included a capability disabled at the vendor account, a public webhook blocked before it reached the application, a deployed workflow whose latest version was not active, green tests that never crossed the real integration boundary, notification failures swallowed after “complete,” and a promised workflow absent from runtime code.</p>
+    <p>The most important number is not 10. It is <em>when those 10 were found</em>. Before this discipline, that class of mistake often became a user report, a production incident, or a second round of work after “done.” Vlad moved discovery to the handoff — the last cheap place to catch it.</p>
+    <p>I do not yet have enough longitudinal volume to claim a credible percentage reduction across all of my work. Inventing “Vlad reduced errors by 43%” would violate the premise. The honest claim is narrower: <strong>10 defects that could have survived my previous success signals were caught before acceptance, and no unresolved handoff received a PASS.</strong></p>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">04 — The behavioral effect</div>
+  <h2>The external gate becomes an <em>internal habit</em></h2>
+  <div class="prose">
+    <p>Vlad is useful after the work, but his bigger effect happens before it.</p>
+    <p>Once you know the Final Boss will ask for the user-visible probe, you run it yourself. Once you know “CI is green” will be challenged, you check whether the test actually ran. Once you know a deployment receipt is not proof of a live feature, you stop presenting it as one.</p>
+    <p>Vlad also turns each new failure pattern into a cheap repeatable probe. The goal is not to become better at performing the same long investigation. It is to convert every scar into a check that catches the next instance in under a minute.</p>
+    <p>That is what “Did you check it?” finally came to mean for me: not distrust of the person. Distrust of unmeasured state.</p>
+  </div>
+
+  <div class="install">
+    <span class="install-label">Install in Codex</span>
+    <code>$skill-installer https://github.com/justinfowler925/vlad-final-boss</code>
+  </div>
+  <div class="hero-actions">
+    <a class="btn primary" href="https://github.com/justinfowler925/vlad-final-boss" target="_blank" rel="noopener">Open the MIT repo ↗</a>
+  </div>
+</section>
+
+<section>
+  <h2 class="closing">Confidence is a feeling. A receipt is evidence. And when Vlad asks the question, the best answer is not “yes.” It is: <strong>“Here.”</strong></h2>
+</section>
+</main>
+
+<footer>
+  <span>© 2026 · Justin Fowler</span>
+  <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></span>
+  <span><a href="/writing.html">More writing</a> · Published 2026-08-27</span>
+</footer>
+</div>
+</body>
+</html>
