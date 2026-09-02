@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "job": "Rework the Shine portfolio project and article into the V4 journey with before-and-after screenshots and an open-source architecture decision",
+  "category": "marketing",
+  "primaryTask": "Understand the decisions and failed versions that produced Shine V4, inspect the real before-and-after, and reach the live skill or source.",
+  "before": {
+    "artifact": "writing/shine.html",
+    "screenshot": "/tmp/portfolio-shine-before.png"
+  },
+  "defects": [
+    {
+      "bucket": "usability",
+      "severity": "major",
+      "problem": "The article converts to the V3 skill but does not tell readers that the current product is V4 or why its architecture changed.",
+      "evidence": "The stamp, metadata, project description, and close all say v3.0.0 while the live skill is v4.0.2.",
+      "expectedEffect": "Align every conversion path with V4 and explain the shadcn/Base UI/React Aria decision before the close."
+    },
+    {
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "The journey stops at V3 and omits the final dogfood evidence, cross-media lanes, family-cap rule, and installed-symlink defect found by this portfolio test.",
+      "evidence": "The current article has no V3/V4 screenshots and its last product milestone is executable usability.",
+      "expectedEffect": "Add the real artifact pair and document the V4 director contract plus the failure the downstream test exposed."
+    },
+    {
+      "bucket": "composition",
+      "severity": "minor",
+      "problem": "The hero proof is a diagram of the old loop, so the article describes a visual product without showing the shipped visual result.",
+      "evidence": "The largest media object is an SVG process diagram; the actual V3 and V4 pages do not appear anywhere in the article.",
+      "expectedEffect": "Use the V4 page as the hero proof and place a wide, captioned before-and-after immediately after the initial problem."
+    }
+  ]
+}

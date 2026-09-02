@@ -15,8 +15,8 @@ assert.match(article, /<meta property="article:published_time" content="2026-08-
 assert.equal((article.match(new RegExp(repoUrl, "g")) ?? []).length >= 2, true, "article must expose the repository at the start and finish");
 assert.match(article, new RegExp(linkedInUrl));
 assert.match(archive, /href="\/writing\/unfog\.html"/);
-assert.match(archive, /4 posts shipped/);
-assert.match(archive, /Last shipped · 2026-08-27/);
+assert.match(archive, /6 posts shipped/);
+assert.match(archive, /Last shipped · 2026-09-01/);
 assert.match(sitemap, /<loc>https:\/\/justinfowler\.com\/writing\/unfog\.html<\/loc>/);
 assert.match(sitemap, /<lastmod>2026-08-27<\/lastmod>/);
 assert.match(article, /<img src="\.\.\/assets\/unfog-article\.svg"/);

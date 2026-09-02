@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "cite": "shadcn-marketing",
+  "objects": [
+    {"id":"journey-link","selector":"[data-testid=journey-link]","referenceRole":"primary evidence action","purpose":"Move directly from the claim to the visual before-and-after"},
+    {"id":"journey-proof","selector":"[data-testid=journey-proof]","referenceRole":"product proof","purpose":"Show the real V3 and V4 artifacts with the measured diagnosis"}
+  ],
+  "flows": [
+    {"id":"inspect-v4-journey","userJob":"See what materially changed before choosing the skill","steps":[
+      {"action":"visible","selector":"[data-testid=journey-link]"},
+      {"action":"click","selector":"[data-testid=journey-link]"},
+      {"action":"text","selector":"[data-testid=journey-proof]","value":"The page passed. The story did not."}
+    ]}
+  ]
+}

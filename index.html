@@ -392,6 +392,16 @@
 
   .work-item:hover { background: var(--ink-3); }
 
+  a.work-item { text-decoration: none; color: inherit; }
+  a.work-item .work-go {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
   .work-tag {
     font-family: var(--mono);
     font-size: 10px;
@@ -783,21 +793,22 @@
   </div>
 
   <div class="work-grid reveal">
+    <a class="work-item" href="/writing/shine.html">
+      <div class="work-tag">Live · MIT · 2026 · shine-blond.vercel.app</div>
+      <h3 class="work-title">Shine</h3>
+      <p class="work-desc">An open-source V4 design director for agents: composed references, explicit art direction, complete interactions, and browser proof. Built on shadcn with Base UI and React Aria paths—and dogfooded on its own public rebuild.</p>
+      <span class="work-go">Use the skill →</span>
+      <div class="work-stack">
+        <span>Agent Skills</span><span>shadcn</span><span>Base UI</span><span>Playwright</span>
+      </div>
+    </a>
+
     <div class="work-item">
       <div class="work-tag">Live · SaaS · 2026 · purplechipmonk.com</div>
       <h3 class="work-title">PurpleChipmonk</h3>
       <p class="work-desc">An 18-skill agentic operating system for the modern job search. Eighteen specialized AI skills, persistent state across sessions, and a self-improving playbook that learns from every correction. Not a chatbot. An actual operating system. Co-founded with Zach Berenzweig.</p>
       <div class="work-stack">
         <span>Next.js 15</span><span>Supabase</span><span>Claude API</span><span>tRPC</span>
-      </div>
-    </div>
-
-    <div class="work-item">
-      <div class="work-tag">Personal infra · 2026</div>
-      <h3 class="work-title">OpenClaw HQ</h3>
-      <p class="work-desc">A three-tier multi-agent workforce running on my desk. Native Ollama on Apple Silicon hits ~18 tok/s on a 70B model. BullMQ + Redis orchestration. PostgreSQL + pgvector for skill memory. The whole thing runs while I sleep.</p>
-      <div class="work-stack">
-        <span>Ollama</span><span>BullMQ</span><span>pgvector</span><span>FastAPI</span>
       </div>
     </div>
 
