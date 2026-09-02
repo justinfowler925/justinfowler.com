@@ -64,8 +64,8 @@ That changed the fix. I audited every executable instead of patching one command
 Today Shine ships:
 
 - 129 catalog rows with family-capped retrieval
-- 113 passing checks in the browser-free CI lane
-- 136 passing checks in the installed release doctor
+- 112 passing checks in the v4.0.2 browser-free CI lane
+- 181 passing checks in the v4.0.2 installed release doctor
 - a canonical 80-line loader skill
 - a 4,446-line self-contained Markdown edition
 - a Claude plugin
