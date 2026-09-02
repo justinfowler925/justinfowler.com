@@ -1,0 +1,16 @@
+The most useful AI skill I’ve built doesn’t create anything.
+
+It asks one question: “Did you check it?”
+
+To my American ear, that once sounded like “I don’t trust you.” What my Eastern European boss meant was simpler: don’t trust your assumptions. Check the thing itself.
+
+So I turned that discipline into Vlad — Final Boss, an adversarial handoff gate that demands a receipt for every “done,” “tested,” and “deployed” claim.
+
+The measured result so far: the latest three gates caught 10 real defects before acceptance. Four were fixed before PASS. Six blocked a production-readiness claim under FAIL.
+
+Not a made-up percentage. Ten documented misses moved left to the last cheap place to catch them.
+
+The story, the deliberately fictional avatar, and the open-source skill:
+https://justinfowler.com/writing/did-you-check-it.html
+
+Confidence is a feeling. A receipt is evidence.
