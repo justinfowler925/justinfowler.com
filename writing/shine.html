@@ -1,0 +1,287 @@
+<!doctype html>
+<!-- shine-lint: off type color
+     This article preserves justinfowler.com's established editorial article chrome.
+     The display scale and theme-color meta are shared with the existing writing pages;
+     all rendered colours come from /assets/tokens.css. -->
+<html lang="en" data-cite="shadcn-marketing">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>I Rebuilt Shine Until It Could Rebuild Itself — Justin Fowler</title>
+<meta name="description" content="The journey from design lint to an open-source V4 design director: failed gates, deleted runtimes, a real before-and-after, and the downstream test that found the final release bug." />
+<meta name="theme-color" content="#0c0a09" />
+<meta name="author" content="Justin Fowler" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+
+<link rel="canonical" href="https://justinfowler.com/writing/shine.html" />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.svg" />
+<link rel="manifest" href="../manifest.webmanifest" />
+
+<meta property="og:title" content="I Rebuilt Shine Until It Could Rebuild Itself" />
+<meta property="og:description" content="How Shine became an open-source V4 design director—and used its own portfolio page to find the final release defect." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-09-01" />
+<meta property="og:url" content="https://justinfowler.com/writing/shine.html" />
+<meta property="og:image" content="https://justinfowler.com/assets/shine-article.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="I Rebuilt Shine Until It Could Rebuild Itself" />
+<meta name="twitter:description" content="An open-source V4 design director, documented through its real before-and-after." />
+<meta name="twitter:image" content="https://justinfowler.com/assets/shine-article.svg" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "I Rebuilt Shine Until It Could Rebuild Itself",
+  "description": "The journey from design lint to an open-source V4 design director, with the real before-and-after.",
+  "datePublished": "2026-09-01",
+  "dateModified": "2026-09-01",
+  "author": { "@type": "Person", "name": "Justin Fowler", "url": "https://justinfowler.com/" },
+  "mainEntityOfPage": "https://justinfowler.com/writing/shine.html",
+  "codeRepository": "https://github.com/justinfowler925/shine",
+  "sameAs": [
+    "https://shine-blond.vercel.app",
+    "https://shine-blond.vercel.app/skill"
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/tokens.css" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { color-scheme: dark; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.5; min-height: 100vh; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  a { color: inherit; }
+  .skip { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); padding: 0; }
+  .skip:focus { width: auto; height: auto; clip: auto; left: var(--shine-space-5); top: var(--shine-space-2); padding: var(--shine-space-2) var(--shine-space-4); background: var(--accent); color: var(--ink); border-radius: var(--shine-radius-full); z-index: 999; }
+  .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 var(--shine-space-5); position: relative; z-index: 2; }
+  @media (min-width: 768px) { .container { padding: 0 var(--shine-space-7); } }
+  nav { padding-top: var(--shine-space-6); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--shine-space-3); }
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--shine-color-fg-muted); text-decoration: none; }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: var(--shine-radius-full); background: var(--accent); margin-right: var(--shine-space-2); vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  .nav-links { display: flex; gap: var(--shine-space-2) var(--shine-space-5); flex-wrap: wrap; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--shine-color-fg-muted); text-decoration: none; transition: color var(--shine-duration-base) var(--shine-easing-standard); }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
+
+  header.hero { padding: var(--shine-space-8) 0 var(--shine-space-7); }
+  @media (min-width: 768px) { header.hero { padding: 104px 0 var(--shine-space-8); } }
+  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--shine-color-fg-muted); margin-bottom: var(--shine-space-5); }
+  .breadcrumb a { color: var(--shine-color-fg-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { margin: 0 var(--shine-space-3); }
+  .breadcrumb .here { color: var(--accent); }
+  .stamp { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: var(--shine-space-5); padding: var(--shine-space-2) var(--shine-space-4); display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent-line); border-radius: var(--shine-radius-full); }
+  h1 { font-family: var(--serif); font-variation-settings: 'opsz' 144, 'SOFT' 50; font-size: clamp(44px, 8vw, 88px); font-weight: 300; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: var(--shine-space-5); }
+  h1 em { font-style: italic; color: var(--accent-2); font-weight: 300; }
+  .lede { font-family: var(--serif); font-size: clamp(22px, 2.4vw, 26px); line-height: 1.45; color: var(--paper-2); max-width: 720px; }
+  .lede strong { color: var(--paper); font-weight: 600; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--shine-space-3); margin-top: var(--shine-space-6); }
+  .hero-proof { margin-top: var(--shine-space-7); padding: var(--shine-space-3); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-lg); box-shadow: var(--shine-shadow-lg); }
+  .hero-proof img { display: block; width: 100%; height: auto; border-radius: var(--shine-radius-md); }
+  .hero-proof figcaption { padding: var(--shine-space-4) var(--shine-space-1) var(--shine-space-1); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--shine-color-fg-muted); }
+  .hero-proof img { height: 420px; object-fit: cover; object-position: top; }
+  .journey-pair { display: grid; gap: var(--shine-space-4); margin-top: var(--shine-space-6); }
+  @media (min-width: 760px) { .journey-pair { grid-template-columns: 1fr 1fr; } }
+  .journey-shot { margin: 0; padding: var(--shine-space-3); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-lg); }
+  .journey-shot img { display: block; width: 100%; height: 360px; object-fit: cover; object-position: top; border-radius: var(--shine-radius-md); }
+  .journey-shot figcaption { padding: var(--shine-space-4) var(--shine-space-1) var(--shine-space-1); font-family: var(--mono); font-size: 11px; line-height: 1.6; text-transform: uppercase; letter-spacing: 0.12em; color: var(--shine-color-fg-muted); }
+  @media (max-width: 560px) { .hero-proof img { height: 260px; } .journey-shot img { height: 280px; } }
+  .btn { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; text-decoration: none; padding: var(--shine-space-3) var(--shine-space-5); border: 1px solid var(--ink-3); color: var(--paper); border-radius: var(--shine-radius-full); display: inline-flex; align-items: center; gap: var(--shine-space-2); transition: border-color var(--shine-duration-base) var(--shine-easing-standard), color var(--shine-duration-base) var(--shine-easing-standard), background var(--shine-duration-base) var(--shine-easing-standard); }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+  .btn.primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: var(--ink); }
+
+  section.block { padding: var(--shine-space-8) 0; border-top: 1px solid var(--ink-3); }
+  .section-num { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: var(--shine-space-2); }
+  h2.st { font-family: var(--serif); font-size: clamp(32px, 4.4vw, 44px); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: var(--shine-space-6); }
+  h2.st em { font-style: italic; color: var(--mute); }
+  .prose { max-width: 680px; display: flex; flex-direction: column; gap: var(--shine-space-5); }
+  .prose p, .contract p { font-family: var(--serif); font-size: 17px; line-height: 1.68; color: var(--paper-2); }
+  .prose strong, .contract strong { color: var(--paper); font-weight: 600; }
+  .prose em { color: var(--accent-2); font-style: italic; }
+  .prompt-stack { display: grid; gap: var(--shine-space-3); margin: var(--shine-space-6) 0; }
+  .prompt { padding: var(--shine-space-4) var(--shine-space-5); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-md); font-family: var(--mono); font-size: 14px; color: var(--paper); }
+  .contrast-line { display: grid; grid-template-columns: 1fr; gap: var(--shine-space-3); margin-top: var(--shine-space-6); }
+  @media (min-width: 700px) { .contrast-line { grid-template-columns: 1fr 1fr; } }
+  .contrast-line div { padding: var(--shine-space-5); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-lg); }
+  .contrast-line strong { display: block; font-family: var(--serif); font-size: 19px; font-weight: 400; color: var(--paper); margin-bottom: var(--shine-space-2); }
+  .contrast-line span { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--shine-color-fg-muted); }
+
+  .contracts { display: grid; gap: var(--shine-space-3); }
+  .contract { display: grid; grid-template-columns: 40px 1fr; gap: var(--shine-space-4); padding: var(--shine-space-5); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-lg); }
+  .contract .num { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.15em; padding-top: var(--shine-space-1); }
+  .contract h3 { font-family: var(--serif); font-size: 19px; font-weight: 400; color: var(--paper); margin-bottom: var(--shine-space-2); }
+  .contract p { font-size: 17px; }
+  .gate { padding: var(--shine-space-6); background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-left: 2px solid var(--accent); border-radius: 0 var(--shine-radius-lg) var(--shine-radius-lg) 0; }
+  .gate p { font-family: var(--serif); font-size: 19px; line-height: 1.6; color: var(--paper-2); }
+  .gate strong { color: var(--paper); }
+  .gate .label { display: block; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: var(--shine-space-3); }
+  code { font-family: var(--mono); font-size: 14px; color: var(--accent-2); background: var(--ink-2); border: 1px solid var(--ink-3); padding: 2px 7px; border-radius: var(--shine-radius-sm); white-space: nowrap; }
+  .repo-card { padding: var(--shine-space-7) var(--shine-space-6); background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-xl); }
+  .repo-card h2 { margin-bottom: var(--shine-space-4); }
+  .repo-card p { font-family: var(--serif); font-size: 17px; line-height: 1.68; color: var(--paper-2); max-width: 660px; }
+  .repo-card .hero-actions { margin-top: var(--shine-space-5); }
+  .final-line { font-family: var(--serif); font-size: 26px; line-height: 1.35; color: var(--paper); }
+  .final-line em { color: var(--accent-2); }
+  footer { padding: var(--shine-space-7) 0 var(--shine-space-8); border-top: 1px solid var(--ink-3); display: flex; flex-wrap: wrap; gap: var(--shine-space-3) var(--shine-space-5); justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--shine-color-fg-muted); }
+  footer a { text-decoration: none; transition: color var(--shine-duration-base) var(--shine-easing-standard); }
+  footer a:hover { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--shine-radius-sm); }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+</style>
+<script src="../assets/analytics.js" defer></script>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="container">
+<nav aria-label="Primary">
+  <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/resume.html">Resume</a>
+    <a href="/now.html">Now</a>
+    <a href="/writing.html" aria-current="page">Writing</a>
+  </div>
+</nav>
+
+<main id="main">
+<header class="hero" data-region="hero">
+  <div class="breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="/writing.html">Writing</a><span class="sep">/</span><span class="here">Shine</span></div>
+  <div class="stamp">Open source · 1 Sep 2026 · v4.0.2</div>
+  <h1>I Rebuilt Shine Until It Could <em>Rebuild Itself</em></h1>
+  <p class="lede">I kept adding gates and calling it taste. Then I used the finished skill on its own site and portfolio. <strong>The public rebuild passed. The downstream test still found a release bug.</strong> That is the journey to Shine V4.</p>
+  <div class="hero-actions" aria-label="Article resources">
+    <a class="btn primary" data-primary href="https://shine-blond.vercel.app/skill" target="_blank" rel="noopener">Copy the skill ↗</a>
+    <a class="btn" href="https://github.com/justinfowler925/shine" target="_blank" rel="noopener">View Shine on GitHub ↗</a>
+    <a class="btn" href="https://shine-blond.vercel.app/" target="_blank" rel="noopener">Live site ↗</a>
+    <a class="btn" data-testid="journey-link" href="#journey">See the before / after ↓</a>
+  </div>
+  <figure class="hero-proof" data-shine-signature="shine-v4-proof">
+    <img src="../assets/shine-v4-after.png" alt="The rebuilt Shine V4 public page with an evidence-led hero and visible design packet" width="1280" height="3742" />
+    <figcaption>After · Shine V4 · the design director became the product proof</figcaption>
+  </figure>
+</header>
+
+<section class="block">
+  <div class="section-num">01 — The costume</div>
+  <h2 class="st">You already know <em>the other look</em></h2>
+  <div class="prose">
+    <p>Gray canvas. Inter. A rounded card. A blue button. Ask for Linear. Ask for “expensive.” Ask for a briefing a CEO would actually open. You get the same costume with a new label.</p>
+    <p>Prompting over it does nothing. The model paints with whatever the library left on the floor.</p>
+  </div>
+  <div class="prompt-stack" aria-label="Prompts that still produce the costume">
+    <div class="prompt">“Make it look like Linear.”</div>
+    <div class="prompt">“This should feel expensive.”</div>
+    <div class="prompt">“A briefing a CEO would actually open.”</div>
+  </div>
+  <div class="contrast-line">
+    <div><strong>On-token is not designed.</strong><span>Compliance without likeness</span></div>
+    <div><strong>Accessible is not usable.</strong><span>Axe without a job</span></div>
+  </div>
+</section>
+
+<section class="block" data-region="product-proof" id="journey" data-testid="journey-proof">
+  <div class="section-num">02 — The dogfood test</div>
+  <h2 class="st">The page passed. The story <em>did not</em>.</h2>
+  <div class="prose">
+    <p>The V3 page was not broken. Its browser report showed zero axe violations, 7.73:1 worst measured contrast, and a working theme. It was also a 4,255-pixel technical essay with the product proof reduced to thumbnails.</p>
+    <p>V4 started by naming that contradiction. The new page makes the director packet the focal object, puts the architecture in the reading path, and shows the real before-and-after before asking anyone to install the skill.</p>
+  </div>
+  <div class="journey-pair">
+    <figure class="journey-shot"><img src="../assets/shine-v3-before.png" alt="Shine V3 as a long narrow editorial article" width="1280" height="4255" /><figcaption>Before · accessible and credible · proof visually subordinate</figcaption></figure>
+    <figure class="journey-shot"><img src="../assets/shine-v4-after.png" alt="Shine V4 with an evidence-led hero, director packet, architecture, and conversion" width="1280" height="3742" /><figcaption>After · evidence-led · art direction and conversion visible</figcaption></figure>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">03 — The project</div>
+  <h2 class="st">A director, not another <em>kit</em></h2>
+  <div class="prose" style="margin-bottom:var(--shine-space-6)">
+    <p>So I built <strong>Shine</strong>, an open-source Agent Skill for Claude Code and Cursor. It is a design system the agent cannot shrug off, and a director that looks at the rendered page.</p>
+    <p>The product is the loop. Before a pixel, the agent opens a page that already solved the job. V4 caps the shortlist at one page per visual family, puts pages above atoms, and requires four decisions before render: composition archetype, image strategy, signature moment, and what the next output must not repeat.</p>
+  </div>
+  <div class="contracts">
+    <article class="contract"><span class="num">01</span><div><h3>Look</h3><p>Render the page. Read the pixels, not the source.</p></div></article>
+    <article class="contract"><span class="num">02</span><div><h3>Name</h3><p>Hierarchy, flow, density — defects in UX terms, worst first.</p></div></article>
+    <article class="contract"><span class="num">03</span><div><h3>Match</h3><p>A real template for this job. Not a vibe. Not zinc.</p></div></article>
+    <article class="contract"><span class="num">04</span><div><h3>Direct</h3><p>Name the archetype, imagery, signature moment, and anti-repetition rule.</p></div></article>
+    <article class="contract"><span class="num">05</span><div><h3>Build</h3><p>Keep the installed system and ship the complete interaction contract.</p></div></article>
+    <article class="contract"><span class="num">06</span><div><h3>Prove</h3><p>Measure, accessibility, executable workflow, and comparison when reference pixels exist.</p></div></article>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">04 — The gate</div>
+  <h2 class="st">A check does not exist until it <em>bites</em></h2>
+  <div class="gate">
+    <span class="label">The rule</span>
+    <p>A gate does not exist until a <strong>seeded violation makes it fail</strong> and a valid fixture makes it pass. Configuration is not proof. A likeness score the page awards itself is not proof. Missing evidence is <strong>unprovable</strong>, never pass.</p>
+  </div>
+  <div class="prose" style="margin-top:var(--shine-space-6)">
+    <p>Shine’s first useful version was a very good compliance officer. It caught raw hex, weak contrast, missing focus, empty regions. Then I watched it cite IBM Carbon and produce a zinc dashboard. Every check passed.</p>
+    <p>The next version grew a critic that returned a likeness score. It did not compare pixels. It searched the page source for labels. A one-button page with the right attributes scored 10/10 against a Carbon data table. I had built a machine that trained the agent to stamp the answer on its own homework.</p>
+    <p>V3 deleted that theater. V4 turned originality into an input contract, then used the released skill here. The very first packet command through the immutable <code>current</code> symlink exited zero and produced nothing. The imported API had passed every test; the installed CLI had not executed. I fixed it, added a symlink regression test, shipped v4.0.1—then diagnosis exposed the same defect in the remaining entry points. V4.0.2 audited all of them.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">05 — The stack</div>
+  <h2 class="st">Keep shadcn. Add <em>direction</em>.</h2>
+  <div class="prose">
+    <p>At one point Shine carried MUI, Ant Design Pro, and IBM Carbon while the products actually consuming it were shadcn/Tailwind apps. That sounded like range. In practice it taught the agent to copy a costume it could not install.</p>
+    <p>Those kits are gone from disk — not retired, not down-ranked. Where that left a hole, Shine says so. Marketing, checkout, and wizard can be honest region maps without pretending to have rendered proof.</p>
+    <p>The decision is not shadcn versus Headless UI. Headless UI is an unstyled primitive set; replacing shadcn with it removes composition without adding taste. V4 keeps shadcn as the owned-source composition layer, uses Base UI by default for greenfield primitives, and escalates to React Aria for complex, internationalized, or accessibility-heavy interactions.</p>
+    <p>Untitled UI, Magic UI, Motion Primitives, and Tremor can contribute licensed components or cited structural lessons. MUI, Ant, and Carbon remain reference-only: no foreign runtime enters a shadcn repo just to imitate its paint. The same eye now routes to output-native lanes for editable PowerPoint, code-first decks, PDF reports, and email.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="section-num">06 — One file, or the full machine</div>
+  <h2 class="st">Codex, Cursor, Claude, <em>shared</em></h2>
+  <div class="prose">
+    <p>If your AI supports skills, give it the canonical <code>SKILL.md</code>. If it does not, paste the same text into persistent project or custom instructions. No repository knowledge is required.</p>
+    <p>The full install builds an immutable release for Codex and Cursor and proves it with <code>node verify/doctor.mjs</code>. The V4 CI lane passes 113 checks; the deployed release passes 136 with two intentionally unconfigured consumer notes. The single-file edition inlines 32 references into 4,446 lines, and the Claude plugin loads them on demand.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="repo-card">
+    <div class="section-num">MIT · Public · Ready to install</div>
+    <h2 class="st">Use the <em>skill</em></h2>
+    <p>Copy one Markdown file into your agent, download the Claude plugin, or clone the full repository for the 129-row catalog, hooks, doctor, and browser proof. Shine’s catalog stands on <a href="https://github.com/shadcn-ui/ui" target="_blank" rel="noopener">shadcn/ui</a>. Independent project — not affiliated, not endorsed.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="https://shine-blond.vercel.app/skill" target="_blank" rel="noopener">shine-blond.vercel.app/skill ↗</a>
+      <a class="btn" href="https://github.com/justinfowler925/shine" target="_blank" rel="noopener">github.com/justinfowler925/shine ↗</a>
+      <a class="btn" href="/portfolio.html">Portfolio entry</a>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h2 class="final-line">The premise got sharper: <em>a design system needs taste, and taste needs a receipt.</em></h2>
+</section>
+</main>
+
+<footer>
+  <span>© 2026 · Justin Fowler</span>
+  <span>Article · Published 2026-09-01</span>
+  <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></span>
+  <span><a href="/writing.html">More writing ↗</a></span>
+</footer>
+</div>
+</body>
+</html>

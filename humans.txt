@@ -16,7 +16,7 @@
   GitHub Pages — this site you're reading
 
 /* SITE */
-  Last update: 2026/08/13
+  Last update: 2026/09/01
   Standards: HTML5, CSS3, ES2022
   Components: Vanilla JS, Intersection Observer, scroll-snap
   Hosting: Vercel → GoDaddy DNS
