@@ -1,0 +1,92 @@
+TITLE
+I rebuilt my AI design skill until it caught its own release bug
+
+ARTICLE
+I built a design system for AI agents, watched it pass every test, and still disliked what it made.
+
+That was the beginning of Shine—not the end.
+
+The first version enforced the things that are easy to measure: tokens, spacing, contrast, focus, states. It was a good compliance officer. It could tell an agent not to use a random hex value. It could not tell the agent that six equal cards had no point of view.
+
+The second version tried to measure “likeness.” That sounded smarter than it was. The critic searched the page source for the right labels. A trivial page could stamp the expected attributes onto its own homework and score well against a reference it did not resemble.
+
+I deleted it.
+
+V3 replaced self-attestation with evidence: real source, harvested screenshots, browser measurement, executable usability, and hooks whose failure paths were tested instead of merely configured. I also removed MUI, Ant Design Pro, and IBM Carbon from the runtime corpus. My actual consumers were shadcn/Tailwind applications. Carrying foreign runtimes created the appearance of range while teaching agents to imitate paint they could not faithfully build.
+
+That version was substantially better. It still did not solve the question I cared about most:
+
+How does an agent create work that is balanced, specific, and recognizably designed—without producing the same tasteful costume every time?
+
+I considered Tailwind Plus. The $299 library offers useful page structures, and I may still buy it as a productivity asset. But a template library cannot decide which page fits the job, stop three siblings from one visual family crowding the shortlist, invent the right image strategy, or translate a visual argument into an editable deck, a PDF report, or an email.
+
+I also considered replacing shadcn with Headless UI. That would have moved in the wrong direction. Headless UI is a primitive layer. It does not replace the composition system I already own, and it does not add art direction.
+
+So V4 keeps shadcn.
+
+Base UI is the default primitive path for new work. React Aria is the escalation path for complex, internationalized, or accessibility-heavy interactions. Untitled UI, Magic UI, Motion Primitives, and Tremor can contribute licensed source or cited structural lessons. No foreign runtime enters a project merely so an agent can imitate its appearance.
+
+Then I made the missing judgment enforceable.
+
+Every V4 direction now has to name four things before render:
+
+1. The composition archetype.
+2. The image strategy and source.
+3. The signature moment that belongs to this subject.
+4. The prior family, silhouette, rhythm, or device the output must not repeat.
+
+Pages outrank atoms. A component demo can fill a named region; it cannot supply the page. A shortlist gets one candidate per visual family. Web, editable PowerPoint, code-first decks, PDF reports, and email each get output-native production and proof.
+
+Then I used Shine V4 on Shine itself.
+
+The old public page was not technically broken. It had zero axe violations, strong measured contrast, and a working theme. It was also a 4,255-pixel technical essay that reduced the product proof to thumbnails.
+
+The rebuild moved the director packet into the hero, made the open-source architecture visible, put the real before-and-after in the reading path, and gave the complete skill one obvious conversion path.
+
+[SCREENSHOT 1 — assets/shine-v3-before.png]
+Caption: Before — technically clean, visually subordinate proof.
+
+[SCREENSHOT 2 — assets/shine-v4-after.png]
+Caption: After — evidence-led, directed, and built around the product itself.
+
+The public page passed its browser and workflow gates. Then I moved to the portfolio article you are reading about now.
+
+The first command against the installed V4 release returned exit code zero—and produced no design packet.
+
+The imported API had passed every test. The executable was being invoked through an immutable `current` symlink, and its main-module check compared the symlink path with the resolved release path. They did not match, so the CLI silently decided it was not the CLI.
+
+I fixed the packet, added a symlink regression test, and shipped v4.0.1.
+
+Then the next step—diagnosis—exposed the same assumption in the remaining entry points.
+
+That changed the fix. I audited every executable instead of patching one command at a time. V4.0.2 is the result.
+
+Today Shine ships:
+
+- 129 catalog rows with family-capped retrieval
+- 113 passing checks in the browser-free CI lane
+- 136 passing checks in the installed release doctor
+- a canonical 80-line loader skill
+- a 4,446-line self-contained Markdown edition
+- a Claude plugin
+- five output-native production lanes
+- the real V3/V4 before-and-after
+
+The most useful lesson was not “add more tests.”
+
+It was this: test the product through the path a real consumer uses. Make the design decision explicit. Treat missing evidence as unprovable. Let the final artifact challenge the system that created it.
+
+Shine V4 is open source and live:
+
+Case study: https://justinfowler.com/writing/shine.html
+Live product: https://shine-blond.vercel.app
+Get the skill: https://shine-blond.vercel.app/skill
+Source and releases: https://github.com/justinfowler925/shine
+
+#DesignSystems #AIEngineering #UXDesign #OpenSource #AgenticAI
+
+PUBLISHING NOTES
+- Schedule for Monday, September 7, 2026 at 9:00 AM America/Chicago.
+- Use assets/shine-v3-before.png as the first image and assets/shine-v4-after.png as the second.
+- Preserve the before/after order and captions.
+- Verify all four links after publication and record the published LinkedIn URL.

@@ -21,7 +21,7 @@ assert.equal((article.match(new RegExp(repoUrl, "g")) ?? []).length >= 2, true, 
 assert.equal((article.match(new RegExp(skillUrl, "g")) ?? []).length >= 2, true, "article must expose the skill page at the start and finish");
 assert.match(article, new RegExp(liveUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
 assert.match(archive, /href="\/writing\/shine\.html"/);
-assert.match(archive, /5 posts shipped/);
+assert.match(archive, /6 posts shipped/);
 assert.match(archive, /Last shipped · 2026-09-01/);
 assert.match(sitemap, /<loc>https:\/\/justinfowler\.com\/writing\/shine\.html<\/loc>/);
 assert.match(sitemap, /<lastmod>2026-09-01<\/lastmod>/);
