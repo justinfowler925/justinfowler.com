@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "job": "Add a curated open-source skills and projects collection to the existing personal portfolio, with repository and public page links",
+  "category": "marketing",
+  "primaryTask": "Distinguish reusable skill files from working projects, then reach the source repository or public evidence page.",
+  "before": {
+    "artifact": "portfolio.html",
+    "screenshot": "/tmp/portfolio-open-source-before.png"
+  },
+  "productPrecedent": {
+    "name": "Existing portfolio project collection",
+    "artifact": "portfolio.html",
+    "preserved": ["editorial dark theme", "Fraunces/Geist/JetBrains Mono hierarchy", "project proof before conversion", "two-column card rhythm"],
+    "divergences": ["compact cards replace long case-study anatomy because the job is source discovery", "kind filters appear only on the dedicated index"]
+  },
+  "defects": [
+    {
+      "bucket": "usability",
+      "severity": "major",
+      "problem": "Visitors cannot distinguish reusable agent skill files from project implementations or open a skill file directly.",
+      "evidence": "The existing portfolio mixes products, infrastructure, strategy, and enterprise delivery; it has no skill-file object or skill/project control.",
+      "expectedEffect": "Add explicit Skill file and Project labels, direct source actions, and a working kind filter."
+    },
+    {
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "Repository links and public evidence pages are duplicated across hand-authored HTML with no authoritative publication record.",
+      "evidence": "GitHub URLs occur across portfolio, case-study, writing, and voice pages; there is no data registry or generated-surface check.",
+      "expectedEffect": "Generate both the portfolio section and index from one explicit allowlist and fail CI when generated output drifts."
+    },
+    {
+      "bucket": "composition",
+      "severity": "minor",
+      "problem": "The 24 long-form portfolio entries bury the small set of source-inspectable work.",
+      "evidence": "The source links appear inside multi-screen project articles and are not available as a scannable collection.",
+      "expectedEffect": "Place a compact proof-led collection before the long-form case studies and provide a dedicated index."
+    },
+    {
+      "bucket": "adoption",
+      "severity": "major",
+      "problem": "Making every GitHub-public repository visible would turn a hosting setting into editorial publication consent.",
+      "evidence": "The account currently has more public repositories than are intentionally represented on the site.",
+      "expectedEffect": "Default exposure to private and render only explicitly allowlisted public records."
+    }
+  ]
+}

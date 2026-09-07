@@ -9,14 +9,14 @@
   posthog.init('phc_CHPeioNrffCBjKAm95xXG3rgBMPKixB2eWGp2sm2zhb8', {
     api_host: 'https://us.i.posthog.com',
     person_profiles: 'identified_only',
-    autocapture: true,
+    autocapture: false,
     capture_pageview: true,
     capture_pageleave: true,
     session_recording: {
       maskAllInputs: true,         // mask form inputs by default
       maskTextSelector: '[data-mask]'
     },
-    disable_session_recording: false,
+    disable_session_recording: true,
     loaded: function (ph) {
       // Tag every event with site identifier — lets a single PostHog project
       // filter cleanly between justinfowler.com and purplechipmonk.com.

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en" style="color-scheme: dark;">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Open-source skills & projects — Justin Fowler</title>
+<meta name="description" content="Public agent skills, source repositories, and evidence-backed project pages from Justin Fowler." />
+<meta name="theme-color" content="#0c0a09" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href="https://justinfowler.com/open-source.html" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<meta property="og:title" content="Open-source skills & projects — Justin Fowler" />
+<meta property="og:description" content="Reusable agent skills and evidence-backed projects, with source and public writeups connected from one curated registry." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://justinfowler.com/open-source.html" />
+<meta property="og:image" content="https://justinfowler.com/og-image.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/tokens.css" />
+<link rel="stylesheet" href="/assets/public-work.css" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { min-height: 100vh; overflow-x: hidden; background: var(--ink); color: var(--paper); font-family: var(--sans); }
+  ::selection { background: var(--accent); color: var(--ink); }
+  .grain { position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E"); }
+  .container { position: relative; z-index: 2; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  @media (min-width: 768px) { .container { padding: 0 48px; } }
+  .skip { position: fixed; top: -100px; left: 20px; z-index: 99; padding: 8px 16px; background: var(--accent); color: var(--ink); font-family: var(--mono); font-size: 11px; }
+  .skip:focus { top: 16px; }
+  nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-top: 32px; }
+  .mark { color: var(--shine-color-fg-muted); font-family: var(--mono); font-size: 11px; letter-spacing: .25em; text-decoration: none; text-transform: uppercase; }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; margin-right: 8px; border-radius: 50%; background: var(--accent); vertical-align: middle; }
+  .nav-links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .nav-links a { color: var(--shine-color-fg-muted); font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-decoration: none; text-transform: uppercase; }
+  .nav-links a:hover, .nav-links a:focus-visible, .nav-links a[aria-current="page"] { color: var(--accent); }
+  .hero { padding: 112px 0 72px; }
+  .breadcrumb { margin-bottom: 32px; color: var(--shine-color-fg-muted); font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
+  .breadcrumb a { color: inherit; text-decoration: none; }
+  .breadcrumb span { margin: 0 8px; }
+  h1 { max-width: 920px; color: var(--paper); font-family: var(--serif); font-size: clamp(50px, 10vw, 112px); font-weight: 300; line-height: .94; letter-spacing: -.045em; }
+  h1 em { color: var(--accent-2); font-weight: 300; }
+  .hero-copy { max-width: 740px; margin-top: 32px; color: var(--paper-2); font-family: var(--serif); font-size: 20px; font-weight: 300; line-height: 1.5; }
+  .registry-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; margin-top: 48px; overflow: hidden; border: 1px solid var(--ink-3); border-radius: 14px; background: var(--ink-3); }
+  @media (min-width: 760px) { .registry-strip { grid-template-columns: repeat(4, 1fr); } }
+  .registry-stat { padding: 20px; background: var(--ink-2); }
+  .registry-stat strong { display: block; color: var(--paper); font-family: var(--serif); font-size: 30px; font-weight: 400; }
+  .registry-stat span { color: var(--shine-color-fg-muted); font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+  .index-section { padding-top: 16px; }
+  .index-section .public-work-grid { margin-bottom: 64px; }
+  .result { margin-left: auto; align-self: center; color: var(--shine-color-fg-muted); font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+  footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 32px 0 48px; border-top: 1px solid var(--ink-3); color: var(--shine-color-fg-muted); font-family: var(--mono); font-size: 10px; }
+  footer a { color: var(--paper-2); }
+</style>
+<script src="/assets/analytics.js" defer></script>
+<script src="/assets/public-work.js" defer></script>
+</head>
+<body data-cite="shadcn-marketing">
+<a class="skip" href="#catalog">Skip to catalog</a>
+<div class="grain" aria-hidden="true"></div>
+<div class="container">
+  <nav aria-label="Primary">
+    <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+    <div class="nav-links">
+      <a href="/portfolio.html" aria-current="page">Portfolio</a>
+      <a href="/resume.html">Resume</a>
+      <a href="/now.html">Now</a>
+      <a href="/writing.html">Writing</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </nav>
+  <main>
+    <header class="hero" data-region="hero">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/portfolio.html">Portfolio</a><span>/</span>Open source</div>
+      <h1>Skills you can <em>read</em>.<br />Projects you can inspect.</h1>
+      <p class="hero-copy">The reusable operating files, source repositories, and public proof behind the work. Every entry is deliberately published; a repository being public does not automatically put it here.</p>
+      <div class="registry-strip" aria-label="Catalog summary">
+        <!-- public-work:stats:start -->
+<div class="registry-stat"><strong>8</strong><span>Published entries</span></div>
+        <div class="registry-stat"><strong>4</strong><span>Skill files</span></div>
+        <div class="registry-stat"><strong>4</strong><span>Projects</span></div>
+        <div class="registry-stat"><strong>1</strong><span>Curated registry</span></div>
+    <!-- public-work:stats:end -->
+      </div>
+    </header>
+    <section class="index-section" id="catalog" aria-labelledby="catalog-title">
+      <div class="public-work-head">
+        <div>
+          <span class="public-work-kicker">Public work index</span>
+          <h2 class="public-work-title" id="catalog-title">Choose the <em>artifact</em>, then inspect the evidence.</h2>
+        </div>
+        <div>
+          <p class="public-work-intro">Skill files are the reusable instructions. Projects are working implementations. Public pages explain the decisions; repositories carry the source.</p>
+          <p class="public-work-policy">Default private · publish by explicit registry entry</p>
+        </div>
+      </div>
+      <div class="public-work-filters" aria-label="Filter public work">
+        <button class="public-work-filter" type="button" data-public-work-filter="all" aria-pressed="true">All</button>
+        <button class="public-work-filter" type="button" data-public-work-filter="skill" aria-pressed="false">Skill files</button>
+        <button class="public-work-filter" type="button" data-public-work-filter="project" aria-pressed="false">Projects</button>
+        <span class="result" data-public-work-result aria-live="polite">8 published items</span>
+      </div>
+      <div class="public-work-grid" data-testid="public-work-grid" data-product-pattern="public-work-collection">
+        <!-- public-work:index:start -->
+      <article class="public-work-card" data-public-work-kind="skill" id="open-shine">
+        <div class="public-work-card-top">
+          <span class="public-work-kind">Skill file</span>
+          <span class="public-work-state">Public · source open</span>
+        </div>
+        <h3>Shine</h3>
+        <p class="public-work-summary">A design director for coding agents: cite real templates, build with installed systems, then prove usability and pixels.</p>
+        <p class="public-work-proof">V4 · browser proof · cross-media lanes</p>
+        <div class="public-work-tags" aria-label="Topics"><span>Design systems</span><span>Agent UX</span><span>Verification</span></div>
+        <div class="public-work-links"><a href="https://github.com/justinfowler925/shine/blob/main/skill/SKILL.md" target="_blank" rel="noopener noreferrer">Open SKILL.md ↗</a>
+          <a href="/writing/shine.html">Read public page →</a>
+          <a href="https://github.com/justinfowler925/shine" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+      </article>
+      <article class="public-work-card" data-public-work-kind="skill" id="open-unfog">
+        <div class="public-work-card-top">
+          <span class="public-work-kind">Skill file</span>
+          <span class="public-work-state">Public · source open</span>
+        </div>
+        <h3>Unfog</h3>
+        <p class="public-work-summary">Turns vague requests into evidence-backed execution contracts, then carries the contract through completion.</p>
+        <p class="public-work-proof">Scope · acceptance probes · delivery receipts</p>
+        <div class="public-work-tags" aria-label="Topics"><span>Agent reliability</span><span>Requirements</span><span>Verification</span></div>
+        <div class="public-work-links"><a href="https://github.com/justinfowler925/unfog/blob/main/skill/SKILL.md" target="_blank" rel="noopener noreferrer">Open SKILL.md ↗</a>
+          <a href="/writing/unfog.html">Read public page →</a>
+          <a href="https://github.com/justinfowler925/unfog" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+      </article>
+      <article class="public-work-card" data-public-work-kind="skill" id="open-vlad-final-boss">
+        <div class="public-work-card-top">
+          <span class="public-work-kind">Skill file</span>
+          <span class="public-work-state">Public · source open</span>
+        </div>
+        <h3>Vlad Final Boss</h3>
+        <p class="public-work-summary">An adversarial handoff gate that refuses completion claims without concrete, independently checkable receipts.</p>
+        <p class="public-work-proof">Receipt gate · adversarial review · public spec</p>
+        <div class="public-work-tags" aria-label="Topics"><span>Quality gates</span><span>Review</span><span>Evidence</span></div>
+        <div class="public-work-links"><a href="https://github.com/justinfowler925/vlad-final-boss/blob/main/SKILL.md" target="_blank" rel="noopener noreferrer">Open SKILL.md ↗</a>
+          <a href="/writing/did-you-check-it.html">Read public page →</a>
+          <a href="https://github.com/justinfowler925/vlad-final-boss" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+      </article>
+      <article class="public-work-card" data-public-work-kind="skill" id="open-strike-package">
+        <div class="public-work-card-top">
+          <span class="public-work-kind">Skill file</span>
+          <span class="public-work-state">Public · source open</span>
+        </div>
+        <h3>Strike Package</h3>
+        <p class="public-work-summary">Creates source-led pre-meeting intelligence briefs for public professional figures without collecting private personal data.</p>
+        <p class="public-work-proof">Source ledger · risk controls · multi-format brief</p>
+        <div class="public-work-tags" aria-label="Topics"><span>Research</span><span>Executive briefings</span><span>Source quality</span></div>
+        <div class="public-work-links"><a href="https://github.com/justinfowler925/strike-package/blob/main/downloads/skill/SKILL.md" target="_blank" rel="noopener noreferrer">Open SKILL.md ↗</a>
+          <a href="https://github.com/justinfowler925/strike-package" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+      </article>
+      <article class="public-work-card" data-public-work-kind="project" id="open-brutus">
+        <div class="public-work-card-top">
+          <span class="public-work-kind">Project</span>
+          <span class="public-work-state">Public · source open</span>
+        </div>
+        <h3>Brutus</h3>
+        <p class="public-work-summary">A local, evidence-first AI coworker and operations console built to keep sensitive context on owned hardware.</p>
+        <p class="public-work-proof">Local-first · tested · configurable</p>
+        <div class="public-work-tags" aria-label="Topics"><span>Local AI</span><span>Operations</span><span>Python</span></div>
+        <div class="public-work-links"><a href="/portfolio.html#brutus">Read public page →</a>
+          <a href="https://github.com/justinfowler925/brutus" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+      </article>
+      <article class="public-work-card" data-public-work-kind="project" id="open-atlas-next">
+        <div class="public-work-card-top">
+          <span class="public-work-kind">Project</span>
+          <span class="public-work-state">Public · source open</span>
+        </div>
+        <h3>Atlas Next</h3>
+        <p class="public-work-summary">An evidence-first deterministic Salesforce work system with replayable runs and explicit delivery controls.</p>
+        <p class="public-work-proof">Deterministic routing · replays · CI</p>
+        <div class="public-work-tags" aria-label="Topics"><span>Salesforce</span><span>Agent orchestration</span><span>Python</span></div>
+        <div class="public-work-links"><a href="https://github.com/justinfowler925/atlas-next" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+      </article>
+      <article class="public-work-card" data-public-work-kind="project" id="open-voice-mode">
+        <div class="public-work-card-top">
+          <span class="public-work-kind">Project</span>
+          <span class="public-work-state">Public · source open</span>
+        </div>
+        <h3>Voice Mode</h3>
+        <p class="public-work-summary">Hands-free macOS control, including the undocumented command format and a diagnostic that refuses to pass an empty configuration.</p>
+        <p class="public-work-proof">161-command catalog · doctor · MIT</p>
+        <div class="public-work-tags" aria-label="Topics"><span>macOS</span><span>Voice</span><span>Diagnostics</span></div>
+        <div class="public-work-links"><a href="/voice-mode.html">Read public page →</a>
+          <a href="https://github.com/justinfowler925/voice-mode" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+      </article>
+      <article class="public-work-card" data-public-work-kind="project" id="open-revops-integration-audit">
+        <div class="public-work-card-top">
+          <span class="public-work-kind">Project</span>
+          <span class="public-work-state">Public · source open</span>
+        </div>
+        <h3>Six-Layer Integration Audit</h3>
+        <p class="public-work-summary">A consulting-grade HubSpot-to-Salesforce audit primitive, published with a sanitized sample instead of client data.</p>
+        <p class="public-work-proof">104 findings · ~5 minutes compute · sanitized sample</p>
+        <div class="public-work-tags" aria-label="Topics"><span>RevOps</span><span>Salesforce</span><span>Data quality</span></div>
+        <div class="public-work-links"><a href="/case-studies/revops-integration-audit.html">Read public page →</a>
+          <a href="https://github.com/justinfowler925/revops-integration-audit" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+      </article>
+    <!-- public-work:index:end -->
+      </div>
+    </section>
+  </main>
+  <footer><span>© 2026 Justin Fowler</span><span><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></span></footer>
+</div>
+</body>
+</html>

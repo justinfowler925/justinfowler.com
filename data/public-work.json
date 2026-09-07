@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "owner": "justinfowler925",
+  "policy": {
+    "defaultExposure": "private",
+    "rule": "Only records with publish=true are rendered. Public GitHub visibility alone is not consent to feature a repository."
+  },
+  "items": [
+    {
+      "slug": "shine",
+      "name": "Shine",
+      "kind": "skill",
+      "publish": true,
+      "repoVisibility": "public",
+      "summary": "A design director for coding agents: cite real templates, build with installed systems, then prove usability and pixels.",
+      "proof": "V4 · browser proof · cross-media lanes",
+      "repo": "https://github.com/justinfowler925/shine",
+      "publicPage": "/writing/shine.html",
+      "sourceFile": "https://github.com/justinfowler925/shine/blob/main/skill/SKILL.md",
+      "tags": ["Design systems", "Agent UX", "Verification"]
+    },
+    {
+      "slug": "unfog",
+      "name": "Unfog",
+      "kind": "skill",
+      "publish": true,
+      "repoVisibility": "public",
+      "summary": "Turns vague requests into evidence-backed execution contracts, then carries the contract through completion.",
+      "proof": "Scope · acceptance probes · delivery receipts",
+      "repo": "https://github.com/justinfowler925/unfog",
+      "publicPage": "/writing/unfog.html",
+      "sourceFile": "https://github.com/justinfowler925/unfog/blob/main/skill/SKILL.md",
+      "tags": ["Agent reliability", "Requirements", "Verification"]
+    },
+    {
+      "slug": "vlad-final-boss",
+      "name": "Vlad Final Boss",
+      "kind": "skill",
+      "publish": true,
+      "repoVisibility": "public",
+      "summary": "An adversarial handoff gate that refuses completion claims without concrete, independently checkable receipts.",
+      "proof": "Receipt gate · adversarial review · public spec",
+      "repo": "https://github.com/justinfowler925/vlad-final-boss",
+      "publicPage": "/writing/did-you-check-it.html",
+      "sourceFile": "https://github.com/justinfowler925/vlad-final-boss/blob/main/SKILL.md",
+      "tags": ["Quality gates", "Review", "Evidence"]
+    },
+    {
+      "slug": "strike-package",
+      "name": "Strike Package",
+      "kind": "skill",
+      "publish": true,
+      "repoVisibility": "public",
+      "summary": "Creates source-led pre-meeting intelligence briefs for public professional figures without collecting private personal data.",
+      "proof": "Source ledger · risk controls · multi-format brief",
+      "repo": "https://github.com/justinfowler925/strike-package",
+      "publicPage": null,
+      "sourceFile": "https://github.com/justinfowler925/strike-package/blob/main/downloads/skill/SKILL.md",
+      "tags": ["Research", "Executive briefings", "Source quality"]
+    },
+    {
+      "slug": "brutus",
+      "name": "Brutus",
+      "kind": "project",
+      "publish": true,
+      "repoVisibility": "public",
+      "summary": "A local, evidence-first AI coworker and operations console built to keep sensitive context on owned hardware.",
+      "proof": "Local-first · tested · configurable",
+      "repo": "https://github.com/justinfowler925/brutus",
+      "publicPage": "/portfolio.html#brutus",
+      "sourceFile": null,
+      "tags": ["Local AI", "Operations", "Python"]
+    },
+    {
+      "slug": "atlas-next",
+      "name": "Atlas Next",
+      "kind": "project",
+      "publish": true,
+      "repoVisibility": "public",
+      "summary": "An evidence-first deterministic Salesforce work system with replayable runs and explicit delivery controls.",
+      "proof": "Deterministic routing · replays · CI",
+      "repo": "https://github.com/justinfowler925/atlas-next",
+      "publicPage": null,
+      "sourceFile": null,
+      "tags": ["Salesforce", "Agent orchestration", "Python"]
+    },
+    {
+      "slug": "voice-mode",
+      "name": "Voice Mode",
+      "kind": "project",
+      "publish": true,
+      "repoVisibility": "public",
+      "summary": "Hands-free macOS control, including the undocumented command format and a diagnostic that refuses to pass an empty configuration.",
+      "proof": "161-command catalog · doctor · MIT",
+      "repo": "https://github.com/justinfowler925/voice-mode",
+      "publicPage": "/voice-mode.html",
+      "sourceFile": null,
+      "tags": ["macOS", "Voice", "Diagnostics"]
+    },
+    {
+      "slug": "revops-integration-audit",
+      "name": "Six-Layer Integration Audit",
+      "kind": "project",
+      "publish": true,
+      "repoVisibility": "public",
+      "summary": "A consulting-grade HubSpot-to-Salesforce audit primitive, published with a sanitized sample instead of client data.",
+      "proof": "104 findings · ~5 minutes compute · sanitized sample",
+      "repo": "https://github.com/justinfowler925/revops-integration-audit",
+      "publicPage": "/case-studies/revops-integration-audit.html",
+      "sourceFile": null,
+      "tags": ["RevOps", "Salesforce", "Data quality"]
+    }
+  ]
+}

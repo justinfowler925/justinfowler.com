@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "cite": "shadcn-marketing",
+  "objects": [
+    {"id":"catalog","selector":"[data-testid=public-work-grid]","referenceRole":"product proof","purpose":"Inspect the published skills and projects"},
+    {"id":"skill-filter","selector":"[data-public-work-filter=skill]","referenceRole":"primary evidence action","purpose":"Reduce the catalog to reusable skill files"},
+    {"id":"project-cards","selector":"[data-public-work-kind=project]","referenceRole":"filtered result","purpose":"Project cards disappear when the skill filter is active"},
+    {"id":"skill-source","selector":"[data-public-work-kind=skill] a[href*=\"SKILL.md\"]","referenceRole":"secondary evidence action","purpose":"Open the reusable skill source"}
+  ],
+  "flows": [
+    {"id":"find-skill-source","userJob":"Filter to skills and open a reusable skill file","steps":[
+      {"action":"visible","selector":"[data-testid=public-work-grid]"},
+      {"action":"click","selector":"[data-public-work-filter=skill]"},
+      {"action":"hidden","selector":"[data-public-work-kind=project]"},
+      {"action":"visible","selector":"[data-public-work-kind=skill] a[href*=\"SKILL.md\"]"}
+    ]}
+  ]
+}
