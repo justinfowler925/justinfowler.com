@@ -64,8 +64,8 @@ That changed the fix. I audited every executable instead of patching one command
 Today Shine ships:
 
 - 129 catalog rows with family-capped retrieval
-- 112 passing checks in the v4.0.2 browser-free CI lane
-- 181 passing checks in the v4.0.2 installed release doctor
+- 112 passing checks in the September 1 v4.0.2 browser-free CI lane (historical)
+- 181 passing checks in the September 1 v4.0.2 installed release doctor (historical)
 - a canonical 80-line loader skill
 - a 4,446-line self-contained Markdown edition
 - a Claude plugin
@@ -90,3 +90,9 @@ PUBLISHING NOTES
 - Use assets/shine-v3-before.png as the first image and assets/shine-v4-after.png as the second.
 - Preserve the before/after order and captions.
 - Verify all four links after publication and record the published LinkedIn URL.
+
+
+SEPTEMBER 8 UPDATE — DRAFT COPY
+The table review exposed another false pass: changing sort arrows, inert actions, and hidden state labels were being treated as complete behavior. Shine now requires the shared table implementation, its established product pattern, and browser assertions against actual records. Missing evidence blocks verification. The release passed 149 full local doctor checks; all 29 table regression cases also passed from the installed release.
+Evidence: https://github.com/justinfowler925/shine/pull/66
+Updated article: https://justinfowler.com/writing/shine.html#table-quality

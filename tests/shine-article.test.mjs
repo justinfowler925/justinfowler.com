@@ -14,10 +14,10 @@ const liveUrl = "https://shine-blond.vercel.app";
 
 assert.match(article, /<link rel="canonical" href="https:\/\/justinfowler\.com\/writing\/shine\.html"/);
 assert.match(article, /<html lang="en" data-cite="shadcn-marketing"/);
-assert.match(article, /v4\.0\.2/);
-assert.match(article, /v4\.0\.2 CI lane passes 112 checks/);
-assert.match(article, /installed release passes 181/);
-assert.match(readFileSync(new URL("../writing/shine-v4.linkedin.txt", import.meta.url), "utf8"), /112 passing checks in the v4\.0\.2 browser-free CI lane[\s\S]*181 passing checks in the v4\.0\.2 installed release doctor/);
+assert.match(article, /v4\.0\.2/i);
+assert.match(article, /149 checks in the full local doctor run/);
+assert.match(article, /29 table regression cases/);
+assert.match(readFileSync(new URL("../writing/shine-v4.linkedin.txt", import.meta.url), "utf8"), /149 full local doctor checks[\s\S]*29 table regression cases/);
 assert.doesNotMatch(article, /passes 113 checks|passes 136/);
 assert.match(article, /I Rebuilt Shine Until It Could Rebuild Itself/);
 assert.match(article, /<meta property="article:published_time" content="2026-09-01"/);
@@ -26,9 +26,9 @@ assert.equal((article.match(new RegExp(skillUrl, "g")) ?? []).length >= 2, true,
 assert.match(article, new RegExp(liveUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
 assert.match(archive, /href="\/writing\/shine\.html"/);
 assert.match(archive, /6 posts shipped/);
-assert.match(archive, /Last shipped · 2026-09-01/);
+assert.match(archive, /Last updated · 2026-09-08/);
 assert.match(sitemap, /<loc>https:\/\/justinfowler\.com\/writing\/shine\.html<\/loc>/);
-assert.match(sitemap, /<lastmod>2026-09-01<\/lastmod>/);
+assert.match(sitemap, /<lastmod>2026-09-08<\/lastmod>/);
 assert.match(article, /<img src="\.\.\/assets\/shine-v3-before\.png"/);
 assert.match(article, /<img src="\.\.\/assets\/shine-v4-after\.png"/);
 assert.ok(statSync(new URL("../assets/shine-v3-before.png", import.meta.url)).size > 100000);
@@ -43,3 +43,11 @@ assert.ok(portfolio.includes(skillUrl), "portfolio must link the skill page");
 assert.doesNotMatch(article + archive + sitemap + socialImage + home, /localhost|127\.0\.0\.1/);
 
 console.log("shine V4 article wiring: metadata, before/after proof, archive, portfolio, and conversion paths pass");
+
+const legacy=readFileSync(new URL("../writing/shine-v3-usability-proof.html",import.meta.url),"utf8");
+const registry=JSON.parse(readFileSync(new URL("../data/public-work.json",import.meta.url),"utf8"));
+assert.match(article, /article:modified_time" content="2026-09-08/);
+for(const surface of [article,legacy,portfolio,home])assert.match(surface,/table-quality|table regression|shared-table/);
+assert.match(portfolio, /Full local doctor · Sep 8 release/);
+assert.match(registry.items.find(x=>x.slug==="shine").proof,/149.*29/);
+assert.doesNotMatch(article+portfolio,/installed release passes 181|Deployed doctor checks passing|CI lane passes 112/);
