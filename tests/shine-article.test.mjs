@@ -49,5 +49,12 @@ const registry=JSON.parse(readFileSync(new URL("../data/public-work.json",import
 assert.match(article, /article:modified_time" content="2026-09-08/);
 for(const surface of [article,legacy,portfolio,home])assert.match(surface,/table-quality|table regression|shared-table/);
 assert.match(portfolio, /Full local doctor · Sep 8 release/);
-assert.match(registry.items.find(x=>x.slug==="shine").proof,/149.*29/);
+const release=JSON.parse(readFileSync(new URL("../data/shine-release.json",import.meta.url),"utf8"));
+const shine=registry.items.find(x=>x.slug==="shine");
+assert.match(release.sourceRevision,/^[a-f0-9]{40}$/);
+assert.match(release.skillSha256,/^[a-f0-9]{64}$/);
+assert.equal(shine.sourceRevision,release.sourceRevision);
+assert.equal(shine.skillSha256,release.skillSha256);
+assert.ok(shine.proof.includes(release.sourceRevision.slice(0,7)));
+assert.ok(article.includes(release.sourceRevision.slice(0,7)));
 assert.doesNotMatch(article+portfolio,/installed release passes 181|Deployed doctor checks passing|CI lane passes 112/);
