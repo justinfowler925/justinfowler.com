@@ -22,6 +22,7 @@
 <meta property="og:description" content="Ambiguity should be compiled, not complained about. An open-source Agent Skill for turning compressed intent into evidence-backed execution." />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2026-08-27" />
+<meta property="article:modified_time" content="2026-09-08" />
 <meta property="og:url" content="https://justinfowler.com/writing/unfog.html" />
 <meta property="og:image" content="https://justinfowler.com/assets/unfog-article.svg" />
 <meta property="og:image:width" content="1200" />
@@ -38,7 +39,7 @@
   "headline": "I Built Unfog Because ‘Write a Better Spec’ Is Usually the Wrong Advice",
   "description": "Unfog turns underspecified requests into evidence-backed execution contracts, then carries the work through completion.",
   "datePublished": "2026-08-27",
-  "dateModified": "2026-08-27",
+  "dateModified": "2026-09-08",
   "author": { "@type": "Person", "name": "Justin Fowler", "url": "https://justinfowler.com/" },
   "mainEntityOfPage": "https://justinfowler.com/writing/unfog.html",
   "isBasedOn": "https://www.linkedin.com/pulse/i-built-unfog-because-write-better-spec-usually-wrong-justin-fowler-awysc/",
@@ -212,6 +213,8 @@
   <div class="prose" style="margin-top:var(--shine-space-6)">
     <p>That changes the collaboration model. The human can speak in compressed intent. The agent is responsible for recovering the execution contract from evidence—not for making the human perform requirements theater.</p>
     <p>It also changes what “done” means. A passing test, green deployment, or HTTP 200 is not automatically a completion receipt. Unfog requires evidence from the layer the user actually experiences, a non-zero denominator, and a receipt for every acceptance probe.</p>
+    <p><strong>Update · September 8, 2026:</strong> That proof requirement now has a concrete rule for ingestion-backed work: trace one real source through parsing, persistence, editorial selection, and the rendered result. Inspect the actual folder and index structure. Keep authorization intact when parsing fails, and distinguish the material collected from the subset published to the user.</p>
+    <p>A successful connection does not prove that a readable report reached the screen. This is a requirement in the skill for how the agent verifies its work; it does not install a data connector or an automated ingestion test. <a href="https://github.com/justinfowler925/unfog/commit/9c387b79d5c164a458847517b95703d9b68bc59b" target="_blank" rel="noopener">Read the source-to-screen proof change ↗</a></p>
   </div>
 </section>
 
@@ -243,7 +246,7 @@
 
 <footer>
   <span>© 2026 · Justin Fowler</span>
-  <span>Article · Published 2026-08-27</span>
+  <span>Article · Published 2026-08-27 · Updated 2026-09-08</span>
   <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></span>
   <span><a href="/writing.html">More writing ↗</a></span>
 </footer>
