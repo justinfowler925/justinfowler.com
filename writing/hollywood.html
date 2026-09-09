@@ -1,0 +1,165 @@
+<!doctype html>
+<!-- shine-lint: off type color
+Preserves the established editorial typography and shared token colours of the site's writing pages. -->
+<html lang="en" data-cite="shadcn-marketing"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Hollywood: I Wanted an Ocean View. I Built a Production Agent. — Justin Fowler</title><meta name="description" content="The journey from disappointing nature scenes to a durable audio, video and broadcasting agent—with playable ocean, forest and cabin demonstrations."><meta name="author" content="Justin Fowler"><meta name="theme-color" content="#0c0a09"><link rel="canonical" href="https://justinfowler.com/writing/hollywood.html"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/assets/tokens.css">
+<meta property="og:title" content="Hollywood: I Wanted an Ocean View. I Built a Production Agent."><meta property="og:description" content="The journey from disappointing nature scenes to a durable audio, video and broadcasting agent—with playable ocean, forest and cabin demonstrations."><meta property="og:type" content="article"><meta property="article:published_time" content="2026-09-09"><meta property="og:url" content="https://justinfowler.com/writing/hollywood.html"><meta property="og:image" content="https://justinfowler.com/assets/hollywood/ocean.jpg"><meta property="og:image:width" content="1280"><meta property="og:image:height" content="720"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://justinfowler.com/assets/hollywood/ocean.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&amp;family=JetBrains+Mono:wght@300;400;500;600&amp;family=Geist:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Hollywood: I Wanted an Ocean View. I Built a Production Agent.", "description": "The journey from disappointing nature scenes to a durable audio, video and broadcasting agent\u2014with playable ocean, forest and cabin demonstrations.", "datePublished": "2026-09-09", "author": {"@type": "Person", "name": "Justin Fowler", "url": "https://justinfowler.com/"}, "mainEntityOfPage": "https://justinfowler.com/writing/hollywood.html", "image": "https://justinfowler.com/assets/hollywood/ocean.jpg"}</script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { color-scheme: dark; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.5; min-height: 100vh; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  a { color: inherit; }
+  .skip { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); padding: 0; }
+  .skip:focus { width: auto; height: auto; clip: auto; left: var(--shine-space-5); top: var(--shine-space-2); padding: var(--shine-space-2) var(--shine-space-4); background: var(--accent); color: var(--ink); border-radius: var(--shine-radius-full); z-index: 999; }
+  .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 var(--shine-space-5); position: relative; z-index: 2; }
+  @media (min-width: 768px) { .container { padding: 0 var(--shine-space-7); } }
+  nav { padding-top: var(--shine-space-6); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--shine-space-3); }
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--shine-color-fg-muted); text-decoration: none; }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: var(--shine-radius-full); background: var(--accent); margin-right: var(--shine-space-2); vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  .nav-links { display: flex; gap: var(--shine-space-2) var(--shine-space-5); flex-wrap: wrap; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--shine-color-fg-muted); text-decoration: none; transition: color var(--shine-duration-base) var(--shine-easing-standard); }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
+
+  header.hero { padding: var(--shine-space-8) 0 var(--shine-space-7); }
+  @media (min-width: 768px) { header.hero { padding: 104px 0 var(--shine-space-8); } }
+  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--shine-color-fg-muted); margin-bottom: var(--shine-space-5); }
+  .breadcrumb a { color: var(--shine-color-fg-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { margin: 0 var(--shine-space-3); }
+  .breadcrumb .here { color: var(--accent); }
+  .stamp { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: var(--shine-space-5); padding: var(--shine-space-2) var(--shine-space-4); display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent-line); border-radius: var(--shine-radius-full); }
+  h1 { font-family: var(--serif); font-variation-settings: 'opsz' 144, 'SOFT' 50; font-size: clamp(44px, 8vw, 88px); font-weight: 300; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: var(--shine-space-5); }
+  h1 em { font-style: italic; color: var(--accent-2); font-weight: 300; }
+  .lede { font-family: var(--serif); font-size: clamp(22px, 2.4vw, 26px); line-height: 1.45; color: var(--paper-2); max-width: 720px; }
+  .lede strong { color: var(--paper); font-weight: 600; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--shine-space-3); margin-top: var(--shine-space-6); }
+  .hero-proof { margin-top: var(--shine-space-7); padding: var(--shine-space-3); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-lg); box-shadow: var(--shine-shadow-lg); }
+  .hero-proof img { display: block; width: 100%; height: auto; border-radius: var(--shine-radius-md); }
+  .hero-proof figcaption { padding: var(--shine-space-4) var(--shine-space-1) var(--shine-space-1); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--shine-color-fg-muted); }
+  .hero-proof img { height: 420px; object-fit: cover; object-position: top; }
+  .journey-pair { display: grid; gap: var(--shine-space-4); margin-top: var(--shine-space-6); }
+  @media (min-width: 760px) { .journey-pair { grid-template-columns: 1fr 1fr; } }
+  .journey-shot { margin: 0; padding: var(--shine-space-3); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-lg); }
+  .journey-shot img { display: block; width: 100%; height: 360px; object-fit: cover; object-position: top; border-radius: var(--shine-radius-md); }
+  .journey-shot figcaption { padding: var(--shine-space-4) var(--shine-space-1) var(--shine-space-1); font-family: var(--mono); font-size: 11px; line-height: 1.6; text-transform: uppercase; letter-spacing: 0.12em; color: var(--shine-color-fg-muted); }
+  @media (max-width: 560px) { .hero-proof img { height: 260px; } .journey-shot img { height: 280px; } }
+  .btn { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; text-decoration: none; padding: var(--shine-space-3) var(--shine-space-5); border: 1px solid var(--ink-3); color: var(--paper); border-radius: var(--shine-radius-full); display: inline-flex; align-items: center; gap: var(--shine-space-2); transition: border-color var(--shine-duration-base) var(--shine-easing-standard), color var(--shine-duration-base) var(--shine-easing-standard), background var(--shine-duration-base) var(--shine-easing-standard); }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+  .btn.primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: var(--ink); }
+
+  section.block { padding: var(--shine-space-8) 0; border-top: 1px solid var(--ink-3); }
+  .section-num { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: var(--shine-space-2); }
+  h2.st { font-family: var(--serif); font-size: clamp(32px, 4.4vw, 44px); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: var(--shine-space-6); }
+  h2.st em { font-style: italic; color: var(--mute); }
+  .prose { max-width: 680px; display: flex; flex-direction: column; gap: var(--shine-space-5); }
+  .prose p, .contract p { font-family: var(--serif); font-size: 17px; line-height: 1.68; color: var(--paper-2); }
+  .prose strong, .contract strong { color: var(--paper); font-weight: 600; }
+  .prose em { color: var(--accent-2); font-style: italic; }
+  .prompt-stack { display: grid; gap: var(--shine-space-3); margin: var(--shine-space-6) 0; }
+  .prompt { padding: var(--shine-space-4) var(--shine-space-5); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-md); font-family: var(--mono); font-size: 14px; color: var(--paper); }
+  .contrast-line { display: grid; grid-template-columns: 1fr; gap: var(--shine-space-3); margin-top: var(--shine-space-6); }
+  @media (min-width: 700px) { .contrast-line { grid-template-columns: 1fr 1fr; } }
+  .contrast-line div { padding: var(--shine-space-5); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-lg); }
+  .contrast-line strong { display: block; font-family: var(--serif); font-size: 19px; font-weight: 400; color: var(--paper); margin-bottom: var(--shine-space-2); }
+  .contrast-line span { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--shine-color-fg-muted); }
+
+  .contracts { display: grid; gap: var(--shine-space-3); }
+  .contract { display: grid; grid-template-columns: 40px 1fr; gap: var(--shine-space-4); padding: var(--shine-space-5); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-lg); }
+  .contract .num { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.15em; padding-top: var(--shine-space-1); }
+  .contract h3 { font-family: var(--serif); font-size: 19px; font-weight: 400; color: var(--paper); margin-bottom: var(--shine-space-2); }
+  .contract p { font-size: 17px; }
+  .gate { padding: var(--shine-space-6); background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-left: 2px solid var(--accent); border-radius: 0 var(--shine-radius-lg) var(--shine-radius-lg) 0; }
+  .gate p { font-family: var(--serif); font-size: 19px; line-height: 1.6; color: var(--paper-2); }
+  .gate strong { color: var(--paper); }
+  .gate .label { display: block; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: var(--shine-space-3); }
+  code { font-family: var(--mono); font-size: 14px; color: var(--accent-2); background: var(--ink-2); border: 1px solid var(--ink-3); padding: 2px 7px; border-radius: var(--shine-radius-sm); white-space: nowrap; }
+  .repo-card { padding: var(--shine-space-7) var(--shine-space-6); background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-xl); }
+  .repo-card h2 { margin-bottom: var(--shine-space-4); }
+  .repo-card p { font-family: var(--serif); font-size: 17px; line-height: 1.68; color: var(--paper-2); max-width: 660px; }
+  .repo-card .hero-actions { margin-top: var(--shine-space-5); }
+  .final-line { font-family: var(--serif); font-size: 26px; line-height: 1.35; color: var(--paper); }
+  .final-line em { color: var(--accent-2); }
+  footer { padding: var(--shine-space-7) 0 var(--shine-space-8); border-top: 1px solid var(--ink-3); display: flex; flex-wrap: wrap; gap: var(--shine-space-3) var(--shine-space-5); justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--shine-color-fg-muted); }
+  footer a { text-decoration: none; transition: color var(--shine-duration-base) var(--shine-easing-standard); }
+  footer a:hover { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--shine-radius-sm); }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+
+.film {margin-top:var(--shine-space-6);border-top:1px solid var(--ink-3);padding-top:var(--shine-space-5)}
+.film video {display:block;width:100%;aspect-ratio:16/9;height:auto;background:var(--ink-2);border-radius:var(--shine-radius-md)}
+.film figcaption {font-family:var(--sans);font-size:14px;line-height:1.65;color:var(--paper-2);margin-top:var(--shine-space-3)}
+.film-pair {display:grid;gap:var(--shine-space-5)}
+@media(min-width:760px){.film-pair{grid-template-columns:1fr 1fr}}
+.prose a,.film a,.repo-card p a{text-decoration:underline;text-underline-offset:3px}
+.repo-card p+p{margin-top:var(--shine-space-4)}
+</style><script src="/assets/analytics.js" defer></script></head><body><a class="skip" href="#main">Skip to content</a><div class="grain" aria-hidden="true"></div><div class="container"><nav aria-label="Primary">
+  <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/resume.html">Resume</a>
+    <a href="/now.html">Now</a>
+    <a href="/writing.html" aria-current="page">Writing</a>
+  </div>
+</nav><main id="main"><header class="hero" data-region="hero">
+  <div class="breadcrumb"><a href="/writing.html">Writing</a><span class="sep">/</span><span class="here">Hollywood</span></div>
+  <div class="stamp">Build journal · 9 September 2026</div>
+  <h1>I wanted an ocean view.<br><em>I built Hollywood.</em></h1>
+  <p class="lede">A voice request became an audio, video and broadcasting agent. The useful part emerged after the first forest looked terrible—and I stopped treating a completed render as a finished product.</p>
+  <div class="hero-actions" aria-label="Article resources"><a class="btn primary" data-primary href="#scenes">Watch the scenes</a><a class="btn" href="#journey">Read the journey</a><a class="btn" href="https://github.com/justinfowler925/hollywood">Public source snapshot ↗</a></div>
+</header>
+<section class="block" id="scenes" data-region="proof">
+ <div class="section-num">01 — The artifacts</div><h2 class="st">A little window <em>into somewhere else</em></h2>
+ <div class="prose"><p>These are current development demonstrations: three 30-second, 720p programs. Short generated takes repeat with dissolves; their synthesized sound beds run separately. They are not location recordings or thirty seconds of unique generated footage. Start a player to hear its soundtrack.</p></div>
+ <figure class="film"><video id="ocean-video" controls playsinline preload="none" poster="/assets/hollywood/ocean.jpg" aria-label="Ocean demonstration with synthesized surf" aria-describedby="ocean-caption"><source src="/assets/hollywood/ocean.mp4" type="video/mp4"></video><figcaption id="ocean-caption"><strong>Ocean.</strong> Four guided takes form a roughly fourteen-second visual rotation. Waves move through a fixed composition while the surf bed continues. <a href="/assets/hollywood/ocean.mp4" download>Download the 30-second film</a>.</figcaption></figure>
+ <div class="film-pair">
+  <figure class="film"><video controls playsinline preload="none" poster="/assets/hollywood/forest.jpg" aria-label="Forest demonstration with synthesized wind" aria-describedby="forest-caption"><source src="/assets/hollywood/forest.mp4" type="video/mp4"></video><figcaption id="forest-caption"><strong>Forest.</strong> An authored environment supplied the reference; guided motion and a wind bed turn it into a short repeating program. <a href="/assets/hollywood/forest.mp4" download>Download</a>.</figcaption></figure>
+  <figure class="film"><video controls playsinline preload="none" poster="/assets/hollywood/cabin.jpg" aria-label="Fireplace cabin demonstration with synthesized rain" aria-describedby="cabin-caption"><source src="/assets/hollywood/cabin.mp4" type="video/mp4"></video><figcaption id="cabin-caption"><strong>Cabin.</strong> Fire and weather move within a held viewpoint. The rain is synthesized; it is not a recording of this setting. <a href="/assets/hollywood/cabin.mp4" download>Download</a>.</figcaption></figure>
+ </div>
+</section>
+<section class="block" id="journey"><div class="section-num">02 — The request grew</div><h2 class="st">It started <em>with my voice</em></h2><div class="prose">
+<p>I wanted to talk to my computer and have useful work happen. Accessibility speech was my starting point because it worked well for the interaction I wanted. Soon the request was larger: make music, change its mood, add nature sounds, build visuals, and eventually keep a channel playing.</p>
+<p>Classical music led to workout and techno experiments. Nature soundscapes led to ocean views. I wanted one place to direct the work, with projects and outputs that would still be there when I returned.</p>
+<p>That became Hollywood: my production skill and the agent system behind it. The skill tells an assistant how to inspect media, choose an operation and review the result. The backend owns the jobs, files and playback. Instructions alone cannot provide that machinery.</p>
+</div></section>
+<section class="block"><div class="section-num">03 — The bad forest</div><h2 class="st">The file existed.<br><em>I still would not use it.</em></h2><div class="prose">
+<p>The early ocean views restarted their camera move every few seconds. Holding a still image in place avoided that reset, but the water did not feel alive. The first forest rendered successfully and looked like a rough game prototype. I withdrew the showcase.</p>
+<p>More moving clouds and foliage helped, but each small improvement left the larger problem intact. I was asking a few visual effects to do the work of a complete environment: materials, light, composition and believable motion.</p>
+<p>That changed the investigation. <a href="https://godotengine.org/">Godot</a> and <a href="https://www.blender.org/">Blender</a> offered real scene tools. Authored environments offered a stronger starting point. Public <a href="https://polyhaven.com/">Poly Haven</a> assets helped with scene quality. A better scene still needed a rendering strategy that fit the machine.</p>
+</div></section>
+<section class="block"><div class="section-num">04 — Choosing the job for each tool</div><h2 class="st">A beautiful frame can be <em>too expensive to animate</em></h2><div class="prose">
+<p>A dense native forest produced a much stronger still. Direct animation took about 51 seconds per frame in one experiment. That makes it useful as an offline source environment; it does not make it a practical live renderer.</p>
+<p>I also tested <a href="https://github.com/princeton-vl/infinigen">Infinigen</a> for an editable interior, <a href="https://github.com/ZimengXiong/Hunyuan3D-Swift">Hunyuan3D-Swift</a> for a prop shape, and <a href="https://github.com/Comfy-Org/ComfyUI">ComfyUI</a> for a basic image-processing graph. Each earned a specific role. Those tests did not establish a finished virtual film studio.</p>
+<p>For the nature demonstrations, the useful route was a strong reference image plus structurally guided video generation through the public <a href="https://github.com/dgrauet/ltx-2-mlx">LTX MLX implementation</a>. The guidance helps hold the composition while water, foliage or fire moves. Ordinary image-to-video had allowed the camera to drift; extending its last frame carried that drift forward.</p>
+</div></section>
+<section class="block"><div class="section-num">05 — The failures underneath</div><h2 class="st">“Runtime failure” <em>was not a diagnosis</em></h2><div class="prose">
+<p>One run timed out in video decoding. Another failed earlier, during the large projection that connects the text representation to the video model. Both surfaced as Apple Metal GPU timeouts. Neither error, by itself, established that the machine had run out of RAM.</p>
+<p>The fixes targeted the work being dispatched: smaller independent token batches for the projection, and temporal tiles for decoding. I also checked whether tiling actually happened. An earlier configured memory threshold had not activated it for the tested clip.</p>
+<p>In the four-second comparisons, measured peak MLX allocation fell from about 65.5 GiB to 24.0 GiB for guided video and 27.1 GiB for standard video. Those are renderer allocation measurements, not whole-machine RAM use. The exact guided request that had crashed subsequently completed and passed full decoding.</p>
+</div></section>
+<section class="block"><div class="section-num">06 — Making the waiting useful</div><h2 class="st">The library is small.<br><em>The soundtrack keeps going.</em></h2><div class="prose">
+<p>The improved guided clip still took about seven minutes to generate four seconds of video. A channel cannot wait for a new render at every transition.</p>
+<p>Hollywood can assemble selected takes into a circular rotation, with short dissolves at the joins. Four ocean takes give me roughly fourteen seconds of varied wave motion before the sequence repeats. The 30-second demonstration assembled in about eleven seconds and occupies about 16 MB.</p>
+<p>Audio has its own clock, so switching visuals does not restart the soundtrack. The selected audio repeats when it reaches its own end. Keeping that separate gives me more room to change the visual library without rebuilding everything around it.</p>
+<p>This is deliberately reusable footage. Repeating a compact program can cover rendering latency; it cannot turn a slow model into real-time generation. The live preview retains a bounded set of segments rather than accumulating hours of intermediate video.</p>
+</div></section>
+<section class="block" id="proof"><div class="section-num">07 — Beyond the first successful clip</div><h2 class="st">I tested <em>the interruptions</em></h2><div class="prose">
+<p>The current development build passed 45 automated tests. Twenty-four duplicate submissions produced one job. Invalid requests were rejected, cancellation worked, and ordinary CPU work remained available while the GPU was occupied.</p>
+<p>A one-hour private broadcast test checked the running channel 354 times and retained no more than seven preview segments. Separate tests killed the playback worker and restarted or killed the service. The channel recovered with its independent soundtrack clock preserved. An explicit stop stayed stopped.</p>
+<p>Desktop and phone-sized browser tests covered saved state, real submissions and complete playback. Fifteen MCP tools let compatible assistants direct the same backend. Shared jobs and assets do not imply shared conversations between clients.</p>
+<p>These are useful boundaries on what I can claim. They do not prove every device, invisible repetition, uninterrupted recovery on every network, or artistic quality. <a href="/assets/hollywood/measurements.json">The measurement summary</a> records the scope alongside the numbers.</p>
+</div></section>
+<section class="block"><div class="section-num">08 — Where it stands</div><h2 class="st">A working production agent.<br><em>Still a developing studio.</em></h2><div class="prose">
+<p>Hollywood now brings audio workflows, scene tools, reusable media and broadcasting controls into one durable production system. The current nature workflow is much more useful than the prototype I first tried to show.</p>
+<p>I still need to earn the next claims: broader visual quality, physical-device voice testing and more demanding production workloads. Fresh real-time 4K neural generation is not qualified. These scenes are demonstrations, not a finished commercial film library.</p>
+<p>The lesson I am carrying forward is to judge the entire result: what it looks like, what happens when something fails, what survives the next session, and how much work it takes to make the next piece. Hollywood became useful when all four mattered.</p>
+</div></section>
+<section class="block" id="sources"><div class="repo-card"><div class="section-num">Public work and credits</div><h2 class="st">Explore <em>Hollywood</em></h2><p>My contribution is the production orchestration, durable workflows, controls and integration. The engines, models and assets have their own authors and licenses. The linked <a href="https://github.com/justinfowler925/hollywood/blob/main/THIRD_PARTY_NOTICES.md">public notices</a> accompany the source snapshot. Poly Haven publishes its assets under <a href="https://polyhaven.com/license">CC0</a>.</p><p>The public repository is an earlier source-available snapshot. This article introduces newer development results; the snapshot is not a turnkey installation of the exact demonstration build.</p><div class="hero-actions"><a class="btn primary" href="https://github.com/justinfowler925/hollywood/blob/main/SKILL.md">Read the public skill</a><a class="btn" href="https://github.com/justinfowler925/hollywood">Browse the source snapshot</a><a class="btn" href="/assets/hollywood/measurements.json" download>Download measurements</a></div></div></section>
+</main><footer><span>© 2026 · Justin Fowler</span><span>Build journal · 9 September 2026</span><span><a href="/writing.html">More writing</a> · <a href="/privacy.html">Privacy</a></span></footer></div><script>document.querySelectorAll('video').forEach(video=>video.addEventListener('play',()=>document.querySelectorAll('video').forEach(other=>{if(other!==video)other.pause()})));</script></body></html>
