@@ -13,11 +13,15 @@
       "publish": true,
       "repoVisibility": "public",
       "summary": "A design director for coding agents: established product patterns, shared table implementations, and browser tests of real outcomes.",
-      "proof": "Sep 8 release · 149 full local doctor checks · 29 table regression cases also passed from the installed release",
+      "proof": "Sep 8 release \u00b7 149 full local doctor checks \u00b7 29 table regression cases also passed from the installed release",
       "repo": "https://github.com/justinfowler925/shine",
       "publicPage": "/writing/shine.html",
       "sourceFile": "https://github.com/justinfowler925/shine/blob/main/skill/SKILL.md",
-      "tags": ["Design systems", "Agent UX", "Verification"]
+      "tags": [
+        "Design systems",
+        "Agent UX",
+        "Verification"
+      ]
     },
     {
       "slug": "unfog",
@@ -26,11 +30,15 @@
       "publish": true,
       "repoVisibility": "public",
       "summary": "Turns vague requests into evidence-backed execution contracts, then carries the contract through completion.",
-      "proof": "Source-to-screen proof · acceptance probes · delivery receipts",
+      "proof": "Source-to-screen proof \u00b7 acceptance probes \u00b7 delivery receipts",
       "repo": "https://github.com/justinfowler925/unfog",
       "publicPage": "/writing/unfog.html",
       "sourceFile": "https://github.com/justinfowler925/unfog/blob/main/skill/SKILL.md",
-      "tags": ["Agent reliability", "Requirements", "Verification"]
+      "tags": [
+        "Agent reliability",
+        "Requirements",
+        "Verification"
+      ]
     },
     {
       "slug": "vlad-final-boss",
@@ -39,11 +47,15 @@
       "publish": true,
       "repoVisibility": "public",
       "summary": "An adversarial handoff gate that refuses completion claims without concrete, independently checkable receipts.",
-      "proof": "Receipt gate · adversarial review · public spec",
+      "proof": "Receipt gate \u00b7 adversarial review \u00b7 public spec",
       "repo": "https://github.com/justinfowler925/vlad-final-boss",
       "publicPage": "/writing/did-you-check-it.html",
       "sourceFile": "https://github.com/justinfowler925/vlad-final-boss/blob/main/SKILL.md",
-      "tags": ["Quality gates", "Review", "Evidence"]
+      "tags": [
+        "Quality gates",
+        "Review",
+        "Evidence"
+      ]
     },
     {
       "slug": "strike-package",
@@ -52,11 +64,15 @@
       "publish": true,
       "repoVisibility": "public",
       "summary": "Creates source-led pre-meeting intelligence briefs for public professional figures without collecting private personal data.",
-      "proof": "Source ledger · risk controls · multi-format brief",
+      "proof": "Source ledger \u00b7 risk controls \u00b7 multi-format brief",
       "repo": "https://github.com/justinfowler925/strike-package",
       "publicPage": null,
       "sourceFile": "https://github.com/justinfowler925/strike-package/blob/main/downloads/skill/SKILL.md",
-      "tags": ["Research", "Executive briefings", "Source quality"]
+      "tags": [
+        "Research",
+        "Executive briefings",
+        "Source quality"
+      ]
     },
     {
       "slug": "brutus",
@@ -65,11 +81,15 @@
       "publish": true,
       "repoVisibility": "public",
       "summary": "A local, evidence-first AI coworker and operations console built to keep sensitive context on owned hardware.",
-      "proof": "Local-first · tested · configurable",
+      "proof": "Local-first \u00b7 tested \u00b7 configurable",
       "repo": "https://github.com/justinfowler925/brutus",
       "publicPage": "/portfolio.html#brutus",
       "sourceFile": null,
-      "tags": ["Local AI", "Operations", "Python"]
+      "tags": [
+        "Local AI",
+        "Operations",
+        "Python"
+      ]
     },
     {
       "slug": "atlas-next",
@@ -78,11 +98,15 @@
       "publish": true,
       "repoVisibility": "public",
       "summary": "An evidence-first deterministic Salesforce work system with replayable runs and explicit delivery controls.",
-      "proof": "Deterministic routing · replays · CI",
+      "proof": "Deterministic routing \u00b7 replays \u00b7 CI",
       "repo": "https://github.com/justinfowler925/atlas-next",
       "publicPage": null,
       "sourceFile": null,
-      "tags": ["Salesforce", "Agent orchestration", "Python"]
+      "tags": [
+        "Salesforce",
+        "Agent orchestration",
+        "Python"
+      ]
     },
     {
       "slug": "voice-mode",
@@ -91,11 +115,15 @@
       "publish": true,
       "repoVisibility": "public",
       "summary": "Hands-free macOS control, including the undocumented command format and a diagnostic that refuses to pass an empty configuration.",
-      "proof": "161-command catalog · doctor · MIT",
+      "proof": "161-command catalog \u00b7 doctor \u00b7 MIT",
       "repo": "https://github.com/justinfowler925/voice-mode",
       "publicPage": "/voice-mode.html",
       "sourceFile": null,
-      "tags": ["macOS", "Voice", "Diagnostics"]
+      "tags": [
+        "macOS",
+        "Voice",
+        "Diagnostics"
+      ]
     },
     {
       "slug": "revops-integration-audit",
@@ -104,11 +132,33 @@
       "publish": true,
       "repoVisibility": "public",
       "summary": "A consulting-grade HubSpot-to-Salesforce audit primitive, published with a sanitized sample instead of client data.",
-      "proof": "104 findings · ~5 minutes compute · sanitized sample",
+      "proof": "104 findings \u00b7 ~5 minutes compute \u00b7 sanitized sample",
       "repo": "https://github.com/justinfowler925/revops-integration-audit",
       "publicPage": "/case-studies/revops-integration-audit.html",
       "sourceFile": null,
-      "tags": ["RevOps", "Salesforce", "Data quality"]
+      "tags": [
+        "RevOps",
+        "Salesforce",
+        "Data quality"
+      ]
+    },
+    {
+      "slug": "hollywood",
+      "name": "Hollywood",
+      "kind": "project",
+      "publish": true,
+      "repoVisibility": "public",
+      "summary": "An audio, video and broadcasting agent with procedural scenes, audio response and durable production jobs.",
+      "proof": "Seven presets \u00b7 fifteen MCP tools \u00b7 bounded private live buffer. Source-available production prototype.",
+      "repo": "https://github.com/justinfowler925/hollywood",
+      "sourceFile": "https://github.com/justinfowler925/hollywood/blob/main/SKILL.md",
+      "tags": [
+        "Audio and video",
+        "Broadcasting",
+        "MCP"
+      ],
+      "previewVideo": "/assets/hollywood/forest-preview.mp4",
+      "previewPoster": "/assets/hollywood/forest-poster.jpg"
     }
   ]
 }

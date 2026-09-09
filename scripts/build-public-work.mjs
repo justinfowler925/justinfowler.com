@@ -42,9 +42,10 @@ function renderCard(item) {
   return `      <article class="public-work-card" data-public-work-kind="${item.kind}" id="open-${escapeHtml(item.slug)}">
         <div class="public-work-card-top">
           <span class="public-work-kind">${item.kind === 'skill' ? 'Skill file' : 'Project'}</span>
-          <span class="public-work-state">Public · source open</span>
+          <span class="public-work-state">Public · source available</span>
         </div>
         <h3>${escapeHtml(item.name)}</h3>
+        ${item.previewVideo ? `<video controls playsinline preload="none" poster="${escapeHtml(item.previewPoster)}" aria-label="Hollywood procedural forest preview" style="width:100%;height:auto;border-radius:8px"><source src="${escapeHtml(item.previewVideo)}" type="video/mp4"></video><p class="public-work-proof">Four-second silent procedural forest prototype.</p>` : ''}
         <p class="public-work-summary">${escapeHtml(item.summary)}</p>
         <p class="public-work-proof">${escapeHtml(item.proof)}</p>
         <div class="public-work-tags" aria-label="Topics">${tags}</div>
@@ -52,7 +53,7 @@ function renderCard(item) {
       </article>`;
 }
 
-const cards = items.map(renderCard).join('\n');
+const cards = items.map(item => renderCard(item).replace(/^[ \t]+$/gm, '')).join('\n');
 const replacements = [
   {
     file: 'portfolio.html',
