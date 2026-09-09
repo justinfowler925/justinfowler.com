@@ -150,15 +150,16 @@
       "kind": "project",
       "publish": true,
       "repoVisibility": "public",
-      "summary": "An audio, video and broadcasting agent with procedural scenes, audio response and durable production jobs.",
-      "proof": "Production tooling in development \u00b7 visual showcase under revision",
+      "summary": "An audio, video and broadcasting skill backed by durable production jobs, guided nature scenes and reusable media.",
+      "proof": "Build journal and playable demonstrations \u00b7 public source snapshot",
       "repo": "https://github.com/justinfowler925/hollywood",
       "sourceFile": "https://github.com/justinfowler925/hollywood/blob/main/SKILL.md",
       "tags": [
         "Audio and video",
         "Broadcasting",
         "MCP"
-      ]
+      ],
+      "publicPage": "/writing/hollywood.html"
     }
   ]
 }

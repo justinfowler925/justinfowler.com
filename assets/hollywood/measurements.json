@@ -1,0 +1,65 @@
+{
+  "title": "Hollywood development measurements",
+  "measured_on": "2026-09-09",
+  "author": "Justin Fowler",
+  "scope": "Author-run development tests on an Apple Silicon Mac Studio; not an independent benchmark or guarantee for other hardware.",
+  "video": {
+    "profile": "four-second 720p tests",
+    "untiled_peak_mlx_gib": 65.5,
+    "guided_tiled_peak_mlx_gib": 24.022,
+    "standard_tiled_peak_mlx_gib": 27.108,
+    "memory_note": "MLX allocation, not whole-machine physical RAM",
+    "guided_reproduction_seconds": 429.9,
+    "standard_tiled_seconds": 261.224
+  },
+  "review_program": {
+    "width": 1280,
+    "height": 720,
+    "fps": 24,
+    "seconds": 30,
+    "ocean_visual_takes": 4,
+    "visual_cycle_seconds": 14.166667,
+    "assembly_seconds": 11.049,
+    "bytes": 16195085,
+    "method": "Circular dissolves over selected short takes, with a synthesized soundtrack; repeated footage, not fresh real-time generation"
+  },
+  "qualification": {
+    "automated_tests_passed": 45,
+    "duplicate_requests": 24,
+    "distinct_jobs_created": 1,
+    "private_broadcast_soak_seconds": 3600,
+    "soak_observations": 354,
+    "maximum_retained_segments": 7,
+    "separate_recovery_tests": [
+      "Killed playout worker",
+      "Graceful service restart",
+      "Killed service",
+      "Explicit stop persists"
+    ],
+    "browser": "Desktop and mobile Chromium viewports, full playback and saved state",
+    "mcp_tools_discovered": 15
+  },
+  "limitations": [
+    "Physical-device voice acoustics not qualified",
+    "Fresh real-time 4K neural generation not qualified",
+    "No claim of sample-perfect network reconnection or invisible repetition",
+    "Public repository is an earlier source snapshot, not a turnkey version of this development build"
+  ],
+  "artifacts": [
+    {
+      "name": "ocean",
+      "video": "/assets/hollywood/ocean.mp4",
+      "poster": "/assets/hollywood/ocean.jpg"
+    },
+    {
+      "name": "forest",
+      "video": "/assets/hollywood/forest.mp4",
+      "poster": "/assets/hollywood/forest.jpg"
+    },
+    {
+      "name": "cabin",
+      "video": "/assets/hollywood/cabin.mp4",
+      "poster": "/assets/hollywood/cabin.jpg"
+    }
+  ]
+}

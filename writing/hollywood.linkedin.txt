@@ -1,0 +1,29 @@
+The first forest I built was bad enough that I pulled it from my website.
+
+The render had completed. The file played. I still would not use it.
+
+That gap became the starting point for Hollywood, my audio, video and broadcasting skill—and the production agent behind it.
+
+I originally wanted to talk to my computer and have it make useful things. Music. Nature sounds. An ocean view that could keep playing while the next piece was being made.
+
+The early videos kept restarting their camera moves. The stationary ocean barely felt alive. Adding more effects to a rough forest made it a busier rough forest.
+
+The change was to work on the entire production path: stronger source scenes, guided motion, a small rotating library, and audio that keeps its own clock.
+
+Then I tested the interruptions.
+
+Kill the playback worker. Restart the service. Keep the GPU busy. Submit the same request 24 times. Check whether the soundtrack resets and whether the preview files keep piling up.
+
+The current build passed 45 automated tests and a one-hour private broadcast test. Batching and tiled decoding brought measured renderer allocation down from about 65.5 GiB to 24–27 GiB in four-second comparisons.
+
+It still takes minutes to generate seconds of footage. The useful answer is a compact library that can cover the wait, with clear limits on what is actually live and what is repeating.
+
+I wrote up the journey, including the failed approaches, the fixes, and three playable demonstrations: ocean, forest and a fireplace cabin.
+
+Hollywood is my orchestration and production workflow, built with public engines, models and assets whose authors deserve their credit. It is a developing studio, and the results are there to inspect.
+
+Article and films in the first comment.
+
+If you were building a small automated studio, what would you test first: the picture, the sound, or what happens when a render fails?
+
+#AgentSkills #CreativeTechnology #BuildingInPublic

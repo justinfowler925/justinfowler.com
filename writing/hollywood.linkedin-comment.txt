@@ -1,0 +1,2 @@
+The full Hollywood build journal, playable ocean/forest/cabin films, measurements and public-source credits:
+https://justinfowler.com/writing/hollywood.html
