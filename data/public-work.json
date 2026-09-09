@@ -26,7 +26,7 @@
       "publish": true,
       "repoVisibility": "public",
       "summary": "Turns vague requests into evidence-backed execution contracts, then carries the contract through completion.",
-      "proof": "Scope · acceptance probes · delivery receipts",
+      "proof": "Source-to-screen proof · acceptance probes · delivery receipts",
       "repo": "https://github.com/justinfowler925/unfog",
       "publicPage": "/writing/unfog.html",
       "sourceFile": "https://github.com/justinfowler925/unfog/blob/main/skill/SKILL.md",
