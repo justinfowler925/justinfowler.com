@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-blog" data-product-pattern="fowler-editorial-article">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Your Best Working Methods Should Travel With Your Team — Justin Fowler</title>
+<meta name="description" content="An evidence-backed position on making AI working methods portable across Claude surfaces, projects, and sessions—with a practical sales starter kit." />
+<meta name="author" content="Justin Fowler" />
+<meta name="robots" content="noindex,nofollow" />
+<link rel="icon" href="../favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/tokens.css" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { color-scheme: dark; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.5; min-height: 100vh; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  a { color: inherit; }
+  .skip { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); padding: 0; }
+  .skip:focus { width: auto; height: auto; clip: auto; left: var(--shine-space-5); top: var(--shine-space-2); padding: var(--shine-space-2) var(--shine-space-4); background: var(--accent); color: var(--ink); border-radius: var(--shine-radius-full); z-index: 999; }
+  .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 var(--shine-space-5); position: relative; z-index: 2; }
+  @media (min-width: 768px) { .container { padding: 0 var(--shine-space-7); } }
+  nav { padding-top: var(--shine-space-6); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--shine-space-3); }
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--shine-color-fg-muted); text-decoration: none; }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: var(--shine-radius-full); background: var(--accent); margin-right: var(--shine-space-2); vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  .nav-links { display: flex; gap: var(--shine-space-2) var(--shine-space-5); flex-wrap: wrap; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--shine-color-fg-muted); text-decoration: none; transition: color var(--shine-duration-base) var(--shine-easing-standard); }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
+
+  header.hero { padding: var(--shine-space-8) 0 var(--shine-space-7); }
+  @media (min-width: 768px) { header.hero { padding: 104px 0 var(--shine-space-8); } }
+  .breadcrumb { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--shine-color-fg-muted); margin-bottom: var(--shine-space-5); }
+  .breadcrumb a { color: var(--shine-color-fg-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { margin: 0 var(--shine-space-3); }
+  .breadcrumb .here { color: var(--accent); }
+  .stamp { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: var(--shine-space-5); padding: var(--shine-space-2) var(--shine-space-4); display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent-line); border-radius: var(--shine-radius-full); }
+  h1 { font-family: var(--serif); font-variation-settings: 'opsz' 144, 'SOFT' 50; font-size: clamp(44px, 8vw, 88px); font-weight: 300; line-height: 0.95; letter-spacing: -0.04em; margin-bottom: var(--shine-space-5); }
+  h1 em { font-style: italic; color: var(--accent-2); font-weight: 300; }
+  .lede { font-family: var(--serif); font-size: clamp(22px, 2.4vw, 26px); line-height: 1.45; color: var(--paper-2); max-width: 720px; }
+  .lede strong { color: var(--paper); font-weight: 600; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--shine-space-3); margin-top: var(--shine-space-6); }
+  .hero-proof { margin-top: var(--shine-space-7); padding: var(--shine-space-3); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-lg); box-shadow: var(--shine-shadow-lg); }
+  .hero-proof img { display: block; width: 100%; height: auto; border-radius: var(--shine-radius-md); }
+  .hero-proof figcaption { padding: var(--shine-space-4) var(--shine-space-1) var(--shine-space-1); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--shine-color-fg-muted); }
+  .btn { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; text-decoration: none; padding: var(--shine-space-3) var(--shine-space-5); border: 1px solid var(--ink-3); color: var(--paper); border-radius: var(--shine-radius-full); display: inline-flex; align-items: center; gap: var(--shine-space-2); transition: border-color var(--shine-duration-base) var(--shine-easing-standard), color var(--shine-duration-base) var(--shine-easing-standard), background var(--shine-duration-base) var(--shine-easing-standard); }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+  .btn.primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: var(--ink); }
+
+  section.block { padding: var(--shine-space-8) 0; border-top: 1px solid var(--ink-3); }
+  .section-num { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: var(--shine-space-2); }
+  h2.st { font-family: var(--serif); font-size: clamp(32px, 4.4vw, 44px); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: var(--shine-space-6); }
+  h2.st em { font-style: italic; color: var(--mute); }
+  .prose { max-width: 680px; display: flex; flex-direction: column; gap: var(--shine-space-5); }
+  .prose p, .contract p { font-family: var(--serif); font-size: 17px; line-height: 1.68; color: var(--paper-2); }
+  .prose strong, .contract strong { color: var(--paper); font-weight: 600; }
+  .prose em { color: var(--accent-2); font-style: italic; }
+  .prompt-stack { display: grid; gap: var(--shine-space-3); margin: var(--shine-space-6) 0; }
+  .prompt { padding: var(--shine-space-4) var(--shine-space-5); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-md); font-family: var(--mono); font-size: 14px; color: var(--paper); }
+  .contrast-line { display: grid; grid-template-columns: 1fr; gap: var(--shine-space-3); margin-top: var(--shine-space-6); }
+  @media (min-width: 700px) { .contrast-line { grid-template-columns: 1fr 1fr; } }
+  .contrast-line div { padding: var(--shine-space-5); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-lg); }
+  .contrast-line strong { display: block; font-family: var(--serif); font-size: 19px; font-weight: 400; color: var(--paper); margin-bottom: var(--shine-space-2); }
+  .contrast-line span { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--shine-color-fg-muted); }
+
+  .contracts { display: grid; gap: var(--shine-space-3); }
+  .contract { display: grid; grid-template-columns: 40px 1fr; gap: var(--shine-space-4); padding: var(--shine-space-5); background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-lg); }
+  .contract .num { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.15em; padding-top: var(--shine-space-1); }
+  .contract h3 { font-family: var(--serif); font-size: 19px; font-weight: 400; color: var(--paper); margin-bottom: var(--shine-space-2); }
+  .contract p { font-size: 17px; }
+  .gate { padding: var(--shine-space-6); background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-left: 2px solid var(--accent); border-radius: 0 var(--shine-radius-lg) var(--shine-radius-lg) 0; }
+  .gate p { font-family: var(--serif); font-size: 19px; line-height: 1.6; color: var(--paper-2); }
+  .gate strong { color: var(--paper); }
+  .gate .label { display: block; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: var(--shine-space-3); }
+  code { font-family: var(--mono); font-size: 14px; color: var(--accent-2); background: var(--ink-2); border: 1px solid var(--ink-3); padding: 2px 7px; border-radius: var(--shine-radius-sm); white-space: nowrap; }
+  .repo-card { padding: var(--shine-space-7) var(--shine-space-6); background: linear-gradient(135deg, var(--ink-2), var(--ink)); border: 1px solid var(--ink-3); border-radius: var(--shine-radius-xl); }
+  .repo-card h2 { margin-bottom: var(--shine-space-4); }
+  .repo-card p { font-family: var(--serif); font-size: 17px; line-height: 1.68; color: var(--paper-2); max-width: 660px; }
+  .repo-card .hero-actions { margin-top: var(--shine-space-5); }
+  .final-line { font-family: var(--serif); font-size: 26px; line-height: 1.35; color: var(--paper); }
+  .final-line em { color: var(--accent-2); }
+  footer { padding: var(--shine-space-7) 0 var(--shine-space-8); border-top: 1px solid var(--ink-3); display: flex; flex-wrap: wrap; gap: var(--shine-space-3) var(--shine-space-5); justify-content: space-between; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--shine-color-fg-muted); }
+  footer a { text-decoration: none; transition: color var(--shine-duration-base) var(--shine-easing-standard); }
+  footer a:hover { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--shine-radius-sm); }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+
+/* Article-specific reading measure; uses the site's existing token vocabulary. */
+body { font-size:17px; }
+.prose { max-width:65ch; margin-bottom:var(--shine-space-8); overflow-wrap:anywhere; }
+.prose .st { margin-top:var(--shine-space-7); margin-bottom:var(--shine-space-2); }
+.prose a { text-decoration:underline; text-underline-offset:.18em; }
+.prose ol,.prose ul { padding-left:var(--shine-space-6); color:var(--paper-2); font-family:var(--serif); font-size:17px; line-height:1.68; }
+.prose li+li { margin-top:var(--shine-space-3); }
+.prose code { font-size:.85em; overflow-wrap:anywhere; }
+details { margin-bottom:var(--shine-space-7); border-top:1px solid var(--ink-3); padding-top:var(--shine-space-5); }
+summary { cursor:pointer; font-family:var(--sans); padding:var(--shine-space-3) 0; }
+details p { margin-top:var(--shine-space-4); color:var(--paper-2); }
+.hero .stamp { color:var(--paper-2); background:none; border-color:var(--ink-3); }
+@media (prefers-reduced-motion:reduce) { * { animation:none!important; scroll-behavior:auto!important; } }
+</style>
+</head>
+<body><a href="#main" class="skip">Skip to content</a>
+<div class="container"><nav aria-label="Primary">
+  <a href="/" class="mark"><span class="dot"></span>Justin Fowler</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/resume.html">Resume</a>
+    <a href="/now.html">Now</a>
+    <a href="/writing.html" aria-current="page">Writing</a>
+  </div>
+</nav>
+<main id="main">
+<header class="hero" data-region="hero">
+<div class="breadcrumb"><a href="/writing.html">Writing</a><span class="sep">/</span>Fowler Brain</div>
+<div class="stamp">Position statement · Draft for review</div>
+<h1 id="headline">Your Best Working Methods Should Travel With Your Team</h1>
+<p class="lede" id="notes">Give salespeople maintained methods, trusted sources, and a way to verify the work—wherever they use AI.</p>
+<p style="margin-top:var(--shine-space-5);color:var(--paper-2)">By Justin Fowler · Position statement for review · 11 September 2026</p>
+<div class="hero-actions" aria-label="Article resources">
+<a class="btn primary" data-primary href="#starter">Get the starter kit</a>
+<a class="btn" href="#evidence">Evidence and limitations</a>
+</div>
+</header>
+<article id="report" class="prose"><p>Builders have learned to give AI more than a request. We give it a working environment: relevant context, reusable procedures, tools that can reach the source, examples of acceptable work, and checks before delivery.</p>
+<p>Salespeople deserve that environment too.</p>
+<p>My position is that a team&#x27;s best working methods should become maintained, portable assets that people can use inside the AI surfaces where they already work. I call my version Fowler Brain. The name matters less than the responsibility: make good judgment easier to apply, inspect, and improve across projects and sessions.</p>
+<p>This is the standard I think we should work toward. It is a recommendation informed by research and documented product behavior, not a claim that my current setup is the finished answer or that this exact architecture has been experimentally proven.</p>
+<h2 class="st" id="what-the-evidence-supports">What the evidence supports</h2>
+<p>There is a credible reason to invest in distributing expertise. In <em>Generative AI at Work</em>, researchers studied 5,172 customer-support agents during a staggered rollout. AI assistance increased issues resolved per hour by about 15% on average; less experienced workers benefited more. That is evidence from customer support, not a forecast of sales lift. It suggests that useful working knowledge can become more accessible through AI. <a href="https://academic.oup.com/qje/article/140/2/889/7990658">Read the published study</a>.</p>
+<p>There is equally good reason to test the boundaries. In the BCG consultant experiment, AI helped on tasks within its capabilities, but participants using it were 19 percentage points less likely to answer one deliberately difficult business problem correctly. The result concerns those tasks and that model generation. It makes a durable point: apparent fluency is an unreliable acceptance test. <a href="https://www.hbs.edu/ris/Publication%20Files/dell-acqua-et-al-2026-navigating-the-jagged-technological-frontier_5c589c8c-fbb5-458f-b285-c944746cd717.pdf">Read the study</a>.</p>
+<p>Builders are subject to the same discipline. METR&#x27;s early-2025 randomized study found that 16 experienced open-source developers took 19% longer with AI on 246 tasks. Its February 2026 follow-up reported serious selection and measurement problems and could not establish a reliable current effect. We should borrow builders&#x27; methods, then measure whether they help our people. <a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">Original experiment</a>; <a href="https://metr.org/blog/2026-02-24-uplift-update/">follow-up and limitations</a>.</p>
+<p>These findings support a disciplined trial. They do not prove that uploading a folder improves revenue, that every skill helps, or that more autonomous agents produce better work.</p>
+<h2 class="st" id="build-a-library-with-clear-ownership">Build a library with clear ownership</h2>
+<p>I would organize a brain around three different responsibilities.</p>
+<p><strong>The shared method library</strong> holds approved procedures, product claims, templates, examples, and reviewed lessons. Give each asset an owner, version, source, review date, and audience. A small team can maintain this in a versioned document workspace. A builder-supported team can keep the source in Git and publish simpler packages for everyone else.</p>
+<p><strong>The account workspace</strong> holds only the context the current user is authorized to use for that account: the objective, source references, buying-process evidence, decisions, and unresolved questions. Shared methods should travel between accounts. Confidential account context should follow access boundaries.</p>
+<p><strong>The system of record</strong> owns live state. Opportunity stage, current pricing, approved commitments, and task completion should be read from their responsible systems. A remembered CRM value is a dated observation. It should not silently become today&#x27;s truth.</p>
+<p>This is my architecture recommendation. One maintained source per asset reduces conflicting copies; it does not require one giant database containing every kind of information.</p>
+<p>The public version of a personal brain should contain reusable methods and synthetic examples. The internal sales edition should add approved company knowledge. Each rep&#x27;s private preferences and each customer&#x27;s restricted material need their own scope. Exporting my whole personal archive would be a poor way to enable a team.</p>
+<h2 class="st" id="make-the-entry-point-small-and-the-depth-retrievable">Make the entry point small and the depth retrievable</h2>
+<p>Every supported surface needs a short entry point that explains the purpose of the library, how to select the relevant method, where authoritative facts live, and what to do when access is missing.</p>
+<p>The rest should be loaded when needed. Anthropic&#x27;s context-engineering guidance recommends curating useful context and retrieving detail on demand. That is engineering guidance from a vendor, not an independent trial of our sales process. <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Read the guidance</a>.</p>
+<p>Earlier research, <em>Lost in the Middle</em>, also found that tested models&#x27; performance depended on where relevant information appeared in long inputs. It is a reason to test retrieval and placement, not a claim that every current model fails identically. <a href="https://arxiv.org/abs/2307.03172">Read the paper</a>.</p>
+<p>For a meeting brief, Claude should retrieve the meeting method, the account packet, and the few approved claims relevant to the conversation. It should not have to absorb every proposal, transcript, policy, and abandoned experiment before it begins.</p>
+<p>An index is useful only if its targets are accessible. A URL written in an instruction does not prove the session can authenticate, retrieve the file, or select the relevant passage. The setup must survive a fresh-session test.</p>
+<h2 class="st" id="translate-builder-habits-into-sales-jobs">Translate builder habits into sales jobs</h2>
+<p>The transfer should happen at the level of decisions and deliverables.</p>
+<p><strong>Clarify the outcome.</strong> Before creating a briefing, identify the account, meeting, audience, decision to support, and constraints. Resolve discoverable details from available sources. Ask about gaps that materially change the work.</p>
+<p><strong>Establish the evidence.</strong> Separate buyer statements, approved product facts, public signals, and the rep&#x27;s hypotheses. Record the source and date. A hiring announcement can support a discovery question; it cannot establish a buying budget.</p>
+<p><strong>Use a repeatable method.</strong> A meeting brief should connect evidence to a small number of discussion angles and questions. An objection response should distinguish a verified capability from something needing product confirmation. A follow-up should distinguish a buyer&#x27;s commitment from our suggested next step.</p>
+<p><strong>Define acceptable output.</strong> Specify the audience, length, required fields, and quality checks. Use annotated examples to show why a good answer is good. Include a plausible but unacceptable example so the boundary is visible.</p>
+<p><strong>Verify the delivered result.</strong> Open the generated document. Check that citations support the associated claims. Recalculate numbers from the inputs. If a CRM update was authorized, read the resulting record back. A statement that something was saved is weaker evidence than the saved artifact.</p>
+<p><strong>Capture a reusable lesson.</strong> Save a correction with its scope, evidence, and proposed change. The method owner reviews it before it changes the shared standard. One successful call is a useful observation; it does not establish a universal rule.</p>
+<p>Start with three jobs: prepare for a meeting, turn discovery into an evidence-based next step, and draft the follow-up. Add proposal work, deal review, and forecasting only when their prerequisites and tests are clear.</p>
+<h2 class="st" id="give-claude-both-instructions-and-working-assets">Give Claude both instructions and working assets</h2>
+<p>A useful package should contain a short working agreement, a method for each supported job, output templates, annotated examples, and a small set of test cases. It also needs a release manifest so someone can tell which version a session is using.</p>
+<p>Agent Skills provide a documented way to package procedural instructions and supporting resources for compatible agents. The open format supports portability; each product still has to discover and execute the skill correctly. <a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills">Anthropic&#x27;s explanation</a>; <a href="https://agentskills.io/specification">Agent Skills specification</a>.</p>
+<p>A skill tells Claude how to approach a task. A connector gives it access to a system. A template defines the output. A reference supplies knowledge. Installing one does not supply the others.</p>
+<p>Uploading these assets supplies context at use time. It does not fine-tune the model&#x27;s weights or guarantee that either Claude or the rep will retain everything.</p>
+<p>For sales, I would connect an approved document source and CRM before adding a broad catalog of tools. Add meeting records, web research, and document creation where they serve the chosen jobs. Use a calculation tool for arithmetic that matters. Test the identity and permission scope of every connection. Empty search results from one account do not prove the information does not exist.</p>
+<p>The package should describe tools by purpose and required capability, with the installed connector named in a local configuration note. This keeps the method useful when a vendor or interface changes. Anthropic&#x27;s tool-design guidance supports clear tool boundaries and evaluation of actual tool use. <a href="https://www.anthropic.com/engineering/writing-tools-for-agents">Read the engineering guidance</a>.</p>
+<h2 class="st" id="install-deliberately-on-each-surface">Install deliberately on each surface</h2>
+<p><strong>Claude chat Projects:</strong> put the short working agreement in Project instructions and the approved method pack in Project knowledge. Use account-specific projects when access or context requires separation. Explicitly install or attach the shared material in each project that needs it. Project instructions apply within that project; project memory has a separate scope. Do not assume one project&#x27;s learning reaches every other project. <a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">Project setup</a>; <a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">memory behavior</a>.</p>
+<p><strong>Claude Skills:</strong> where enabled by the workspace, install the method as a custom skill and test its activation. The current documented path is Customize → Skills. A rep can use the plain-text method pack if the workspace does not expose skill installation. <a href="https://support.claude.com/en/articles/12512180-use-skills-in-claude">Current installation guidance</a>.</p>
+<p><strong>Claude Cowork:</strong> attach the permitted folders and set the project&#x27;s instructions. Current documentation distinguishes local Cowork projects from cloud chat Projects; linking a chat Project supplies access to its knowledge without merging the two. Local folders need a separate distribution and update process. <a href="https://claude.com/docs/cowork/guide/projects">Cowork project documentation</a>.</p>
+<p><strong>Claude Code:</strong> use the documented <code>CLAUDE.md</code> entry points for user or project instructions and install the relevant skill in a supported skill location. Keep global guidance small. Check what actually loaded. <code>AGENTS.md</code> is not automatically interchangeable with <code>CLAUDE.md</code>; Claude Code documents an explicit import. <a href="https://code.claude.com/docs/en/memory">Claude Code memory documentation</a>.</p>
+<p><strong>Other agents and future surfaces:</strong> retain the same method source and write a small adapter for the destination. Test the adapter on that surface. Compatibility is a result to demonstrate, not something a file extension guarantees.</p>
+<p>Use native synchronization where it is documented. Claude currently documents account-enabled skills loading in Cowork and cloud sessions, plus an opt-in download path for local Claude Code. Verify the installed version and name collisions; skill synchronization does not merge account context, live records, or every kind of memory. <a href="https://code.claude.com/docs/en/skills#skills-synced-from-claudeai">Skill synchronization and scope</a>.</p>
+<p>Product menus and capabilities change. The durable requirement is a verified route from the maintained source to the material a fresh session actually uses.</p>
+<h2 class="st" id="define-what-accessible-everywhere-means">Define what “accessible everywhere” means</h2>
+<p>I would accept a surface only after it passes these checks:</p>
+<ol><li>A fresh session identifies the installed method version and uses a distinctive rule from it on a real task.</li><li>A second project retrieves the shared method without being given the first project&#x27;s confidential account context.</li><li>A new session resumes from a saved handoff containing the objective, decisions, sources, open questions, and next action.</li><li>A release update changes a harmless test instruction; the new session exhibits the new behavior. Reverting the release restores the prior behavior.</li><li>Missing access produces an explicit limitation. Conflicting sources remain visible. A restricted document stays unavailable in an unauthorized test account.</li></ol>
+<p>Asking “Did you read the brain?” is insufficient. Inspect the output and the source or tool evidence. Instructions can guide an assistant; actual permissions must enforce access. Claude Code explicitly distinguishes instructions from enforced settings. <a href="https://code.claude.com/docs/en/memory">Enforcement boundary</a>.</p>
+<p>A practical release receipt should record the user role, surface, project, package version, test result, date, and verifier. For uploaded knowledge, mark the installed copy as a dated release and replace superseded files. For connected knowledge, still test freshness and permission changes. An editable live source can improve currency while also changing results between sessions.</p>
+<h2 class="st" id="measure-usefulness-and-learning-separately">Measure usefulness and learning separately</h2>
+<p>I would begin with a two-week pilot on those three sales jobs. That duration is a proposed operational starting point, not a scientifically established optimum.</p>
+<p>Compare the team&#x27;s current method, a strong basic Claude setup, and Claude with the method pack. Use matched tasks and rotate the order where practical. Hold the model, tools, and source materials constant when testing the pack&#x27;s contribution. Grade outputs without revealing which condition produced them where feasible.</p>
+<p>Measure total time through review, factual errors, unsupported claims, missing commitments, and usability of the next step. Count corrections and failed attempts. Track model, package, and connector versions. A small task suite helps catch regressions; it cannot establish a revenue effect. Anthropic recommends starting agent evaluations with concrete failures and expanding coverage as the system matures. <a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">Evaluation guidance</a>.</p>
+<p>Also check what the rep can explain without Claude. In a 52-person coding experiment, the AI-assisted group averaged 50% on a subsequent quiz versus 67% for the comparison group. That is a coding-learning result, not a sales finding. It is enough to make learning a separate design objective. <a href="https://www.anthropic.com/research/AI-assistance-coding-skills">Study and limitations</a>.</p>
+<p>After a brief, ask the rep to identify the strongest source, the least certain claim, and the question that could disprove the account hypothesis. After the call, compare the hypothesis with what the buyer actually said. The aim is a better prepared rep who can defend the recommendation and improve the method.</p>
+<h2 class="st" id="the-standard-i-want-us-to-adopt">The standard I want us to adopt</h2>
+<p>Give someone a maintained method they can inspect. Put it within reach of their normal working surface. Connect only the sources and tools the job needs. Make the output concrete. Verify it. Preserve the useful learning and release improvements deliberately.</p>
+<p>That is how I would set up Fowler Brain properly: a portable library of judgment, supported by scoped access, reliable handoffs, and evidence that it helps the person doing the work.</p>
+<p>The accompanying starter kit is a pilot implementation of that position. Its examples are synthetic. Its packaging can be checked mechanically; its effectiveness with a sales team still needs to be measured.</p></article>
+<section class="block" id="starter" data-shine-signature="fowler-brain-sales-method-release">
+<h2 class="st">Try the method</h2>
+<div class="prose"><p>The pilot kit includes Project instructions, three sales workflows, annotated fictional examples, a handoff template, and ten test cases. No customer data or live integrations are included.</p></div>
+<div class="hero-actions">
+<a class="btn primary" id="kit-download" href="../assets/fowler-brain-sales-starter.zip" download>Download the starter kit</a>
+<a class="btn" id="skill-download" href="../assets/fowler-sales-method.zip" download>Download the Claude skill</a>
+<a class="btn" href="../assets/fowler-brain-starter/START-HERE.md">Setup instructions</a>
+</div>
+</section>
+<details id="evidence"><summary>Evidence and limitations</summary>
+<p>Research and product documentation were checked on 11 September 2026. The article links supporting sources at the relevant claims. Field studies, controlled experiments, vendor engineering guidance, and the author's recommendations have different evidentiary weight.</p>
+<p>The proposed architecture and starter kit have not been validated in a sales-team trial. Packaging and rendering checks do not demonstrate Claude behavior, cross-surface installation, human learning, or revenue improvement. Product behavior must be checked against the actual workspace and version.</p>
+</details>
+</main>
+<footer><span>© 2026 · Justin Fowler</span><span>Draft · 11 September 2026</span><a href="/writing.html">More writing</a></footer>
+</div></body></html>

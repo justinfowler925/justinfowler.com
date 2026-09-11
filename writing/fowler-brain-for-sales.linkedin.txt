@@ -1,0 +1,16 @@
+Our best working methods should travel with our team.
+
+Builders give AI context, reusable procedures, tools, examples, and checks before delivery. Salespeople deserve that working environment too.
+
+I've drafted the standard I think we should build toward with Fowler Brain:
+
+• One maintained source for shared methods.
+• Account context scoped to the right people.
+• Small, tested adapters for each Claude surface.
+• Concrete templates, examples, and quality checks.
+• A saved handoff when the session changes.
+• A pilot that measures quality, review time, and what the rep actually learns.
+
+The evidence is promising but task-specific. Uploading a folder is the beginning. The test is whether a fresh session can apply the right method to real work—and whether the person can defend the result.
+
+The article explains the position, its evidence, and the setup. The companion kit makes it possible to try.
