@@ -59,3 +59,5 @@ Keep the parts that improve the work. Revise or remove the parts that add ceremo
 I want our salespeople to inherit the practical advantages of a well-built AI working environment: trusted context, usable methods, relevant tools, continuity, and a clear standard of evidence.
 
 Fowler Brain should make that possible across the surfaces people use. Its success should be visible in their work.
+
+The full setup guide and downloadable starter kit: [Read the guide on justinfowler.com](https://justinfowler.com/share?to=fowler-brain&src=linkedin&medium=social&campaign=fowler-brain-sales-sep26).

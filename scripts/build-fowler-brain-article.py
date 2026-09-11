@@ -82,7 +82,21 @@ page = f'''<!doctype html>
 <title>{html.escape(title)} — Justin Fowler</title>
 <meta name="description" content="{html.escape(summary)}" />
 <meta name="author" content="Justin Fowler" />
-<meta name="robots" content="noindex,nofollow" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href="https://justinfowler.com/writing/{SLUG}.html" />
+<meta property="og:title" content="{html.escape(title)}" />
+<meta property="og:description" content="{html.escape(summary)}" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://justinfowler.com/writing/{SLUG}.html" />
+<meta property="og:image" content="https://justinfowler.com/og-image.svg" />
+<meta property="article:published_time" content="2026-09-11" />
+<meta property="article:modified_time" content="2026-09-11" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{html.escape(title)}" />
+<meta name="twitter:description" content="{html.escape(summary)}" />
+<meta name="twitter:image" content="https://justinfowler.com/og-image.svg" />
+<script type="application/ld+json">{json.dumps({"@context":"https://schema.org","@type":"Article","headline":title,"description":summary,"author":{"@type":"Person","name":"Justin Fowler","url":"https://justinfowler.com/"},"datePublished":"2026-09-11","dateModified":"2026-09-11","mainEntityOfPage":f"https://justinfowler.com/writing/{SLUG}.html"})}</script>
+<script src="/assets/analytics.js" defer></script>
 <link rel="icon" href="../favicon.svg" />
 {font_links}
 <style>{css}
@@ -106,7 +120,7 @@ details p {{ margin-top:var(--shine-space-4); color:var(--paper-2); }}
 <main id="main">
 <header class="hero" data-region="hero">
 <div class="breadcrumb"><a href="/writing.html">Writing</a><span class="sep">/</span>Fowler Brain</div>
-<div class="stamp">Position statement · Draft for review</div>
+<div class="stamp">Position statement · 11 September 2026</div>
 <h1 id="headline">{html.escape(title)}</h1>
 <p class="lede" id="notes">Give salespeople maintained methods, trusted sources, and a way to verify the work—wherever they use AI.</p>
 <p style="margin-top:var(--shine-space-5);color:var(--paper-2)">{html.escape(byline)}</p>
@@ -130,7 +144,7 @@ details p {{ margin-top:var(--shine-space-4); color:var(--paper-2); }}
 <p>The proposed architecture and starter kit have not been validated in a sales-team trial. Packaging and rendering checks do not demonstrate Claude behavior, cross-surface installation, human learning, or revenue improvement. Product behavior must be checked against the actual workspace and version.</p>
 </details>
 </main>
-<footer><span>© 2026 · Justin Fowler</span><span>Draft · 11 September 2026</span><a href="/writing.html">More writing</a></footer>
+<footer><span>© 2026 · Justin Fowler</span><span>Published · 11 September 2026</span><a href="/writing.html">More writing</a></footer>
 </div></body></html>'''
 (ROOT / f'writing/{SLUG}.html').write_text(page)
-print(json.dumps({'article_words': len(body.split()), 'kit_files':len(files)+1, 'article':f'writing/{SLUG}.html', 'status':'draft-not-published'}))
+print(json.dumps({'article_words': len(body.split()), 'kit_files':len(files)+1, 'article':f'writing/{SLUG}.html', 'status':'publication-ready'}))

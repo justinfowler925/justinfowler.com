@@ -1,6 +1,6 @@
 # Your Best Working Methods Should Travel With Your Team
 
-By Justin Fowler · Position statement for review · 11 September 2026
+By Justin Fowler · Position statement · 11 September 2026
 
 Builders have learned to give AI more than a request. We give it a working environment: relevant context, reusable procedures, tools that can reach the source, examples of acceptable work, and checks before delivery.
 
