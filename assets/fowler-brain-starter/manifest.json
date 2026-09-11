@@ -1,0 +1,23 @@
+{
+  "name": "fowler-brain-sales-starter",
+  "version": "0.1.0",
+  "date": "2026-09-11",
+  "status": "pilot-candidate",
+  "author": "Justin Fowler",
+  "team_maintainer": "Assign before rollout",
+  "audience": "public-methods-and-synthetic-examples",
+  "behavioral_validation": "not-run-in-Claude",
+  "files": {
+    "CLAUDE-ADAPTER.md": "dd8818fc82d4802ff104b0d9c4747b79882455ed144b58613e5b248c3849edcb",
+    "EVALUATION.md": "4c88668b4d13d92211e859d42cc8556768c888fdb210b835f178d4b5a68ed55d",
+    "EXAMPLES.md": "e2ea03d4ba4a411e8b7c19ddc97c45ab16a34f60661e4d8873d461edf031b521",
+    "METHOD-PACK.md": "c8448a01fdcfd84d5eaa01e10563badac3344e98d8c6602200a88471d7ce3084",
+    "PROJECT-INSTRUCTIONS.md": "f522c4647a45494684294676a216ab67791f4bf3cc429fee6617a4565f924757",
+    "START-HERE.md": "766fd38be8d726f29073db6fac622ba393aa55441d782f37475005b9f697ebbf",
+    "TEMPLATES.md": "8331b047e31443323c959a10121332e433f151571d304556029e8c599f8602a6",
+    "fowler-sales-method/SKILL.md": "18732fd05459176707edf4358cda509249ea6a688d74f0e4f4cf061bf90a52cd",
+    "fowler-sales-method/references/EXAMPLES.md": "e2ea03d4ba4a411e8b7c19ddc97c45ab16a34f60661e4d8873d461edf031b521",
+    "fowler-sales-method/references/METHOD-PACK.md": "c8448a01fdcfd84d5eaa01e10563badac3344e98d8c6602200a88471d7ce3084",
+    "fowler-sales-method/references/TEMPLATES.md": "8331b047e31443323c959a10121332e433f151571d304556029e8c599f8602a6"
+  }
+}
