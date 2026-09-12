@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Your Best Working Methods Should Travel With Your Team — Justin Fowler</title>
-<meta name="description" content="An evidence-backed position on making AI working methods portable across Claude surfaces, projects, and sessions—with a practical sales starter kit." />
+<title>How to use SLED Agent in Claude Cowork — Justin Fowler</title>
+<meta name="description" content="A practical walkthrough for using SLED Agent in Claude Cowork: enable the shared skill, research a state, check the evidence, and keep a reusable state record." />
 <meta name="author" content="Justin Fowler" />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="https://justinfowler.com/writing/fowler-brain-for-sales.html" />
-<meta property="og:title" content="Your Best Working Methods Should Travel With Your Team" />
-<meta property="og:description" content="An evidence-backed position on making AI working methods portable across Claude surfaces, projects, and sessions—with a practical sales starter kit." />
+<meta property="og:title" content="How to use SLED Agent in Claude Cowork" />
+<meta property="og:description" content="A practical walkthrough for using SLED Agent in Claude Cowork: enable the shared skill, research a state, check the evidence, and keep a reusable state record." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://justinfowler.com/writing/fowler-brain-for-sales.html" />
 <meta property="og:image" content="https://justinfowler.com/og-image.svg" />
 <meta property="article:published_time" content="2026-09-11" />
 <meta property="article:modified_time" content="2026-09-11" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Your Best Working Methods Should Travel With Your Team" />
-<meta name="twitter:description" content="An evidence-backed position on making AI working methods portable across Claude surfaces, projects, and sessions—with a practical sales starter kit." />
+<meta name="twitter:title" content="How to use SLED Agent in Claude Cowork" />
+<meta name="twitter:description" content="A practical walkthrough for using SLED Agent in Claude Cowork: enable the shared skill, research a state, check the evidence, and keep a reusable state record." />
 <meta name="twitter:image" content="https://justinfowler.com/og-image.svg" />
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Your Best Working Methods Should Travel With Your Team", "description": "An evidence-backed position on making AI working methods portable across Claude surfaces, projects, and sessions\u2014with a practical sales starter kit.", "author": {"@type": "Person", "name": "Justin Fowler", "url": "https://justinfowler.com/"}, "datePublished": "2026-09-11", "dateModified": "2026-09-11", "mainEntityOfPage": "https://justinfowler.com/writing/fowler-brain-for-sales.html"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to use SLED Agent in Claude Cowork", "description": "A practical walkthrough for using SLED Agent in Claude Cowork: enable the shared skill, research a state, check the evidence, and keep a reusable state record.", "author": {"@type": "Person", "name": "Justin Fowler", "url": "https://justinfowler.com/"}, "datePublished": "2026-09-11", "dateModified": "2026-09-11", "mainEntityOfPage": "https://justinfowler.com/writing/fowler-brain-for-sales.html"}</script>
 <script src="/assets/analytics.js" defer></script>
 <link rel="icon" href="../favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -134,90 +134,53 @@ details p { margin-top:var(--shine-space-4); color:var(--paper-2); }
 </nav>
 <main id="main">
 <header class="hero" data-region="hero">
-<div class="breadcrumb"><a href="/writing.html">Writing</a><span class="sep">/</span>Fowler Brain</div>
-<div class="stamp">Position statement · 11 September 2026</div>
-<h1 id="headline">Your Best Working Methods Should Travel With Your Team</h1>
-<p class="lede" id="notes">Give salespeople maintained methods, trusted sources, and a way to verify the work—wherever they use AI.</p>
-<p style="margin-top:var(--shine-space-5);color:var(--paper-2)">By Justin Fowler · Position statement · 11 September 2026</p>
+<div class="breadcrumb"><a href="/writing.html">Writing</a><span class="sep">/</span>SLED Agent</div>
+<div class="stamp">Setup & training · 11 September 2026</div>
+<h1 id="headline">How to use SLED Agent in Claude Cowork</h1>
+<p class="lede" id="notes">Choose a state. Review the evidence. Leave with a clear next step and a record you can use again.</p>
+<p style="margin-top:var(--shine-space-5);color:var(--paper-2)">By Justin Fowler · Updated September 11, 2026</p>
 <div class="hero-actions" aria-label="Article resources">
-<a class="btn primary" data-primary href="#starter">Get the starter kit</a>
-<a class="btn" href="#evidence">Evidence and limitations</a>
+<a class="btn primary" data-primary href="#start-with-the-shared-skill">Start with the shared skill</a>
+<a class="btn" href="#what-a-useful-answer-looks-like">See what you get</a>
 </div>
 </header>
-<article id="report" class="prose"><p>Builders have learned to give AI more than a request. We give it a working environment: relevant context, reusable procedures, tools that can reach the source, examples of acceptable work, and checks before delivery.</p>
-<p>Salespeople deserve that environment too.</p>
-<p>My position is that a team&#x27;s best working methods should become maintained, portable assets that people can use inside the AI surfaces where they already work. I call my version Fowler Brain. The name matters less than the responsibility: make good judgment easier to apply, inspect, and improve across projects and sessions.</p>
-<p>This is the standard I think we should work toward. It is a recommendation informed by research and documented product behavior, not a claim that my current setup is the finished answer or that this exact architecture has been experimentally proven.</p>
-<h2 class="st" id="what-the-evidence-supports">What the evidence supports</h2>
-<p>There is a credible reason to invest in distributing expertise. In <em>Generative AI at Work</em>, researchers studied 5,172 customer-support agents during a staggered rollout. AI assistance increased issues resolved per hour by about 15% on average; less experienced workers benefited more. That is evidence from customer support, not a forecast of sales lift. It suggests that useful working knowledge can become more accessible through AI. <a href="https://academic.oup.com/qje/article/140/2/889/7990658">Read the published study</a>.</p>
-<p>There is equally good reason to test the boundaries. In the BCG consultant experiment, AI helped on tasks within its capabilities, but participants using it were 19 percentage points less likely to answer one deliberately difficult business problem correctly. The result concerns those tasks and that model generation. It makes a durable point: apparent fluency is an unreliable acceptance test. <a href="https://www.hbs.edu/ris/Publication%20Files/dell-acqua-et-al-2026-navigating-the-jagged-technological-frontier_5c589c8c-fbb5-458f-b285-c944746cd717.pdf">Read the study</a>.</p>
-<p>Builders are subject to the same discipline. METR&#x27;s early-2025 randomized study found that 16 experienced open-source developers took 19% longer with AI on 246 tasks. Its February 2026 follow-up reported serious selection and measurement problems and could not establish a reliable current effect. We should borrow builders&#x27; methods, then measure whether they help our people. <a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">Original experiment</a>; <a href="https://metr.org/blog/2026-02-24-uplift-update/">follow-up and limitations</a>.</p>
-<p>These findings support a disciplined trial. They do not prove that uploading a folder improves revenue, that every skill helps, or that more autonomous agents produce better work.</p>
-<h2 class="st" id="build-a-library-with-clear-ownership">Build a library with clear ownership</h2>
-<p>I would organize a brain around three different responsibilities.</p>
-<p><strong>The shared method library</strong> holds approved procedures, product claims, templates, examples, and reviewed lessons. Give each asset an owner, version, source, review date, and audience. A small team can maintain this in a versioned document workspace. A builder-supported team can keep the source in Git and publish simpler packages for everyone else.</p>
-<p><strong>The account workspace</strong> holds only the context the current user is authorized to use for that account: the objective, source references, buying-process evidence, decisions, and unresolved questions. Shared methods should travel between accounts. Confidential account context should follow access boundaries.</p>
-<p><strong>The system of record</strong> owns live state. Opportunity stage, current pricing, approved commitments, and task completion should be read from their responsible systems. A remembered CRM value is a dated observation. It should not silently become today&#x27;s truth.</p>
-<p>This is my architecture recommendation. One maintained source per asset reduces conflicting copies; it does not require one giant database containing every kind of information.</p>
-<p>The public version of a personal brain should contain reusable methods and synthetic examples. The internal sales edition should add approved company knowledge. Each rep&#x27;s private preferences and each customer&#x27;s restricted material need their own scope. Exporting my whole personal archive would be a poor way to enable a team.</p>
-<h2 class="st" id="make-the-entry-point-small-and-the-depth-retrievable">Make the entry point small and the depth retrievable</h2>
-<p>Every supported surface needs a short entry point that explains the purpose of the library, how to select the relevant method, where authoritative facts live, and what to do when access is missing.</p>
-<p>The rest should be loaded when needed. Anthropic&#x27;s context-engineering guidance recommends curating useful context and retrieving detail on demand. That is engineering guidance from a vendor, not an independent trial of our sales process. <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Read the guidance</a>.</p>
-<p>Earlier research, <em>Lost in the Middle</em>, also found that tested models&#x27; performance depended on where relevant information appeared in long inputs. It is a reason to test retrieval and placement, not a claim that every current model fails identically. <a href="https://arxiv.org/abs/2307.03172">Read the paper</a>.</p>
-<p>For a meeting brief, Claude should retrieve the meeting method, the account packet, and the few approved claims relevant to the conversation. It should not have to absorb every proposal, transcript, policy, and abandoned experiment before it begins.</p>
-<p>An index is useful only if its targets are accessible. A URL written in an instruction does not prove the session can authenticate, retrieve the file, or select the relevant passage. The setup must survive a fresh-session test.</p>
-<h2 class="st" id="translate-builder-habits-into-sales-jobs">Translate builder habits into sales jobs</h2>
-<p>The transfer should happen at the level of decisions and deliverables.</p>
-<p><strong>Clarify the outcome.</strong> Before creating a briefing, identify the account, meeting, audience, decision to support, and constraints. Resolve discoverable details from available sources. Ask about gaps that materially change the work.</p>
-<p><strong>Establish the evidence.</strong> Separate buyer statements, approved product facts, public signals, and the rep&#x27;s hypotheses. Record the source and date. A hiring announcement can support a discovery question; it cannot establish a buying budget.</p>
-<p><strong>Use a repeatable method.</strong> A meeting brief should connect evidence to a small number of discussion angles and questions. An objection response should distinguish a verified capability from something needing product confirmation. A follow-up should distinguish a buyer&#x27;s commitment from our suggested next step.</p>
-<p><strong>Define acceptable output.</strong> Specify the audience, length, required fields, and quality checks. Use annotated examples to show why a good answer is good. Include a plausible but unacceptable example so the boundary is visible.</p>
-<p><strong>Verify the delivered result.</strong> Open the generated document. Check that citations support the associated claims. Recalculate numbers from the inputs. If a CRM update was authorized, read the resulting record back. A statement that something was saved is weaker evidence than the saved artifact.</p>
-<p><strong>Capture a reusable lesson.</strong> Save a correction with its scope, evidence, and proposed change. The method owner reviews it before it changes the shared standard. One successful call is a useful observation; it does not establish a universal rule.</p>
-<p>Start with three jobs: prepare for a meeting, turn discovery into an evidence-based next step, and draft the follow-up. Add proposal work, deal review, and forecasting only when their prerequisites and tests are clear.</p>
-<h2 class="st" id="give-claude-both-instructions-and-working-assets">Give Claude both instructions and working assets</h2>
-<p>A useful package should contain a short working agreement, a method for each supported job, output templates, annotated examples, and a small set of test cases. It also needs a release manifest so someone can tell which version a session is using.</p>
-<p>Agent Skills provide a documented way to package procedural instructions and supporting resources for compatible agents. The open format supports portability; each product still has to discover and execute the skill correctly. <a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills">Anthropic&#x27;s explanation</a>; <a href="https://agentskills.io/specification">Agent Skills specification</a>.</p>
-<p>A skill tells Claude how to approach a task. A connector gives it access to a system. A template defines the output. A reference supplies knowledge. Installing one does not supply the others.</p>
-<p>Uploading these assets supplies context at use time. It does not fine-tune the model&#x27;s weights or guarantee that either Claude or the rep will retain everything.</p>
-<p>For sales, I would connect an approved document source and CRM before adding a broad catalog of tools. Add meeting records, web research, and document creation where they serve the chosen jobs. Use a calculation tool for arithmetic that matters. Test the identity and permission scope of every connection. Empty search results from one account do not prove the information does not exist.</p>
-<p>The package should describe tools by purpose and required capability, with the installed connector named in a local configuration note. This keeps the method useful when a vendor or interface changes. Anthropic&#x27;s tool-design guidance supports clear tool boundaries and evaluation of actual tool use. <a href="https://www.anthropic.com/engineering/writing-tools-for-agents">Read the engineering guidance</a>.</p>
-<h2 class="st" id="install-deliberately-on-each-surface">Install deliberately on each surface</h2>
-<p><strong>Claude chat Projects:</strong> put the short working agreement in Project instructions and the approved method pack in Project knowledge. Use account-specific projects when access or context requires separation. Explicitly install or attach the shared material in each project that needs it. Project instructions apply within that project; project memory has a separate scope. Do not assume one project&#x27;s learning reaches every other project. <a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects">Project setup</a>; <a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">memory behavior</a>.</p>
-<p><strong>Claude Skills:</strong> where enabled by the workspace, install the method as a custom skill and test its activation. The current documented path is Customize → Skills. A rep can use the plain-text method pack if the workspace does not expose skill installation. <a href="https://support.claude.com/en/articles/12512180-use-skills-in-claude">Current installation guidance</a>.</p>
-<p><strong>Claude Cowork:</strong> attach the permitted folders and set the project&#x27;s instructions. Current documentation distinguishes local Cowork projects from cloud chat Projects; linking a chat Project supplies access to its knowledge without merging the two. Local folders need a separate distribution and update process. <a href="https://claude.com/docs/cowork/guide/projects">Cowork project documentation</a>.</p>
-<p><strong>Claude Code:</strong> use the documented <code>CLAUDE.md</code> entry points for user or project instructions and install the relevant skill in a supported skill location. Keep global guidance small. Check what actually loaded. <code>AGENTS.md</code> is not automatically interchangeable with <code>CLAUDE.md</code>; Claude Code documents an explicit import. <a href="https://code.claude.com/docs/en/memory">Claude Code memory documentation</a>.</p>
-<p><strong>Other agents and future surfaces:</strong> retain the same method source and write a small adapter for the destination. Test the adapter on that surface. Compatibility is a result to demonstrate, not something a file extension guarantees.</p>
-<p>Use native synchronization where it is documented. Claude currently documents account-enabled skills loading in Cowork and cloud sessions, plus an opt-in download path for local Claude Code. Verify the installed version and name collisions; skill synchronization does not merge account context, live records, or every kind of memory. <a href="https://code.claude.com/docs/en/skills#skills-synced-from-claudeai">Skill synchronization and scope</a>.</p>
-<p>Product menus and capabilities change. The durable requirement is a verified route from the maintained source to the material a fresh session actually uses.</p>
-<h2 class="st" id="define-what-accessible-everywhere-means">Define what “accessible everywhere” means</h2>
-<p>I would accept a surface only after it passes these checks:</p>
-<ol><li>A fresh session identifies the installed method version and uses a distinctive rule from it on a real task.</li><li>A second project retrieves the shared method without being given the first project&#x27;s confidential account context.</li><li>A new session resumes from a saved handoff containing the objective, decisions, sources, open questions, and next action.</li><li>A release update changes a harmless test instruction; the new session exhibits the new behavior. Reverting the release restores the prior behavior.</li><li>Missing access produces an explicit limitation. Conflicting sources remain visible. A restricted document stays unavailable in an unauthorized test account.</li></ol>
-<p>Asking “Did you read the brain?” is insufficient. Inspect the output and the source or tool evidence. Instructions can guide an assistant; actual permissions must enforce access. Claude Code explicitly distinguishes instructions from enforced settings. <a href="https://code.claude.com/docs/en/memory">Enforcement boundary</a>.</p>
-<p>A practical release receipt should record the user role, surface, project, package version, test result, date, and verifier. For uploaded knowledge, mark the installed copy as a dated release and replace superseded files. For connected knowledge, still test freshness and permission changes. An editable live source can improve currency while also changing results between sessions.</p>
-<h2 class="st" id="measure-usefulness-and-learning-separately">Measure usefulness and learning separately</h2>
-<p>I would begin with a two-week pilot on those three sales jobs. That duration is a proposed operational starting point, not a scientifically established optimum.</p>
-<p>Compare the team&#x27;s current method, a strong basic Claude setup, and Claude with the method pack. Use matched tasks and rotate the order where practical. Hold the model, tools, and source materials constant when testing the pack&#x27;s contribution. Grade outputs without revealing which condition produced them where feasible.</p>
-<p>Measure total time through review, factual errors, unsupported claims, missing commitments, and usability of the next step. Count corrections and failed attempts. Track model, package, and connector versions. A small task suite helps catch regressions; it cannot establish a revenue effect. Anthropic recommends starting agent evaluations with concrete failures and expanding coverage as the system matures. <a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">Evaluation guidance</a>.</p>
-<p>Also check what the rep can explain without Claude. In a 52-person coding experiment, the AI-assisted group averaged 50% on a subsequent quiz versus 67% for the comparison group. That is a coding-learning result, not a sales finding. It is enough to make learning a separate design objective. <a href="https://www.anthropic.com/research/AI-assistance-coding-skills">Study and limitations</a>.</p>
-<p>After a brief, ask the rep to identify the strongest source, the least certain claim, and the question that could disprove the account hypothesis. After the call, compare the hypothesis with what the buyer actually said. The aim is a better prepared rep who can defend the recommendation and improve the method.</p>
-<h2 class="st" id="the-standard-i-want-us-to-adopt">The standard I want us to adopt</h2>
-<p>Give someone a maintained method they can inspect. Put it within reach of their normal working surface. Connect only the sources and tools the job needs. Make the output concrete. Verify it. Preserve the useful learning and release improvements deliberately.</p>
-<p>That is how I would set up Fowler Brain properly: a portable library of judgment, supported by scoped access, reliable handoffs, and evidence that it helps the person doing the work.</p>
-<p>The accompanying starter kit is a pilot implementation of that position. Its examples are synthetic. Its packaging can be checked mechanically; its effectiveness with a sales team still needs to be measured.</p></article>
-<section class="block" id="starter" data-shine-signature="fowler-brain-sales-method-release">
-<h2 class="st">Try the method</h2>
-<div class="prose"><p>The pilot kit includes Project instructions, three sales workflows, annotated fictional examples, a handoff template, and ten test cases. No customer data or live integrations are included.</p></div>
-<div class="hero-actions">
-<a class="btn primary" id="kit-download" href="../assets/fowler-brain-sales-starter.zip" download>Download the starter kit</a>
-<a class="btn" id="skill-download" href="../assets/fowler-sales-method.zip" download>Download the Claude skill</a>
-<a class="btn" href="../assets/fowler-brain-starter/START-HERE.md">Setup instructions</a>
-</div>
+<article id="report" class="prose"><p>SLED Agent helps a rep answer a practical question: <strong>Where should we start in this state, and what evidence supports that choice?</strong> Give it a state and any approved context you already have. It researches agency workflows, checks whether there is a credible use for Clearspeed, maps buyer roles and funding, and recommends a next step.</p>
+<p>The result is a research brief and a reusable state record. You still review the evidence and decide what to do. The agent can draft outreach; it does not send it or update your CRM.</p>
+<h2 class="st" id="start-with-the-shared-skill">Start with the shared skill</h2>
+<p>Our team uses Claude Cowork in the Clearspeed Enterprise workspace. Open <a href="https://nucleus-clearspeed.vercel.app/company-tools/sled-agent">SLED Agent setup and training in Nucleus</a>, sign in, and follow the shared Claude skill link. Install or enable SLED Agent in Customize → Skills. Then start a Cowork task with a permitted working folder.</p>
+<p>The shared copy is available to the organization. You do not need a terminal or a local ZIP upload to use it. Shared availability and automatic enablement are different: check that it is enabled in your own account. If it is missing, first confirm you selected the Clearspeed workspace, then check with the workspace owner.</p>
+<p>Claude also supports organization-owner provisioning, which makes a skill available centrally without individual uploads. We have shared SLED Agent in the organization directory; we have not claimed owner provisioning for this release. <a href="https://support.claude.com/en/articles/13119606-provision-and-manage-skills-for-your-organization">Claude organization skill documentation</a>.</p>
+<h2 class="st" id="your-first-task-research-one-state">Your first task: research one state</h2>
+<p>Start with one state. Attach approved product evidence if you have it. Add an agency, existing relationship or deadline only when it is real. If you already have a capture record for that state, attach the latest version.</p>
+<p>Copy this prompt and replace Arizona with your state:</p>
+<p><strong>Use SLED Agent to discover Arizona for Clearspeed. Examine the state broadly before choosing an entry use case. Show ranked candidates, failed fit tests, funding stages, buyer roles, the strongest alternative, missing evidence, one outreach draft and a next-action plan. Use current official sources. Do not send anything. Save a dated brief and reusable state record.</strong></p>
+<p>Current research needs web tools permitted by your workspace. If those tools or a source are unavailable, the agent should identify the gap. It should not invent findings or pretend an old fact was checked today.</p>
+<h2 class="st" id="what-a-useful-answer-looks-like">What a useful answer looks like</h2>
+<p>A useful answer makes a recommendation you can inspect. It should contain:</p>
+<ul><li>A leading agency/workflow candidate and why it deserves attention.</li><li>An alternative, plus candidates rejected or left unresolved by the fit tests.</li><li>Buyer roles and funding/procurement evidence, with dates and sources.</li><li>Missing facts that could change the recommendation.</li><li>An unsent outreach draft and a concrete next action.</li><li>A dated report and a state record you can bring to the next task.</li></ul>
+<p>“No qualifying candidate yet” can be a good answer. A large budget or a fraud headline does not by itself establish a buyer, a suitable workflow or money available for this purchase.</p>
+<h2 class="st" id="check-the-answer-before-acting">Check the answer before acting</h2>
+<p>Open the three citations most important to the leading recommendation. Does each source actually support the claim? Is the time period correct? Is the money proposed, available or already obligated? Does the identified person own the workflow, approve the budget or run procurement? Those are different roles.</p>
+<p>Ask the agent to explain the precise workflow and the attestation being checked. Then test what is missing: existing controls, review volume, procurement route, buyer authority or product evidence. Use those gaps to shape the next conversation instead of turning a tentative lead into a qualified deal.</p>
+<p>Nucleus includes a dated Nevada example, the full method, practice scenarios and an answer key. The example is teaching material, not a current recommendation to pursue those agencies.</p>
+<h2 class="st" id="continue-after-a-call">Continue after a call</h2>
+<p>Keep the brief and state record in your approved working folder. Add the facts learned on the call, naming the source and date. In a new task, attach the latest state record and ask:</p>
+<p><strong>Refresh Arizona using the attached prior state record. Show new and materially changed findings, facts rechecked without change, carried-forward facts not rechecked, and failed collection. Preserve original dates and stable IDs. Save the next dated brief and updated state record.</strong></p>
+<p>Do not assume a fresh chat remembers the previous work. The saved record is the handoff. Check the files were actually created; if file creation is unavailable, save the copyable record yourself.</p>
+<h2 class="st" id="use-the-files-elsewhere">Use the files elsewhere</h2>
+<p><a href="https://nucleus-clearspeed.vercel.app/company-tools">Nucleus Company Tools</a> holds the current skill downloads and supporting material. The SLED page offers the standalone Cowork skill ZIP, the complete training packet and individual Markdown files. The packet includes learner and facilitator guides, prompts, exercises, an answer key, a worked example and the original method.</p>
+<p>For another approved Claude workspace, upload the <strong>Cowork skill ZIP</strong>, not the complete training packet. For Claude Projects or Claude Code, follow START-HERE.md in the full packet; those are different installation paths. The private SLED package stays behind company sign-in. This public page and its handout explain the workflow without redistributing the internal method.</p>
+<h2 class="st" id="the-other-shared-skills">The other shared skills</h2>
+<p>Shine helps review and improve an interface or document; its Cowork edition supplies design guidance, not the full local verifier runtime. Unfog turns a vague request into concrete work and checks whether it is finished. Strike Package prepares a sourced brief for a specific professional meeting. Choose the skill for the task; none of these replaces SLED Agent&#x27;s state capture method.</p>
+<p>The <a href="https://justinfowler.com/assets/cowork-skills/START-HERE.md">public Cowork downloads</a> provide those three general-purpose editions for use elsewhere. Team members should use the shared copies linked from Nucleus. A skill does not grant connectors, account access or tools that your workspace does not already have.</p>
+<h2 class="st" id="about-the-previous-version-of-this-page">About the previous version of this page</h2>
+<p>The earlier article and generic Fowler sales-method starter kit did not explain this SLED Agent. They have been retired. This page now covers the actual agent and its setup, and the old download addresses direct readers here. Previously downloaded copies cannot be updated remotely; replace them with the current materials from Nucleus.</p></article>
+<section class="hero-actions" aria-label="SLED training downloads">
+<a class="btn primary" href="https://nucleus-clearspeed.vercel.app/company-tools/sled-agent">Open SLED training in Nucleus</a>
+<a class="btn" href="/assets/sled-agent-public-guide.zip" download>Download this walkthrough</a>
+<a class="btn" href="/assets/cowork-skills/START-HERE.md">Other Cowork skills</a>
 </section>
-<details id="evidence"><summary>Evidence and limitations</summary>
-<p>Research and product documentation were checked on 11 September 2026. The article links supporting sources at the relevant claims. Field studies, controlled experiments, vendor engineering guidance, and the author's recommendations have different evidentiary weight.</p>
-<p>The proposed architecture and starter kit have not been validated in a sales-team trial. Packaging and rendering checks do not demonstrate Claude behavior, cross-surface installation, human learning, or revenue improvement. Product behavior must be checked against the actual workspace and version.</p>
-</details>
+
 </main>
 <footer><span>© 2026 · Justin Fowler</span><span>Published · 11 September 2026</span><a href="/writing.html">More writing</a></footer>
 </div></body></html>

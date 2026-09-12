@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-weekly-board" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>shadcn weekly cadence board reference</title>
+  <link rel="stylesheet" href="../../../tokens/voices/shadcn-zinc.css">
+  <style>
+    *{box-sizing:border-box}:root{color-scheme:light dark}body{margin:0;background:var(--shine-color-bg);color:var(--shine-color-fg);font:14px/1.5 var(--shine-font-sans);-webkit-font-smoothing:antialiased}.wrap{width:min(1184px,calc(100% - 48px));margin:auto}.mast{background:#09090b;color:#fafafa}.mast .wrap{padding:32px 0}.top{display:flex;align-items:flex-end;gap:28px}.identity{flex:1}.eyebrow{margin:0;color:#a1a1aa;font-size:12px;font-weight:650;letter-spacing:.13em;text-transform:uppercase}h1{margin:8px 0 0;font-size:30px;line-height:1.16;letter-spacing:-.03em}h2{margin:4px 0 0;font-size:20px;line-height:1.25;letter-spacing:-.02em}.muted{color:#71717a}.fresh{margin:8px 0 0;color:#a1a1aa}.button{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 16px;border:1px solid #e4e4e7;border-radius:var(--shine-radius-md);background:#fff;color:#18181b;font:600 14px/1 var(--shine-font-sans)}.button.primary{background:#fafafa;color:#18181b}.button.active{background:#18181b;color:#fafafa;border-color:#18181b}.button svg{width:16px;height:16px;margin-right:8px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;min-width:340px;margin:0}.metrics dt{font-size:12px;color:#a1a1aa}.metrics dd{margin:4px 0 0;font-size:24px;font-weight:650;font-variant-numeric:tabular-nums}.content{display:grid;gap:32px;padding:32px 0 52px}.section-kicker{margin:0;color:#71717a;font-size:12px;font-weight:650;letter-spacing:.09em;text-transform:uppercase}.owners{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.divider{height:1px;background:#e4e4e7}.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:16px}.statusline{margin:0;color:#71717a}.panel,.card{border:1px solid #e4e4e7;border-radius:var(--shine-radius-lg);background:#fff}.rows{list-style:none;margin:0;padding:0;overflow:hidden}.row{display:flex;align-items:center;gap:16px;padding:16px}.row+.row{border-top:1px solid #e4e4e7}.row p{flex:1;margin:0;font-weight:550}.badge{display:inline-flex;align-items:center;justify-content:center;min-width:92px;padding:4px 8px;border:1px solid #d4d4d8;border-radius:999px;color:#3f3f46;font-size:12px}.outcome{min-width:112px;background:#fff}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}.card{padding:16px}.card-top{display:flex;justify-content:space-between;gap:12px}.card h3{margin:16px 0 0;font-size:14px;line-height:1.4}.card small{color:#71717a;font-size:12px}.discuss{padding:20px;border:1px solid #fcd34d;border-radius:var(--shine-radius-lg);background:#fffbeb;color:#451a03}.discuss-head{display:flex;align-items:center;gap:8px}.discuss h2{margin:0}.count{margin-left:auto;min-width:auto;border-color:#fbbf24;color:#78350f}.issue{margin-top:12px;padding:16px;border-radius:var(--shine-radius-md);background:rgba(255,255,255,.8)}.issue strong,.issue span{display:block}.issue span{margin-top:4px;color:#92400e}.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}.pair .card{padding:0}.pair h2{padding:16px;font-size:14px}.mini{list-style:none;margin:0;padding:0 16px 16px}.mini li{display:flex;gap:16px;padding:12px 0}.mini li+li{border-top:1px solid #e4e4e7}.mini time{width:64px;font-weight:650;font-variant-numeric:tabular-nums}.mini p{margin:0;font-weight:550}.mini small{display:block;margin-top:4px;color:#71717a;font-size:12px}@media(max-width:800px){.top{align-items:flex-start;flex-wrap:wrap}.metrics{width:100%}.cards,.pair{grid-template-columns:1fr}.wrap{width:min(100% - 32px,1184px)}}
+  </style>
+</head>
+<body>
+  <header class="mast" data-region="weekly-summary" data-summary>
+    <div class="wrap top">
+      <div class="identity"><p class="eyebrow">ELT weekly cadence</p><h1>Week ending 4 September</h1><p class="fresh" data-testid="freshness">Synced 8 minutes ago · Google Sheet snapshot</p></div>
+      <button class="button primary" data-primary data-testid="refresh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6v5h-5M4 18v-5h5M18 9a7 7 0 0 0-12-2L4 11m2 4a7 7 0 0 0 12 2l2-4"/></svg>Refresh source</button>
+      <dl class="metrics"><div><dt>Reported</dt><dd>3 / 4</dd></div><div><dt>Met</dt><dd>2</dd></div><div><dt>Off track</dt><dd>1</dd></div></dl>
+    </div>
+  </header>
+  <main class="wrap content">
+    <nav aria-label="Meeting owners" data-region="owner-navigation" data-testid="owners"><p class="section-kicker">Walk the agenda by owner</p><div class="owners"><button class="button active" aria-pressed="true" data-owner="All">All</button><button class="button" aria-pressed="false" data-owner="Revenue">Revenue</button><button class="button" aria-pressed="false" data-owner="Product">Product</button><button class="button" aria-pressed="false" data-owner="Operations">Operations</button><button class="button" aria-pressed="false" data-owner="People">People</button></div><p class="statusline" data-testid="owner-status">Showing all owners.</p></nav>
+    <div class="divider"></div>
+    <section data-region="last-period-report-out"><div class="section-head"><div><p class="section-kicker">Last period</p><h2>Report out</h2></div><p class="statusline" role="status" data-testid="report-status">No report-out changes yet.</p></div><ul class="panel rows">
+      <li class="row"><span class="badge">Revenue</span><p>Confirm the enterprise renewal plan</p><button class="button outcome">✓&nbsp; Met</button></li>
+      <li class="row"><span class="badge">Product</span><p>Ship the reviewer workflow to pilot</p><button class="button outcome">×&nbsp; Off track</button></li>
+      <li class="row"><span class="badge">Operations</span><p>Close the onboarding handoff gaps</p><button class="button outcome" data-testid="operations-outcome">○&nbsp; Unreported</button></li>
+      <li class="row"><span class="badge">People</span><p>Publish the manager enablement plan</p><button class="button outcome">✓&nbsp; Met</button></li>
+    </ul></section>
+    <section data-region="current-period"><p class="section-kicker">Current period</p><h2>Committed now</h2><div class="cards">
+      <article class="card"><div class="card-top"><span class="badge">Revenue</span><small>Durable growth</small></div><h3>Put the renewal forecast in front of ELT</h3></article>
+      <article class="card"><div class="card-top"><span class="badge">Product</span><small>Trusted product</small></div><h3>Resolve pilot feedback and set the release boundary</h3></article>
+      <article class="card"><div class="card-top"><span class="badge">Operations</span><small>Operational scale</small></div><h3>Cut time-to-ready for the next customer cohort</h3></article>
+    </div></section>
+    <section class="discuss" data-region="discuss"><div class="discuss-head"><span aria-hidden="true">⚠</span><h2>Discuss</h2><span class="badge count">1</span></div><div class="issue"><strong>Ship the reviewer workflow to pilot</strong><span>Pilot feedback changed the release boundary; ELT needs to choose scope.</span></div></section>
+    <section class="pair" data-region="next-and-standing"><article class="card"><h2>Up next</h2><ul class="mini"><li><time>Sep 11</time><div><p>Run the manager calibration session</p><small>People</small></div></li><li><time>Sep 18</time><div><p>Lock the Q4 account plan</p><small>Revenue</small></div></li></ul></article><article class="card"><h2>Standing</h2><ul class="mini"><li><div><p>Review critical risk and control changes</p><small>Security</small></div></li><li><div><p>Reconcile forecast movement against plan</p><small>Finance</small></div></li></ul></article></section>
+  </main>
+  <script>
+    document.querySelector('[data-testid="refresh"]').addEventListener('click', () => {
+      document.querySelector('[data-testid="freshness"]').textContent = 'Synced just now · Google Sheet snapshot';
+    });
+    for (const button of document.querySelectorAll('[data-owner]')) button.addEventListener('click', () => {
+      for (const peer of document.querySelectorAll('[data-owner]')) {
+        const selected = peer === button;
+        peer.classList.toggle('active', selected);
+        peer.setAttribute('aria-pressed', String(selected));
+      }
+      document.querySelector('[data-testid="owner-status"]').textContent = button.dataset.owner === 'All'
+        ? 'Showing all owners.' : `Showing ${button.dataset.owner}.`;
+    });
+    document.querySelector('[data-testid="operations-outcome"]').addEventListener('click', (event) => {
+      event.currentTarget.textContent = '✓  Met';
+      document.querySelector('[data-testid="report-status"]').textContent = 'Close the onboarding handoff gaps: Met.';
+    });
+  </script>
+</body>
+</html>

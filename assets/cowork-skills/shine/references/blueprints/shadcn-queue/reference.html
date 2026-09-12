@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en" data-cite="shadcn-queue" data-shine-voice="kit-faithful" data-dna-family="shadcn-zinc">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>shadcn work queue reference</title>
+  <link rel="stylesheet" href="../../../tokens/voices/shadcn-zinc.css">
+  <style>
+    *{box-sizing:border-box}:root{color-scheme:light}body{margin:0;background:#fafafa;color:#18181b;font:14px/1.5 var(--shine-font-sans,ui-sans-serif,system-ui)}.wrap{width:min(1184px,calc(100% - 48px));margin:auto}
+    .shell{display:flex;align-items:center;gap:24px;padding:12px 0;border-bottom:1px solid #e4e4e7;background:#fff}
+    .shell .wrap{display:flex;align-items:center;gap:24px}
+    .mark{font-weight:700;letter-spacing:-.02em}
+    .shellnav{display:flex;gap:4px;margin:0;padding:0;list-style:none}
+    .shellnav a{display:inline-flex;min-height:36px;align-items:center;padding:0 12px;border-radius:8px;color:#3f3f46;text-decoration:none;font-weight:550}
+    .shellnav a[aria-current="page"]{background:#f4f4f5;color:#18181b}
+    header.page .wrap{padding:28px 0 0}
+    h1{margin:0;font-size:24px;line-height:1.2;letter-spacing:-.025em}
+    .fresh{margin:8px 0 0;color:#71717a}
+    .toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:20px 0 12px}
+    .search{position:relative}
+    .search svg{position:absolute;left:12px;top:12px;width:16px;height:16px;color:#a1a1aa}
+    .search input{min-height:36px;width:280px;padding:0 12px 0 36px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;font:inherit}
+    .button{display:inline-flex;align-items:center;gap:8px;justify-content:center;min-height:36px;padding:0 16px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;color:#18181b;font:600 14px/1 var(--shine-font-sans,ui-sans-serif);cursor:pointer}
+    .button.ghost{border-color:transparent;background:transparent;color:#3f3f46}
+    .button.primary{margin-left:auto;background:#18181b;border-color:#18181b;color:#fafafa}
+    .button svg{width:16px;height:16px}
+    .button[disabled]{opacity:.5;cursor:not-allowed}
+    .batch{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;padding:8px 12px;border:1px solid #e4e4e7;border-radius:8px;background:#f4f4f5}
+    .batch strong{font-size:13px}
+    .gridbox{overflow-x:auto;border:1px solid #e4e4e7;border-radius:12px;background:#fff}
+    table{border-collapse:collapse;width:100%;min-width:760px}
+    thead th{position:sticky;top:0;background:#fff;border-bottom:1px solid #e4e4e7;padding:12px;text-align:left;font-size:12px;color:#71717a;font-weight:600}
+    thead th.num,td.num{text-align:right;font-variant-numeric:tabular-nums}
+    thead button{display:inline-flex;align-items:center;gap:8px;border:0;background:none;padding:0;font:inherit;color:inherit;cursor:pointer}
+    thead button svg{width:14px;height:14px}
+    tbody td{border-bottom:1px solid #f4f4f5;padding:12px;vertical-align:middle}
+    tbody tr:last-child td{border-bottom:0}
+    tbody tr[data-selected="true"]{background:#f4f4f5}
+    .chip{display:inline-flex;align-items:center;min-width:96px;justify-content:center;padding:4px 8px;border:1px solid #d4d4d8;border-radius:999px;color:#3f3f46;font-size:12px}
+    .rowtitle{font-weight:550}
+    .open{gap:8px}
+    .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0}
+    input{margin:0}
+    .resize{display:inline-block;width:4px;align-self:stretch}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0 8px}
+    .foot select{min-height:36px;padding:0 8px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;font:inherit}
+    .pager{display:flex;align-items:center;gap:8px;color:#71717a}
+    .gated{display:flex;align-items:center;gap:12px;margin:8px 0 48px;color:#71717a}
+    .statusline{margin:0 0 8px;color:#71717a;font-size:12px}
+    @media(max-width:800px){.search input{width:100%}.button.primary{margin-left:0}.wrap{width:min(100% - 32px,1184px)}}
+  </style>
+</head>
+<body>
+  <nav class="shell" aria-label="Application" data-region="queue-navigation" data-testid="shell-nav">
+    <div class="wrap">
+      <span class="mark">Revenue Desk</span>
+      <ul class="shellnav">
+        <li><a href="#morning">Morning</a></li>
+        <li><a href="#queue" aria-current="page">Work queue</a></li>
+        <li><a href="#intel">Intel</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="page" data-region="queue-masthead">
+    <div class="wrap">
+      <h1>Work queue</h1>
+      <p class="fresh" data-testid="freshness">14 flagged items · generated 06:30 UTC · one snapshot, one stamp</p>
+    </div>
+  </header>
+
+  <main class="wrap" data-region="queue">
+    <section data-grid aria-label="Work queue grid">
+    <h2 class="sr">Work queue</h2>
+    <div class="toolbar" data-region="queue-toolbar" data-toolbar role="search">
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.4-3.4"/></svg>
+        <input type="search" aria-label="Search the queue" placeholder="Search items or owners" data-testid="search" data-shine-probe-value="zzzz">
+      </div>
+      <button type="button" class="button ghost" data-clear-filters data-testid="clear">Clear filters</button>
+      <span data-loading aria-busy="true" hidden>Loading the queue</span>
+      <span data-state="error" role="alert" hidden>Could not load the queue. <button type="button" data-retry>Retry</button></span>
+      <span data-state="empty" hidden>Nothing in this queue. Every source reported in.</span>
+      <span data-state="filtered-empty" data-testid="filtered-empty" hidden>No items match these filters. Clear filters to see all 14.</span>
+      <button type="button" class="button" data-testid="columns">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg>
+        Columns
+      </button>
+      <button type="button" class="button primary" data-primary data-testid="open-top" onclick="location.hash='q-top'">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        Open top record
+      </button>
+    </div>
+
+    <p class="statusline" role="status" data-testid="queue-status">Showing all 14 items, worst first.</p>
+
+    <div class="batch" role="status" data-testid="batch">
+      <strong data-testid="batch-count">0 selected</strong>
+      <button type="button" class="button" data-testid="batch-open" disabled>Open selected</button>
+    </div>
+
+    <div class="gridbox" data-region="queue-grid">
+      <table data-shine-contract="table" data-region="table" data-client-mode aria-label="Work queue table">
+        <caption class="sr">Every flagged item, worst first, with a deep link to its record</caption>
+        <thead>
+          <tr>
+            <th scope="col"><input type="checkbox" aria-label="Select all rows on this page" data-testid="select-all"><span class="sr">Select</span></th>
+            <th scope="col">Problem</th>
+            <th scope="col" aria-sort="none"><button type="button" data-sort data-sort-key="title" data-testid="sort-title">Item <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 9 4-4 4 4M8 15l4 4 4-4"/></svg></button><span role="separator" data-column-resize class="resize"></span></th>
+            <th scope="col">Owner</th>
+            <th scope="col" class="num" aria-sort="descending"><button type="button" data-sort data-sort-key="amount" data-testid="sort-amount">Value <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 9 4-4 4 4M8 15l4 4 4-4"/></svg></button></th>
+            <th scope="col">Due</th>
+            <th scope="col"><span class="sr">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody data-testid="rows"></tbody>
+      </table>
+    </div>
+
+    <nav class="foot" data-region="queue-pagination" data-pagination aria-label="Pagination">
+      <label>Rows per page
+        <select aria-label="Rows per page" data-page-size data-testid="page-size">
+          <option>10</option><option>25</option><option>50</option>
+        </select>
+      </label>
+      <div class="pager">
+        <span data-page-range data-testid="page-label">Page 1 of 2</span>
+        <span data-total>14 total</span>
+        <button type="button" class="button" data-testid="prev" disabled>Previous</button>
+        <button type="button" class="button" data-page-next data-testid="next">Next</button>
+      </div>
+    </nav>
+    </section>
+
+    <p class="gated">
+      <button type="button" class="button" disabled title="Blocked on connector authorization" data-testid="gated">Nudge owners</button>
+      Delivery is off until the connector carries a dated authorization. The control stays visible so the gate is a plan, not a secret.
+    </p>
+  </main>
+
+  <script>
+    const DATA = [
+      { id:"q-top", kind:"Never logged", title:"Placeholder Dynamics — Enterprise QA", owner:"Sam Okafor", amount:12100000, due:"1 Oct" },
+      { id:"q2", kind:"Past due", title:"Bureau of Fictional Affairs — Screening", owner:"Riley Vega", amount:8400000, due:"15 Aug" },
+      { id:"q3", kind:"Never logged", title:"Synthetic State DOL — UI Integrity", owner:"Riley Vega", amount:5250000, due:"20 Sep" },
+      { id:"q4", kind:"Silent 30d", title:"Imaginary Rail Co — Contractor Vetting", owner:"Dana Liu", amount:3400000, due:"15 Oct" },
+      { id:"q5", kind:"Silent 30d", title:"Example Logistics — Vendor Vetting", owner:"Dana Liu", amount:2300000, due:"5 Nov" },
+      { id:"q6", kind:"Silent 30d", title:"Mock Metro Transit — Badge Screening", owner:"Riley Vega", amount:1950000, due:"20 Nov" },
+      { id:"q7", kind:"Silent 30d", title:"Fictive Energy — Insider Threat Pilot", owner:"Sam Okafor", amount:1600000, due:"4 Dec" },
+      { id:"q8", kind:"No contact role", title:"Notional County Schools — Volunteer Vetting", owner:"Dana Liu", amount:1200000, due:"30 Nov" },
+      { id:"q9", kind:"No contact role", title:"Model City PD — Applicant Screening", owner:"Sam Okafor", amount:950000, due:"1 Dec" },
+      { id:"q10", kind:"Silent 30d", title:"Pretend Port Authority — Access Program", owner:"Riley Vega", amount:840000, due:"11 Dec" },
+      { id:"q11", kind:"No contact role", title:"Hypothetical Health Dept — Provider Screening", owner:"Dana Liu", amount:720000, due:"9 Dec" },
+      { id:"q12", kind:"Silent 30d", title:"Arbitrary Airlines — Crew Screening", owner:"Sam Okafor", amount:610000, due:"18 Dec" },
+      { id:"q13", kind:"No contact role", title:"Invented Insurance Group — Claims Integrity", owner:"Riley Vega", amount:530000, due:"16 Dec" },
+      { id:"q14", kind:"Past due", title:"Sample Harbor Authority — Credentialing", owner:"Dana Liu", amount:480000, due:"22 Aug" },
+    ];
+    const money = (v) => "$" + (v / 1e6).toFixed(1) + "M";
+    const state = { query:"", sortKey:"amount", sortDesc:true, page:0, size:10, selected:new Set() };
+    const el = (t) => document.querySelector(`[data-testid="${t}"]`);
+
+    function view() {
+      const q = state.query.toLowerCase();
+      let rows = DATA.filter((r) => !q || (r.title + " " + r.owner + " " + r.kind).toLowerCase().includes(q));
+      rows.sort((a, b) => {
+        const va = a[state.sortKey], vb = b[state.sortKey];
+        const cmp = typeof va === "number" ? va - vb : String(va).localeCompare(String(vb));
+        return state.sortDesc ? -cmp : cmp;
+      });
+      return rows;
+    }
+
+    function render() {
+      const rows = view();
+      const pages = Math.max(1, Math.ceil(rows.length / state.size));
+      state.page = Math.min(state.page, pages - 1);
+      const slice = rows.slice(state.page * state.size, (state.page + 1) * state.size);
+      el("rows").innerHTML = slice.map((r) => `
+        <tr data-url="#${r.id}" data-selected="${state.selected.has(r.id)}">
+          <td><input type="checkbox" aria-label="Select ${r.title}" data-row="${r.id}" ${state.selected.has(r.id) ? "checked" : ""}></td>
+          <td><span class="chip">${r.kind}</span></td>
+          <td class="rowtitle">${r.title}</td>
+          <td>${r.owner}</td>
+          <td class="num" data-sort="${r.amount}">${money(r.amount)}</td>
+          <td>${r.due}</td>
+          <td><button type="button" class="button ghost open" data-row-action onclick="location.hash='${r.id}'">Open <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></button></td>
+        </tr>`).join("") || `
+        <tr><td colspan="7" style="padding:40px;text-align:center;color:#71717a">${state.query ? "No items match these filters." : "Nothing in this queue. Every source reported in."}</td></tr>`;
+      el("page-label").textContent = `Page ${state.page + 1} of ${pages}`;
+      el("filtered-empty").hidden = !(state.query && rows.length === 0);
+      el("prev").disabled = state.page === 0;
+      el("next").disabled = state.page >= pages - 1;
+      el("clear").hidden = !state.query;
+      el("queue-status").textContent = state.query
+        ? `${rows.length} of ${DATA.length} items match.`
+        : `Showing all ${DATA.length} items, worst first.`;
+      el("batch-count").textContent = `${state.selected.size} selected`;
+      el("batch-open").disabled = state.selected.size === 0;
+    }
+
+    el("search").addEventListener("input", (e) => { state.query = e.target.value; state.page = 0; render(); });
+    el("clear").addEventListener("click", () => { state.query = ""; el("search").value = ""; render(); });
+    el("prev").addEventListener("click", () => { state.page -= 1; render(); });
+    el("next").addEventListener("click", () => { state.page += 1; render(); });
+    el("page-size").addEventListener("change", (e) => { state.size = Number(e.target.value); state.page = 0; render(); });
+    document.querySelectorAll("[data-sort-key]").forEach((b) => b.addEventListener("click", () => {
+      const key = b.dataset.sortKey;
+      state.sortDesc = state.sortKey === key ? !state.sortDesc : true;
+      state.sortKey = key;
+      document.querySelectorAll("th[aria-sort]").forEach((th) => th.setAttribute("aria-sort",
+        th.contains(b) ? (state.sortDesc ? "descending" : "ascending") : "none"));
+      render();
+    }));
+    el("rows").addEventListener("change", (e) => {
+      const id = e.target.dataset.row;
+      if (!id) return;
+      e.target.checked ? state.selected.add(id) : state.selected.delete(id);
+      render();
+    });
+    el("select-all").addEventListener("change", (e) => {
+      const slice = view().slice(state.page * state.size, (state.page + 1) * state.size);
+      slice.forEach((r) => e.target.checked ? state.selected.add(r.id) : state.selected.delete(r.id));
+      render();
+    });
+    render();
+  </script>
+</body>
+</html>

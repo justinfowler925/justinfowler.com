@@ -47,24 +47,9 @@ def archive(path, files, base):
             z.writestr(info, file.read_bytes())
 
 
-refs = KIT / 'fowler-sales-method/references'
-refs.mkdir(parents=True, exist_ok=True)
-for name in ['METHOD-PACK.md', 'TEMPLATES.md', 'EXAMPLES.md']:
-    (refs / name).write_bytes((KIT / name).read_bytes())
-
-files = sorted(p for p in KIT.rglob('*') if p.is_file() and p.name != 'manifest.json')
-manifest = {
-    'name': 'fowler-brain-sales-starter', 'version': '0.1.0',
-    'date': '2026-09-11', 'status': 'pilot-candidate',
-    'author': 'Justin Fowler', 'team_maintainer': 'Assign before rollout',
-    'audience': 'public-methods-and-synthetic-examples',
-    'behavioral_validation': 'not-run-in-Claude',
-    'files': {p.relative_to(KIT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
-}
-(KIT / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
-archive(ROOT / 'assets/fowler-sales-method.zip', (KIT / 'fowler-sales-method').rglob('*.md'), KIT)
-archive(ROOT / 'assets/fowler-brain-sales-starter.zip', [*files, KIT / 'manifest.json'], ROOT / 'assets')
-
+# The unrelated generic sales starter is retired. This builder produces only
+# the public walkthrough and its handout; private SLED files stay in Nucleus.
+files = []
 source = (ROOT / f'writing/{SLUG}.md').read_text()
 title, _, body = source.partition('\n\n')
 title = title.removeprefix('# ')
@@ -73,7 +58,7 @@ sibling = (ROOT / 'writing/unfog.html').read_text()
 css = re.search(r'<style>(.*?)</style>', sibling, re.S).group(1)
 nav = re.search(r'<nav aria-label="Primary">.*?</nav>', sibling, re.S).group(0)
 font_links = re.search(r'<link rel="preconnect".*?<link rel="stylesheet" href="../assets/tokens.css" />', sibling, re.S).group(0)
-summary = 'An evidence-backed position on making AI working methods portable across Claude surfaces, projects, and sessions—with a practical sales starter kit.'
+summary = 'A practical walkthrough for using SLED Agent in Claude Cowork: enable the shared skill, research a state, check the evidence, and keep a reusable state record.'
 page = f'''<!doctype html>
 <html lang="en" data-cite="shadcn-blog" data-product-pattern="fowler-editorial-article">
 <head>
@@ -119,32 +104,29 @@ details p {{ margin-top:var(--shine-space-4); color:var(--paper-2); }}
 <div class="container">{nav}
 <main id="main">
 <header class="hero" data-region="hero">
-<div class="breadcrumb"><a href="/writing.html">Writing</a><span class="sep">/</span>Fowler Brain</div>
-<div class="stamp">Position statement · 11 September 2026</div>
+<div class="breadcrumb"><a href="/writing.html">Writing</a><span class="sep">/</span>SLED Agent</div>
+<div class="stamp">Setup & training · 11 September 2026</div>
 <h1 id="headline">{html.escape(title)}</h1>
-<p class="lede" id="notes">Give salespeople maintained methods, trusted sources, and a way to verify the work—wherever they use AI.</p>
+<p class="lede" id="notes">Choose a state. Review the evidence. Leave with a clear next step and a record you can use again.</p>
 <p style="margin-top:var(--shine-space-5);color:var(--paper-2)">{html.escape(byline)}</p>
 <div class="hero-actions" aria-label="Article resources">
-<a class="btn primary" data-primary href="#starter">Get the starter kit</a>
-<a class="btn" href="#evidence">Evidence and limitations</a>
+<a class="btn primary" data-primary href="#start-with-the-shared-skill">Start with the shared skill</a>
+<a class="btn" href="#what-a-useful-answer-looks-like">See what you get</a>
 </div>
 </header>
 <article id="report" class="prose">{markdown(body)}</article>
-<section class="block" id="starter" data-shine-signature="fowler-brain-sales-method-release">
-<h2 class="st">Try the method</h2>
-<div class="prose"><p>The pilot kit includes Project instructions, three sales workflows, annotated fictional examples, a handoff template, and ten test cases. No customer data or live integrations are included.</p></div>
-<div class="hero-actions">
-<a class="btn primary" id="kit-download" href="../assets/fowler-brain-sales-starter.zip" download>Download the starter kit</a>
-<a class="btn" id="skill-download" href="../assets/fowler-sales-method.zip" download>Download the Claude skill</a>
-<a class="btn" href="../assets/fowler-brain-starter/START-HERE.md">Setup instructions</a>
-</div>
+<section class="hero-actions" aria-label="SLED training downloads">
+<a class="btn primary" href="https://nucleus-clearspeed.vercel.app/company-tools/sled-agent">Open SLED training in Nucleus</a>
+<a class="btn" href="/assets/sled-agent-public-guide.zip" download>Download this walkthrough</a>
+<a class="btn" href="/assets/cowork-skills/START-HERE.md">Other Cowork skills</a>
 </section>
-<details id="evidence"><summary>Evidence and limitations</summary>
-<p>Research and product documentation were checked on 11 September 2026. The article links supporting sources at the relevant claims. Field studies, controlled experiments, vendor engineering guidance, and the author's recommendations have different evidentiary weight.</p>
-<p>The proposed architecture and starter kit have not been validated in a sales-team trial. Packaging and rendering checks do not demonstrate Claude behavior, cross-surface installation, human learning, or revenue improvement. Product behavior must be checked against the actual workspace and version.</p>
-</details>
+
 </main>
 <footer><span>© 2026 · Justin Fowler</span><span>Published · 11 September 2026</span><a href="/writing.html">More writing</a></footer>
 </div></body></html>'''
 (ROOT / f'writing/{SLUG}.html').write_text(page)
-print(json.dumps({'article_words': len(body.split()), 'kit_files':len(files)+1, 'article':f'writing/{SLUG}.html', 'status':'publication-ready'}))
+print(json.dumps({'article_words': len(body.split()), 'public_handout':True, 'article':f'writing/{SLUG}.html', 'status':'publication-ready'}))
+
+handout = ROOT / 'assets/sled-agent-public-guide.md'
+handout.write_text(source)
+archive(ROOT / 'assets/sled-agent-public-guide.zip', [handout], ROOT / 'assets')

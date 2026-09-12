@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "request": "Make the intake safer",
+  "mode": "change",
+  "phase": "ready",
+  "outcome": {
+    "statement": "Unsafe submissions cannot reach dispatch",
+    "observed_by": "the intake operator"
+  },
+  "targets": [
+    {
+      "artifact": "intake queue",
+      "environment": "production",
+      "principal": "intake operator",
+      "source": "intake/policy.py",
+      "running_identity": "",
+      "evidence": [
+        "dispatch path trace"
+      ]
+    }
+  ],
+  "premise": {
+    "claim": "unsafe submissions currently reach dispatch",
+    "status": "confirmed",
+    "evidence": [
+      "one live rejected-policy record reached dispatch"
+    ]
+  },
+  "scope": {
+    "signature": "submissions rejected by the destructive-content policy",
+    "population": {
+      "checked": 10,
+      "affected": 1
+    },
+    "included": [],
+    "excluded": []
+  },
+  "preserve": [
+    "valid submissions continue to dispatch"
+  ],
+  "acceptance": [
+    {
+      "id": "unsafe-blocked",
+      "layer": "user_observable",
+      "probe": "submit a denied payload through the production entry point",
+      "expected": "the operator sees a refusal and no dispatch record",
+      "control": "a valid payload still creates one dispatch record",
+      "verification_path": "entry-point request plus queue record query"
+    }
+  ],
+  "assumptions": [],
+  "forks": [
+    {
+      "decision": "whether refused payloads are retained for audit or deleted",
+      "options": [
+        "retain redacted record",
+        "delete immediately"
+      ],
+      "material": true,
+      "resolution": "",
+      "choice": "",
+      "reason": ""
+    }
+  ],
+  "delivery": [
+    {
+      "environment": "production",
+      "action": "deploy the policy gate and verify the queue",
+      "evidence": ""
+    }
+  ],
+  "receipts": []
+}

@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "cite": "shadcn-queue",
+  "objects": [
+    {
+      "id": "shell_nav",
+      "selector": "[data-testid=shell-nav]",
+      "referenceRole": "navigation",
+      "purpose": "The queue lives inside an application shell; the reader can leave it for the sibling surfaces"
+    },
+    {
+      "id": "grid",
+      "selector": "[data-grid]",
+      "referenceRole": "table",
+      "purpose": "The focal object: every flagged item with its problem, owner, value and a deep link to the record"
+    },
+    {
+      "id": "freshness",
+      "selector": "[data-testid=freshness]",
+      "referenceRole": "status",
+      "purpose": "Say when this queue was generated \u2014 a queue whose freshness is unstated reads as live when it may be a snapshot"
+    },
+    {
+      "id": "search",
+      "selector": "[data-testid=search]",
+      "referenceRole": "filter",
+      "purpose": "Narrow the queue to one item or owner before acting on it"
+    },
+    {
+      "id": "queue_status",
+      "selector": "[data-testid=queue-status]",
+      "referenceRole": "status",
+      "purpose": "State how much of the queue is showing, so a filtered view can never pass as the whole"
+    },
+    {
+      "id": "open_top",
+      "selector": "[data-testid=open-top]",
+      "referenceRole": "command",
+      "purpose": "The one filled primary: leave for the record where the worst item gets worked"
+    },
+    {
+      "id": "gated_action",
+      "selector": "[data-testid=gated]",
+      "referenceRole": "command",
+      "purpose": "A delivery action that is not yet authorized stays visible and disabled with its gate named"
+    },
+    {
+      "id": "clear_filters",
+      "selector": "[data-testid=clear]",
+      "referenceRole": "control",
+      "purpose": "Get the whole queue back after narrowing it"
+    },
+    {
+      "id": "page_position",
+      "selector": "[data-testid=page-label]",
+      "referenceRole": "status",
+      "purpose": "State where the reader is in the queue, so page two is never mistaken for the whole"
+    },
+    {
+      "id": "page_next",
+      "selector": "[data-testid=next]",
+      "referenceRole": "control",
+      "purpose": "Move through the queue one page at a time"
+    },
+    {
+      "id": "row_select",
+      "selector": "[data-row=q-top]",
+      "referenceRole": "control",
+      "purpose": "Pick a row for a batch action"
+    },
+    {
+      "id": "batch_count",
+      "selector": "[data-testid=batch-count]",
+      "referenceRole": "status",
+      "purpose": "State how many rows a batch action would touch before it runs"
+    },
+    {
+      "id": "page_prev",
+      "selector": "[data-testid=prev]",
+      "referenceRole": "control",
+      "purpose": "Return to the front of the queue"
+    }
+  ],
+  "flows": [
+    {
+      "id": "find-an-item",
+      "userJob": "Narrow the queue to one account, confirm the count says so, and get the whole queue back",
+      "steps": [
+        {
+          "action": "visible",
+          "selector": "[data-grid]"
+        },
+        {
+          "action": "fill",
+          "selector": "[data-testid=search]",
+          "value": "Rail"
+        },
+        {
+          "action": "text",
+          "selector": "[data-testid=queue-status]",
+          "value": "1 of 14 items match."
+        },
+        {
+          "action": "click",
+          "selector": "[data-testid=clear]"
+        },
+        {
+          "action": "text",
+          "selector": "[data-testid=queue-status]",
+          "value": "Showing all 14 items, worst first."
+        }
+      ]
+    },
+    {
+      "id": "page-the-queue",
+      "userJob": "Reach the second page of the queue, know the position, and come back",
+      "steps": [
+        {
+          "action": "text",
+          "selector": "[data-testid=page-label]",
+          "value": "Page 1 of 2"
+        },
+        {
+          "action": "click",
+          "selector": "[data-testid=next]"
+        },
+        {
+          "action": "text",
+          "selector": "[data-testid=page-label]",
+          "value": "Page 2 of 2"
+        },
+        {
+          "action": "click",
+          "selector": "[data-testid=prev]"
+        },
+        {
+          "action": "text",
+          "selector": "[data-testid=page-label]",
+          "value": "Page 1 of 2"
+        }
+      ]
+    },
+    {
+      "id": "select-for-batch",
+      "userJob": "Select a row and see the batch bar state the count",
+      "steps": [
+        {
+          "action": "visible",
+          "selector": "[data-grid]"
+        },
+        {
+          "action": "click",
+          "selector": "[data-row=q-top]"
+        },
+        {
+          "action": "text",
+          "selector": "[data-testid=batch-count]",
+          "value": "1 selected"
+        }
+      ]
+    }
+  ]
+}

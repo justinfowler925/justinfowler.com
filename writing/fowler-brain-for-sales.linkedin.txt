@@ -1,18 +1,7 @@
-Our best working methods should travel with our team.
+SLED Agent helps a rep decide where to start in a state and what evidence supports that choice.
 
-Builders give AI context, reusable procedures, tools, examples, and checks before delivery. Salespeople deserve that working environment too.
+This walkthrough explains the actual workflow: enable the shared skill in Claude Cowork, name a state, check the leading recommendation against its sources, and save a state record for the next conversation.
 
-I've published the standard I think we should build toward with Fowler Brain:
+Our team gets the private skill, training, prompts and examples through Nucleus. The public walkthrough explains how to use it and replaces the earlier generic sales-method article.
 
-• One maintained source for shared methods.
-• Account context scoped to the right people.
-• Small, tested adapters for each Claude surface.
-• Concrete templates, examples, and quality checks.
-• A saved handoff when the session changes.
-• A pilot that measures quality, review time, and what the rep actually learns.
-
-The evidence is promising but task-specific. Uploading a folder is the beginning. The test is whether a fresh session can apply the right method to real work—and whether the person can defend the result.
-
-The article explains the position, its evidence, and the setup. The companion kit makes it possible to try.
-
-https://justinfowler.com/share?to=fowler-brain&src=linkedin&medium=social&campaign=fowler-brain-sales-sep26
+https://justinfowler.com/writing/fowler-brain-for-sales.html

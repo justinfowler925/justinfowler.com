@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "request": "Make every demo embed show the language picker",
+  "mode": "change",
+  "phase": "ready",
+  "outcome": {
+    "statement": "Every public demo embed presents the language picker on its first screen",
+    "observed_by": "an anonymous visitor"
+  },
+  "targets": [
+    {
+      "artifact": "public demo embeds",
+      "environment": "production",
+      "principal": "anonymous visitor",
+      "source": "public/demos",
+      "running_identity": "",
+      "evidence": [
+        "route-to-bundle trace found 18 embed definitions"
+      ]
+    }
+  ],
+  "premise": {
+    "claim": "embedded=true removes the screen containing the language picker",
+    "status": "confirmed",
+    "evidence": [
+      "first-screen comparison with and without the flag"
+    ]
+  },
+  "scope": {
+    "signature": "demo iframe URLs carrying embedded=true",
+    "population": {
+      "checked": 18,
+      "affected": 2
+    },
+    "included": [
+      "all public demo iframe definitions"
+    ],
+    "excluded": [
+      "non-demo third-party embeds"
+    ]
+  },
+  "preserve": [
+    "demo route names",
+    "locale-specific content"
+  ],
+  "acceptance": [
+    {
+      "id": "picker-visible",
+      "layer": "user_observable",
+      "probe": "open every public demo URL anonymously and inspect the first screen",
+      "expected": "18 of 18 first screens expose the language picker",
+      "control": "the pre-change URL with embedded=true omits the picker",
+      "verification_path": "browser render rather than source-string inspection"
+    },
+    {
+      "id": "class-gate",
+      "layer": "test",
+      "probe": "seed embedded=true in each supported URL construction shape",
+      "expected": "the population gate fails on every seeded shape",
+      "control": "unrelated query parameters remain allowed",
+      "verification_path": "test runner"
+    }
+  ],
+  "assumptions": [
+    {
+      "statement": "the route inventory is authoritative for public demos",
+      "basis": "evidence",
+      "material": false
+    }
+  ],
+  "forks": [],
+  "delivery": [
+    {
+      "environment": "repository",
+      "action": "merge the class fix through a current, green PR",
+      "evidence": ""
+    },
+    {
+      "environment": "production",
+      "action": "deploy and verify all 18 public demo URLs",
+      "evidence": ""
+    }
+  ],
+  "receipts": []
+}

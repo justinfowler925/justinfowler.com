@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
+const page=read('writing/fowler-brain-for-sales.html');
+assert.match(page,/How to use SLED Agent in Claude Cowork/);
+assert.match(page,/Use SLED Agent to discover Arizona/);
+assert.match(page,/nucleus-clearspeed.vercel.app\/company-tools\/sled-agent/);
+assert.doesNotMatch(page,/href="[^\"]*(?:fowler-sales-method.zip|fowler-brain-sales-starter.zip|#starter|#evidence)"/);
+for(const m of page.matchAll(/href="#([^\"]+)"/g))assert.ok(page.includes('id="'+m[1]+'"'),m[1]);
+const redirects=JSON.parse(read('vercel.json')).redirects;
+for(const old of ['/assets/fowler-sales-method.zip','/assets/fowler-brain-sales-starter.zip','/assets/fowler-brain-starter/:path*'])assert.ok(redirects.some(r=>r.source===old&&r.permanent));
+const receipt=JSON.parse(read('assets/cowork-skills/release.json'));
+assert.deepEqual(receipt.artifacts.map(a=>a.name),['shine','unfog','strike-package']);
+assert.ok(!fs.existsSync(new URL('../assets/cowork-skills/sled-agent',import.meta.url)));
+console.log('SLED article, functional anchors, retired routes and public/private package boundary passed');
