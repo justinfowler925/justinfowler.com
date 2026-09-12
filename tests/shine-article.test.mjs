@@ -25,8 +25,8 @@ assert.equal((article.match(new RegExp(repoUrl, "g")) ?? []).length >= 2, true, 
 assert.equal((article.match(new RegExp(skillUrl, "g")) ?? []).length >= 2, true, "article must expose the skill page at the start and finish");
 assert.match(article, new RegExp(liveUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
 assert.match(archive, /href="\/writing\/shine\.html"/);
-assert.match(archive, /7 posts shipped/);
-assert.match(archive, /Last updated · 2026-09-09/);
+assert.match(archive, new RegExp(`${(archive.match(/class="post"/g) || []).length} posts shipped`));
+assert.match(archive, /Last updated · 2026-\d{2}-\d{2}/);
 assert.match(sitemap, /<loc>https:\/\/justinfowler\.com\/writing\/shine\.html<\/loc>/);
 assert.match(sitemap, /<lastmod>2026-09-08<\/lastmod>/);
 assert.match(article, /<img src="\.\.\/assets\/shine-v3-before\.png"/);

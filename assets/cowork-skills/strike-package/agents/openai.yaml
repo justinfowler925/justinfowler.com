@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strike Package"
+  short_description: "Sourced meeting briefs with LinkedIn context"
+  default_prompt: "Use $strike-package to research a professional contact and create a sourced pre-meeting intelligence brief using public evidence and relevant user-authorized LinkedIn profiles, feeds, connections, and content when available."

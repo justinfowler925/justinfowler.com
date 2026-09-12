@@ -1,0 +1,30 @@
+{
+  "edition": "Cowork guidance",
+  "upstreamMethodsUnchanged": true,
+  "artifacts": [
+    {
+      "name": "shine",
+      "zip": "shine-cowork.zip",
+      "files": 68,
+      "bytes": 204355,
+      "sha256": "310527985b84d19fe63e297f34cf51fb15f015253a7431fd57545e4ac7618b93",
+      "sourceRevision": "7baf789b1d57eacd32aca66ea22fa252a2422afc"
+    },
+    {
+      "name": "unfog",
+      "zip": "unfog-cowork.zip",
+      "files": 11,
+      "bytes": 18058,
+      "sha256": "c3a4d75fc40910b8e070a07387afd4e12c16993de78f912fc092635c352cb450",
+      "sourceRevision": "76c87a3523c439ffdfa68a6919f40b232b05bca9"
+    },
+    {
+      "name": "strike-package",
+      "zip": "strike-package-cowork.zip",
+      "files": 7,
+      "bytes": 13659,
+      "sha256": "88a8c42f14962c8f540eab5e27e93f9864254a7e1f77c5eb8d4b1834efe0b973",
+      "sourceRevision": "db00bfea81c9adb60535164b78be0c3b0c5a5551"
+    }
+  ]
+}

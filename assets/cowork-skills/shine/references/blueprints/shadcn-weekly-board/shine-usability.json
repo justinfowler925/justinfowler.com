@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "cite": "shadcn-weekly-board",
+  "objects": [
+    {
+      "id": "summary",
+      "selector": "[data-region=weekly-summary]",
+      "referenceRole": "summary",
+      "purpose": "See period freshness and reported, met, and off-track counts before the meeting starts"
+    },
+    {
+      "id": "owners",
+      "selector": "[data-testid=owners]",
+      "referenceRole": "navigation",
+      "purpose": "Walk the fixed meeting agenda one accountable owner at a time"
+    },
+    {
+      "id": "owner_status",
+      "selector": "[data-testid=owner-status]",
+      "referenceRole": "status",
+      "purpose": "Confirm which owner is currently selected"
+    },
+    {
+      "id": "owner_revenue",
+      "selector": "[data-owner=Revenue]",
+      "referenceRole": "navigation",
+      "purpose": "Move the live meeting to the Revenue portion of the fixed owner roster"
+    },
+    {
+      "id": "outcome",
+      "selector": "[data-testid=operations-outcome]",
+      "referenceRole": "command",
+      "purpose": "Record one commitment outcome without interrupting the meeting with a form"
+    },
+    {
+      "id": "report_status",
+      "selector": "[data-testid=report-status]",
+      "referenceRole": "status",
+      "purpose": "Announce the recorded outcome in the live meeting"
+    }
+  ],
+  "flows": [
+    {
+      "id": "walk-owner",
+      "userJob": "Move the meeting to Revenue and confirm the active owner",
+      "steps": [
+        { "action": "visible", "selector": "[data-testid=owners]" },
+        { "action": "click", "selector": "[data-owner=Revenue]" },
+        { "action": "text", "selector": "[data-testid=owner-status]", "value": "Showing Revenue." }
+      ]
+    },
+    {
+      "id": "record-outcome",
+      "userJob": "Record an Operations commitment as met and hear the confirmation",
+      "steps": [
+        { "action": "text", "selector": "[data-testid=operations-outcome]", "value": "Unreported" },
+        { "action": "click", "selector": "[data-testid=operations-outcome]" },
+        { "action": "text", "selector": "[data-testid=report-status]", "value": "Close the onboarding handoff gaps: Met." }
+      ]
+    }
+  ]
+}
