@@ -11,7 +11,9 @@ permissions:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    # Hosted runners on this personal account are billing-locked, so the guard never
+    # ran; the repo-registered self-hosted runner (see justinfowler925/shine) runs it.
+    runs-on: [self-hosted, macOS, ARM64, portfolio]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
