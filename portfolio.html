@@ -1362,15 +1362,45 @@
     .lightbox-next { right: 12px; }
   }
   #brutus .brutus-gallery { margin-top: var(--shine-space-6); }
-  #brutus .slider-track { align-items: flex-start; }
-  #brutus .slide { aspect-ratio: auto; border: 0; padding: 0; text-align: left; color: inherit; font: inherit; }
-  #brutus .slide img { height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: var(--ink); }
+  #brutus .slider-track {
+    align-items: flex-start;
+    justify-content: center;
+    overflow: visible;
+  }
+  #brutus .slide {
+    flex: 0 0 auto;
+    width: min(100%, 28rem);
+    max-width: 28rem;
+    margin-inline: auto;
+    aspect-ratio: auto;
+    border: 0;
+    padding: 0;
+    text-align: left;
+    color: inherit;
+    font: inherit;
+    background: transparent;
+    overflow: visible;
+  }
+  #brutus .slide img {
+    width: 100%;
+    max-width: 28rem;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    object-position: center;
+    background: var(--ink);
+  }
   #brutus .slide::after { display: none; }
-  #brutus .brutus-caption { display: flex; gap: var(--shine-space-3); position: static; padding: var(--shine-space-4); letter-spacing: 0; text-transform: none; font-family: var(--sans); font-size: var(--shine-text-sm); }
-  #brutus .slider-nav { opacity: 1; top: var(--shine-space-8); }
-  #brutus .slider-nav:disabled { opacity: 0.25; }
-  #brutus .slider-counter { position: static; width: fit-content; margin: var(--shine-space-4) auto; }
-  #brutus .slider-dots { position: static; transform: none; justify-content: center; padding: var(--shine-space-3); }
+  #brutus .brutus-caption {
+    display: flex;
+    gap: var(--shine-space-3);
+    position: static;
+    padding: var(--shine-space-4) 0 0;
+    letter-spacing: 0;
+    text-transform: none;
+    font-family: var(--sans);
+    font-size: var(--shine-text-sm);
+  }
   #brutus .slide:hover img { transform: none; }
   #brutus .slide:focus-visible { outline: var(--shine-space-1) solid var(--accent); outline-offset: calc(-1 * var(--shine-space-1)); }
 </style>
@@ -1745,10 +1775,13 @@
     <article class="project reveal" data-cat="ai" id="brutus" data-product-pattern="portfolio-project" data-cite="shadcn-blog">
       <div class="pmeta"><span class="pidx">§ 03</span><span class="ptag">Active development · Voice + avatars</span><span class="pcat">AI infrastructure</span><span class="pyear">Updated Sep 19, 2026</span></div>
       <h2 class="ptitle">Brut<em>us</em><span class="sub">An AI workspace with a face, a conversation, and the work in view.</span></h2>
-      <div class="slider brutus-gallery" data-slider aria-label="Brutus interface and avatar gallery">
-        <button class="slider-nav prev" type="button" aria-label="Previous Brutus image">‹</button><button class="slider-nav next" type="button" aria-label="Next Brutus image">›</button>
-        <div class="slider-counter" data-counter aria-live="polite">1 / 3</div><div class="slider-track" data-track><button type="button" class="slide" data-src="assets/brutus/conversation-september.png" data-cap-num="01" data-cap-text="Conversation workspace · development preview · September 19" aria-label="Enlarge Conversation workspace · development preview · September 19"><img src="assets/brutus/conversation-september.png" alt="Brutus development interface with Alexis on the left and the conversation and attachment composer on the right" loading="lazy" /><span class="brutus-caption"><span class="cap-num">01</span><span class="cap-text">Conversation workspace · development preview · September 19</span></span></button><button type="button" class="slide" data-src="assets/brutus/alexis.jpg" data-cap-num="02" data-cap-text="Alexis · generated avatar portrait" aria-label="Enlarge Alexis · generated avatar portrait"><img src="assets/brutus/alexis.jpg" alt="Alexis, a generated avatar in a navy jacket" loading="lazy" /><span class="brutus-caption"><span class="cap-num">02</span><span class="cap-text">Alexis · generated avatar portrait</span></span></button><button type="button" class="slide" data-src="assets/brutus/alicia.jpg" data-cap-num="03" data-cap-text="Alicia · generated avatar portrait" aria-label="Enlarge Alicia · generated avatar portrait"><img src="assets/brutus/alicia.jpg" alt="Alicia, a generated avatar with a navy jacket and white top" loading="lazy" /><span class="brutus-caption"><span class="cap-num">03</span><span class="cap-text">Alicia · generated avatar portrait</span></span></button></div>
-        <div class="slider-dots" data-dots aria-hidden="true"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+      <div class="slider brutus-gallery" data-slider aria-label="Alicia avatar portrait">
+        <div class="slider-track" data-track>
+          <button type="button" class="slide" data-src="assets/brutus/alicia.jpg" data-cap-num="01" data-cap-text="Alicia · generated avatar portrait" aria-label="Enlarge Alicia · generated avatar portrait">
+            <img src="assets/brutus/alicia.jpg" alt="Alicia, a generated avatar with a navy jacket and white top" loading="lazy" width="1024" height="1024" />
+            <span class="brutus-caption"><span class="cap-num">01</span><span class="cap-text">Alicia · generated avatar portrait</span></span>
+          </button>
+        </div>
       </div>
       <div class="pgrid"><div><div class="psynopsis">
         <p><strong>Talk through the work, with the conversation always in view.</strong> Brutus brings conversation, project context, and agent activity into one workspace. The latest interface puts the presenter on the left and the transcript on the right, with a compact composer for messages and text attachments. Alexis and Alicia are generated avatar options; the gallery shows the actual development interface and source portraits.</p>
