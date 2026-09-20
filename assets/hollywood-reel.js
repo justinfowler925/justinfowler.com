@@ -6,7 +6,6 @@
   const scene = reel.querySelector('[data-reel-scene]');
   const clips = [
     { name: 'Ocean', file: 'ocean' },
-    { name: 'Redwoods', file: 'redwoods-brook-30s' },
     { name: 'Winter cabin', file: 'winter-cabin-30s' }
   ];
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
