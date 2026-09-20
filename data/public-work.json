@@ -82,15 +82,15 @@
       "kind": "project",
       "publish": true,
       "repoVisibility": "public",
-      "summary": "A local, evidence-first AI coworker and operations console built to keep sensitive context on owned hardware.",
-      "proof": "Local-first \u00b7 tested \u00b7 configurable",
+      "summary": "A conversational AI workspace combining avatars, persistent sessions, tool approvals, and visible work activity.",
+      "proof": "September development preview \u00b7 Alexis + Alicia \u00b7 shared conversation service",
       "repo": "https://github.com/justinfowler925/brutus",
       "publicPage": "/portfolio.html#brutus",
       "sourceFile": null,
       "tags": [
-        "Local AI",
-        "Operations",
-        "Python"
+        "Conversational AI",
+        "Avatars",
+        "Operations"
       ]
     },
     {

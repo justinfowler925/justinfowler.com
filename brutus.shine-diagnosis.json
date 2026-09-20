@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "job": "Update Brutus portfolio with current avatars and truthful development status",
+  "category": "editorial",
+  "verdict": "defects",
+  "primaryTask": "Inspect current Brutus interface and portraits, understand development status, and reach public source.",
+  "before": {
+    "artifact": "https://justinfowler.com/portfolio.html#brutus",
+    "screenshot": "/tmp/brutus-portfolio-before.png"
+  },
+  "productPrecedent": {
+    "name": "Portfolio project case study",
+    "reference": "portfolio.html",
+    "divergences": [
+      "Replace abstract diagram with existing portfolio slider; preserve typography, metadata, links and timeline."
+    ]
+  },
+  "defects": [
+    {
+      "id": "current-work",
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "Brutus entry stops at August and shows no current avatars.",
+      "evidence": "Before image shows abstract two-lane SVG and August 8 final milestone.",
+      "expectedEffect": "Three current images with readable captions and September development status.",
+      "assertions": [
+        "flow:inspect-gallery"
+      ]
+    },
+    {
+      "id": "status",
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "Historical local-model and private-repository copy conflicts with current public source and hosted development configuration.",
+      "evidence": "Existing copy says local 14B and private repo; current public registry links GitHub and development contract supports hosted services.",
+      "expectedEffect": "Explicit development status and runtime/model distinction.",
+      "assertions": [
+        "flow:read-status"
+      ]
+    }
+  ]
+}
