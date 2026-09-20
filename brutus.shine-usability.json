@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "cite": "shadcn-blog",
+  "objects": [
+    {
+      "id": "title",
+      "selector": "#brutus h2",
+      "referenceRole": "headline",
+      "purpose": "Identify the Brutus project"
+    },
+    {
+      "id": "report",
+      "selector": "#brutus .psynopsis",
+      "referenceRole": "article",
+      "purpose": "Read current capabilities and development limits"
+    },
+    {
+      "id": "image",
+      "selector": "#brutus .slider",
+      "referenceRole": "figure",
+      "purpose": "Inspect actual interface and generated avatars"
+    },
+    {
+      "id": "control-4",
+      "selector": "#brutus .next",
+      "referenceRole": "control",
+      "purpose": "Inspect the current interface and both avatar portraits"
+    },
+    {
+      "id": "control-5",
+      "selector": "#brutus [data-counter]",
+      "referenceRole": "control",
+      "purpose": "Inspect the current interface and both avatar portraits"
+    },
+    {
+      "id": "control-6",
+      "selector": "#brutus .slide:nth-child(3)",
+      "referenceRole": "control",
+      "purpose": "Inspect the current interface and both avatar portraits",
+      "appearsIn": "inspect-gallery"
+    },
+    {
+      "id": "control-7",
+      "selector": "#lightbox.open",
+      "referenceRole": "control",
+      "purpose": "Inspect the current interface and both avatar portraits",
+      "appearsIn": "inspect-gallery"
+    },
+    {
+      "id": "control-8",
+      "selector": "#lightbox .cap-text",
+      "referenceRole": "control",
+      "purpose": "Inspect the current interface and both avatar portraits",
+      "appearsIn": "inspect-gallery"
+    },
+    {
+      "id": "control-9",
+      "selector": ".lightbox-close",
+      "referenceRole": "control",
+      "purpose": "Inspect the current interface and both avatar portraits",
+      "appearsIn": "inspect-gallery"
+    },
+    {
+      "id": "control-10",
+      "selector": "#brutus a[href=\"#brutus-status\"]",
+      "referenceRole": "control",
+      "purpose": "Find development status and source"
+    },
+    {
+      "id": "control-11",
+      "selector": "#brutus-status",
+      "referenceRole": "control",
+      "purpose": "Find development status and source"
+    },
+    {
+      "id": "control-12",
+      "selector": "#brutus a[href=\"https://github.com/justinfowler925/brutus\"]",
+      "referenceRole": "control",
+      "purpose": "Find development status and source"
+    }
+  ],
+  "flows": [
+    {
+      "id": "inspect-gallery",
+      "userJob": "Inspect the current interface and both avatar portraits",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "#brutus .next"
+        },
+        {
+          "action": "text",
+          "selector": "#brutus [data-counter]",
+          "value": "2 / 3"
+        },
+        {
+          "action": "click",
+          "selector": "#brutus .next"
+        },
+        {
+          "action": "text",
+          "selector": "#brutus [data-counter]",
+          "value": "3 / 3"
+        },
+        {
+          "action": "press",
+          "selector": "#brutus .slide:nth-child(3)",
+          "value": "Enter"
+        },
+        {
+          "action": "visible",
+          "selector": "#lightbox.open"
+        },
+        {
+          "action": "text",
+          "selector": "#lightbox .cap-text",
+          "value": "Alicia"
+        },
+        {
+          "action": "press",
+          "selector": ".lightbox-close",
+          "value": "Escape"
+        },
+        {
+          "action": "hidden",
+          "selector": "#lightbox.open"
+        }
+      ]
+    },
+    {
+      "id": "read-status",
+      "userJob": "Find development status and source",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "#brutus a[href=\"#brutus-status\"]"
+        },
+        {
+          "action": "text",
+          "selector": "#brutus-status",
+          "value": "active development"
+        },
+        {
+          "action": "visible",
+          "selector": "#brutus a[href=\"https://github.com/justinfowler925/brutus\"]"
+        }
+      ]
+    }
+  ]
+}

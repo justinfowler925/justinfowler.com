@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "ready": "#brutus",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 1000
+    },
+    {
+      "width": 768,
+      "height": 1000
+    },
+    {
+      "width": 1280,
+      "height": 1000
+    },
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1920,
+      "height": 1000
+    }
+  ],
+  "content": [
+    {
+      "selector": "#brutus .slide:first-child .cap-text",
+      "text": "A longer caption explaining the current development interface, its source date, and the generated avatar portrait. A longer caption explaining the current development interface, its source date, and the generated avatar portrait. A longer caption explaining the current development interface, its source date, and the generated avatar portrait. "
+    }
+  ],
+  "missingMedia": [
+    "#brutus .slide img"
+  ],
+  "checks": [
+    {
+      "id": "page-overflow",
+      "type": "no-overflow",
+      "selector": "html"
+    },
+    {
+      "id": "gallery-visible",
+      "type": "visible",
+      "selector": "#brutus .slider"
+    },
+    {
+      "id": "status-visible",
+      "type": "visible",
+      "selector": "#brutus-status"
+    }
+  ]
+}
