@@ -4,7 +4,11 @@
   const video = reel.querySelector('video');
   const toggle = reel.querySelector('[data-reel-toggle]');
   const scene = reel.querySelector('[data-reel-scene]');
-  const clips = ['Ocean', 'Forest', 'Cabin'];
+  const clips = [
+    { name: 'Ocean', file: 'ocean' },
+    { name: 'River', file: 'river-loop' },
+    { name: 'Cabin', file: 'cabin-snow-loop' }
+  ];
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let index = 0;
   let visible = false;
@@ -17,10 +21,10 @@
     toggle.setAttribute('aria-label', `${pausedByUser ? 'Play' : 'Pause'} Hollywood video loop`);
   };
   const load = () => {
-    const name = clips[index];
-    video.poster = `/assets/hollywood/${name.toLowerCase()}.jpg`;
-    video.src = `/assets/hollywood/${name.toLowerCase()}.mp4`;
-    scene.textContent = name;
+    const clip = clips[index];
+    video.poster = `/assets/hollywood/${clip.file}.jpg`;
+    video.src = `/assets/hollywood/${clip.file}.mp4`;
+    scene.textContent = clip.name;
   };
   const sync = () => {
     label();
