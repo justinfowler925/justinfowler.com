@@ -5,7 +5,7 @@
   "verdict": "defects",
   "primaryTask": "Inspect current Brutus interface and portraits, understand development status, and reach public source.",
   "before": {
-    "artifact": "https://justinfowler.com/portfolio.html#brutus",
+    "artifact": "/tmp/brutus-portfolio-before.html",
     "screenshot": "/tmp/brutus-portfolio-before.png"
   },
   "productPrecedent": {

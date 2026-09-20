@@ -25,7 +25,7 @@
   ],
   "content": [
     {
-      "selector": "#brutus .cap-text",
+      "selector": "#brutus .slide:first-child .cap-text",
       "text": "A longer caption explaining the current development interface, its source date, and the generated avatar portrait. A longer caption explaining the current development interface, its source date, and the generated avatar portrait. A longer caption explaining the current development interface, its source date, and the generated avatar portrait. "
     }
   ],
