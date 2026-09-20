@@ -5,8 +5,10 @@
   "verdict": "defects",
   "primaryTask": "Inspect current Brutus interface and portraits, understand development status, and reach public source.",
   "before": {
-    "artifact": "/tmp/brutus-portfolio-before.html",
-    "screenshot": "/tmp/brutus-portfolio-before.png"
+    "artifact": "assets/brutus/august-interface.png",
+    "screenshot": "assets/brutus/august-interface.png",
+    "source": "https://justinfowler.com/portfolio.html#brutus",
+    "sourceCommit": "c841816"
   },
   "productPrecedent": {
     "name": "Portfolio project case study",
