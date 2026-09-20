@@ -225,6 +225,9 @@
 
 /* The final portfolio grid cell showcases Hollywood's published films. */
 .hollywood-reel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
   min-width: 0;
   min-height: 310px;
@@ -235,14 +238,11 @@
 .hollywood-reel video {
   display: block;
   width: 100%;
-  height: 100%;
-  position: absolute;
-  inset: 0;
-  object-fit: cover;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
 }
 .hollywood-reel figcaption {
-  position: absolute;
-  inset: auto 0 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
