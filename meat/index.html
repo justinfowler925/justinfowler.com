@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Private note — Justin Fowler</title>
+<meta name="robots" content="noindex,nofollow,noarchive" />
+<meta name="description" content="A private note. The address it was sent to is the only one that opens it." />
+<link rel="icon" href="/favicon.svg" />
+<link rel="canonical" href="https://meat.justinfowler.com/" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/tokens.css" />
+<style>
+  [hidden] { display: none !important; }
+  html { color-scheme: dark; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.5; min-height: 100vh; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  a { color: inherit; }
+  .skip { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .skip:focus { width: auto; height: auto; clip: auto; left: 16px; top: 8px; padding: 8px 16px; background: var(--accent); color: var(--ink); z-index: 9; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+  @media (min-width: 768px) { .wrap { padding: 0 40px; } }
+
+  .mark { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--mute); text-decoration: none; }
+  .mark .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; }
+
+  .lock { min-height: 100vh; display: grid; align-items: center; padding: 48px 0; }
+  .lock-card { max-width: 440px; }
+  .lock h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(40px, 7vw, 64px); line-height: 0.95; letter-spacing: -0.03em; margin: 16px 0; }
+  .lock h1 em { font-style: italic; color: var(--accent-2); }
+  .lock p { font-family: var(--serif); font-size: 18px; line-height: 1.55; color: var(--paper-2); }
+  .lock form { margin-top: 28px; display: grid; gap: 10px; }
+  label { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--mute); }
+  input[type="email"] { width: 100%; background: var(--ink-2); color: var(--paper); border: 1px solid var(--ink-3); border-radius: 8px; padding: 14px 16px; font: 16px var(--sans); }
+  input[type="email"]:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; background: var(--accent); color: var(--ink); border: 0; border-radius: 999px; padding: 14px 20px; cursor: pointer; }
+  button:hover { background: var(--accent-2); }
+  button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .err { min-height: 1.4em; font-family: var(--sans); font-size: 14px; color: var(--crit); }
+  .fine { margin-top: 18px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute-2); }
+
+  .stamp { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); }
+  header.hero { padding: 28px 0 48px; }
+  header.hero h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(44px, 7vw, 76px); line-height: 0.96; letter-spacing: -0.035em; margin: 18px 0 20px; max-width: 16ch; }
+  header.hero h1 em { font-style: italic; color: var(--accent-2); }
+  .lede { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); line-height: 1.4; color: var(--paper-2); max-width: 38em; }
+  .lede strong { color: var(--paper); font-weight: 500; }
+
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--ink-3); border: 1px solid var(--ink-3); margin-top: 36px; }
+  @media (min-width: 800px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+  .stat { background: var(--ink); padding: 18px 16px 20px; }
+  .stat b { display: block; font-family: var(--serif); font-weight: 400; font-size: 28px; letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
+  .stat span { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--mute); }
+
+  section { padding: 56px 0; border-top: 1px solid var(--ink-3); }
+  .kicker { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 10px; }
+  h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(30px, 4vw, 42px); letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 18px; }
+  h2 em { font-style: italic; color: var(--mute); }
+  .prose { max-width: 68ch; display: grid; gap: 16px; }
+  .prose p, .step p, td { font-family: var(--serif); font-size: 17px; line-height: 1.65; color: var(--paper-2); }
+  .prose strong, td strong { color: var(--paper); font-weight: 600; }
+  .prose em { font-style: italic; color: var(--accent-2); }
+
+  .steps { display: grid; gap: 12px; margin-top: 28px; }
+  .step { display: grid; grid-template-columns: 42px 1fr; gap: 14px; padding: 18px; background: var(--ink-2); border: 1px solid var(--ink-3); }
+  .step .n { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.12em; padding-top: 4px; }
+  .step h3 { font-family: var(--serif); font-weight: 400; font-size: 20px; margin-bottom: 6px; }
+
+  .split { display: grid; gap: 12px; margin-top: 28px; }
+  @media (min-width: 760px) { .split { grid-template-columns: 1fr 1fr; } }
+  .panel { padding: 22px; background: var(--ink-2); border: 1px solid var(--ink-3); }
+  .panel h3 { font-family: var(--serif); font-weight: 400; font-size: 22px; margin-bottom: 10px; }
+  .panel p { font-family: var(--serif); font-size: 16px; line-height: 1.6; color: var(--paper-2); }
+
+  .table-wrap { overflow-x: auto; margin-top: 28px; border: 1px solid var(--ink-3); }
+  table { width: 100%; border-collapse: collapse; min-width: 640px; }
+  th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--ink-3); }
+  th { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); background: var(--ink-2); }
+  tr:last-child td { border-bottom: 0; }
+  caption { caption-side: bottom; text-align: left; padding: 10px 2px 0; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--mute); }
+
+  .call { margin-top: 28px; padding: 22px 22px 22px 18px; border-left: 2px solid var(--accent); background: var(--ink-2); }
+  .call strong { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; font-weight: 500; }
+  .call p { font-family: var(--serif); font-size: 18px; line-height: 1.55; color: var(--paper-2); }
+
+  footer { padding: 28px 0 48px; border-top: 1px solid var(--ink-3); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#brief">Skip to the note</a>
+
+<div class="lock" id="lock">
+  <div class="wrap">
+    <a class="mark" href="https://justinfowler.com/"><span class="dot"></span>Justin Fowler</a>
+    <div class="lock-card">
+      <h1>This note was sent to <em>one address.</em></h1>
+      <p>Type that address to open it. Any other address stays out.</p>
+      <form id="gate">
+        <label for="email">Address this note was sent to</label>
+        <input id="email" name="email" type="email" autocomplete="email" required spellcheck="false" />
+        <p class="err" id="err" role="alert"></p>
+        <button type="submit">Open the note</button>
+      </form>
+      <p class="fine">Courtesy lock. Not a security system.</p>
+    </div>
+  </div>
+</div>
+
+<article id="brief" hidden>
+  <header class="hero">
+    <div class="wrap">
+      <p class="stamp">Private brief · 18 September 2026</p>
+      <h1>Win the protein. <em>Then broker the rest.</em></h1>
+      <p class="lede">Building an InsideTrack-style desk is feasible as the door into an account. It is not feasible as the business. <strong>The money is the protein you place after the account trusts the file.</strong></p>
+      <div class="stats">
+        <div class="stat"><b>Door</b><span>Software, not the company</span></div>
+        <div class="stat"><b>$1–10M</b><span>Whole InsideTrack revenue band</span></div>
+        <div class="stat"><b>150–400</b><span>Buying groups worth a meeting</span></div>
+        <div class="stat"><b>~$100k</b><span>Gross on one placed account</span></div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <p class="kicker">01 — The call</p>
+      <h2>Feasible, if the sequence is right.</h2>
+      <div class="prose">
+        <p>The concept is: give a multi-unit operator a contract desk for free, win the relationship, then broker the supply they are already buying from someone else. That motion works in foodservice. Brokers have always been paid to place product. What is new is using the reconciliation itself as the reason to get in the room.</p>
+        <p>It fails if you build the software first and go hunting for accounts to “put on the platform.” Purchasing directors do not adopt a vendor portal from a stranger, and they will not authorize a distributor feed for someone who is about to shop their volume. The feed is the product. Without it you have a slide.</p>
+        <p>The sequence that holds is the reverse. You already sell, or can sell, one protein program. The desk proves that program: cases that qualified and were not paid, locations off the agreement, invoice price versus the contracted price. Once those three numbers match their distributor report, you ask to broker the other protein on the order guide. Disclosed fee. Their purchasing lead in the room. You still do not become their spend system.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="kicker">02 — Why a desk opens a door</p>
+      <h2>They already pay someone to count cases you ship.</h2>
+      <div class="prose">
+        <p>InsideTrack, owned by Buyers Edge since about 2011, is an operator-side desk. It loads agreements, matches purchases, flags gaps and overcharges, runs renewals, and files customer-direct rebates. Sister brand Dining Alliance already gives operators rebate cash-back at no membership fee and keeps a portion of the manufacturer rebate. InsideTrack is the paid layer on top of that: compliance, recovery, renewals, benchmarking.</p>
+        <p>There is no public price card, no seat license, and no free trial. It is sold by quote. A directory puts the company in a $1–10 million revenue band, with a $6.2 million point estimate and about 33 people. That is not a filing. It is enough to know you are not late to a software category. You are late to “free rebate admin,” which Buyers Edge already gives away, and early only to “the company that sells the meat will also prove the file.”</p>
+      </div>
+      <div class="split">
+        <div class="panel">
+          <h3>What they resent</h3>
+          <p>A third party between the agreement and the check. Specialists who send the renewal request, submit the price to the distributor, and chase the short-pay. The license, if it is tens of thousands a year, is real. It is not why a protein bid moves. Missed cases are.</p>
+        </div>
+        <div class="panel">
+          <h3>What you can replace</h3>
+          <p>The proof on your own items. Not grocery, not supplies, not their peer-price benchmark. Their published volume claims do not even agree with each other: $15 billion, $44 billion, $70 billion, and a parent claim past $100 billion. You have your shipments. Use those.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="kicker">03 — Where the motion breaks</p>
+      <h2>You cannot audit them and sell them at the same time, in secret.</h2>
+      <div class="prose">
+        <p>InsideTrack is trusted because it does not sell the beef. The moment your “missed cases” report is also a pitch, a good purchasing director marks it down. The fix is not a better dashboard. It is a disclosed role: you sell a program, you show the file on that program, and any brokerage beyond it is a separate ask with a fee they can see.</p>
+        <p>Do not collect or remit other manufacturers’ rebate money. That is a trust account, and Dining Alliance already does it. Do not promise all-category spend. Do not give the desk away on volume you already hold. That is a margin cut. Give it on volume that is new or about to leave, and only above a book you can actually service. A wrong number on the first screen costs the account. A missed delivery costs it faster.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="kicker">04 — Who this is for</p>
+      <h2>A purchasing lead with a protein bid and a small team.</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>Fit is about the buying office, not the cuisine.</caption>
+          <thead>
+            <tr><th>Account</th><th>Why they listen</th><th>Walk away</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Regional chain, about 20–250 units, protein on the plate</strong></td>
+              <td>Large enough to have contracts. Small enough that a third-party desk feels like overhead. Steak, barbecue, casual, chicken that still buys protein rather than a commissary.</td>
+              <td>No corporate purchasing, or protein is a pure bid with no spec.</td>
+            </tr>
+            <tr>
+              <td><strong>Hotel, casino, campus, healthcare with an F&amp;B desk</strong></td>
+              <td>InsideTrack names these verticals. Same proof, longer cycle.</td>
+              <td>A GPO already administers the file and will not share it.</td>
+            </tr>
+            <tr>
+              <td><strong>Under about 10 units</strong></td>
+              <td>They already get free GPO cash-back. The feed costs more than the cases.</td>
+              <td>You are pitching software instead of a drop size.</td>
+            </tr>
+            <tr>
+              <td><strong>The largest national chains</strong></td>
+              <td>They buy protein. They will not adopt a supplier screen as the record.</td>
+              <td>The ask is to replace BirchStreet, iTrade, or an internal audit team.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="kicker">05 — Market size</p>
+      <h2>There is no software TAM worth entering. There is a protein book.</h2>
+      <div class="prose">
+        <p>Technomic’s 15 April 2026 release put the 2025 Top 500 chains at <strong>$450 billion</strong> in sales and more than <strong>240,000</strong> locations. That is the ceiling of chain restaurant sales. It is not protein, and it is not your customer list. The top of that list will not take this door.</p>
+        <p>Nobody publishes a current census of chains with 20–250 units. A 2013 Chain Store Guide is too old to use as dollars. A commercial directory of multi-concept operators, read 18 September 2026, counts <strong>225</strong> companies at 20–49 units, <strong>92</strong> at 50–99, and <strong>132</strong> at 100–499. That file misses single-concept regional chains, so it is a floor on buying groups, not a market. The 100–250 slice cannot be pulled out of the public 100–499 row.</p>
+        <p>Planning judgment, labeled as judgment: a few hundred groups will take a meeting. Cut again for concepts where protein is actually managed, and the list worth working is on the order of <strong>150 to 400</strong>. Year one is not that list. Year one is 10 to 20 conversations, 3 to 5 distributor feeds, and 1 or 2 brokerage awards.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <caption>Three different “markets.” Only the last one is a plan.</caption>
+          <thead>
+            <tr><th>Layer</th><th>Size</th><th>Use it for</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Chain restaurant sales</strong></td>
+              <td>$450 billion, Top 500, 2025</td>
+              <td>Context. Not a target.</td>
+            </tr>
+            <tr>
+              <td><strong>This exact software</strong></td>
+              <td>$1–10 million for the incumbent company</td>
+              <td>Do not raise, hire, or price against it.</td>
+            </tr>
+            <tr>
+              <td><strong>Protein you can place</strong></td>
+              <td>About $100k gross brokerage per won account, on the assumptions below. Five accounts is about $540k. One hundred fifty accounts at that same rate is about $16 million, and that figure is a ceiling of the model, not a forecast.</td>
+              <td>Whether one desk pays for itself, and how many accounts you need before this is a business.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="kicker">06 — One account, in dollars</p>
+      <h2>The desk is cheap. The placement is the bet.</h2>
+      <div class="prose">
+        <p>Every figure below is an assumption you can change. None of it is a market study. Food brokerage often lands around 3 to 5 percent of what you place, or a per-case fee. Four percent is the middle of that range, and it has to be said out loud.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <caption>Planning model for one 40-unit protein account. Change the inputs before you believe the output.</caption>
+          <thead>
+            <tr><th>Input</th><th>Value used</th><th>Result</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Units</td><td>40</td><td>Middle of the ICP, not a steakhouse giant</td></tr>
+            <tr><td>Sales per unit</td><td>$3 million</td><td>$120 million system sales. Casual, not fine dining</td></tr>
+            <tr><td>Food purchases</td><td>30% of sales</td><td>$36 million purchased food</td></tr>
+            <tr><td>Protein you could place</td><td>30% of food</td><td>$10.8 million. Pizza and coffee are not in this row</td></tr>
+            <tr><td>Share you actually place in year one</td><td>25%</td><td>$2.7 million placed. You do not get the whole book</td></tr>
+            <tr><td>Brokerage, disclosed</td><td>4%</td><td><strong>$108,000 gross</strong></td></tr>
+            <tr><td>Cost to run the desk for that account</td><td>$25,000</td><td>Covered if the placement happens. Fatal if you only give away software</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="call">
+        <strong>Read the $108,000 correctly</strong>
+        <p>It is not software revenue. It is brokerage on protein you placed, at a fee the operator already knows. Five accounts at this shape are about $540,000 gross. That is a book. One hundred fifty accounts at this shape are about $16 million, and you will not get one hundred fifty. Plan the company off the five, not the one hundred fifty.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="kicker">07 — What to build</p>
+      <h2>A protein file. Not an InsideTrack clone.</h2>
+      <div class="prose">
+        <p>The hard part is the crosswalk from the distributor’s item code to yours, and an exceptions queue for subs, splits, and catch weight. The screens are ordinary. A useful pilot is one chain, one broadliner, and your own SKU file. Four to six months with one person who has run national-account deviations, one data person, and one developer. Do not staff a rebate call center.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="n">01</span><div><h3>Your ledger</h3><p>Item, distributor, ship-to, deviation, rebate rate, dates. Your shipments and bill-backs beside them.</p></div></div>
+        <div class="step"><span class="n">02</span><div><h3>One feed</h3><p>The operator authorizes one distributor velocity file. Unmatched lines sit in a queue. If the file does not tie to their report, do not show the screen.</p></div></div>
+        <div class="step"><span class="n">03</span><div><h3>Three reports</h3><p>Qualifying cases not paid. Locations off the agreement. Invoiced price versus contracted price. Your items only.</p></div></div>
+        <div class="step"><span class="n">04</span><div><h3>Then the ask</h3><p>Other protein on that order guide, brokered at a fee they can see. You do not send renewal requests to other manufacturers, and you do not hold their money.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="kicker">08 — How it is sold</p>
+      <h2>The account manager sells protein. The desk stays behind.</h2>
+      <div class="steps">
+        <div class="step"><span class="n">01</span><div><h3>Fifteen names</h3><p>25 to 150 units. A protein bid inside two quarters. Already a customer, or a loss you can explain. Each name has a purchasing contact and a distributor.</p></div></div>
+        <div class="step"><span class="n">02</span><div><h3>Ninety days of your own file, before any demo</h3><p>Shipments and deviations. Cases, not a slide.</p></div></div>
+        <div class="step"><span class="n">03</span><div><h3>A purchasing review, not a software meeting</h3><p>Show the three numbers. Ask them to authorize one feed. Distributor reps will not sell this. It audits their invoices.</p></div></div>
+        <div class="step"><span class="n">04</span><div><h3>The award is the contract</h3><p>Zero license. No seats. No per-location fee. The portal is a term of the protein program, not a signature of its own. Brokerage beyond that program is a second conversation.</p></div></div>
+      </div>
+      <div class="call">
+        <strong>What not to say</strong>
+        <p>Do not say you replace InsideTrack. Do not say the desk is free for every operator. Do not quote a price tier they do not publish. Do not claim a $40 billion benchmark. Say: we will prove our program, at no license, and if the file is right we can talk about the rest of the protein.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="kicker">Sources</p>
+      <div class="prose">
+        <p>InsideTrack contract process and modules: insidetrackdata.com, read 18 September 2026. No price page. Dining Alliance: membership free, platform keeps a portion of manufacturer rebates. Buyers Edge acquisition of InsideTrack, about 2011, and the April 2024 preferred-equity round: public company profile, not a filing. Revenue and headcount: third-party directory, $1–10 million band. Technomic press release, 15 April 2026, for 2025 Top 500 sales and locations. Multi-concept unit bands: RestaurantData.com directory, retrieved 18 September 2026, multi-concept operators only. The 150–400 group range, the 30 percent food and protein shares, the 25 percent placement, and the 4 percent fee are planning assumptions, not measured industry totals.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;width:100%;max-width:920px;">
+      <a class="mark" href="https://justinfowler.com/"><span class="dot"></span>Justin Fowler</a>
+      <span>Not for circulation</span>
+    </div>
+  </footer>
+</article>
+
+<script type="module">
+  import { ALLOWED_EMAIL, unlockDecision } from "/protein-broker-gate.js";
+
+  const lock = document.getElementById("lock");
+  const brief = document.getElementById("brief");
+  const form = document.getElementById("gate");
+  const input = document.getElementById("email");
+  const err = document.getElementById("err");
+  const storageKey = "meat-brief:" + ALLOWED_EMAIL;
+
+  const copy = {
+    empty: "Enter the address this note was sent to.",
+    mismatch: "That is not the address this note was sent to."
+  };
+
+  function openNote() {
+    lock.hidden = true;
+    brief.hidden = false;
+    document.title = "Win the protein — Justin Fowler";
+    sessionStorage.setItem(storageKey, "1");
+    const heading = brief.querySelector("h1");
+    if (heading) {
+      heading.setAttribute("tabindex", "-1");
+      heading.focus();
+    }
+  }
+
+  if (sessionStorage.getItem(storageKey) === "1") openNote();
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const decision = unlockDecision(input.value);
+    if (decision === "ok") {
+      err.textContent = "";
+      input.removeAttribute("aria-invalid");
+      openNote();
+      return;
+    }
+    err.textContent = copy[decision];
+    input.setAttribute("aria-invalid", "true");
+    input.focus();
+  });
+</script>
+</body>
+</html>
