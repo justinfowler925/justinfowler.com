@@ -70,4 +70,4 @@ Scout has adapters for planning a write to an existing Salesforce or HubSpot fie
 
 ## Maintain this guide
 
-Edit this README and submit a pull request. Keep capability claims tied to observed behavior. Do not add private records, account identifiers, access tokens or internal endpoint addresses. The public page and Nucleus guide packet should be updated together when these instructions change.
+The repository is private and requires an invitation. The usage guide on justinfowler.com remains public. If you have repository access, edit this README and submit a pull request. Keep capability claims tied to observed behavior. Do not add private records, account identifiers, access tokens or internal endpoint addresses. The public page and Nucleus guide packet should be updated together when these instructions change.
