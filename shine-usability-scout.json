@@ -27,6 +27,12 @@
       "referenceRole": "content",
       "purpose": "Use Scout instructions and observe the result",
       "appearsIn": "scout-guide"
+    },
+    {
+      "id": "prompt-text",
+      "selector": "#prompt-1",
+      "referenceRole": "content",
+      "purpose": "Read a first research request"
     }
   ],
   "flows": [
@@ -36,17 +42,16 @@
       "steps": [
         {
           "action": "click",
-          "selector": "a[href=\"#your-first-request\"]",
-          "value": ""
+          "selector": "a[href=\"#your-first-request\"]"
         },
         {
-          "action": "click",
-          "selector": "[data-copy=\"prompt-1\"]"
+          "action": "visible",
+          "selector": "#prompt-1"
         },
         {
           "action": "text",
-          "selector": "[data-copy=\"prompt-1\"] + [data-copy-status]",
-          "value": "Copied."
+          "selector": "#prompt-1",
+          "value": "prepare a strike package"
         }
       ]
     }
