@@ -13,6 +13,20 @@
       "selector": "[data-copy=\"prompt-1\"]",
       "referenceRole": "action",
       "purpose": "Copy a first request"
+    },
+    {
+      "id": "flow-object-0",
+      "selector": "a[href=\"#your-first-request\"]",
+      "referenceRole": "action",
+      "purpose": "Use Scout instructions and observe the result",
+      "appearsIn": "scout-guide"
+    },
+    {
+      "id": "flow-object-2",
+      "selector": "[data-copy=\"prompt-1\"] + [data-copy-status]",
+      "referenceRole": "content",
+      "purpose": "Use Scout instructions and observe the result",
+      "appearsIn": "scout-guide"
     }
   ],
   "flows": [
