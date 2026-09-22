@@ -160,6 +160,22 @@
         "MCP"
       ],
       "publicPage": "/writing/hollywood.html"
+    },
+    {
+      "slug": "scout",
+      "name": "Scout",
+      "kind": "project",
+      "publish": true,
+      "repoVisibility": "public",
+      "summary": "Background research and source ingestion with cited briefs and reusable findings. Public usage guide for a private service.",
+      "proof": "Preview \u00b7 documentation repository \u00b7 owner-managed access",
+      "repo": "https://github.com/justinfowler925/scout",
+      "publicPage": "/writing/scout.html",
+      "tags": [
+        "Research",
+        "Data ingestion",
+        "MCP"
+      ]
     }
   ]
 }
