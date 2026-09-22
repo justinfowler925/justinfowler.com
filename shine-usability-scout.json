@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "cite": "shadcn-blog",
+  "objects": [
+    {
+      "id": "guide",
+      "selector": "#guide",
+      "referenceRole": "content",
+      "purpose": "Understand Scout and prepare a request"
+    },
+    {
+      "id": "request",
+      "selector": "[data-copy=\"prompt-1\"]",
+      "referenceRole": "action",
+      "purpose": "Copy a first request"
+    }
+  ],
+  "flows": [
+    {
+      "id": "scout-guide",
+      "userJob": "Find the Scout guide and prepare a bounded request",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "a[href=\"#your-first-request\"]",
+          "value": ""
+        },
+        {
+          "action": "click",
+          "selector": "[data-copy=\"prompt-1\"]"
+        },
+        {
+          "action": "text",
+          "selector": "[data-copy=\"prompt-1\"] + [data-copy-status]",
+          "value": "Copied."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "job": "Publish an accurate Scout guide and company-tool entry",
+  "primaryTask": "Find Scout, understand access, and prepare a bounded first research request",
+  "before": {
+    "artifact": "http://localhost:3196/writing/fowler-brain-for-sales.html",
+    "screenshot": "/tmp/scout-before-portfolio.png"
+  },
+  "productReference": "writing/fowler-brain-for-sales.html",
+  "defects": [
+    {
+      "id": "scout-missing",
+      "bucket": "completeness",
+      "severity": "major",
+      "problem": "No public Scout guide exists; the existing SLED guide provides the closest usage-guide structure.",
+      "evidence": "Repository inventory, catalog source and rendered sibling screenshot",
+      "expectedEffect": "A discoverable Scout guide with real access requirements and example requests",
+      "assertions": [
+        "flow:scout-guide"
+      ]
+    }
+  ]
+}
