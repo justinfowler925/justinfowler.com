@@ -13,7 +13,7 @@
       "publish": true,
       "repoVisibility": "public",
       "summary": "A design director for coding agents: established product patterns, shared table implementations, and browser tests of real outcomes.",
-      "proof": "Release 7eb927c \u00b7 executable media/layout proof \u00b7 verified distribution required",
+      "proof": "Release 1189711 \u00b7 executable media/layout proof \u00b7 verified distribution required",
       "repo": "https://github.com/justinfowler925/shine",
       "publicPage": "/writing/shine.html",
       "sourceFile": "https://github.com/justinfowler925/shine/blob/main/skill/SKILL.md",
@@ -22,7 +22,7 @@
         "Agent UX",
         "Verification"
       ],
-      "sourceRevision": "7eb927c22d77ea6f7539421928b283c9b7797e74",
+      "sourceRevision": "1189711c1537efb312c85ffed52f27599d536f4e",
       "skillSha256": "8a85ac0445338040975e202486c6cccccc6842cbf7b4c369be4700d76257ceb7"
     },
     {
