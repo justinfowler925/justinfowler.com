@@ -62,7 +62,7 @@ End with a numbered source register containing:
 
 `[1] Page or document title — Publisher/author, publication date or n.d.; accessed YYYY-MM-DD. Direct URL.`
 
-For PDFs, recordings, long transcripts, or filings, add page, timestamp, section, or paragraph detail when available. Preserve full URLs as hyperlinks in `.docx` output.
+For PDFs, recordings, long transcripts, or filings, add page, timestamp, section, or paragraph detail when available. Preserve full URLs as hyperlinks in PDF output and in any `.docx` or other editable edition.
 
 For account-visible sources, add “LinkedIn — account-visible; recipient access may be required.” For supplied exports or excerpts without a permalink, cite a descriptive source identifier and item location, with the supplied date. Never invent a URL or call restricted material public. Include only minimal excerpts needed to support the brief.
 
