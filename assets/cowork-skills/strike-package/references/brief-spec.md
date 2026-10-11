@@ -90,4 +90,4 @@ Match the examples’ professional briefing style without copying their person-s
 - consistent header/footer and page numbering; and
 - working clickable citations plus a complete source register.
 
-Favor legibility over density. Prevent split table headers, orphaned headings, clipped URLs, and unreadably small citation text. Visually inspect the rendered document before delivery.
+Favor legibility over density. Prevent split table headers, orphaned headings, clipped URLs, and unreadably small citation text. Deliver a PDF by default; produce `.docx` or another editable format as well when requested. Visually inspect the rendered PDF pages before delivery.

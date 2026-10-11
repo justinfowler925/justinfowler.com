@@ -22,9 +22,9 @@
       "name": "strike-package",
       "zip": "strike-package-cowork.zip",
       "files": 7,
-      "bytes": 13659,
-      "sha256": "88a8c42f14962c8f540eab5e27e93f9864254a7e1f77c5eb8d4b1834efe0b973",
-      "sourceRevision": "db00bfea81c9adb60535164b78be0c3b0c5a5551"
+      "bytes": 13974,
+      "sha256": "1a7d30f1795951583835a074ae39b8d3a570e293c37e1ccfe0cacb0a9ec060d9",
+      "sourceRevision": "3531809b71ccf1207f88c3e5c1600a562ff304a3"
     }
   ]
 }

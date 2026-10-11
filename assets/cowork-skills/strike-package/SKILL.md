@@ -57,7 +57,7 @@ Read [brief-spec.md](references/brief-spec.md) before drafting or rendering the 
 
 When a worked example would help interpret the fact/assessment/question distinction, read [example-tim-sweeney.md](references/example-tim-sweeney.md). Treat its September 3, 2026 research cutoff and illustrative meeting context as fixed example metadata, not reusable facts about future assignments.
 
-Default to a polished `.docx` when the user asks for a strike package without naming a format. Make source citations clickable in the document. Also preserve a source register in the document so evidence remains auditable outside the chat.
+Default to a polished PDF when the user asks for a strike package without naming a format. When the user asks for `.docx` or another editable format, deliver that format as well as the PDF. A reliable route is to build the `.docx`, then convert it to PDF with Word, LibreOffice, or a direct PDF library. Make source citations clickable in the PDF and in any editable edition. Also preserve a source register in the document so evidence remains auditable outside the chat.
 
 Keep factual and analytical language visibly separate. Cite every factual paragraph, bullet, and material table row at the point of use with a numbered hyperlink such as `[3]`. A final source list alone is not enough. Source links must go to the supporting page, filing, document, video, or transcript—not a search-results page.
 
@@ -71,7 +71,7 @@ Before delivery:
 - verify that links resolve and that source titles, publishers, and dates are accurate;
 - distinguish stale, conflicting, client-provided, and unverified information;
 - ensure recommendations are proportional to the evidence and meeting objective;
-- render and visually inspect the final document for readable tables, headings, page breaks, headers/footers, and clickable citations; and
+- render the final PDF and visually inspect its pages for readable tables, headings, page breaks, headers/footers, and clickable citations, and confirm any requested editable edition matches it; and
 - state the research cutoff date and any important evidence gaps.
 
 If a reliable brief cannot be produced from available authorized evidence, return a short gap report rather than inventing a complete package.

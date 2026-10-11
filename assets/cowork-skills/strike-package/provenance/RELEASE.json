@@ -1,7 +1,7 @@
 {
   "source": "https://github.com/justinfowler925/strike-package",
-  "revision": "db00bfea81c9adb60535164b78be0c3b0c5a5551",
-  "sourceArchiveSha256": "0590cf4f4feb0aa42874744408fc35daf062c6312674622d481c9daaccf1be2f",
-  "originalSkillSha256": "71fc80085126864e8828231196cd8f19b4b2f68a79d53e3b17bf427f45fa1c87",
-  "adaptation": "Unchanged skill and references"
+  "revision": "3531809b71ccf1207f88c3e5c1600a562ff304a3",
+  "sourceArchiveSha256": "311fd285671e12ffccbe3c2d9dc054289cf1026113551b81fdff6bb16270b6f1",
+  "originalSkillSha256": "2b23212ae5a81b2247d4be5d48ec162506ba51fe876997d0c560f8af5f1ae748",
+  "adaptation": "Skill and references match upstream; PDF is now the default deliverable (with .docx or other editable formats produced as well when requested, and rendered PDF pages inspected in the quality gate), replacing the earlier .docx default"
 }
