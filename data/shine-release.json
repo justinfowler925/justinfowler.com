@@ -1,6 +1,10 @@
 {
-  "sourceRevision": "dba35c8a4f9b24dfdf5dfb50c890090a15dcc5fb",
-  "skillSha256": "d629003877190ab1ba2811a50b86eb87aeee5befda2656fc4900cd873ed77c03",
+  "sourceRevision": "a25f6f1c405f10a6a26a5535dec46f7aea109d21",
+  "skillSha256": "20970d245c706fcedadf71bff4c276cce2da13319068ed133c1cc3de17b3f4a3",
   "skill": "shine",
-  "archiveSha256": "e0062f3acfdcc45d344e757db29ceb7e164395d1f3f757ef0f1daf0086729c8a"
+  "archiveSha256": "5aea4dbd10fb09266ea9d9b1510f6e7ecfe591de1b7640794496e9628640dc11",
+  "distribution": {
+    "url": "https://github.com/justinfowler925/shine/releases/download/consumer-a25f6f1c405f10a6a26a5535dec46f7aea109d21/shine.zip",
+    "bytes": 193643684
+  }
 }
