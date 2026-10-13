@@ -1,0 +1,135 @@
+{
+  "test_date": "2026-10-12",
+  "files": [
+    {
+      "file": "baseline-crop.jpg",
+      "bytes": 27017,
+      "sha256": "92e62ff38a986c56f7318f5c36c56044086183f722c12b9d4385c73ffb2df0f6"
+    },
+    {
+      "file": "baseline-crop.mp4",
+      "bytes": 599100,
+      "sha256": "783b4078467f9e1879746f5e7ca96b165b1957beeeba483bf5d4258979fe2913"
+    },
+    {
+      "file": "baseline.jpg",
+      "bytes": 22470,
+      "sha256": "049404506d5f400bb640fabdecfc5ac5ba68d0f71c9a55dd3d2fd2ec7247350b"
+    },
+    {
+      "file": "baseline.mp4",
+      "bytes": 12800510,
+      "sha256": "dda9a1faa9a551bfc06d322f6416b3ef64ed5b4b9258beb0764c8077fa102b56"
+    },
+    {
+      "file": "dubit-promptlocked.jpg",
+      "bytes": 16621,
+      "sha256": "87ecbb0da69d6fb47fa236937ef2adc6fc60d2a3779efed9995ce3647d0b48c3"
+    },
+    {
+      "file": "dubit-promptlocked.mp4",
+      "bytes": 351079,
+      "sha256": "4042d48b1d8ca2dc76ebea5d6bbfd846f117eeceaac14bd964b307119cab7229"
+    },
+    {
+      "file": "dubit-raw-audition.wav",
+      "bytes": 385038,
+      "sha256": "1ffca585ebd4061ae046aa0183c86fa0b8d11fb5c4e3c1e741cff12bce7f509c"
+    },
+    {
+      "file": "genie-audition.wav",
+      "bytes": 1577270,
+      "sha256": "e12c8d20b8fb6abd6cfbfb64554fbf5f054596b51d5f28ab7a1568acc5cfa0c5"
+    },
+    {
+      "file": "latentsync-speech.jpg",
+      "bytes": 22037,
+      "sha256": "5a899ca5643d8764793223379e6d3d8c394ad0c9fe448dfad5c0c9f559188ae1"
+    },
+    {
+      "file": "latentsync-speech.mp4",
+      "bytes": 272963,
+      "sha256": "277ea543c26db7a861b3ba3d8962fe98c1c00bb3188d52e00fb831a59b8b9d00"
+    },
+    {
+      "file": "latentsync.jpg",
+      "bytes": 21683,
+      "sha256": "ca079db8ffb9d60471ef48d5d7d244fcf57ffb32e4998c6e5aad03af634edd44"
+    },
+    {
+      "file": "latentsync.mp4",
+      "bytes": 308423,
+      "sha256": "9a3cc083408c37696c87bdd7887aa9b5c43075f3c7fbcbb1686c757b7e5ebc41"
+    },
+    {
+      "file": "liveportrait.jpg",
+      "bytes": 22686,
+      "sha256": "3683cc5c760f8e654e617129a2e81c4023f498617ffea9f2aeb4bf2ed13e0557"
+    },
+    {
+      "file": "liveportrait.mp4",
+      "bytes": 231409,
+      "sha256": "0234a8ba0a05ebd53d939cd33e21de8efff2f954d3598452f4b7a86c8ca6cbac"
+    },
+    {
+      "file": "ltx-a2v.jpg",
+      "bytes": 16829,
+      "sha256": "4cec5fc2f678147c2a15f5e84df855fee1471afeeead28a175d291f40d6cbe94"
+    },
+    {
+      "file": "ltx-a2v.mp4",
+      "bytes": 311425,
+      "sha256": "dbd59133f5dd18e0fef90dcd79927367bf48cd81b2d618f8b9ed44fa9fe266d8"
+    },
+    {
+      "file": "maria-audition.wav",
+      "bytes": 1287922,
+      "sha256": "575e80a2211192149cad9a9780756999ee9233b08510ea411861b01209b879f6"
+    },
+    {
+      "file": "musetalk-speech.jpg",
+      "bytes": 30987,
+      "sha256": "38d20fd76f43bc2efdba7bda31ab0ac69c7ed713afb53131d04b8c3e726c32fd"
+    },
+    {
+      "file": "musetalk-speech.mp4",
+      "bytes": 306925,
+      "sha256": "b38716ad62216f29cca28deaafd057443ad25616a9085ea188403bf95f427f1d"
+    },
+    {
+      "file": "poster.jpg",
+      "bytes": 30987,
+      "sha256": "38d20fd76f43bc2efdba7bda31ab0ac69c7ed713afb53131d04b8c3e726c32fd"
+    },
+    {
+      "file": "proxy.jpg",
+      "bytes": 7079,
+      "sha256": "c73079eb5cd90a110b02e43dd759b1595e31579c3fe26577b3a2970f425f4ade"
+    },
+    {
+      "file": "proxy.mp4",
+      "bytes": 94057,
+      "sha256": "ee21fabd57829c93dc35e695b2f51fff414853f39cfd546dfd4de1408fed4269"
+    },
+    {
+      "file": "results.json",
+      "bytes": 14738,
+      "sha256": "06b46bcad8d63690574fc2773d0e2f8e4d5cf9c1490639913a030d3bcf95f7ab"
+    },
+    {
+      "file": "rife.jpg",
+      "bytes": 54703,
+      "sha256": "4d15cab0ee2771160c160befbbdf05db8dda6d3ac45f1402caa7341da65bf260"
+    },
+    {
+      "file": "rife.mp4",
+      "bytes": 255275,
+      "sha256": "64c6f17fdfc4eb1aae54bf09f55299a33b9a3e50e11da6074f4b7ca3e38d05c1"
+    },
+    {
+      "file": "seedvr-comparison.jpg",
+      "bytes": 111913,
+      "sha256": "889639089a9cbfecdc144b95c3a980146ea646ae4e3b4b3edf29cb68ebe49807"
+    }
+  ]
+}

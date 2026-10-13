@@ -1,0 +1,222 @@
+{
+  "intro": "I want Hollywood to make an entire film locally, with the same characters, voices and lighting from beginning to end. This is the current film, the alternatives tested against it, and the gaps I need help closing.",
+  "baseline_url": "/assets/hollywood/review-20261012/baseline.mp4",
+  "baseline_detail": "59.833 seconds · 24 fps. This animated comedy is the unchanged reference cut, including the receipt, hand and fries joke and justinfowler.com bumpers. The voices and images are synthesized. The experiments below have not replaced this cut.",
+  "cards": [
+    {
+      "name": "Accepted Maria shot · MuseTalk",
+      "role": "Existing film reference",
+      "verdict": "BASELINE — preserved",
+      "detail": "The accepted four-second crop, including the final phone composite. All diagnostic candidates use the pre-composite source; preserve the receipt, hand and fries when promoting any face result.",
+      "video_url": "/assets/hollywood/review-20261012/baseline-crop.mp4",
+      "seconds": 4
+    },
+    {
+      "name": "LTX 2.3 · supplied audio",
+      "role": "Generate acting from image + dialogue",
+      "verdict": "EXECUTION PROVEN — artistic comparison required",
+      "detail": "Rendered 97 frames in 305 seconds at 512×384; peak MLX memory 15.1 GiB. Four sampled frames retain the general character and warm room. Upstream audio level fell about 3 dB; this comparison restores the original dialogue without stretching. This is a short test, not long-scene continuity proof.",
+      "evidence": [
+        "Runtime pinned at 91e6f6c9bd621ff2ae31adfee643e113d67d6ae8",
+        "Original decoded audio same-timeline correlation: 0.99932"
+      ],
+      "video_url": "/assets/hollywood/review-20261012/ltx-a2v.mp4",
+      "seconds": 4
+    },
+    {
+      "name": "LTX DubIt · current MLX integration",
+      "role": "Existing-video dubbing",
+      "verdict": "REJECT FOR THIS FILM — dialogue changed",
+      "detail": "Two runs completed at 512×384 in about 207 seconds each, peak 18.0 GiB. Both generated speech that failed the requested-line transcription check, including an exact-text prompt retry. The displayed video has original dialogue restored for visual diagnosis; that replacement does not establish correct lip sync. Hold this binding pending integration diagnosis, not a global verdict on DubIt. Audit found that target audio starts from noise; reference speech is conditioning, not a timing lock. All 1,344 LoRA pairs match. A separate stage 2 freeze defect has a tested patch artifact, not installed; it does not fix the stage 1 dialogue failure.",
+      "evidence": [
+        "https://huggingface.co/Lightricks/LTX-2.3-22b-IC-LoRA-DubIt",
+        "Both complete runs and CPU transcript receipts retained with the local test receipts."
+      ],
+      "comparison_default": false,
+      "video_url": "/assets/hollywood/review-20261012/dubit-promptlocked.mp4",
+      "seconds": 4
+    },
+    {
+      "name": "DubIt · generated audio diagnostic",
+      "role": "Failed exact-dialogue test",
+      "verdict": "REJECT — keep original voice stems",
+      "detail": "Requested: Okay, can you take this photo? CPU transcription instead reported substantially different words in both runs. This player contains the raw generated audio from the exact-prompt retry, without replacement.",
+      "audio_url": "/assets/hollywood/review-20261012/dubit-raw-audition.wav",
+      "seconds": 4
+    },
+    {
+      "name": "LivePortrait",
+      "role": "Drive a still portrait with a performance video",
+      "verdict": "KEEP — controlled portrait motion",
+      "detail": "Rendered four seconds / 96 frames in 107.9 seconds. Sampled frames preserve Maria’s general identity, with plausible mouth, blink and head changes. Phone, hand and background are static. Requires a driving video; this does not prove audio-only lip synchronization.",
+      "video_url": "/assets/hollywood/review-20261012/liveportrait.mp4",
+      "seconds": 4
+    },
+    {
+      "name": "Genie · voice auditions",
+      "role": "Clean reference → old ending → Fish → Qwen",
+      "verdict": "EXECUTION + WORDS PASS — identity needs listening",
+      "detail": "All four generated lines passed normalized transcript comparison with zero word errors and no rail clipping. The audition sections are normalized to −20 LUFS / −2 dBTP with half-second gaps. Different durations mean the old timeline cannot simply be reused.",
+      "audio_url": "/assets/hollywood/review-20261012/genie-audition.wav"
+    },
+    {
+      "name": "Maria · voice auditions",
+      "role": "Clean reference → old ending → Fish → Qwen",
+      "verdict": "EXECUTION + WORDS PASS — identity needs listening",
+      "detail": "All four generated lines passed normalized transcript comparison with zero word errors and no rail clipping. The audition sections are normalized to −20 LUFS / −2 dBTP with half-second gaps. Different durations mean the old timeline cannot simply be reused.",
+      "audio_url": "/assets/hollywood/review-20261012/maria-audition.wav"
+    },
+    {
+      "name": "Unreal Engine MetaHuman Animator",
+      "role": "Existing dialogue → processed MetaHumanPerformance → reusable named facial animation curves on the installed face template skeleton",
+      "verdict": "KEEP — native local facial-solve foundation",
+      "detail": "5 seconds of existing Genie dialogue. 150 processed frames; 260 curves exported, 105 varying. Full editor run 44.74 seconds.",
+      "limitations": [
+        "No persistent Maria or Genie 3D rig exists in the audited projects.",
+        "No character render or artistic facial-synchronization quality was qualified.",
+        "Exported native motion is 30 fps and must be sampled in the 24 fps film sequence."
+      ],
+      "evidence": [
+        "https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-5-8-release-notes"
+      ],
+      "seconds": 5
+    },
+    {
+      "name": "speech-swift Audio2Face3D MLX",
+      "role": "Existing dialogue → dense native facial coefficient frames",
+      "verdict": "KEEP AS RETARGETING CANDIDATE — native coefficient inference works",
+      "detail": "5 seconds of existing Genie dialogue. 151 frames × 169 finite, varying coefficients; inference 6.30 seconds.",
+      "limitations": [
+        "Native James coefficients are not automatically ARKit or MetaHuman control names.",
+        "Matching geometry/rig or a verified retargeting projection is still required.",
+        "No character render or lip-sync superiority was tested."
+      ],
+      "evidence": [
+        "https://github.com/soniqo/speech-swift"
+      ],
+      "seconds": 5
+    },
+    {
+      "name": "Rhubarb + Blender",
+      "role": "CPU speech recognition → 31 timed visemes → nine editable Blender shape keys and 120-frame rendered animation",
+      "verdict": "KEEP FOR SIMPLE CARTOON MOUTH ANIMATION — proxy only",
+      "detail": "5 seconds of existing Genie dialogue. 31 timed cues, nine editable shape keys and a 120-frame proxy render. The proxy is deliberately not the film cast.",
+      "limitations": [
+        "Simple proxy head, no cast likeness or full-face/body performance.",
+        "Viseme mouth poses need manual refinement and artistic direction."
+      ],
+      "evidence": [
+        "https://github.com/DanielSWolf/rhubarb-lip-sync"
+      ],
+      "video_url": "/assets/hollywood/review-20261012/proxy.mp4",
+      "seconds": 5
+    },
+    {
+      "name": "LTX 2.5 · current Metal adapter",
+      "role": "General video generation",
+      "verdict": "NOT QUALIFIED for this dialogue test",
+      "detail": "An earlier short generation smoke passed. The current Hollywood adapter does not expose supplied-audio conditioning; its quality profiles disable audio generation. No claim that general 2.5 support proves this dialogue path."
+    },
+    {
+      "name": "CUDA-oriented and missing-runtime candidates",
+      "role": "Further porting, not ready production adapters",
+      "verdict": "HOLD — concrete runtime gaps",
+      "detail": "Wan S2V/Animate, InfiniteTalk/MultiTalk, Hunyuan Avatar and Hallo have no qualified end-to-end Mac adapter here. EchoMimicV3 and FlashHead have MLX weight leads, but the declared runnable implementations were unavailable at audit. Weight availability alone does not qualify a pipeline.",
+      "evidence": [
+        "https://github.com/antgroup/echomimic_v3",
+        "https://huggingface.co/Avdpro/EchoMimicV3-MLX",
+        "https://github.com/Wan-Video/Wan2.2",
+        "https://huggingface.co/Wan-AI/Wan2.2-S2V-14B",
+        "https://github.com/dandandan1983/Wan2.2_mps",
+        "https://github.com/Wan-Video/Wan2.2",
+        "https://huggingface.co/Wan-AI/Wan2.2-Animate-14B",
+        "https://github.com/MeiGen-AI/InfiniteTalk",
+        "https://huggingface.co/MeiGen-AI/InfiniteTalk",
+        "https://github.com/MeiGen-AI/MultiTalk",
+        "https://github.com/Tencent-Hunyuan/HunyuanVideo-Avatar",
+        "https://github.com/fudan-generative-vision/hallo",
+        "https://huggingface.co/Avdpro/FlashHead-Lite-MLX"
+      ]
+    },
+    {
+      "name": "Other downloaded audio models",
+      "role": "Music, separation and general speech roles",
+      "verdict": "ROLE TRIAGE — not a film continuity fix",
+      "detail": "The 18-package prior inventory is retained. General music, cleanup or new-speaker models do not by themselves preserve this cast. Fish and Qwen received the actual held-out dialogue tests; imports of other libraries are not presented as inference proofs."
+    },
+    {
+      "name": "LatentSync 1.6 · repaired MLX port",
+      "role": "Face-region lip correction",
+      "verdict": "EXECUTION PROVEN — no quality promotion",
+      "seconds": 2,
+      "video_url": "/assets/hollywood/review-20261012/latentsync.mp4",
+      "detail": "48 frames at 24 fps rendered in 330.5 seconds. Sampled physical peak 24.4 GB versus 71.6 GB in the initial failed attempt. Fused attention and per-chunk CPU checkpoints fixed major runtime problems. Maria remains recognizable; no clear visual win over MuseTalk. This excerpt contains an initial pause, limiting speech evidence. A separate speech-bearing test is included below; neither is promoted over the current face pass.",
+      "evidence": [
+        "https://github.com/sb1992/latentsync-mlx"
+      ],
+      "limitations": [
+        "Requested 12 steps produces 13 scheduler iterations per chunk.",
+        "Kept isolated; production lip-sync default unchanged."
+      ],
+      "comparison_default": false
+    },
+    {
+      "name": "RIFE 4.25 · 48fps presentation",
+      "role": "Finishing / frame interpolation",
+      "verdict": "KEEP — interpolation, not lip-sync repair",
+      "seconds": 1,
+      "video_url": "/assets/hollywood/review-20261012/rife.mp4",
+      "comparison_default": false,
+      "detail": "Actual 24→47 interpolated frames passed decode, with no adjacent duplicates. Sampled triplets looked plausible. Presentation wrapper adds exactly one endpoint frame to make 48 frames/1 second and restores the original 34–35 second film audio. Raw output is preserved. Runtime receipt includes shared-GPU queue waiting; it is not inference latency.",
+      "limitations": [
+        "One-second screening does not qualify long-video temporal behavior."
+      ]
+    },
+    {
+      "name": "SeedVR2 · frame reconstruction",
+      "role": "Restoration / upscaling",
+      "verdict": "REJECT THIS CONFIGURATION — cast and color drift",
+      "detail": "Actual local inference produced a valid reconstructed frame, but sharpened lines accompanied changes to Genie’s facial hair/features and stronger orange contrast. Pixel MAE 7.89 versus 1.76 for bicubic on this synthetic downsample/reconstruction test. The visual identity changes drive the rejection; pixel error alone is not a perceptual quality score.",
+      "image_url": "/assets/hollywood/review-20261012/seedvr-comparison.jpg",
+      "image_alt": "Left: real baseline. Center: bicubic from 256px. Right: SeedVR reconstruction with changed facial details and contrast.",
+      "limitations": [
+        "One-frame test; no temporal quality qualification."
+      ]
+    },
+    {
+      "name": "Existing MuseTalk face pass · seconds 2–4",
+      "role": "Matched speech-window baseline, before final phone overlay",
+      "verdict": "BASELINE — fixed speech and frames",
+      "seconds": 2,
+      "video_url": "/assets/hollywood/review-20261012/musetalk-speech.mp4",
+      "comparison_default": false,
+      "detail": "Frames 48–95 of the existing MuseTalk face pass, with the exact original 2–4 second audio window. Both sides use the same 640×480 region and 24 fps. This diagnostic baseline precedes the finished receipt/hand/fries overlay."
+    },
+    {
+      "name": "LatentSync · speech window 2–4",
+      "role": "Matched speech-bearing lip-sync comparison",
+      "verdict": "WORKING — no demonstrated quality win",
+      "seconds": 2,
+      "video_url": "/assets/hollywood/review-20261012/latentsync-speech.mp4",
+      "comparison_default": false,
+      "paired_baseline_name": "Existing MuseTalk face pass · seconds 2–4",
+      "detail": "The corrected port rendered 48 frames in 320.7 seconds, using the same speech-heavy 2–4 second window as the paired MuseTalk face pass. Full decode passed. Frame inspection keeps Maria recognizable but does not establish a synchronization or appearance improvement. Keep experimental; do not replace the production default. Some lower-face softening and smile/teeth bias remain in sampled frames.",
+      "limitations": [
+        "Selecting this on the right automatically selects its matched baseline.",
+        "No normal-speed audiovisual acceptance or objective synchronization score claimed."
+      ]
+    }
+  ],
+  "deployment_status": "As tested on 12 October 2026: local generation is the default. Hosted recommendations and fallbacks require explicit opt-in. Voice references stay paired with their transcripts. The routing change passed 16 router tests and 2 capability-registry tests. Experimental tools below have not all been added to the production interface.",
+  "limitations": [
+    "Tests ran locally on an Apple M3 Ultra Mac Studio with 96 GiB unified memory. This public page hosts copies of the outputs; it does not run generation.",
+    "Short excerpts do not establish long-form consistency or artistic acceptance. No replacement full-film cut is claimed.",
+    "Native Unreal facial animation works, but matching Maria/Genie rigs, retargeting and authored body acting remain unfinished."
+  ],
+  "test_date": "2026-10-12",
+  "published_date": "2026-10-13",
+  "hardware": {
+    "chip": "Apple M3 Ultra",
+    "unified_memory_gib": 96
+  }
+}
