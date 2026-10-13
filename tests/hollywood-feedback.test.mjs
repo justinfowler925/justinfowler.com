@@ -21,3 +21,5 @@ import controlHandler from '../api/hollywood-feedback-control.js';
 function response(){return {headers:{},setHeader(k,v){this.headers[k]=v},status(n){this.code=n;return this},json(body){this.body=body;return this}}}
 test('public API rejects GET, cross-origin and non-JSON requests before storage',async()=>{for(const [req,status] of [[{method:'GET',headers:{}},405],[{method:'POST',headers:{origin:'https://example.com'}},403],[{method:'POST',headers:{origin:'https://justinfowler.com','content-type':'text/plain'}},415]]){const res=response();await submitHandler(req,res);assert.equal(res.code,status)}});
 test('owner control rejects unauthenticated reads and mutations',async()=>{for(const method of ['GET','POST']){const res=response();await controlHandler({method,headers:{},body:{paused:false}},res);assert.equal(res.code,401)}});
+
+test('paused intake performs no writes even for new network addresses',async()=>{const store=memory();await setPaused(store,true);let writes=0;store.write=async()=>{writes++;return true};await assert.rejects(acceptFeedback(body(),options(store)),{status:503});assert.equal(writes,0)});
