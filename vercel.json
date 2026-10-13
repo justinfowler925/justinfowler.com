@@ -65,5 +65,16 @@
       "destination": "/writing/fowler-brain-for-sales.html#about-the-previous-version-of-this-page",
       "permanent": true
     }
-  ]
+  ],
+  "functions": {
+    "api/hollywood-feedback.js": {
+      "maxDuration": 30
+    },
+    "api/hollywood-feedback-retry.js": {
+      "maxDuration": 120
+    },
+    "api/hollywood-feedback-control.js": {
+      "maxDuration": 30
+    }
+  }
 }

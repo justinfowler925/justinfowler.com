@@ -1,0 +1,8 @@
+{
+  "/writing/hollywood-architecture.html": {
+    "map":"Architecture: system map", "paths":"Architecture: workflow walkthroughs", "parts":"Architecture: component contracts", "client-api":"Client and API boundary", "producer-routing":"Producer, story and routing", "jobs-gpu":"Job engine and GPU scheduling", "model-adapters":"Model and engine adapters", "assets-timeline":"Assets, timelines and film assembly", "knowledge":"Knowledge retrieval", "review-release":"Review, release and deployment", "integration-status":"Integration status", "gaps":"Unfinished architecture work", "contribute":"Architecture suggestions"
+  },
+  "/writing/hollywood-developer-review.html": {
+    "baseline":"Revision 2 film", "compare":"Video comparisons", "voices":"Voice auditions", "evidence":"Model results", "help":"Developer help", "revision-plan":"Revision 3 repair plan"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "justinfowler-public-site",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "test:feedback": "node --test tests/hollywood-feedback.test.mjs"
+  },
+  "dependencies": {
+    "@vercel/blob": "2.8.1"
+  }
+}
