@@ -1,6 +1,6 @@
 # justinfowler.com
 
-Public landing page for Justin Fowler. Single-file static site, deploys anywhere.
+Public landing page for Justin Fowler. Static pages with a small Vercel Functions backend for private Hollywood feedback.
 
 ## Stack
 
@@ -91,3 +91,15 @@ Those live in the **personal dashboard** (separate, private, never indexed).
 ---
 
 Built April 24, 2026. Step into it.
+
+## Hollywood section feedback
+
+Architecture and developer-review sections load the shared feedback form. Suggestions are private, not a public comment board. The API validates page/section IDs against `assets/hollywood-feedback/sections.json`, saves to private Vercel Blob storage, then attempts a Slack DM. Browser retries reuse a request ID; a changed body cannot overwrite a saved comment. A keyed network-address hash limits submissions to eight per hour and one per ten seconds. No raw network address is stored in the feedback record.
+
+Server-only configuration: `HOLLYWOOD_FEEDBACK_SECRET`, `HOLLYWOOD_FEEDBACK_RETRY_SECRET`, `HOLLYWOOD_FEEDBACK_ADMIN_SECRET`, `HOLLYWOOD_SLACK_BOT_TOKEN`, and `HOLLYWOOD_SLACK_DM_ID`, plus the connected Blob store. Preview records use a separate prefix. Never put these values in client code or Git.
+
+`POST /api/hollywood-feedback-retry` requires its bearer secret and accepts an optional pagination cursor. A Studio-owned scheduled caller drains pending notifications independently of laptop uptime. Saved comments survive Slack outages. Delivery is at-least-once: the submission ID is included for recognition of a rare duplicate after a successful Slack send but interrupted status write.
+
+Run `npm ci` and `npm run test:feedback`. The existing public-surface checks still apply.
+
+Owner kill switch: `/tools/hollywood-feedback.html`, with the dedicated owner-only control password. It pauses new submissions and queued notifications without deleting feedback. An already in-flight Slack request can finish. Every DM links to these controls. Global optimistic counters cap both submissions and delivery attempts at 10 per clock hour; excess traffic trips a durable pause until manually resumed. Resume does not reset counters. Storage errors fail closed. Preview uses isolated control state. `scripts/hollywood-feedback-retry.py` runs on Studio every five minutes with owner-only configuration, locking and persistent pagination.
