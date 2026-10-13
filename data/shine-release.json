@@ -1,10 +1,10 @@
 {
-  "sourceRevision": "da7ab5c94dc8e115b0ea0f45ed380951631c11b7",
+  "sourceRevision": "9b4dfb91d9d625a8ab6527542bc9d375495d167f",
   "skillSha256": "87e007fdfe9bd3e9d1e2747cf5d974f3bae59095f5384ec6b46a7ce04d9f8e48",
   "skill": "shine",
-  "archiveSha256": "6a58f0e954dce61bd47eec285064d561f19b0acab55ed48fd3021530ea69fe43",
+  "archiveSha256": "652ae449461367531aa36de753fc86b5e400ac2943aa2031788c0573ff22be48",
   "distribution": {
-    "url": "https://github.com/justinfowler925/shine/releases/download/consumer-da7ab5c94dc8e115b0ea0f45ed380951631c11b7/shine.zip",
-    "bytes": 197295159
+    "url": "https://github.com/justinfowler925/shine/releases/download/consumer-9b4dfb91d9d625a8ab6527542bc9d375495d167f/shine.zip",
+    "bytes": 197295272
   }
 }
