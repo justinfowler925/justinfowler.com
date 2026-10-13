@@ -1,13 +1,13 @@
 {
-  "intro": "I want Hollywood to make an entire film locally, with the same characters, voices and lighting from beginning to end. This is the current film, the alternatives tested against it, and the gaps I need help closing.",
+  "intro": "Hollywood is still failing this film’s voice-continuity and lip-sync requirements. This page shows the unfinished review cut, local tool experiments, and the concrete plan for a corrected Revision 3.",
   "baseline_url": "/assets/hollywood/review-20261012/baseline.mp4",
-  "baseline_detail": "59.833 seconds · 24 fps. This animated comedy is the unchanged reference cut, including the receipt, hand and fries joke and justinfowler.com bumpers. The voices and images are synthesized. The experiments below have not replaced this cut.",
+  "baseline_detail": "Revision 2 is the latest complete export, not a quality-approved final. Lip synchronization is visibly poor, and both ending voices differ from their earlier performances. Those defects remain in this 59.833-second cut. Later model tests produced excerpts only; they have not been assembled into a corrected film. Images and voices are synthesized.",
   "cards": [
     {
-      "name": "Accepted Maria shot · MuseTalk",
+      "name": "Revision 2 Maria shot · MuseTalk",
       "role": "Existing film reference",
-      "verdict": "BASELINE — preserved",
-      "detail": "The accepted four-second crop, including the final phone composite. All diagnostic candidates use the pre-composite source; preserve the receipt, hand and fries when promoting any face result.",
+      "verdict": "UNFINISHED BASELINE — lip-sync and voice defects remain",
+      "detail": "The existing four-second crop, including the final phone composite. All diagnostic candidates use the pre-composite source; preserve the receipt, hand and fries when promoting any face result.",
       "video_url": "/assets/hollywood/review-20261012/baseline-crop.mp4",
       "seconds": 4
     },
