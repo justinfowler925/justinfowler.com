@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   verify:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     # Hosted runners on this personal account are billing-locked, so the guard never
     # ran; the repo-registered self-hosted runner (see justinfowler925/shine) runs it.
     runs-on: [self-hosted, macOS, ARM64, portfolio]
