@@ -116,7 +116,7 @@ details p {{ margin-top:var(--shine-space-4); color:var(--paper-2); }}
 </header>
 <article id="report" class="prose">{markdown(body)}</article>
 <section class="hero-actions" aria-label="SLED training downloads">
-<a class="btn primary" href="https://nucleus-clearspeed.vercel.app/company-tools/sled-agent">Open SLED training in Nucleus</a>
+Open SLED training in Nucleus (internal)
 <a class="btn" href="/assets/sled-agent-public-guide.zip" download>Download this walkthrough</a>
 <a class="btn" href="/assets/cowork-skills/START-HERE.md">Other Cowork skills</a>
 </section>
