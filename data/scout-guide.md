@@ -4,7 +4,7 @@ Scout is a research and data-ingestion assistant. Give him a professional resear
 
 **Preview · public documentation edition · September 22, 2026.**
 
-[Read the public guide](https://justinfowler.com/writing/scout.html) · [Nucleus Company Tools](https://nucleus-clearspeed.vercel.app/company-tools)
+[Read the public guide](https://justinfowler.com/writing/scout.html) · Nucleus Company Tools (internal)
 
 This repository contains documentation and example requests. The running service, source data, credentials and deployment configuration are private. Cloning this repository does not install Scout or grant access.
 

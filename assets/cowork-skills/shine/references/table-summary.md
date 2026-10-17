@@ -82,6 +82,6 @@ static, invent a receipt, or claim a passing aggregate result when the tool cann
 
 Nucleus Admin → Adoption: people, modules and task impact each keep their own KPI header
 above adjacent collapsed detail tables. Reference implementation: Nucleus pull request 216,
-https://github.com/justin-fowler_cspd/nucleus/pull/216 (source f947cb7).
+an internal repository PR (source f947cb7).
 Use its information hierarchy and interaction behavior through the consumer's own components;
 its metrics, labels and data are examples, not defaults for every product.

@@ -4,7 +4,7 @@ const read=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const page=read('writing/fowler-brain-for-sales.html');
 assert.match(page,/How to use SLED Agent in Claude Cowork/);
 assert.match(page,/Use SLED Agent to discover Arizona/);
-assert.match(page,/nucleus-clearspeed.vercel.app\/company-tools\/sled-agent/);
+assert.doesNotMatch(page,/nucleus-clearspeed\.vercel\.app/);
 assert.doesNotMatch(page,/href="[^\"]*(?:fowler-sales-method.zip|fowler-brain-sales-starter.zip|#starter|#evidence)"/);
 for(const m of page.matchAll(/href="#([^\"]+)"/g))assert.ok(page.includes('id="'+m[1]+'"'),m[1]);
 const redirects=JSON.parse(read('vercel.json')).redirects;

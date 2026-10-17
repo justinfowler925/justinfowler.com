@@ -8,7 +8,7 @@ The result is a research brief and a reusable state record. You still review the
 
 ## Start with the shared skill
 
-Our team uses Claude Cowork in the Clearspeed Enterprise workspace. Open [SLED Agent setup and training in Nucleus](https://nucleus-clearspeed.vercel.app/company-tools/sled-agent), sign in, and follow the shared Claude skill link. Install or enable SLED Agent in Customize → Skills. Then start a Cowork task with a permitted working folder.
+Our team uses Claude Cowork in the Clearspeed Enterprise workspace. Open SLED Agent setup and training in Nucleus (internal), sign in, and follow the shared Claude skill link. Install or enable SLED Agent in Customize → Skills. Then start a Cowork task with a permitted working folder.
 
 The shared copy is available to the organization. You do not need a terminal or a local ZIP upload to use it. Shared availability and automatic enablement are different: check that it is enabled in your own account. If it is missing, first confirm you selected the Clearspeed workspace, then check with the workspace owner.
 
@@ -55,7 +55,7 @@ Do not assume a fresh chat remembers the previous work. The saved record is the 
 
 ## Use the files elsewhere
 
-[Nucleus Company Tools](https://nucleus-clearspeed.vercel.app/company-tools) holds the current skill downloads and supporting material. The SLED page offers the standalone Cowork skill ZIP, the complete training packet and individual Markdown files. The packet includes learner and facilitator guides, prompts, exercises, an answer key, a worked example and the original method.
+Nucleus Company Tools (internal) holds the current skill downloads and supporting material. The SLED page offers the standalone Cowork skill ZIP, the complete training packet and individual Markdown files. The packet includes learner and facilitator guides, prompts, exercises, an answer key, a worked example and the original method.
 
 For another approved Claude workspace, upload the **Cowork skill ZIP**, not the complete training packet. For Claude Projects or Claude Code, follow START-HERE.md in the full packet; those are different installation paths. The private SLED package stays behind company sign-in. This public page and its handout explain the workflow without redistributing the internal method.
 
