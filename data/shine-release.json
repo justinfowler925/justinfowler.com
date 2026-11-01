@@ -1,10 +1,10 @@
 {
-  "sourceRevision": "ea89c347f063827648568284601909f9d45b579f",
-  "skillSha256": "87e007fdfe9bd3e9d1e2747cf5d974f3bae59095f5384ec6b46a7ce04d9f8e48",
+  "sourceRevision": "89a4cb5dbace13aaaaacf11ea5a049513aff27ab",
+  "skillSha256": "135e9edd02ee13e4fa2e7600cf481d7ba3ca823a70a2e4ce9a9cdd485e1ade7d",
   "skill": "shine",
-  "archiveSha256": "4064b489eeb826e375c3332df29846f8a72b9ad2f385b9e4674448522fcce722",
+  "archiveSha256": "115c8628251ff39a76cdfeacea0409ba88477e51064f02aee317eaffd3a8dbab",
   "distribution": {
-    "url": "https://github.com/justinfowler925/shine/releases/download/consumer-ea89c347f063827648568284601909f9d45b579f/shine.zip",
-    "bytes": 201822453
+    "url": "https://github.com/ClearspeedInternalOps/nucleus/releases/download/shine-consumer-89a4cb5dbace13aaaaacf11ea5a049513aff27ab/shine.zip",
+    "bytes": 201929233
   }
 }
