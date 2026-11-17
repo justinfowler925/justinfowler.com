@@ -1,6 +1,10 @@
 {
-  "sourceRevision": "119fbefed9358cc22e5029526a48a00e89138820",
+  "sourceRevision": "d1950740a5f60799eef721600551265235311970",
   "skillSha256": "a7a967df005739df7845de1468d3411dd24e7c86dda9790266130ae8b3317631",
   "skill": "shine",
-  "archiveSha256": "9d13d8180313c2502cea023945e202a0e52641e48a0b9ff0857dabdf6c8ebba1"
+  "archiveSha256": "6e8706918a8b3ef33ce1dc93cabbb1c8ad2bd0c114c222cff395b20dff06a373",
+  "distribution": {
+    "url": "https://github.com/ClearspeedInternalOps/nucleus/releases/download/shine-consumer-d1950740a5f60799eef721600551265235311970/shine.zip",
+    "bytes": 203055399
+  }
 }
